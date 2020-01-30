@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-class Login extends Component{
+class Register extends Component{
 
   render(){
     return(
@@ -11,4 +11,4 @@ class Login extends Component{
   }
 }
 
-export default connect()(Login);
+export default connect()(Register);
