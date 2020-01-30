@@ -19,18 +19,26 @@
 
 .login-label-email {
   display: block;
-  position: relative;
-  right: 60px;
+  position: absolute;
+  color: rgb(172, 172, 172);
+  top: 243px;
+  left: 644px;
+  order: -1;
+  z-index: 1;
 }
 
 .login-label-password {
   display: block;
-  position: relative;
-  right: 50px;
+  position: absolute;
+  color: rgb(172, 172, 172);
+  top: 334px;
+  left: 643px;
+  z-index: 1;
 }
 
 .login-login-btn {
-  margin: 30px;
+  margin-top: 130px;
+  margin-bottom: 30px;
 }
 
 .login-logo {

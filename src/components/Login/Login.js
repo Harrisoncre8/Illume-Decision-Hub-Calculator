@@ -13,12 +13,12 @@ class Login extends Component{
             <span className="login-brand-name">illume decision hub</span>
           </div>
           <div className="login-text-field-container">
-            <label className="login-label-email">Email:</label>
-            <input className="text-field login-text-field-email" type="text" placeholder="email" />
+            <label className="login-label-email" for="login-email">email</label>
+            <input className="text-field login-text-field-email" id="login-email" type="text" name="email" />
           </div>
           <div className="login-text-field-container">
-            <label className="login-label-password">Password:</label>
-            <input className="text-field login-text-field-password" type="password" placeholder="password" />
+            <label className="login-label-password" for="login-password">password</label>
+            <input className="text-field login-text-field-password" id="login-password" type="password" />
           </div>
             <button className="normal-btn login-login-btn">Log In</button>
           <hr className="login-hr" />
