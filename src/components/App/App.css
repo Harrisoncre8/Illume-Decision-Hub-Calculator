@@ -1,12 +1,14 @@
-body {
-  margin: 30px;
-  text-align: center;
-  background-color: #25223b;
+* {
+  line-height: 1em;
 }
 
-p {
+body {
+  margin: 30px;
+  background-color: #423f52;
+}
+
+p, span, div, h1, h2, h3, label {
   font-family: "Open Sans Condensed", sans-serif;
-  color: white;
 }
 
 .arrow-left {
