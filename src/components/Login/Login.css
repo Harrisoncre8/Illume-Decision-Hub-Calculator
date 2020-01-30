@@ -1,0 +1,75 @@
+.login-brand-name {
+  position: relative;
+  bottom: 85px;
+  font-size: 2.6em;
+}
+
+.login-container {
+  background-color: white;
+  box-shadow: 5px 5px 10px grey;
+  padding: 20px;
+  border-radius: 25px;
+  height: 600px;
+  width: 400px;
+}
+
+.login-hr {
+  width: 80%;
+}
+
+.login-label-email {
+  display: block;
+  position: absolute;
+  color: rgb(172, 172, 172);
+  top: 243px;
+  left: 644px;
+  order: -1;
+  z-index: 1;
+}
+
+.login-label-password {
+  display: block;
+  position: absolute;
+  color: rgb(172, 172, 172);
+  top: 334px;
+  left: 643px;
+  z-index: 1;
+}
+
+.login-login-btn {
+  margin-top: 130px;
+  margin-bottom: 30px;
+}
+
+.login-logo {
+  height: 100px;
+  margin-bottom: 50px;
+}
+
+.login-register-btn {
+  margin: 30px;
+  border: none;
+  text-transform: lowercase;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.login-register-btn:hover {
+  background-color: #eee;
+}
+
+.login-text-field-container {
+  margin-bottom: 70px;
+}
+
+.login-text-field-email {
+  position: absolute;
+  top: 235px;
+  left: 638px;
+}
+
+.login-text-field-password {
+  position: absolute;
+  top: 326px;
+  left: 638px;
+}
