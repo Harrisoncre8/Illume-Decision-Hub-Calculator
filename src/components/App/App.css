@@ -110,6 +110,7 @@ p, span, div, h1, h2, h3, label, button {
   position: relative;
   height: 30px;
   width: 160px;
+  margin: 0 auto;
   font-size: 0.8em;
   border: 1px solid grey;
   border-radius: 4px;
