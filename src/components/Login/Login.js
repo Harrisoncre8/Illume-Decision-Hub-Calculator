@@ -21,7 +21,7 @@ class Login extends Component{
           </div>
 
           <div className="login-text-field-container">
-            <input className="text-field login-text-field-password" type="text" />
+            <input className="text-field login-text-field-password" type="password" />
             <label className="login-label-password">password</label>
             <div className="text-field-mask login-password-mask"></div>
           </div>

@@ -1,0 +1,89 @@
+.register-brand-name {
+  position: relative;
+  bottom: 135px;
+  font-size: 2.6em;
+}
+
+.register-container {
+  background-color: white;
+  box-shadow: 5px 5px 10px grey;
+  padding: 20px;
+  border-radius: 25px;
+  height: 600px;
+  width: 400px;
+}
+
+.register-email-mask {
+  width: 30px;
+}
+
+.register-hr {
+  width: 80%;
+}
+
+.register-label-email {
+  position: relative;
+  color: lightgrey;
+  order: -1;
+  padding-left: 5px;
+  transition: all 0.3s ease-in;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-60px, 23px);
+}
+
+.register-label-password {
+  position: relative;
+  color: lightgrey;
+  order: -1;
+  padding-left: 5px;
+  transition: all 0.3s ease-in;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50px, 23px);
+}
+
+.register-register-btn {
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+
+.register-logo {
+  height: 100px;
+  margin-bottom: 100px;
+}
+
+.register-password-mask {
+  width: 45px;
+}
+
+.register-cancel-btn {
+  margin: 30px;
+  border: none;
+  font-size: 0.9em;
+  text-transform: lowercase;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.register-text-field-container {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-text-field-email, .register-text-field-password {
+  left: 120px;
+}
+
+.register-text-field-email:focus + .register-label-email {
+  color: #f0aa42;
+  font-size: 0.8em;
+  transform: translate(-60px, 6px);
+}
+
+.register-text-field-password:focus + .register-label-password {
+  color: #f0aa42;
+  font-size: 0.8em;
+  transform: translate(-52px, 6px);
+}
