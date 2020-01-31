@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import './BreakEven.css';
 
 function BreakEven() {
   const [price, setPrice] = useState('');
@@ -9,22 +10,21 @@ function BreakEven() {
   const [part, setPart] = useState('');
   const [indirect, setIndirect] = useState('');
   const [type, setType] = useState('single');
+  const [sales, setSales] = useState(1);
 
   useEffect(()=>{
-    if(hours && rate && raw && part && indirect ){
-      setPrice(hours*rate+raw+part+indirect);
-    }
-  },[hours, rate, raw, part, indirect, setPrice])
+    setPrice((hours*rate+raw+part+indirect)/(sales))
+  },[hours, rate, raw, part, indirect, setPrice, type, sales])
 
   return (
-    <div>
+    <div className='break-even'>
       <form>
         <input 
           type="radio" 
           name="type" 
           value="single"
           checked={type === 'single'}
-          onChange={()=>setType('single')}
+          onChange={()=>{setType('single'); setSales(1)}}
         />
         Single Sale
         <br/>
@@ -37,17 +37,40 @@ function BreakEven() {
         />
         Total Product
         <br/>
-        hours<input type='number' onChange={(event)=>{setHours( Number(event.target.value))}}/>
-        labor rate<input type='number' onChange={(event)=>{setRate(Number(event.target.value))}}/>
-        Cost of raw materials<input type='number' onChange={(event)=>{setRaw(Number(event.target.value))}}/>
-        Cost of parts<input type='number' onChange={(event)=>{setPart(Number(event.target.value))}}/>
-        Indirect costs<input type='number' onChange={(event)=>{setIndirect(Number(event.target.value))}}/>
-        {/* {type==='total'? Number of Sales} */}
+        hours
+        <br/>
+        <input type='number' value={hours} onChange={(event)=>{setHours( Number(event.target.value))}}/>
+        <br/>
+        labor rate
+        <br/>
+        <input type='number' value={rate} onChange={(event)=>{setRate(Number(event.target.value))}}/>
+        <br/>
+        Cost of raw materials
+        <br/>
+        <input type='number' value={raw} onChange={(event)=>{setRaw(Number(event.target.value))}}/>
+        <br/>
+        Cost of parts
+        <br/>
+        <input type='number' value={part} onChange={(event)=>{setPart(Number(event.target.value))}}/>
+        <br/>
+        Indirect costs
+        <br/>
+        <input type='number' value={indirect} onChange={(event)=>{setIndirect(Number(event.target.value))}}/>
+        {
+          type==='total'?
+            <>
+              <br/>
+              Number of Sales
+              <br/>
+              <input type='number' value={sales} min={1} onChange={(event)=>{setSales(Number(event.target.value));}}/>
+            </>:
+            null
+        }
       </form>
       <p>
-        You're break even price is {price}.
+        You're break even price is {price.toLocaleString("en-US", {style: "currency", currency: 'USD'})}.
         <br/>
-        You must sell your product at a price higher than {price} to make a profit.
+        You must sell your product at a price higher than {price.toLocaleString("en-US", {style: "currency", currency: 'USD'})} to make a profit.
       </p>
     </div>
   );
