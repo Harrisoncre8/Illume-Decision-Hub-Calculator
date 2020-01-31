@@ -8,8 +8,6 @@ function ProfitLever() {
 
   return (
     <form>
-        <input type="radio" name="productType" value="single">Single Unit</input>
-        <input type="radio" name="productType" value="total">Total Product</input>
         Your Direct Costs <input />
         Your Indirect Costs <input />
         Your Revenue <input />
