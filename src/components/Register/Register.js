@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 import './Register.css';
 
 class Register extends Component{
@@ -69,7 +70,11 @@ class Register extends Component{
 
           <button className="normal-btn register-register-btn">Confirm</button>
           <hr className="register-hr" />
-          <button className="register-cancel-btn">cancel</button>
+
+          {/* <Link exact to="/"> */}
+            <button className="register-cancel-btn">cancel</button>
+          {/* </Link> */}
+
         </div>
       </center>
     );

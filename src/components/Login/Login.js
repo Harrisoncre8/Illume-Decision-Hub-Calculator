@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 class Login extends Component{
@@ -27,8 +28,13 @@ class Login extends Component{
           </div>
 
           <button className="normal-btn login-login-btn">Log In</button>
+          
           <hr className="login-hr" />
-          <button className="login-register-btn">register</button>
+
+          {/* <Link exact to="/register"> */}
+            <button className="login-register-btn">register</button>
+          {/* </Link> */}
+
         </div>
       </center>
     );
