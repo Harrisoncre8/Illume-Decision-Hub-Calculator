@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Stepper(){
-
     let dispatch = useDispatch();
 
     useEffect(() => {
@@ -11,7 +10,7 @@ export default function Stepper(){
 
     return(
         <div>
-            Questions populate here
+            Questions populate here: 
         </div>
     );
 }
