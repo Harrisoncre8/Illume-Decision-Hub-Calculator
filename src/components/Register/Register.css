@@ -93,10 +93,6 @@
   margin-top: 10px;
 }
 
-.register-dropdown, .register-text-field-company, .register-text-field-confirm-password, .register-text-field-email, .register-text-field-name, .register-text-field-password, .register-text-field-phone {
-  left: 120px;
-}
-
 .register-text-field-company:focus + .register-label-company {
   color: #f0aa42;
   font-size: 0.8em;
