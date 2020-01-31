@@ -22,24 +22,10 @@
 }
 
 .login-label-email {
-  position: relative;
-  color: lightgrey;
-  order: -1;
-  padding-left: 5px;
-  transition: all 0.3s ease-in;
-  pointer-events: none;
-  z-index: 1;
   transform: translate(-60px, 23px);
 }
 
 .login-label-password {
-  position: relative;
-  color: lightgrey;
-  order: -1;
-  padding-left: 5px;
-  transition: all 0.3s ease-in;
-  pointer-events: none;
-  z-index: 1;
   transform: translate(-50px, 23px);
 }
 
