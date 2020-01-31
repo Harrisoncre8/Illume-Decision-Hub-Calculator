@@ -24,7 +24,7 @@ CREATE TABLE "region" (
   "region" TEXT
 );
 
-CREATE TABLE "revinue_cost" (
+CREATE TABLE "revenue_cost" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INT REFERENCES "users"."id",
   "r_c" TEXT,
@@ -59,7 +59,7 @@ CREATE TABLE "split" (
   "calculator_id" INT REFERENCES "calculators"."id",
   "question_id" INT REFERENCES "questions"."id",
   "split_text" TEXT,
-  "next" INT
+  "next_id" INT
 )
 
 CREATE TABLE "sub_questions" (
@@ -75,7 +75,7 @@ CREATE TABLE "question_calculator" (
   "id" SERIAL PRIMARY KEY,
   "calculator_id" INT REFERENCES "calculators"."id",
   "question_id" INT REFERENCES "questions"."id",
-  "next" int
+  "next_id" int
 );
 
 INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questiosn", "split")
@@ -120,7 +120,7 @@ VALUES ('Define Your Profit Lever', 1),
 ('Break Even Pricing', 6),
 ('Price Setting', NULL);
 
-INSERT INTO "question_calculator" 
+INSERT INTO "question_calculator" ("calculator_id", "question_id", "next_id")
 VALUES (1,1,2),
 (1,2,3),
 (1,3,4),
@@ -137,6 +137,6 @@ VALUES (3,1,'What is the rate per of this labor?','number','Consider just one la
 (3,4,'What are your part costs?','number','Part costs are things like hinges or templates.'),
 (3,5,'What are some other direct costs?','number','Other costs may be things like rental space that is unique to each transaction');
 
-INSERT INTO "split" ("calculator_id", "question_id","split_text","next")
+INSERT INTO "split" ("calculator_id", "question_id","split_text","next_id")
 VALUES(2,1,'Single Product',2),
 (2,1,'Total Product', 5);
