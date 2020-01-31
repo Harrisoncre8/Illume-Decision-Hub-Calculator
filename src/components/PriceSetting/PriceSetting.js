@@ -26,8 +26,8 @@ function PriceSetting() {
 
   return (
     <center>
-      <div className="price-main-container">
-        <h1 className="price-main-heading">Price Setting</h1>
+      <div className="main-container">
+        <h1 className="main-heading">Price Setting</h1>
         <div className="inputs"> 
           <form>
             <select onChange={(event)=>{setMargin( Number(event.target.value))}}>
@@ -70,8 +70,8 @@ function PriceSetting() {
           </form>
         </div>
 
-        <div className="price-result">
-          <h3 className="price-result-heading">Result</h3>
+        <div className="data-result">
+          <h3 className="data-result-heading">Result</h3>
 
           <br />
           <p>Your Margin: ${userMargin} per unit</p>
