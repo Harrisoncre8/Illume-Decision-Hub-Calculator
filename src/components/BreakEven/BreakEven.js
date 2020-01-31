@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 
-function Price() {
+function BreakEven() {
   const [price, setPrice] = useState('');
   const [hours, setHours] = useState('');
   const [rate, setRate] = useState('');
@@ -53,4 +53,4 @@ function Price() {
   );
 }
 
-export default Price;
+export default BreakEven;
