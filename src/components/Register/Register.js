@@ -35,6 +35,7 @@ class Register extends Component{
 
           <div className="register-text-field-container">
             <select className="dropdown register-dropdown">
+              <option disabled selected values>Select Region</option>
               <option>Attorney</option>
               <option>Cleaning</option>
               <option>Massage</option>
@@ -43,6 +44,7 @@ class Register extends Component{
 
           <div className="register-text-field-container">
             <select className="dropdown register-dropdown">
+              <option disabled selected values>Select Industry</option>
               <option>Midwest</option>
               <option>Northeast</option>
               <option>Southwest</option>
