@@ -6,11 +6,12 @@ export default function Stepper(){
     let dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({type: `GET_QUESTIONS`});
+        dispatch({type: `GET_QUESTION`});
         }, [dispatch]);
 
     return(
         <div>
+            Questions populate here
         </div>
     );
 }
