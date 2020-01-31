@@ -27,8 +27,8 @@ function PriceSetting() {
   return (
     <center>
       <div className="price-main-container">
-        <h1 className="price-main-heading">Define Profit Levers</h1>
-        <div className="inputs">
+        <h1 className="price-main-heading">Price Setting</h1>
+        <div className="inputs"> 
           <form>
             <select onChange={(event)=>{setMargin( Number(event.target.value))}}>
               <option value={.15}>A</option>
