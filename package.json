@@ -30,6 +30,9 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
