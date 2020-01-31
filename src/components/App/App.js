@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Price from '../Price/Price';
+import Price from '../BreakEven/BreakEven';
 import Login from '../Login/Login';
 
 function App() {
