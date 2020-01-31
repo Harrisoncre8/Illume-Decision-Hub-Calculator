@@ -31,6 +31,7 @@ function PriceSetting() {
         <div className="inputs"> 
           <form>
             <select onChange={(event)=>{setMargin( Number(event.target.value))}}>
+              <option disabled selected value>Industry</option>
               <option value={.15}>A</option>
               <option value={.20}>B</option>
               <option value={.25}>C</option>
