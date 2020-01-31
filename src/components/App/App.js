@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import Price from '../BreakEven/BreakEven';
+import BreakEven from '../BreakEven/BreakEven';
+import PriceSetting from '../PriceSetting/PriceSetting';
 import Login from '../Login/Login';
 
 function App() {
   return (
     <div className="App">
-      <Price/>
+      <BreakEven/>
+      <PriceSetting/>
       <Login />
     </div>
   );

@@ -3,10 +3,35 @@ import { useEffect } from 'react';
 
 function PriceSetting() {
   const [industry, setIndustry] = useState('');
+  const [margin, setMargin] = useState('');
   const [price, setPrice] = useState('');
   const [cost, setCost] = useState('');
 
-  
+  useEffect(()=>{
+    switch (industry){
+        case A:
+            setMargin();
+        case B:
+
+        case C:
+
+        case D:
+
+        case E:
+
+        case F:
+
+        case G:
+
+        case H:
+
+        case I:
+
+        default:
+            
+    }
+  },[industry, margin, price, cost])
+
   return (
     <>
     <div className="inputs">
@@ -19,13 +44,25 @@ function PriceSetting() {
                 <option value="E">E</option>
                 <option value="F">F</option>
                 <option value="G">G</option>
+                <option value="H">H</option>
+                <option value="I">I</option>
             </select>
         </form>
             <p>Industry Norm:</p>
             <p>Industry Margin:</p>
         <form>
-            Product Cost<input />
-            Product Price<input />
+            Product Cost
+                <input 
+                    type='number' 
+                    value={cost} 
+                    onChange={(event)=>{setCost( Number(event.target.value))}}
+                />
+            Product Price
+                <input 
+                    type='number' 
+                    value={price} 
+                    onChange={(event)=>{setPrice( Number(event.target.value))}}
+                />
         </form>
     </div>
     <div className="results">
