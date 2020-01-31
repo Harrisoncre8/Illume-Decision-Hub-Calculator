@@ -4,11 +4,11 @@ import './PriceSetting.css';
 
 function PriceSetting() {
   const [margin, setMargin] = useState(.15);
-  const [userMargin, setUserMargin] = useState('');
-  const [productMargin, setProductMargin] = useState('');
+  const [userMargin, setUserMargin] = useState(0);
+  const [productMargin, setProductMargin] = useState(0);
   const [price, setPrice] = useState('');
   const [cost, setCost] = useState('');
-  const [industryNorm, setIndustryNorm] = useState('');
+  const [industryNorm, setIndustryNorm] = useState(0);
   const [difference, setDifference] = useState(0);
 
   useEffect(()=>{
@@ -76,9 +76,9 @@ function PriceSetting() {
           <br />
           <p>Your Margin: ${userMargin} per unit</p>
           <br />
-          <p>Industry Norm: ${industryNorm} per unit</p>
+          <p>Industry Norm: ${industryNorm.toFixed(2)} per unit</p>
           <br />
-          <p>Industry Margin: ${productMargin} per unit</p>
+          <p>Industry Margin: ${productMargin.toFixed(2)} per unit</p>
           <br />
 
           <p>Your price is {productMargin > userMargin ? 'lower': 'higher'} than industry norms<br/> You will need to sell {difference.toFixed(1)} times {productMargin > userMargin ? 'more' : 'less'} units to make the same margin</p>
