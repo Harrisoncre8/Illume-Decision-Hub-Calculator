@@ -17,6 +17,8 @@ function BreakEven() {
   
   return (
     <form>
+      <input type="radio" name="productType" value="single">Single Unit</input>
+      <input type="radio" name="productType" value="total">Total Product</input>
       hours<input type='number' onChange={(event)=>{setHours(Number(event.target.value))}}/>
       labor rate<input type='number' onChange={(event)=>{setRate(Number(event.target.value))}}/>
       Cost of raw materials<input type='number' onChange={(event)=>{setRaw(Number(event.target.value))}}/>
