@@ -27,20 +27,21 @@ function ProfitLever() {
     // just single unit right now
     
     <center>
-      <div className="profit-lever-container">
+      <div className="lever-main-container">
         <h1 className="lever-main-heading">Define Profit Levers</h1>
           <form>
             <div>
               <span>What are your Direct Costs?</span>
                 <div className="lever-text-field-container">
-                <label className="lever-label-direct-cost">direct costs</label>
                   <input 
-                    className="text-field lever-text-field-direct-cost" 
+                    className="text-field lever-text-field-direct-cost"
+                    id="lever-direct-cost" 
                     type="number" 
                     value={directCost}
                     onChange={(event)=>setDirectCost(event.target.value)} 
                   />
-                  {/* <div className="text-field-mask lever-mask-direct-cost"></div> */}
+                  <label className="text-field-label lever-label-direct-cost" htmlFor="lever-direct-cost">direct costs</label>
+                  <div className="text-field-mask lever-mask-direct-cost"></div>
                 </div>
             </div>
 
@@ -53,8 +54,8 @@ function ProfitLever() {
                     value={indirectCost}
                     onChange={(event)=>setIndirectCost(event.target.value)}
                     />
-                  <label className="lever-label-indirect-cost">indirect costs</label>
-                  {/* <div className="text-field-mask lever-mask-indirect-cost"></div> */}
+                  <label className="text-field-label lever-label-indirect-cost">indirect costs</label>
+                  <div className="text-field-mask lever-mask-indirect-cost"></div>
                 </div>
             </div>
 
@@ -67,8 +68,8 @@ function ProfitLever() {
                     value={revenue}
                     onChange={(event)=>setRevenue(event.target.value)}
                   />
-                  <label className="lever-label-revenue">revenue</label>
-                  {/* <div className="text-field-mask lever-mask-revenue"></div> */}
+                  <label className="text-field-label lever-label-revenue">revenue</label>
+                  <div className="text-field-mask lever-mask-revenue"></div>
                 </div>
             </div>
 
