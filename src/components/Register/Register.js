@@ -33,11 +33,19 @@ class Register extends Component{
           </div>
 
           <div className="register-text-field-container">
-            DROPDOWN WITH INDUSTRY LIST
+            <select className="dropdown register-dropdown">
+              <option>Attorney</option>
+              <option>Cleaning</option>
+              <option>Massage</option>
+            </select>
           </div>
 
           <div className="register-text-field-container">
-            DROPDOWN WITH REGION LIST
+            <select className="dropdown register-dropdown">
+              <option>Midwest</option>
+              <option>Northeast</option>
+              <option>Southwest</option>
+            </select>
           </div>
 
 

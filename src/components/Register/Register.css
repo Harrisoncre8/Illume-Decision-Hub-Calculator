@@ -1,11 +1,11 @@
 .register-brand-name {
   position: relative;
-  bottom: 65px;
+  bottom: 35px;
   font-size: 2.6em;
 }
 
 .register-cancel-btn {
-  margin: 30px;
+  margin: 15px;
   border: none;
   font-size: 0.9em;
   text-transform: lowercase;
@@ -94,7 +94,6 @@
 
 .register-logo {
   height: 100px;
-  margin-bottom: 30px;
 }
 
 .register-mask-company {
@@ -123,7 +122,7 @@
 
 .register-register-btn {
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .register-text-field-container {
@@ -131,7 +130,11 @@
   flex-direction: column;
 }
 
-.register-text-field-company, .register-text-field-confirm-password, .register-text-field-email, .register-text-field-name, .register-text-field-password, .register-text-field-phone {
+.register-dropdown {
+  margin-top: 10px;
+}
+
+.register-dropdown, .register-text-field-company, .register-text-field-confirm-password, .register-text-field-email, .register-text-field-name, .register-text-field-password, .register-text-field-phone {
   left: 120px;
 }
 
