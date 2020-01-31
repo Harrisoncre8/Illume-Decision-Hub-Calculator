@@ -11,12 +11,12 @@ import Stepper from '../Stepper/Stepper';
 function App() {
   return (
     <div className="App">
-      {/* <BreakEven/> */}
+      <BreakEven/>
       <PriceSetting/>
-      {/* <Login />
+      <Login />
       <Register />
       <ProfitLever />
-      <Stepper /> */}
+      <Stepper />
     </div>
   );
 }
