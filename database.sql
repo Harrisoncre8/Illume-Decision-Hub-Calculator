@@ -46,12 +46,19 @@ CREATE TABLE "inputs" (
 
 CREATE TABLE "questions" (
   "id" SERIAL PRIMARY KEY,
-  "order" INT,
   "question" TEXT,
   "response_type" TEXT,
-  "help_text" TEXT,
-  "sub_questions" BOOLEAN
+  "help_TEXT" TEXT,
+  "sub_questions" BOOLEAN,
+  "split" BOOLEAN
 );
+
+CREATE TABLE "split" (
+  "id" INT,
+  "question_id" INT REFERENCES "questions"."id",
+  "split_text" TEXT,
+  "next" INT
+)
 
 CREATE TABLE "sub_questions" (
   "id" SERIAL PRIMARY KEY,
@@ -59,39 +66,36 @@ CREATE TABLE "sub_questions" (
   "order" INT UNIQUE,
   "question" TEXT,
   "response_type" TEXT,
-  "help_text" TEXT,
+  "help_text" TEXT
 );
 
 CREATE TABLE "question_calculator" (
-  "question_id" INT REFERENCES "questions"."id",
+  "id" SERIAL PRIMARY KEY,
   "calculator_id" INT REFERENCES "calculators"."id",
-  PRIMARY KEY ("question_id", "calculator_id")
+  "question_id" INT REFERENCES "questions"."id",
+  "next" int REFERENCES "question_calculator"."id"
 );
 
-INSERT INTO "calculators" ("calculator") 
-VALUES ('Define Your Profit Lever'),
-('Break Even Point'),
-('Price Setting');
-
-INSERT INTO "questions" ("order", "question", "response_type", "help_text", "sub_questiosn")
-VALUES (
-  1,
+INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questiosn", "split")
+VALUES ()
+(
   'What is your revinue?',
   'number',
   'Revinue is that amount of money you charge for a product or service',
+  FALSE,
   FALSE
 ),
 (
-  2,
   'What are your direct costs?',
   'number',
   'Direct costs are costs that are specific to a sale such as labor costs and material costs',
-  TRUE
+  TRUE,
+  FALSE
 ),
 (
-  3,
   'What are your indirect costs?',
   'number',
   'Indirect costs are costs that apply to all sales or services such as gas or rent',
+  FALSE,
   FALSE
 )
