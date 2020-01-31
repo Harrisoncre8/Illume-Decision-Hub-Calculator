@@ -42,7 +42,7 @@ function BreakEven() {
         Cost of raw materials<input type='number' onChange={(event)=>{setRaw(Number(event.target.value))}}/>
         Cost of parts<input type='number' onChange={(event)=>{setPart(Number(event.target.value))}}/>
         Indirect costs<input type='number' onChange={(event)=>{setIndirect(Number(event.target.value))}}/>
-        {type==='total'? Number of Sales}
+        {/* {type==='total'? Number of Sales} */}
       </form>
       <p>
         You're break even price is {price}.
