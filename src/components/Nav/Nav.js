@@ -7,7 +7,7 @@ export default function Nav(){
     let history = useHistory();
 
     return(
-        <div>
+        <div className='nav-div'>
             <button className='circle-btn' onClick={() => history.push('/break-even')}>
                 Break Even Calculator</button>
             <button className='circle-btn' onClick={() => history.push('/profit-lever')}>
