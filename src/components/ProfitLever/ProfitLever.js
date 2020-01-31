@@ -22,22 +22,25 @@ function ProfitLever() {
   },[revenue, directCost, indirectCost]);
 
   return (
+
+    // place radio buttons here for users to change total products and single unit
+    // just single unit right now
+    
     <center>
       <div className="profit-lever-container">
         <h1 className="lever-main-heading">Define Profit Levers</h1>
-        <div>
           <form>
             <div>
               <span>What are your Direct Costs?</span>
                 <div className="lever-text-field-container">
+                <label className="lever-label-direct-cost">direct costs</label>
                   <input 
                     className="text-field lever-text-field-direct-cost" 
                     type="number" 
                     value={directCost}
                     onChange={(event)=>setDirectCost(event.target.value)} 
                   />
-                  <label className="lever-label-direct-cost">direct costs</label>
-                  {/* <div className="text-field-mask lever-direct-cost-mask"></div> */}
+                  {/* <div className="text-field-mask lever-mask-direct-cost"></div> */}
                 </div>
             </div>
 
@@ -51,7 +54,7 @@ function ProfitLever() {
                     onChange={(event)=>setIndirectCost(event.target.value)}
                     />
                   <label className="lever-label-indirect-cost">indirect costs</label>
-                  {/* <div className="text-field-mask lever-indirect-cost-mask"></div> */}
+                  {/* <div className="text-field-mask lever-mask-indirect-cost"></div> */}
                 </div>
             </div>
 
@@ -65,12 +68,11 @@ function ProfitLever() {
                     onChange={(event)=>setRevenue(event.target.value)}
                   />
                   <label className="lever-label-revenue">revenue</label>
-                  {/* <div className="text-field-mask lever-revenue-mask"></div> */}
+                  {/* <div className="text-field-mask lever-mask-revenue"></div> */}
                 </div>
             </div>
 
           </form>
-        </div>
         <div className="lever-result">
           <h3 className="lever-result-heading">Result</h3>
           <p>A 1% improvement in price will deliver {price.toFixed(1)}% improvement in profit.</p> 

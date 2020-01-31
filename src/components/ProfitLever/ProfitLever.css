@@ -1,4 +1,4 @@
-.lever-direct-cost-mask, l.ever-indirect-cost-mask, .lever-revenue-mask {
+.lever-direct-cost-mask, .lever-indirect-cost-mask, .lever-revenue-mask {
   width: 30px;
 }
 
@@ -53,14 +53,14 @@
 }
 
 .lever-text-field-container {
-  /* padding-top: 10px;
+  padding-top: 10px;
   display: flex;
-  flex-direction: column; */
+  flex-direction: column;
   margin-bottom: 10px;
 }
 
 .lever-text-field-direct-cost, .lever-text-field-indirect-cost, .lever-text-field-revenue {
-  left: 30px;
+  left: 230px;
 }
 
 .lever-text-field-direct-cost:focus + .lever-label-direct-cost {
