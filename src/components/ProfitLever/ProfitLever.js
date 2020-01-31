@@ -27,8 +27,8 @@ function ProfitLever() {
     // just single unit right now
     
     <center>
-      <div className="lever-main-container">
-        <h1 className="lever-main-heading">Define Profit Levers</h1>
+      <div className="main-container">
+        <h1 className="main-heading">Define Profit Levers</h1>
           <form>
             <div>
               <span>What are your Direct Costs?</span>
@@ -73,8 +73,8 @@ function ProfitLever() {
             </div>
 
           </form>
-        <div className="lever-result">
-          <h3 className="lever-result-heading">Result</h3>
+        <div className="data-result">
+          <h3 className="data-result-heading">Result</h3>
           <p>A 1% improvement in price will deliver {price.toFixed(1)}% improvement in profit.</p> 
           {/* <p>This translates to $x more profit in your pocket per year</p> */}
           <br />

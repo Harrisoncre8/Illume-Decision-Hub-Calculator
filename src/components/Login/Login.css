@@ -58,10 +58,6 @@
   flex-direction: column;
 }
 
-.login-text-field-email, .login-text-field-password {
-  left: 120px;
-}
-
 .login-text-field-email:focus + .login-label-email {
   color: #f0aa42;
   font-size: 0.8em;
