@@ -4,14 +4,14 @@ const app = express();
 const bodyParser = require('body-parser');
 
 // Route includes
-const ROUTER = require('./routes/router');
+const questionRouter = require('./routes/question.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 /* Routes */
-app.use('/api/ROUTE', ROUTER);
+app.use('/api/question', questionRouter);
 
 // Serve static files
 app.use(express.static('build'));
