@@ -132,6 +132,12 @@ p, span, div, h1, h2, h3, label, button {
   background-color: #FFF;
 }
 
+.dropdown {
+  position: relative;
+  height: 30px;
+  width: 160px;
+}
+
 
 
 
