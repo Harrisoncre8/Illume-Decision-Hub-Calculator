@@ -2,54 +2,46 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 
 function PriceSetting() {
-  const [industry, setIndustry] = useState('');
-  const [margin, setMargin] = useState('');
+  const [margin, setMargin] = useState(.15);
+  const [userMargin, setUserMargin] = useState('');
+  const [productMargin, setProductMargin] = useState('');
   const [price, setPrice] = useState('');
   const [cost, setCost] = useState('');
+  const [industryNorm, setIndustryNorm] = useState('');
+  const [difference, setDifference] = useState('');
 
   useEffect(()=>{
-    switch (industry){
-        case A:
-            setMargin();
-        case B:
-
-        case C:
-
-        case D:
-
-        case E:
-
-        case F:
-
-        case G:
-
-        case H:
-
-        case I:
-
-        default:
-            
+    let pm = (cost/margin)*margin;
+    let um = price-cost;
+    setIndustryNorm(cost/margin);
+    setProductMargin(pm);
+    setUserMargin(um);
+    if (pm >= um){
+        setDifference(pm/um);
+    }else if(pm < um){
+        setDifference(um/pm);
     }
-  },[industry, margin, price, cost])
+  },[margin, price, cost, productMargin, userMargin])
 
   return (
     <>
     <div className="inputs">
         <form>
-            <select>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-                <option value="F">F</option>
-                <option value="G">G</option>
-                <option value="H">H</option>
-                <option value="I">I</option>
+            <select onChange={(event)=>{setMargin( Number(event.target.value))}}>
+                <option value={.15}>A</option>
+                <option value={.20}>B</option>
+                <option value={.25}>C</option>
+                <option value={.40}>D</option>
+                <option value={.60}>E</option>
+                <option value={.80}>F</option>
+                <option value={.35}>G</option>
+                <option value={.40}>H</option>
+                <option value={.55}>I</option>
             </select>
         </form>
-            <p>Industry Norm:</p>
-            <p>Industry Margin:</p>
+            <p>Your Margin: {userMargin}</p>
+            <p>Industry Norm: {industryNorm}</p>
+            <p>Industry Margin: {productMargin}</p>
         <form>
             Product Cost
                 <input 
@@ -66,8 +58,7 @@ function PriceSetting() {
         </form>
     </div>
     <div className="results">
-        <p>If your price is lower than industry norms, you will need to sell *math goes here* more units to make the same margin</p>
-        <p>If your price is higher than industry norms, you can sell *math goes here* fewer units</p>
+        <p>Your price is {productMargin > userMargin ? 'lower': 'higher'} than industry norms<br/> You will need to sell {difference} times {productMargin > userMargin ? 'more' : 'less'} units to make the same margin</p>
     </div>
     </>
   );
