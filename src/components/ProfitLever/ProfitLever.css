@@ -1,0 +1,39 @@
+.lever-direct-cost-mask {
+  width: 30px;
+}
+
+.lever-label-direct-cost {
+  position: relative;
+  color: lightgrey;
+  order: -1;
+  padding-left: 5px;
+  transition: all 0.3s ease-in;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-60px, 23px);
+}
+
+.lever-text-field-container {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lever-text-field-direct-cost {
+  left: 120px;
+}
+
+.lever-text-field-direct-cost:focus + .lever-label-direct-cost {
+  color: #f0aa42;
+  font-size: 0.8em;
+  transform: translate(-60px, 6px);
+}
+
+.profit-lever-container {
+  background-color: white;
+  box-shadow: 5px 5px 10px grey;
+  padding: 20px;
+  border-radius: 25px;
+  height: 100%;
+  width: 80%;
+}
