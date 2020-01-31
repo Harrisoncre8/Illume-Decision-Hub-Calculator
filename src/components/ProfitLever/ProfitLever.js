@@ -22,6 +22,10 @@ function ProfitLever() {
   },[revenue, directCost, indirectCost]);
 
   return (
+
+    // place radio buttons here for users to change total products and single unit
+    // just single unit right now
+    
     <center>
       <div className="profit-lever-container">
         <h1 className="lever-main-heading">Define Profit Levers</h1>
