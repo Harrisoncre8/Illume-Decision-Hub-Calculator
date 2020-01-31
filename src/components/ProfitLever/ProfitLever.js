@@ -35,12 +35,11 @@ function ProfitLever() {
                 <div className="lever-text-field-container">
                   <input 
                     className="text-field lever-text-field-direct-cost"
-                    id="lever-direct-cost" 
                     type="number" 
                     value={directCost}
                     onChange={(event)=>setDirectCost(event.target.value)} 
                   />
-                  <label className="text-field-label lever-label-direct-cost" htmlFor="lever-direct-cost">direct costs</label>
+                  <label className="text-field-label lever-label-direct-cost">direct costs</label>
                   <div className="text-field-mask lever-mask-direct-cost"></div>
                 </div>
             </div>
