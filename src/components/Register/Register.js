@@ -17,19 +17,19 @@ class Register extends Component{
 
           <div className="register-text-field-container">
             <input className="text-field register-text-field-name" type="text" />
-            <label className="register-label-name">name</label>
+            <label className="text-field-label register-label-name">name</label>
             <div className="text-field-mask register-mask-name"></div>
           </div>
 
           <div className="register-text-field-container">
             <input className="text-field register-text-field-company" type="text" />
-            <label className="register-label-company">company</label>
+            <label className="text-field-label register-label-company">company</label>
             <div className="text-field-mask register-mask-company"></div>
           </div>
 
           <div className="register-text-field-container">
             <input className="text-field register-text-field-phone" type="text" />
-            <label className="register-label-phone">phone #</label>
+            <label className="text-field-label register-label-phone">phone #</label>
             <div className="text-field-mask register-mask-phone"></div>
           </div>
 
@@ -52,19 +52,19 @@ class Register extends Component{
 
           <div className="register-text-field-container">
             <input className="text-field register-text-field-email" type="text" />
-            <label className="register-label-email">email</label>
+            <label className="text-field-label register-label-email">email</label>
             <div className="text-field-mask register-mask-email"></div>
           </div>
 
           <div className="register-text-field-container">
             <input className="text-field register-text-field-password" type="password" />
-            <label className="register-label-password">password</label>
+            <label className="text-field-label register-label-password">password</label>
             <div className="text-field-mask register-mask-password"></div>
           </div>
 
           <div className="register-text-field-container">
             <input className="text-field register-text-field-confirm-password" type="password" />
-            <label className="register-label-confirm-password">confirm password</label>
+            <label className="text-field-label register-label-confirm-password">confirm password</label>
             <div className="text-field-mask register-mask-confirm-password"></div>
           </div>
 

@@ -17,13 +17,13 @@ class Login extends Component{
 
           <div className="login-text-field-container">
             <input className="text-field login-text-field-email" type="text" />
-            <label className="login-label-email">email</label>
+            <label className="text-field-label login-label-email">email</label>
             <div className="text-field-mask login-email-mask"></div>
           </div>
 
           <div className="login-text-field-container">
             <input className="text-field login-text-field-password" type="password" />
-            <label className="login-label-password">password</label>
+            <label className="text-field-label login-label-password">password</label>
             <div className="text-field-mask login-password-mask"></div>
           </div>
 
