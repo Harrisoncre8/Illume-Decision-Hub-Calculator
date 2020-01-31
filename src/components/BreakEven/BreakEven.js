@@ -56,7 +56,7 @@ function BreakEven() {
               className="text-field break-text-field-hours"
               type='number' 
               value={hours} 
-              onChange={(event)=>{setHours(event.target.value)}}
+              onChange={(event)=>{setHours(Number(event.target.value))}}
             />
             <label className="text-field-label break-label-hours">labor hours</label>
             <div className="text-field-mask break-mask-hours"></div>
@@ -70,7 +70,7 @@ function BreakEven() {
               className="text-field break-text-field-rate"
               type='number' 
               value={rate} 
-              onChange={(event)=>{setRate(event.target.value)}}
+              onChange={(event)=>{setRate(Number(event.target.value))}}
             />
             <label className="text-field-label break-label-rate">labor rate</label>
             <div className="text-field-mask break-mask-rate"></div>
@@ -84,7 +84,7 @@ function BreakEven() {
               className="text-field break-text-field-raw-material"
               type='number' 
               value={raw} 
-              onChange={(event)=>{setRaw(event.target.value)}}
+              onChange={(event)=>{setRaw(Number(event.target.value))}}
             />
             <label className="text-field-label break-label-raw-material">raw material costs</label>
             <div className="text-field-mask break-mask-raw-material"></div>
@@ -98,7 +98,7 @@ function BreakEven() {
               className="text-field break-text-field-part"
               type='number' 
               value={part} 
-              onChange={(event)=>{setPart(event.target.value)}}
+              onChange={(event)=>{setPart(Number(event.target.value))}}
             />
             <label className="text-field-label break-label-part">part costs</label>
             <div className="text-field-mask break-mask-part"></div>
@@ -112,7 +112,7 @@ function BreakEven() {
               className="text-field break-text-field-indirect-cost"
               type='number' 
               value={indirect} 
-              onChange={(event)=>{setIndirect(event.target.value)}}
+              onChange={(event)=>{setIndirect(Number(event.target.value))}}
             />
             <label className="text-field-label break-label-indirect-cost">indirect costs</label>
             <div className="text-field-mask break-mask-indirect-cost"></div>
@@ -129,7 +129,8 @@ function BreakEven() {
                   className="text-field break-text-field-sales"
                   type='number' 
                   value={sales} 
-                  onChange={(event)=>{setSales(event.target.value)}}
+                  min={1}
+                  onChange={(event)=>{setSales(Number(event.target.value))}}
                 />
                 <label className="text-field-label break-label-sales">number of sales</label>
                 <div className="text-field-mask break-mask-sales"></div>
