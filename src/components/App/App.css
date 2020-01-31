@@ -1,5 +1,8 @@
 * {
+  margin: 0;
+  padding: 0;
   line-height: 1em;
+  outline: none;
 }
 
 body {
@@ -7,7 +10,7 @@ body {
   background-color: #423f52;
 }
 
-p, span, div, h1, h2, h3, label {
+p, span, div, h1, h2, h3, label, button {
   font-family: "Open Sans Condensed", sans-serif;
 }
 
@@ -52,7 +55,6 @@ p, span, div, h1, h2, h3, label {
 }
 
 .circle-btn {
-  font-family: "Open Sans Condensed", sans-serif;
   font-size: 1.4em;
   text-transform: uppercase;
   background-color: #f7d149;
@@ -79,7 +81,6 @@ p, span, div, h1, h2, h3, label {
 }
 
 .normal-btn {
-  font-family: "Open Sans Condensed", sans-serif;
   font-size: 0.9em;
   text-transform: uppercase;
   background-color: #f7d149;
@@ -106,9 +107,7 @@ p, span, div, h1, h2, h3, label {
 }
 
 .text-field {
-  /* position: absolute;
-  top: 100;
-  left: 100; */
+  position: relative;
   height: 30px;
   width: 160px;
   font-size: 0.8em;
@@ -118,12 +117,19 @@ p, span, div, h1, h2, h3, label {
 }
 
 .text-field:hover {
-  background-color: #fff7dc;
   border: 1px solid #f0aa42;
 }
 
 .text-field:focus {
   border: 3px solid #f0aa42;
+}
+
+.text-field-mask {
+  position: relative;
+  top: -36px;
+  left: 128px;
+  height: 4px;
+  background-color: #FFF;
 }
 
 
