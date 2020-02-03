@@ -21,17 +21,22 @@ class AdminEditUserInfo extends Component{
 
   componentDidMount(){
     this.props.dispatch({type: `GET_ADMIN_USER_INFO`});
+    this.props.dispatch({type: `GET_INDUSTRY`});
   }
 
   closeModal = () => {
     this.setState({visible : false});
   }
 
-  handleClick = id => {
-    this.setState({visible: true});
+  handleClick = user => {
+    this.setState({
+      visible: true,
+      selectedUser: user
+    });
   }
 
-  render(){    
+  render(){
+    let editUser = this.state.selectedUser;   
     return(
       <center>
         <div className="main-container">
@@ -53,7 +58,7 @@ class AdminEditUserInfo extends Component{
                   <td>{user.company}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
-                  <td className="admin-edit-user-cell" onClick={()=>this.handleClick(user.id)}>Edit Info</td>
+                  <td className="admin-edit-user-cell" onClick={()=>this.handleClick(user)}>Edit Info</td>
                 </tr>
               )}
             </tbody>
@@ -65,7 +70,22 @@ class AdminEditUserInfo extends Component{
             effect="fadeInUp"
             onClickAway={() => this.closeModal()}
           >
-            <h1 className="main-heading"></h1>
+            <h1 className="main-heading">{editUser.name}</h1>
+            <input type="text" value={editUser.name} />
+            <input type="text" value={editUser.company} />
+            <input type="text" value={editUser.phone} />
+            <input type="text" value={editUser.email} />
+            <select>
+              {this.props.industry.map(industry =>
+                <div key={industry.id}>
+                  <option>industry.industry</option>
+                </div>
+              )}
+            </select>
+            <input type="text" value={editUser.industry} />
+            <input type="text" value={editUser.region} />
+            <input type="text" value={editUser.password} placeholder="reset password" />
+
           </Modal>
         </div>
       </center>
@@ -74,6 +94,7 @@ class AdminEditUserInfo extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
+  industry: reduxState.industry,
   user: reduxState.admin.adminUserInfo
 });
 
