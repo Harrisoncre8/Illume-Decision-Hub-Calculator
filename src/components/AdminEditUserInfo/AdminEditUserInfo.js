@@ -27,10 +27,28 @@ class AdminEditUserInfo extends Component{
     this.setState({visible : false});
   }
 
+  handleChange = (e, propName) => {
+    this.setState({
+      selectedUser: {
+        ...this.state.selectedUser,
+        [propName]: e.target.value
+      }
+    });
+  }
+
   handleClick = user => {
     this.setState({
       visible: true,
       selectedUser: user
+    });
+  }
+
+  handleDropdownChange = (e) => {
+    this.setState({
+      selectedUser: {
+        ...this.state.selectedUser,
+        industry: e.target.value
+      }
     });
   }
 
@@ -76,6 +94,7 @@ class AdminEditUserInfo extends Component{
             onClickAway={this.closeModal}
           >
             <div className="modal-container">
+              {JSON.stringify(this.state.selectedUser)}
               <button className="close-window-button" onClick={this.closeModal}>x</button>
               <h1 className="main-heading modal-heading">{editUser.name}</h1>
               <input 
@@ -109,6 +128,7 @@ class AdminEditUserInfo extends Component{
               <select 
                 className="modal-input" 
                 value={this.state.selectedUser.industry || 'industry'}
+                onChange={this.handleDropdownChange}
               >
                 {this.props.industry.map(industry =>
                   <option key={industry.id}>{industry.industry}</option>
