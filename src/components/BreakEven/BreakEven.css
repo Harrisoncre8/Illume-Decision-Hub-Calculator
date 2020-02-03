@@ -63,6 +63,12 @@
   transform: translate(-47px, 7px);
 }
 
+/*  WORKING ON PLACEHOLDER SHOWN - MAKE LABEL INVISIBLE TO START, 
+    MOVE UP WHEN FOCUSED, STAY UP WHEN PLACEHOLDER NOT SHOWN */
+.break-text-field-hours:placeholder-shown + .break-label-hours {
+  font-size: 1.4em;
+}
+
 .break-text-field-indirect-cost:focus + .break-label-indirect-cost {
   color: #f0aa42;
   font-size: 0.8em;

@@ -54,6 +54,7 @@ function BreakEven() {
           <div className="break-text-field-container">
             <input 
               className="text-field break-text-field-hours"
+              placeholder=''
               type='number' 
               value={hours} 
               onChange={(event)=>{setHours(Number(event.target.value))}}
