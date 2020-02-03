@@ -19,4 +19,18 @@ router.get('/user-info', (req, res) => {
   });
 });
 
+// PUT route for admin to update user information
+router.put('/user-info', (req, res) => {
+  let id = [req.body.id, req.body.name, req.body.company, req.body.phone, req.body.email, req.body.industry, req.body.password];
+  let sqlQuery = `UPDATE ;`;
+  pool.query(sqlQuery, id)
+    .then(result => {
+    res.send(result.rows);
+  })
+  .catch( error => {
+    console.log('Error with PUT admin user info', error);
+    res.sendStatus(500);
+  });
+});
+
 module.exports = router;
