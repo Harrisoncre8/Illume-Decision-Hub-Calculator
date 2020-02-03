@@ -12,7 +12,7 @@ function* getAdminUserInfo(action){
 
 function* putAdminUserInfo(action){
   try{
-    yield axios.get(`/api/admin/user-info`, action.payload);
+    yield axios.put(`/api/admin/user-info`, action.payload);
     yield put({type: `GET_ADMIN_USER_INFO`});
   } catch(error){
     console.log('Error in admin user info PUT', error);
