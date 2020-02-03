@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
 import './Nav.css';
 
 export default function Nav(){
     // react router hook
     let history = useHistory();
+    let dispatch = useDispatch();
+    // let questionData = useSelector(state => state);
     const [modal, setModal] = useState(false);
+
+    useEffect(){
+      dispatch({type: `SOMETHING`})
+    }
 
     // Change state to open modal
     const openModal = () => {
