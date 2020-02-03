@@ -9,7 +9,7 @@ export default function Nav(){
     let history = useHistory();
     let dispatch = useDispatch();
     let userData = useSelector(state => state.admin.adminUserInfo);
-    let industryData = useSelector(state => state.industry);
+    // let industryData = useSelector(state => state.industry);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function Nav(){
                 Price Setting Calculator</button>
             <button className='circle-btn' onClick={() => history.push('/')}>
                 Log <br/> Out</button>
-            <input type="button" value="Open" onClick={() => openModal()} />
+            <input type="button" value="Edit Profile" onClick={() => openModal()} />
             <Modal 
                     visible={modal}
                     width="400"
