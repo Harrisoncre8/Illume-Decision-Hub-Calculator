@@ -14,7 +14,6 @@ class AdminEditUserInfo extends Component{
       phone: '',
       email: '',
       industry: '',
-      region: '',
       password: ''
     }
   }
@@ -82,8 +81,6 @@ class AdminEditUserInfo extends Component{
                 </div>
               )}
             </select>
-            <input type="text" value={editUser.industry} />
-            <input type="text" value={editUser.region} />
             <input type="text" value={editUser.password} placeholder="reset password" />
 
           </Modal>
