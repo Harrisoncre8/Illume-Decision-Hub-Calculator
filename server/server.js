@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 // Route includes
 const adminRouter = require('./routes/admin.router');
+const industryRouter = require('./routes/industry.router');
 const questionRouter = require('./routes/question.router');
 
 // Body parser middleware
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // Routes
 app.use(`/api/admin`, adminRouter);
+app.use(`/api/industry`, industryRouter);
 app.use(`/api/question`, questionRouter);
 
 // Serve static files
