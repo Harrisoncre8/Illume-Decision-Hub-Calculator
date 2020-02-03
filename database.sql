@@ -11,7 +11,6 @@ CREATE TABLE "industry" (
   "margin" DECIMAL(4,2)
 );
 
-
 CREATE TABLE "contact_info" (
   "user_id" INT PRIMARY KEY,
   "buisiness_name" TEXT,
@@ -120,6 +119,7 @@ ALTER TABLE "split" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id"
 ALTER TABLE "sub_questions" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
+-- ALTER TABlE "contact_info" ADD "name" TEXT;
 
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
