@@ -7,7 +7,7 @@ router.get('/user-info', (req, res) => {
   let sqlQuery = `SELECT c.user_id as id, c.business_name as company, c.phone_number as phone, c.name, u.email
                   FROM contact_info c
                   JOIN users u ON u.id = c.user_id
-                  ORDER BY c.business_name DESC;`;
+                  ORDER BY c.business_name;`;
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
