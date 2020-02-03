@@ -4,6 +4,10 @@ import './Admin.css';
 
 class Admin extends Component{
 
+  pushHistoryToEditUserInfo = () => {
+    this.props.history.push('/admin/edit-user-info');
+  }
+
   render(){
     return(
       <center>
@@ -14,7 +18,7 @@ class Admin extends Component{
               <button className="circle-btn">Edit Calculators</button>
             </div>
             <div className="admin-btn-flex-column">
-              <button className="circle-btn">Edit User Information</button>
+              <button className="circle-btn" onClick={this.pushHistoryToEditUserInfo}>Edit User Information</button>
             </div>
             <div className="admin-btn-flex-column">
               <button className="circle-btn">Edit Industries</button>
