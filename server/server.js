@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 // Route includes
 const adminRouter = require('./routes/admin.router');
+const questionRouter = require('./routes/question.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
