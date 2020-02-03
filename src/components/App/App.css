@@ -106,6 +106,18 @@ p, span, div, h1, h2, h3, label, button {
   margin-bottom: 20px;
 }
 
+.modal-container {
+  padding: 20px;
+}
+
+.modal-heading {
+  text-align: left;
+}
+
+.modal-input {
+  margin: 5px;
+}
+
 .normal-btn {
   font-size: 0.9em;
   text-transform: uppercase;

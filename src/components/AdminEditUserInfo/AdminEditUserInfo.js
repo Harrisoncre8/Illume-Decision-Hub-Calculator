@@ -35,7 +35,8 @@ class AdminEditUserInfo extends Component{
   }
 
   render(){
-    let editUser = this.state.selectedUser;   
+    let editUser = this.state.selectedUser;
+
     return(
       <center>
         <div className="main-container">
@@ -69,20 +70,19 @@ class AdminEditUserInfo extends Component{
             effect="fadeInUp"
             onClickAway={() => this.closeModal()}
           >
-            <h1 className="main-heading">{editUser.name}</h1>
-            <input type="text" value={editUser.name} />
-            <input type="text" value={editUser.company} />
-            <input type="text" value={editUser.phone} />
-            <input type="text" value={editUser.email} />
-            <select>
-              {this.props.industry.map(industry =>
-                <div key={industry.id}>
-                  <option>industry.industry</option>
-                </div>
-              )}
-            </select>
-            <input type="text" value={editUser.password} placeholder="reset password" />
-
+            <div className="modal-container">
+              <h1 className="main-heading modal-heading">{editUser.name}</h1>
+              <input className="modal-input" type="text" value={editUser.name} placeholder="user's name" />
+              <input className="modal-input" type="text" value={editUser.company} placeholder="company" />
+              <input className="modal-input" type="text" value={editUser.phone} placeholder="phone #" />
+              <input className="modal-input" type="text" value={editUser.email} placeholder="email" />
+              <select className="modal-input" value={this.state.selectedUser.industry || 'industry'}>
+                {this.props.industry.map(industry =>
+                  <option key={industry.id}>{industry.industry}</option>
+                )}
+              </select>
+              <input type="text" value={editUser.password} placeholder="reset password" />
+            </div>
           </Modal>
         </div>
       </center>
@@ -91,7 +91,7 @@ class AdminEditUserInfo extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  industry: reduxState.industry,
+  industry: reduxState.industry.industry,
   user: reduxState.admin.adminUserInfo
 });
 
