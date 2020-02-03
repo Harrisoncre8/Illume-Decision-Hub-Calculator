@@ -14,7 +14,7 @@ function PriceSetting() {
   useEffect(()=>{
     let pm = (cost/margin)*margin;
     let um = price-cost;
-    setIndustryNorm(cost/margin);
+    setIndustryNorm(cost/(1-margin));
     setProductMargin(pm);
     setUserMargin(um);
     if (pm >= um){
