@@ -36,19 +36,23 @@ class AdminEditUserInfo extends Component{
     });
   }
 
-  handleClick = user => {
-    this.setState({
-      visible: true,
-      selectedUser: user
-    });
-  }
-
-  handleDropdownChange = (e) => {
+  handleDropdownChange = e => {
     this.setState({
       selectedUser: {
         ...this.state.selectedUser,
         industry: e.target.value
       }
+    });
+  }
+
+  handleSave = () => {
+    this.props.dispatch({type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser});
+  }
+
+  openModal = user => {
+    this.setState({
+      visible: true,
+      selectedUser: user
     });
   }
 
@@ -81,7 +85,7 @@ class AdminEditUserInfo extends Component{
                   <td>{user.company}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
-                  <td className="admin-edit-user-cell" onClick={()=>this.handleClick(user)}>Edit Info</td>
+                  <td className="admin-edit-user-cell" onClick={()=>this.openModal(user)}>Edit Info</td>
                 </tr>
               )}
             </tbody>
@@ -113,7 +117,7 @@ class AdminEditUserInfo extends Component{
               />
               <input 
                 className="modal-input" 
-                type="text" 
+                type="tel" 
                 value={editUser.phone} 
                 onChange={(event)=>this.handleChange(event, 'phone')}
                 placeholder="phone #" 
@@ -142,7 +146,7 @@ class AdminEditUserInfo extends Component{
                 placeholder="reset password" 
               />
               <div className="modal-btn-container">
-                <button className="normal-btn">Save</button>
+                <button className="normal-btn" onClick={this.handleSave}>Save</button>
               </div>
             </div>
           </Modal>
