@@ -146,3 +146,14 @@ VALUES (3,1,'What is the rate per of this labor?','number','Consider just one la
 INSERT INTO "split" ("calculator_id", "question_id","split_text","next_id")
 VALUES(2,1,'Single Product',2),
 (2,1,'Total Product', 5);
+
+INSERT INTO contact_info (user_id, business_name, industry_id, phone_number, "name")
+VALUES (1, 'Hennepin County', 1, '651-288-1234', 'Jack'),
+(2, 'Prime Academy', 2, '651-234-9172', 'Crystal');
+
+INSERT INTO users (email) 
+VALUES ('jack@hennepin.gov'), ('crystal@primeacademy.io');
+
+INSERT INTO industry (industry, margin)
+VALUES ('commercial cleaning', .3),
+('technical instruction', .4);
