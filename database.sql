@@ -124,8 +124,6 @@ ALTER TABLE contact_info
 ADD name text;
 ALTER TABLE "contact_info"
 RENAME "buisiness_name" TO "business_name";
-ALTER TABLE industry
-ADD region text;
 
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
@@ -160,6 +158,6 @@ VALUES (1, 'Hennepin County', 1, '651-288-1234', 'Jack'),
 INSERT INTO users (email) 
 VALUES ('jack@hennepin.gov'), ('crystal@primeacademy.io');
 
-INSERT INTO industry (industry, margin, region)
-VALUES ('commercial cleaning', .3, 'midwest'),
-('technical instruction', .4, 'midwest');
+INSERT INTO industry (industry, margin)
+VALUES ('commercial cleaning', .3),
+('technical instruction', .4);
