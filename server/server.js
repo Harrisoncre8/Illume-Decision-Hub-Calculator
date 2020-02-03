@@ -4,6 +4,8 @@ const app = express();
 const bodyParser = require('body-parser');
 
 // Route includes
+const adminRouter = require('./routes/admin.router');
+const industryRouter = require('./routes/industry.router');
 const questionRouter = require('./routes/question.router');
 const splitRouter = require('./routes/split.router');
 
@@ -11,7 +13,9 @@ const splitRouter = require('./routes/split.router');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-/* Routes */
+// Routes
+app.use(`/api/admin`, adminRouter);
+app.use(`/api/industry`, industryRouter);
 app.use(`/api/question`, questionRouter);
 app.use(`/api/split`, splitRouter);
 
@@ -21,7 +25,7 @@ app.use(express.static('build'));
 // App Set //
 const PORT = process.env.PORT || 5000;
 
-/** Listen * */
+// Listen
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });

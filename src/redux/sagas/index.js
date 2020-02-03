@@ -1,10 +1,14 @@
 import { all } from 'redux-saga/effects';
-import questionSaga from './questionSaga';
+import admin from './adminSaga';
+import industry from './industrySaga';
+import question from './questionSaga';
 import splitSaga from './splitSaga';
 
 export default function* rootSaga() {
   yield all([
-    questionSaga(),
-    splitSaga()
+    admin(),
+    industry(),
+    question(),
+    splitSaga(),
   ]);
 }
