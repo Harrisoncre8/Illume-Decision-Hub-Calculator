@@ -52,7 +52,10 @@ class AdminEditUserInfo extends Component{
   openModal = user => {
     this.setState({
       visible: true,
-      selectedUser: user
+      selectedUser: {
+        ...user,
+        password: ''
+      }
     });
   }
 
