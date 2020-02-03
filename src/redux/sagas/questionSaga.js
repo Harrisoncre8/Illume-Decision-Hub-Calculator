@@ -5,8 +5,12 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* getQuestion(action){
     console.log('In getQuestion with', action)
     try{
-        const response = yield axios.get(`/api/question/` + action.payload);
-        yield put({type: `SET_QUESTION`, payload: response.data})
+        const querries = Object.entries(action.payload.querry).reduce((acum, arr)=>{
+            acum += `${arr[0]}=${arr[1]}&`;
+            return acum;
+        }, '').slice(0,-1);
+        const response = yield axios.get(`/api/question?${querries}`);
+        yield put({type: `SET_QUESTION`, payload: response.data[0]})
     } catch(error){
         // alert('Sorry, something went wrong while getting questions')
         console.log('Error getting questions in saga', error);
