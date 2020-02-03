@@ -6,10 +6,9 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "contact_info" (
-  "user_id" INT PRIMARY KEY REFERENCES "users"."id",
+  "user_id" INT PRIMARY KEY REFERENCES "users",
   "buisiness_name" TEXT,
-  "industry_id" INT REFERENCES "industry"."id",
-  "region_id" INT REFERENCES "region"."id",
+  "industry_id" INT REFERENCES "industry",
   "phone_number" TEXT
 );
 
@@ -26,7 +25,7 @@ CREATE TABLE "region" (
 
 CREATE TABLE "revenue_cost" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" INT REFERENCES "users"."id",
+  "user_id" INT REFERENCES "users",
   "r_c" TEXT,
   "value" INT,
   "category" TEXT
@@ -35,13 +34,13 @@ CREATE TABLE "revenue_cost" (
 CREATE TABLE "calculators" (
   "id" SERIAL PRIMARY KEY,
   "calculator" TEXT,
-  "start_id" INT REFERENCES "question_calculator"."id"
+  "start_id" INT REFERENCES "question_calculator"
 );
 
 CREATE TABLE "inputs" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" INT REFERENCES "users"."id",
-  "question_id" INT REFERENCES "questions"."id",
+  "user_id" INT REFERENCES "users",
+  "question_id" INT REFERENCES "questions",
   "value" INT
 );
 
@@ -56,15 +55,15 @@ CREATE TABLE "questions" (
 
 CREATE TABLE "split" (
   "id" INT,
-  "calculator_id" INT REFERENCES "calculators"."id",
-  "question_id" INT REFERENCES "questions"."id",
+  "calculator_id" INT REFERENCES "calculators",
+  "question_id" INT REFERENCES "questions",
   "split_text" TEXT,
   "next_id" INT
 )
 
 CREATE TABLE "sub_questions" (
   "id" SERIAL PRIMARY KEY,
-  "question_id" INT REFERENCES "questions"."id",
+  "question_id" INT REFERENCES "questions",
   "order" INT,
   "question" TEXT,
   "response_type" TEXT,
@@ -73,8 +72,8 @@ CREATE TABLE "sub_questions" (
 
 CREATE TABLE "question_calculator" (
   "id" SERIAL PRIMARY KEY,
-  "calculator_id" INT REFERENCES "calculators"."id",
-  "question_id" INT REFERENCES "questions"."id",
+  "calculator_id" INT REFERENCES "calculators",
+  "question_id" INT REFERENCES "questions",
   "next_id" int
 );
 
