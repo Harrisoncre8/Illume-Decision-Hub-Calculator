@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // GET route for questions
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
   console.log('In getQuestion route with')
   let sqlQuery = `
     SELECT * FROM question_calculator qc
@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     LEFT JOIN "sub_questions" s ON "qc"."id" = "s"."question_id"
     WHERE "qc"."id" = $1;
   `
-  pool.query(sqlQuery).then(result => {
+  pool.query(sqlQuery,[req.params.id]).then(result => {
     res.send(result.rows);
   })
   .catch(error => {
