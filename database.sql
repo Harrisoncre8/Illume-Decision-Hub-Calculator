@@ -5,27 +5,23 @@ CREATE TABLE "users" (
   "admin" BOOLEAN
 );
 
-CREATE TABLE "contact_info" (
-  "user_id" INT PRIMARY KEY REFERENCES "users",
-  "buisiness_name" TEXT,
-  "industry_id" INT REFERENCES "industry",
-  "phone_number" TEXT
-);
-
 CREATE TABLE "industry" (
   "id" SERIAL PRIMARY KEY,
   "industry" TEXT,
   "margin" DECIMAL(4,2)
 );
 
-CREATE TABLE "region" (
-  "id" SERIAL PRIMARY KEY,
-  "region" TEXT
+
+CREATE TABLE "contact_info" (
+  "user_id" INT PRIMARY KEY,
+  "buisiness_name" TEXT,
+  "industry_id" INT,
+  "phone_number" TEXT
 );
 
 CREATE TABLE "revenue_cost" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" INT REFERENCES "users",
+  "user_id" INT,
   "r_c" TEXT,
   "value" INT,
   "category" TEXT
@@ -34,13 +30,13 @@ CREATE TABLE "revenue_cost" (
 CREATE TABLE "calculators" (
   "id" SERIAL PRIMARY KEY,
   "calculator" TEXT,
-  "start_id" INT REFERENCES "question_calculator"
+  "start_id" INT
 );
 
 CREATE TABLE "inputs" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" INT REFERENCES "users",
-  "question_id" INT REFERENCES "questions",
+  "user_id" INT,
+  "question_id" INT,
   "value" INT
 );
 
@@ -48,22 +44,22 @@ CREATE TABLE "questions" (
   "id" SERIAL PRIMARY KEY,
   "question" TEXT,
   "response_type" TEXT,
-  "help_TEXT" TEXT,
+  "help_text" TEXT,
   "sub_questions" BOOLEAN,
   "split" BOOLEAN
 );
 
 CREATE TABLE "split" (
   "id" INT,
-  "calculator_id" INT REFERENCES "calculators",
-  "question_id" INT REFERENCES "questions",
+  "calculator_id" INT,
+  "question_id" INT,
   "split_text" TEXT,
   "next_id" INT
-)
+);
 
 CREATE TABLE "sub_questions" (
   "id" SERIAL PRIMARY KEY,
-  "question_id" INT REFERENCES "questions",
+  "question_id" INT,
   "order" INT,
   "question" TEXT,
   "response_type" TEXT,
@@ -72,12 +68,12 @@ CREATE TABLE "sub_questions" (
 
 CREATE TABLE "question_calculator" (
   "id" SERIAL PRIMARY KEY,
-  "calculator_id" INT REFERENCES "calculators",
-  "question_id" INT REFERENCES "questions",
+  "calculator_id" INT,
+  "question_id" INT,
   "next_id" int
 );
 
-INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questiosn", "split")
+INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questions", "split")
 VALUES (
   'Is this for a single sale or total product sales?',
   'radio',
@@ -113,6 +109,17 @@ VALUES (
   FALSE,
   FALSE
 );
+
+ALTER TABLE "contact_info" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "contact_info" ADD FOREIGN KEY ("industry_id") REFERENCES "industry" ("id");
+ALTER TABLE "revenue_cost" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "inputs" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "inputs" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "split" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
+ALTER TABLE "split" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "sub_questions" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "question_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
