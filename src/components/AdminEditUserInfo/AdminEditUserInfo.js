@@ -6,7 +6,17 @@ import Modal from 'react-awesome-modal';
 class AdminEditUserInfo extends Component{
 
   state = {
-    visible: false
+    visible: false,
+    selectedUser: {
+      id: '',
+      name: '',
+      company: '',
+      phone: '',
+      email: '',
+      industry: '',
+      region: '',
+      password: ''
+    }
   }
 
   componentDidMount(){
@@ -21,7 +31,7 @@ class AdminEditUserInfo extends Component{
     this.setState({visible: true});
   }
 
-  render(){
+  render(){    
     return(
       <center>
         <div className="main-container">
@@ -54,7 +64,8 @@ class AdminEditUserInfo extends Component{
             height="300"
             effect="fadeInUp"
             onClickAway={() => this.closeModal()}
-          > 
+          >
+            <h1 className="main-heading"></h1>
           </Modal>
         </div>
       </center>
