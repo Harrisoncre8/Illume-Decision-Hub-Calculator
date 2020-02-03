@@ -8,12 +8,14 @@ export default function Nav(){
     // react router hook
     let history = useHistory();
     let dispatch = useDispatch();
-    // let questionData = useSelector(state => state);
+    let userData = useSelector(state => state.admin.adminUserInfo);
+    let industryData = useSelector(state => state.industry);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
-      dispatch({type: `GET_ADMIN_USER_INFO`})
-    });
+      dispatch({type: `GET_ADMIN_USER_INFO`});
+      dispatch({type: `GET_INDUSTRY`});
+    }, [dispatch]);
 
     // Change state to open modal
     const openModal = () => {
@@ -43,8 +45,18 @@ export default function Nav(){
                     onClickAway={() => closeModal()}
                 >
                     <div>
-                        <h1>Title</h1>
-                        <p>Some Contents</p>
+                        <h1>Hello!</h1>
+                        <p>User Information</p>
+                        {/* {JSON.stringify(userData)} */}
+                        {userData.map((user, i) => 
+                          <ul key={i}>
+                            <li>Name: {user.name}</li>
+                            <li>Company: {user.company}</li>
+                            <li>Phone: {user.phone}</li>
+                            <li>Email: {user.email}</li>
+                            <li>Industry: {user.industry}</li>
+                          </ul>
+                        )}
                         <a href="javascript:void(0);" onClick={() => closeModal()}>Close</a>
                     </div>
                 </Modal>
