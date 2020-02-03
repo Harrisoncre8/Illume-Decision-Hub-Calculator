@@ -19,7 +19,7 @@ function App() {
         <Route exact path='/break-even' component={BreakEven} /> 
         <Route exact path='/price-setting' component={PriceSetting} />
         <Route exact path='/register' component={Register} />
-        <Route exact path='/profit-lever' component={ProfitLever} />
+        <Route exact path='/define-your-profit-lever' component={ProfitLever} />
         <Route exact path ='/questionaire' component={Stepper} />
       </div>
     </Router>
