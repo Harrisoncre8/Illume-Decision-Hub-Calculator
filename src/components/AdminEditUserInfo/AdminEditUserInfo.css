@@ -9,6 +9,10 @@
   background-color: #f0aa42;
 }
 
+.admin-user-heading {
+  margin-top: 20px;
+}
+
 .admin-user-table {
   width: 80%;
   text-align: center;

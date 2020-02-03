@@ -40,7 +40,8 @@ class AdminEditUserInfo extends Component{
     return(
       <center>
         <div className="main-container">
-          <h1 className="main-heading">User Information</h1>
+          <button className="close-window-button">x</button>
+          <h1 className="main-heading admin-user-heading">User Information</h1>
           <table className="admin-user-table">
             <thead>
               <tr>
