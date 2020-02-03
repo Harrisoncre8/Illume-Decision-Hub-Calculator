@@ -116,11 +116,16 @@ p, span, div, h1, h2, h3, label, button {
   margin-bottom: 20px;
 }
 
+.modal-btn-container {
+  margin: 20px;
+}
+
 .modal-container {
   padding: 20px;
 }
 
 .modal-heading {
+  margin-top: 20px;
   text-align: left;
 }
 

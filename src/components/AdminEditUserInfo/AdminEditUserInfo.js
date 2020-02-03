@@ -34,13 +34,17 @@ class AdminEditUserInfo extends Component{
     });
   }
 
+  pushHistoryBack = () => {
+    this.props.history.push('/admin');
+  }
+
   render(){
     let editUser = this.state.selectedUser;
 
     return(
       <center>
         <div className="main-container">
-          <button className="close-window-button">x</button>
+          <button className="close-window-button" onClick={this.pushHistoryBack}>x</button>
           <h1 className="main-heading admin-user-heading">User Information</h1>
           <table className="admin-user-table">
             <thead>
@@ -69,9 +73,10 @@ class AdminEditUserInfo extends Component{
             width="400"
             height="300"
             effect="fadeInUp"
-            onClickAway={() => this.closeModal()}
+            onClickAway={this.closeModal}
           >
             <div className="modal-container">
+              <button className="close-window-button" onClick={this.closeModal}>x</button>
               <h1 className="main-heading modal-heading">{editUser.name}</h1>
               <input className="modal-input" type="text" value={editUser.name} placeholder="user's name" />
               <input className="modal-input" type="text" value={editUser.company} placeholder="company" />
@@ -83,6 +88,9 @@ class AdminEditUserInfo extends Component{
                 )}
               </select>
               <input type="text" value={editUser.password} placeholder="reset password" />
+              <div className="modal-btn-container">
+                <button className="normal-btn">Save</button>
+              </div>
             </div>
           </Modal>
         </div>
