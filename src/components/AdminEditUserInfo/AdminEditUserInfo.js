@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 
 class AdminEditUserInfo extends Component{
 
+  handleClick = (id) => {
+  }
+
   render(){
     return(
       <center>
@@ -19,13 +22,13 @@ class AdminEditUserInfo extends Component{
               </tr>
             </thead>
             <tbody>
-              {this.props.reduxState.map(user => 
+              {this.props.user.map(user => 
                 <tr key={user.id}>
-                  <td>{user.username}</td>
-                  <td>{user.company}</td>
-                  <td>{user.phone}</td>
+                  <td>{user.name}</td>
+                  <td>{user.business_name}</td>
+                  <td>{user.phone_number}</td>
                   <td>{user.email}</td>
-                  <td></td>
+                  <td className="admin-edit-user-cell" onClick={()=>this.handleClick(user.id)}></td>
                 </tr>
               )}
             </tbody>
@@ -37,7 +40,7 @@ class AdminEditUserInfo extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.OBJECT
+  user: reduxState.OBJECT
 });
 
 export default connect(putReduxStateOnProps)(AdminEditUserInfo);
