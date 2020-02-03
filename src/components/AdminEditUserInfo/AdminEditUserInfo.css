@@ -1,0 +1,29 @@
+.admin-edit-user-cell {
+  cursor: pointer;
+  text-decoration: underline;
+  background-color: #f7d149;
+  transition: 0.3s;
+}
+
+.admin-edit-user-cell:hover {
+  background-color: #f0aa42;
+}
+
+.admin-user-table {
+  width: 80%;
+  text-align: center;
+  border-collapse: collapse;
+  border: 3px solid black;
+}
+
+.admin-user-table td {
+  border: 1px solid black;
+}
+
+.admin-user-table th {
+  border: 3px solid black;
+}
+
+.admin-user-table tr:nth-child(even) {
+  background-color: #dddddd;
+}
