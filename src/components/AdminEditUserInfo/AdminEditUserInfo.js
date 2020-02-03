@@ -78,16 +78,49 @@ class AdminEditUserInfo extends Component{
             <div className="modal-container">
               <button className="close-window-button" onClick={this.closeModal}>x</button>
               <h1 className="main-heading modal-heading">{editUser.name}</h1>
-              <input className="modal-input" type="text" value={editUser.name} placeholder="user's name" />
-              <input className="modal-input" type="text" value={editUser.company} placeholder="company" />
-              <input className="modal-input" type="text" value={editUser.phone} placeholder="phone #" />
-              <input className="modal-input" type="text" value={editUser.email} placeholder="email" />
-              <select className="modal-input" value={this.state.selectedUser.industry || 'industry'}>
+              <input 
+                className="modal-input" 
+                type="text" 
+                value={editUser.name} 
+                onChange={(event)=>this.handleChange(event, 'name')}
+                placeholder="user's name" 
+              />
+              <input 
+                className="modal-input" 
+                type="text" 
+                value={editUser.company} 
+                onChange={(event)=>this.handleChange(event, 'company')}
+                placeholder="company" 
+              />
+              <input 
+                className="modal-input" 
+                type="text" 
+                value={editUser.phone} 
+                onChange={(event)=>this.handleChange(event, 'phone')}
+                placeholder="phone #" 
+              />
+              <input 
+                className="modal-input" 
+                type="text" 
+                value={editUser.email} 
+                onChange={(event)=>this.handleChange(event, 'email')}
+                placeholder="email" 
+              />
+              <select 
+                className="modal-input" 
+                value={this.state.selectedUser.industry || 'industry'}
+              >
                 {this.props.industry.map(industry =>
                   <option key={industry.id}>{industry.industry}</option>
                 )}
               </select>
-              <input type="text" value={editUser.password} placeholder="reset password" />
+              <input 
+                className="modal-input" 
+                type="text" 
+                value={editUser.password} 
+                onChange={(event)=>this.handleChange(event, 'password')}
+                placeholder="reset password" 
+              />
               <div className="modal-btn-container">
                 <button className="normal-btn">Save</button>
               </div>
