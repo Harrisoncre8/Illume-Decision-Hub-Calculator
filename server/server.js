@@ -2,15 +2,23 @@ const express = require('express');
 require('dotenv').config();
 const app = express();
 const bodyParser = require('body-parser');
+const passport = require('./strategies/user.strategy');
+
 
 // Route includes
+const userRouter = require('./routes/user.router');
 const questionRouter = require('./routes/question.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+// start up passport sessions
+app.use(passport.initialize());
+app.use(passport.session());
+
 /* Routes */
+app.use(`/api/user`, userRouter);
 app.use(`/api/question`, questionRouter);
 
 // Serve static files

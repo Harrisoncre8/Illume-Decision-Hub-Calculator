@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './Nav.css';
 
-export default function Nav(){
+export default function Nav(props){
     // react router hook
     let history = useHistory();
 
@@ -14,7 +14,7 @@ export default function Nav(){
                 Profit Lever Calculator</button>
             <button className='circle-btn' onClick={() => history.push('/price-setting')}>
                 Price Setting Calculator</button>
-            <button className='circle-btn' onClick={() => history.push('/')}>
+            <button className='circle-btn' onClick={() => props.dispatch({ type: 'LOGOUT' })}>
                 Log <br/> Out</button>
         </div>
     );
