@@ -14,7 +14,6 @@ class AdminEditUserInfo extends Component{
     return(
       <center>
         <div className="main-container">
-          {JSON.stringify(this.props.user)}
           <h1 className="main-heading">User Information</h1>
           <table>
             <thead>
