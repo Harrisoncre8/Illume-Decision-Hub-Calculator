@@ -2,7 +2,7 @@ CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
   "email" TEXT,
   "hashedpassword" TEXT,
-  "admin" BOOLEAN
+  "admin" BOOLEAN DEFAULT false
 );
 
 CREATE TABLE "industry" (
