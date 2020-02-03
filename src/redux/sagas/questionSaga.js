@@ -5,7 +5,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* getQuestion(action){
     console.log('In getQuestion with', action)
     try{
-        const response = yield axios.get(`/api/question`);
+        const response = yield axios.get(`/api/question/` + action.payload);
         yield put({type: `SET_QUESTION`, payload: response.data})
     } catch(error){
         // alert('Sorry, something went wrong while getting questions')
