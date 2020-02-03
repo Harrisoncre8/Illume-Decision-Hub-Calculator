@@ -1,15 +1,13 @@
-.lever-main-container {
-  background-color: white;
-  box-shadow: 5px 5px 10px grey;
-  padding: 20px;
-  border-radius: 25px;
-  height: 100%;
-  width: 80%;
+.lever-label-direct-cost {
+  transform: translate(-47px, 23px);
 }
 
-.lever-main-heading {
-  text-decoration: underline;
-  margin-bottom: 20px;
+.lever-label-indirect-cost {
+  transform: translate(-41px, 23px);
+}
+
+.lever-label-revenue {
+  transform: translate(-53px, 23px);
 }
 
 .lever-mask-direct-cost {
@@ -24,40 +22,12 @@
   width: 39px;
 }
 
-.lever-label-direct-cost {
-  transform: translate(-47px, 23px);
-}
-
-.lever-label-indirect-cost {
-  transform: translate(-41px, 23px);
-}
-
-.lever-label-revenue {
-  transform: translate(-53px, 23px);
-}
-
-.lever-result {
-  border: 4px solid black;
-  padding: 10px;
-  margin-top: 20px;
-  width: 50%;
-}
-
-.lever-result-heading {
-  text-decoration: underline;
-  margin-bottom: 10px;
-}
-
 .lever-text-field-container {
   width: 400px;
   padding-top: 10px;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-}
-
-.lever-text-field-direct-cost, .lever-text-field-indirect-cost, .lever-text-field-revenue {
-  left: 120px;
 }
 
 .lever-text-field-direct-cost:focus + .lever-label-direct-cost {

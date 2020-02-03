@@ -22,20 +22,6 @@
   transform: translate(-33px, 23px);
 }
 
-.break-main-container {
-  background-color: white;
-  box-shadow: 5px 5px 10px grey;
-  padding: 20px;
-  border-radius: 25px;
-  height: 100%;
-  width: 80%;
-}
-
-.break-main-heading {
-  text-decoration: underline;
-  margin-bottom: 20px;
-}
-
 .break-mask-hours {
   width: 55px;
 }
