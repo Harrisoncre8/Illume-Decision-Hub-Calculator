@@ -6,19 +6,31 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   console.log('In getQuestion route with');
   const sqlQuery = `
-      SELECT * FROM question_calculator qc
+      SELECT 
+        "qc"."id", 
+        "qc"."question_id", 
+        "qc"."next_id",
+        "q"."question",
+        "q"."response_type",
+        "q"."help_text",
+        "q"."sub_questions",
+        "q"."split",
+        "c"."calculator"
+      FROM question_calculator qc
       JOIN "questions" q ON "qc"."question_id" = "q"."id"
-      LEFT JOIN "sub_questions" s ON "qc"."id" = "s"."question_id"
+      JOIN "calculators" c ON "qc"."calculator_id" = "c"."id"
       WHERE "qc"."id" = $1;
     `;
   const client = await pool.connect();
   try {
     if(req.query.start){
       const startId = await client.query(`SELECT "start_id" FROM "calculators" WHERE "id" = $1;`, [req.query.start]);
-      const results = await client.query(sqlQuery,[startId]);
+      console.log(startId.rows[0].start_id)
+      const results = await client.query(sqlQuery,[startId.rows[0].start_id]);
+      console.log(results.rows);
       res.send(results.rows);
     } else {
-      const results = await client.query(sqlQuery,[req.querry.id]);
+      const results = await client.query(sqlQuery,[req.query.id]);
       res.send(results.rows);
     }
   } catch (error) {
