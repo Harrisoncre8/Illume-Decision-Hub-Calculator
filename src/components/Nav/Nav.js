@@ -11,9 +11,9 @@ export default function Nav(){
     // let questionData = useSelector(state => state);
     const [modal, setModal] = useState(false);
 
-    useEffect(){
-      dispatch({type: `SOMETHING`})
-    }
+    useEffect(() => {
+      dispatch({type: `GET_ADMIN_USER_INFO`})
+    });
 
     // Change state to open modal
     const openModal = () => {
