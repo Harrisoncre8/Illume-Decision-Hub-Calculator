@@ -9,6 +9,8 @@ import Login from '../Login/Login';
 import Nav from '../Nav/Nav';
 import Register from '../Register/Register';
 import Stepper from '../Stepper/Stepper';
+import Admin from '../Admin/Admin';
+import AdminEditUserInfo from '../AdminEditUserInfo/AdminEditUserInfo';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route exact path='/register' component={Register} />
         <Route exact path='/profit-lever' component={ProfitLever} />
         <Route exact path ='/questionaire' component={Stepper} />
+        <Route exact path ='/admin' component={Admin} />
+        <Route exact path ='/admin/edit-user-info' component={AdminEditUserInfo} />
       </div>
     </Router>
   );

@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
-import question from '../reducers/questionReducer';
+import admin from './adminReducer';
+import industry from './industryReducer';
+import question from './questionReducer';
 
 const rootReducer = combineReducers({
-  question // stores questions from the database
+  admin, // stores admin information
+  industry, // stores industry information
+  question, // stores questions from the database
 });
 
 export default rootReducer;
