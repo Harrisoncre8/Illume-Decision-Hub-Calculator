@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import question from '../reducers/questionReducer';
+import question from './questionReducer';
+import split from './splitReducer';
 
 const rootReducer = combineReducers({
-  question // stores questions from the database
+  question, // stores questions from the database
+  split
 });
 
 export default rootReducer;
