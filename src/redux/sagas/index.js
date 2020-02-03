@@ -1,8 +1,10 @@
 import { all } from 'redux-saga/effects';
-import questionSaga from '../sagas/questionSaga';
+import admin from './adminSaga';
+import question from './questionSaga';
 
 export default function* rootSaga() {
   yield all([
-    questionSaga()
+    admin(),
+    question(),
   ]);
 }
