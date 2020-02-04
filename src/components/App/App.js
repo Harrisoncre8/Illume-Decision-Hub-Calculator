@@ -18,7 +18,7 @@ function App() {
       <Nav />
       <div className="App">
         <Route exact path='/' component={Login} />
-        <Route exact path='/break-even' component={BreakEven} /> 
+        <Route exact path='/break-even-pricing' component={BreakEven} /> 
         <Route exact path='/price-setting' component={PriceSetting} />
         <Route exact path='/register' component={Register} />
         <Route exact path='/define-your-profit-lever' component={ProfitLever} />
