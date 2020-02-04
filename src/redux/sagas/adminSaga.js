@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* getAdminQuestions(action){
+function* getAdminQuestion(action){
   try{
     const response = yield axios.get(`/api/admin/questions`);
     yield put({type: `SET_ADMIN_QUESTION`, payload: response.data});
@@ -47,7 +47,7 @@ function* putAdminUserInfo(action){
 }
 
 function* adminSaga() {
-  yield takeLatest(`GET_ADMIN_QUESTION`, getAdminQuestions);
+  yield takeLatest(`GET_ADMIN_QUESTION`, getAdminQuestion);
   yield takeLatest(`GET_ADMIN_USER_INFO`, getAdminUserInfo);
   yield takeLatest(`POST_ADMIN_INDUSTRY_INFO`, postAdminIndustryInfo);
   yield takeLatest(`PUT_ADMIN_INDUSTRY_INFO`, putAdminIndustryInfo);

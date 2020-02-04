@@ -29,6 +29,7 @@ class AdminEditPrice extends Component{
     return(
       <div className="main-container">
         {JSON.stringify(this.state)}
+        {JSON.stringify(this.props.question)}
         <h1 className="main-heading">Edit Price Setting Calculator</h1>
         {/* {this.props.question.map(q =>
           <div key={q.id}>
@@ -41,7 +42,7 @@ class AdminEditPrice extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  question: reduxState.adminQuestion
+  question: reduxState.admin.adminQuestion
 });
 
 export default connect(putReduxStateOnProps)(AdminEditPrice);
