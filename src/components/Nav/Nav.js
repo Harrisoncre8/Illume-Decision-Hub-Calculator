@@ -17,13 +17,31 @@ export default function Nav() {
     history.push('/questionaire')
   }
 
+  function priceSetting() {
+    dispatch({type: 'GET_QUESTION', payload: {
+      querry: {
+        start: 3
+      }
+    }})
+    history.push('/questionaire')
+  }
+
+  function breakEven() {
+    dispatch({type: 'GET_QUESTION', payload: {
+      querry: {
+        start: 2
+      }
+    }})
+    history.push('/questionaire')
+  }
+
   return (
     <div className='nav-div'>
-      <button className='circle-btn' onClick={() => history.push('/break-even')}>
+      <button className='circle-btn' onClick={breakEven}>
         Break Even Calculator</button>
-      <button className='circle-btn' onClick={() => profitLever()}>
+      <button className='circle-btn' onClick={profitLever}>
         Profit Lever Calculator</button>
-      <button className='circle-btn' onClick={() => history.push('/price-setting')}>
+      <button className='circle-btn' onClick={priceSetting}>
         Price Setting Calculator</button>
       <button className='circle-btn' onClick={() => history.push('/')}>
         Log <br /> Out</button>
