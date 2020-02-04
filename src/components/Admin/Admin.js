@@ -8,7 +8,7 @@ class Admin extends Component{
     this.props.history.push('/admin/edit-calculator-info');
   }
 
-  pushHistoryToEditUserInfo = () => {
+  pushHistoryToEditIndustryInfo = () => {
     this.props.history.push('/admin/edit-industry-info');
   }
 
@@ -41,7 +41,7 @@ class Admin extends Component{
             <div className="admin-btn-flex-column">
               <button 
                 className="circle-btn" 
-                onClick={this.pushHistoryToEditIndustriesInfo}
+                onClick={this.pushHistoryToEditIndustryInfo}
               >
                 Edit Industries
               </button>
