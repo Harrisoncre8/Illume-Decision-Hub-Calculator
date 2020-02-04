@@ -11,10 +11,20 @@ function PriceSetting() {
   const [industryNorm, setIndustryNorm] = useState(0);
   const [difference, setDifference] = useState(0);
 
+  // Adds class if input has a value, removes the class if input has no value
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
+  
+  // Sets local state to current input value, adds or removes class based on input's value
+  const handleChange = (e, propName) => {
+    propName(e.target.value);
+    checkForValue(e);
+  }
+
   useEffect(()=>{
-    let pm = (cost/margin)*margin;
+    let iNorm = cost/(1-margin)
+    let pm = iNorm-cost;
     let um = price-cost;
-    setIndustryNorm(cost/(1-margin));
+    setIndustryNorm(iNorm);
     setProductMargin(pm);
     setUserMargin(um);
     if (pm >= um){
@@ -30,8 +40,8 @@ function PriceSetting() {
         <h1 className="main-heading">Price Setting</h1>
         <div className="inputs"> 
           <form>
-            <select onChange={(event)=>{setMargin( Number(event.target.value))}}>
-              <option disabled selected value>Industry</option>
+            <select onChange={(event)=>handleChange(event, setMargin)} defaultValue="Select Industry">
+              <option disabled>Select Industry</option>
               <option value={.15}>A</option>
               <option value={.20}>B</option>
               <option value={.25}>C</option>
@@ -51,7 +61,7 @@ function PriceSetting() {
                 className="text-field price-text-field-product-cost"
                 type='number' 
                 value={cost} 
-                onChange={(event)=>{setCost(event.target.value)}}
+                onChange={(event)=>handleChange(event, setCost)}
               />
               <label className="text-field-label price-label-product-cost">product cost</label>
               <div className="text-field-mask price-mask-product-cost"></div>
@@ -63,7 +73,7 @@ function PriceSetting() {
                 className="text-field price-text-field-product-price"
                 type='number'
                 value={price} 
-                onChange={(event)=>{setPrice(event.target.value)}}
+                onChange={(event)=>handleChange(event, setPrice)}
               />
               <label className="text-field-label price-label-product-price">product price</label>
               <div className="text-field-mask price-mask-product-price"></div>

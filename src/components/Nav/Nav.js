@@ -1,23 +1,50 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './Nav.css';
+import { useDispatch } from 'react-redux';
 
-export default function Nav(){
-    // react router hook
-    let history = useHistory();
+export default function Nav() {
+  // react router hook
+  let history = useHistory();
+  const dispatch = useDispatch();
 
-    return(
-        <div className='nav-div'>
-            <button className='circle-btn' onClick={() => history.push('/break-even')}>
-                Break Even Calculator</button>
-            <button className='circle-btn' onClick={() => history.push('/profit-lever')}>
-                Profit Lever Calculator</button>
-            <button className='circle-btn' onClick={() => history.push('/price-setting')}>
-                Price Setting Calculator</button>
-            <button className='circle-btn' onClick={() => history.push('/')}>
-                Log <br/> Out</button>
-            <button onClick={() => history.push('/user')}>NUT COG WIDGET</button>
-        </div>
-    );
+  function profitLever() {
+    dispatch({type: 'GET_QUESTION', payload: {
+      query: {
+        start: 1
+      }
+    }});
+    history.push('/questionnaire');
+  }
+
+  function priceSetting() {
+    dispatch({type: 'GET_QUESTION', payload: {
+      query: {
+        start: 3
+      }
+    }});
+    history.push('/questionnaire');
+  }
+
+  function breakEven() {
+    dispatch({type: 'GET_QUESTION', payload: {
+      query: {
+        start: 2
+      }
+    }});
+    history.push('/questionnaire');
+  }
+
+  return (
+    <div className='nav-div'>
+      <button className='circle-btn' onClick={breakEven}>
+        Break Even Calculator</button>
+      <button className='circle-btn' onClick={profitLever}>
+        Profit Lever Calculator</button>
+      <button className='circle-btn' onClick={priceSetting}>
+        Price Setting Calculator</button>
+      <button className='circle-btn' onClick={() => history.push('/')}>
+        Log <br /> Out</button>
+    </div>
+  );
 }
-
