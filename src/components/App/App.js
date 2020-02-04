@@ -14,6 +14,7 @@ import PriceSetting from '../PriceSetting/PriceSetting';
 import ProfitLever from '../ProfitLever/ProfitLever';
 import Register from '../Register/Register';
 import Stepper from '../Stepper/Stepper';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
@@ -21,14 +22,14 @@ function App() {
       <Nav />
       <div className="App">
         <Route exact path='/' component={Login} />
-        <Route exact path='/admin' component={Admin} />
-        <Route exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
-        <Route exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
-        <Route exact path='/admin/edit-user-info' component={AdminEditUserInfo} />
-        <Route exact path='/break-even-pricing' component={BreakEven} /> 
-        <Route exact path='/price-setting' component={PriceSetting} />
-        <Route exact path='/define-your-profit-lever' component={ProfitLever} />
-        <Route exact path='/questionnaire' component={Stepper} />
+        <ProtectedRoute exact path='/admin' component={Admin} />
+        <ProtectedRoute exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
+        <ProtectedRoute exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
+        <ProtectedRoute exact path='/admin/edit-user-info' component={AdminEditUserInfo} />
+        <ProtectedRoute exact path='/break-even-pricing' component={BreakEven} /> 
+        <ProtectedRoute exact path='/price-setting' component={PriceSetting} />
+        <ProtectedRoute exact path='/define-your-profit-lever' component={ProfitLever} />
+        <ProtectedRoute exact path='/questionnaire' component={Stepper} />
         <Route exact path='/register' component={Register} />
       </div>
     </Router>
