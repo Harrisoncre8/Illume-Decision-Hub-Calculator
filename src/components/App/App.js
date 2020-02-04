@@ -32,8 +32,6 @@ function App() {
         <Route exact path='/register' component={Register} />
         <Route exact path='/profit-lever' component={ProfitLever} />
         <Route exact path ='/questionaire' component={Stepper} />
-        <Route exact path ='/admin' component={Admin} />
-        <Route exact path ='/admin/edit-user-info' component={AdminEditUserInfo} />
         <Route exact path ='/user' component={User} />
       </div>
     </Router>
