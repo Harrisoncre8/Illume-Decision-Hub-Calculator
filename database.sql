@@ -11,7 +11,6 @@ CREATE TABLE "industry" (
   "margin" DECIMAL(4,2)
 );
 
-
 CREATE TABLE "contact_info" (
   "user_id" INT PRIMARY KEY,
   "name" TEXT,
@@ -48,7 +47,8 @@ CREATE TABLE "questions" (
   "response_type" TEXT,
   "help_text" TEXT,
   "sub_questions" BOOLEAN,
-  "split" BOOLEAN
+  "split" BOOLEAN,
+  "checkboxes" BOOLEAN
 );
 
 CREATE TABLE "split" (
@@ -75,18 +75,32 @@ CREATE TABLE "question_calculator" (
   "next_id" int
 );
 
+CREATE TABLE "checkboxes" (
+  "id" SERIAL PRIMARY KEY,
+  "question_id" INT,
+  "checkbox_text" TEXT
+);
+
+CREATE TABLE "user_checks" (
+  "id" SERIAL PRIMARY KEY,
+  "user_id" INT,
+  "question_id" INT
+)
+
 INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questions", "split")
 VALUES (
   'Is this for a single sale or total product sales?',
   'radio',
   'Single sales are for when you are only considering a single transaction where total product sales considers multiple transactions.',
   FALSE,
-  TRUE
+  TRUE,
+  FALSE
 ),
 (
   'What is your revinue?',
   'number',
   'Revinue is that amount of money you charge for a product or service',
+  FALSE,
   FALSE,
   FALSE
 ),
@@ -95,12 +109,14 @@ VALUES (
   'number',
   'Direct costs are costs that are specific to a sale such as labor costs and material costs',
   TRUE,
+  FALSE,
   FALSE
 ),
 (
   'What are your indirect costs?',
   'number',
   'Indirect costs are costs that apply to all sales or services such as gas or rent',
+  FALSE,
   FALSE,
   FALSE
 ),
@@ -109,6 +125,7 @@ VALUES (
   'number',
   'How much of this product or service do you sell?',
   FALSE,
+  FALSE,
   FALSE
 ),
 (
@@ -116,8 +133,9 @@ VALUES (
   'number',
   'Consider your costs and the value you bring with this product.',
   FALSE,
+  FALSE,
   FALSE
-);;
+);
 
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("industry_id") REFERENCES "industry" ("id");
@@ -130,6 +148,9 @@ ALTER TABLE "split" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id"
 ALTER TABLE "sub_questions" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
+ALTER TABLE "checkboxes" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "user_checks" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "user_checks" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
