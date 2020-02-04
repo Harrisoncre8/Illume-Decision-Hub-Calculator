@@ -52,36 +52,35 @@ router.put('/industry-info', (req, res) => {
 
 // PUT route for admin to update user information
 router.put('/user-info', async (req, res) => {
-  console.log('req.body:', req.body);
-  // const id = req.body.id;
-  // const name = req.body.name;
-  // const company = req.body.company;
-  // const phone = req.body.phone;
-  // const industry = req.body.industry;
-  // const email = req.body.email;
-  // const password = req.body.password;
-  // const sqlQueryContactInfo = ` UPDATE contact_info
-  //                               SET name = $1, business_name = $2, phone_number = $3
-  //                               WHERE id = $4;`;
-  // const sqlQueryUsers;
-  // const connection = await pool.connect();
+  const id = req.body.id;
+  const name = req.body.name;
+  const company = req.body.company;
+  const phone = req.body.phone;
+  const industry = req.body.industryid;
+  const email = req.body.email;
+  const password = req.body.password;
+  const sqlQueryContactInfo = ` UPDATE contact_info
+                                SET name = $1, business_name = $2, phone_number = $3, industry_id = $4
+                                WHERE user_id = $5;`;
+  let sqlQueryUsers = ``;
+  const connection = await pool.connect();
 
 
-  // password ? sqlQueryUsers = `UPDATE users SET email = $1, password = $2;` : sqlQueryUsers = `UPDATE users SET email = $1;`
+  password ? sqlQueryUsers = `UPDATE users SET email = $1, password = $2;` : sqlQueryUsers = `UPDATE users SET email = $1;`
   
-  // try {
-  //   await connection.query(`BEGIN`);
-  //   await connection.query(sqlQueryContactInfo, [name, company, phone, id]);
-  //   password ? await connection.query(sqlQueryUsers, [email, password]) : await connection.query(sqlQueryUsers, [email]);
-  //   await connection.query(`COMMIT`);
-  // } catch(error) {
-  //   console.log('Error with PUT admin edit user info', error);
-  //   await connection.query(`ROLLBACK`);
-  //   res.sendStatus(500);
-  // }
-  // finally {
-  //   connection.release();
-  // }
+  try {
+    await connection.query(`BEGIN`);
+    await connection.query(sqlQueryContactInfo, [name, company, phone, industry, id]);
+    password ? await connection.query(sqlQueryUsers, [email, password]) : await connection.query(sqlQueryUsers, [email]);
+    await connection.query(`COMMIT`);
+  } catch(error) {
+    console.log('Error with PUT admin edit user info', error);
+    await connection.query(`ROLLBACK`);
+    res.sendStatus(500);
+  }
+  finally {
+    connection.release();
+  }
 });
 
 module.exports = router;
