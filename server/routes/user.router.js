@@ -18,14 +18,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/register', (req, res, next) => {  
   console.log('req body is:', req.body);
     
-  const username = req.body.username;
+  const email = req.body.email;
   const password = encryptLib.encryptPassword(req.body.password);
-  const waterGoal = req.body.waterGoal;
-  const wasteGoal = req.body.wasteGoal;
 
-  const queryText = `INSERT INTO "consumer" (username, password, water_goal, waste_goal) 
-  VALUES ($1, $2, $3, $4) RETURNING user_id`;
-  pool.query(queryText, [username, password, waterGoal, wasteGoal])
+
+  const queryText = `INSERT INTO "consumer" (email, password) 
+  VALUES ($1, $2) RETURNING user_id`;
+  pool.query(queryText, [email, password])
     .then( (result) => {
       res.send(result.rows[0].id);
     })
