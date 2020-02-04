@@ -84,16 +84,6 @@ class Register extends Component{
           </div>
 
           <div className="register-text-field-container">
-            <select className="dropdown register-dropdown">
-              <option disabled selected value>Select Region</option>
-              <option>Midwest</option>
-              <option>Northeast</option>
-              <option>Southwest</option>
-            </select>
-          </div>
-
-
-          <div className="register-text-field-container">
             <input 
               className="text-field register-text-field-email" 
               type="text" 
