@@ -4,6 +4,14 @@ import './Login.css';
 
 class Login extends Component{
 
+  handleLogin = () => {
+    // Enter code to handle logging user in
+  }
+
+  handleRegister = () => {
+    this.props.history.push('/register');
+  }
+
   render(){
     return(
       <center>
@@ -26,13 +34,11 @@ class Login extends Component{
             <div className="text-field-mask login-password-mask"></div>
           </div>
 
-          <button className="normal-btn login-login-btn">Log In</button>
+          <button className="normal-btn login-login-btn" onClick={this.handleLogin}>Log In</button>
           
           <hr className="login-hr" />
 
-          {/* <Link exact to="/register"> */}
-            <button className="login-register-btn">register</button>
-          {/* </Link> */}
+          <button className="login-register-btn" onClick={this.handleRegister}>register</button>
 
         </div>
       </center>
