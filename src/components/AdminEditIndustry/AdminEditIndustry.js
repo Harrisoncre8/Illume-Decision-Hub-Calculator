@@ -109,7 +109,7 @@ class AdminEditIndustry extends Component{
                   value={editIndustry.margin} 
                   onChange={(event)=>this.handleChange(event, 'margin')}
                 />
-                <label className="text-field-label admin-industry-label-margin">margin</label>
+                <label className="text-field-label admin-industry-label-margin">margin (%)</label>
                 <div className="text-field-mask admin-industry-mask-margin"></div>
               </div>
 

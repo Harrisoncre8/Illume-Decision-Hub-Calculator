@@ -1,0 +1,71 @@
+.admin-edit-industry-cell {
+  cursor: pointer;
+  text-decoration: underline;
+  background-color: #f7d149;
+  transition: 0.3s;
+}
+
+.admin-edit-industry-cell:hover {
+  background-color: #f0aa42;
+}
+
+.admin-industry-heading {
+  margin-top: 20px;
+}
+
+.admin-industry-label-industry {
+  transform: translate(-43px, 23px);
+}
+
+.admin-industry-label-margin {
+  transform: translate(-52px, 23px);
+}
+
+.admin-industry-mask-industry {
+  width: 58px;
+}
+
+.admin-industry-mask-margin {
+  width: 45px;
+}
+
+.admin-industry-table {
+  width: 80%;
+  text-align: center;
+  border-collapse: collapse;
+  border: 3px solid black;
+}
+
+.admin-industry-table td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.admin-industry-table th {
+  border: 3px solid black;
+}
+
+.admin-industry-table tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.admin-industry-text-field-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-industry-text-field-industry:focus + .admin-industry-label-industry {
+  transform: translate(-46px, 6px);
+}
+
+.admin-industry-text-field-margin:focus + .admin-industry-label-margin {
+  transform: translate(-52px, 6px);
+}
+
+.text-field-active + .admin-industry-label-industry {
+  transform: translate(-46px, 6px);
+}
+
+.text-field-active + .admin-industry-label-margin {
+  transform: translate(-52px, 6px);
+}
