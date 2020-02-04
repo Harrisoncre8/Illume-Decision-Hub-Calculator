@@ -102,6 +102,12 @@ p, span, div, h1, h2, h3, label, button {
   margin-bottom: 10px;
 }
 
+.dropdown {
+  position: relative;
+  height: 30px;
+  width: 160px;
+}
+
 .main-container {
   background-color: white;
   box-shadow: 5px 5px 10px #272727;
@@ -212,12 +218,6 @@ p, span, div, h1, h2, h3, label, button {
   left: 128px;
   height: 4px;
   background-color: #FFF;
-}
-
-.dropdown {
-  position: relative;
-  height: 30px;
-  width: 160px;
 }
 
 

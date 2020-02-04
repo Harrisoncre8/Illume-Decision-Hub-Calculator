@@ -26,7 +26,6 @@ class AdminEditUserInfo extends Component{
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
-
   closeModal = () => {
     this.setState({visible : false});
   }
