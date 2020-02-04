@@ -30,20 +30,26 @@
   margin-bottom: 10px;
 }
 
+.text-field-active + .lever-label-direct-cost {
+  transform: translate(-48px, 7px);
+}
+
+.text-field-active + .lever-label-indirect-cost {
+  transform: translate(-44px, 7px);
+}
+
+.text-field-active + .lever-label-revenue {
+  transform: translate(-55px, 7px);
+}
+
 .lever-text-field-direct-cost:focus + .lever-label-direct-cost {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-48px, 7px);
 }
 
 .lever-text-field-indirect-cost:focus + .lever-label-indirect-cost {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-44px, 7px);
 }
 
 .lever-text-field-revenue:focus + .lever-label-revenue {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-55px, 7px);
 }

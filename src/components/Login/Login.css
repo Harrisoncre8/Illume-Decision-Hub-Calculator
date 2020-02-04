@@ -58,14 +58,18 @@
   flex-direction: column;
 }
 
+.text-field-active + .login-label-email {
+  transform: translate(-60px, 6px);
+}
+
+.text-field-active + .login-label-password {
+  transform: translate(-52px, 6px);
+}
+
 .login-text-field-email:focus + .login-label-email {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-60px, 6px);
 }
 
 .login-text-field-password:focus + .login-label-password {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-52px, 6px);
 }

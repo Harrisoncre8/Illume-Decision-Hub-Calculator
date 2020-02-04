@@ -57,44 +57,50 @@
   margin-bottom: 10px;
 }
 
-.break-text-field-hours:focus + .break-label-hours {
-  color: #f0aa42;
-  font-size: 0.8em;
+.text-field-active + .break-label-hours {
   transform: translate(-47px, 7px);
 }
 
-/*  WORKING ON PLACEHOLDER SHOWN - MAKE LABEL INVISIBLE TO START, 
-    MOVE UP WHEN FOCUSED, STAY UP WHEN PLACEHOLDER NOT SHOWN */
-.break-text-field-hours:placeholder-shown + .break-label-hours {
-  font-size: 1.4em;
+.text-field-active + .break-label-indirect-cost {
+  transform: translate(-43px, 7px);
+}
+
+.text-field-active + .break-label-part {
+  transform: translate(-50px, 7px);
+}
+
+.text-field-active + .break-label-rate {
+  transform: translate(-52px, 7px);
+}
+
+.text-field-active + .break-label-raw-material {
+  transform: translate(-32px, 7px);
+}
+
+.text-field-active + .break-label-sales {
+  transform: translate(-35px, 7px);
+}
+
+.break-text-field-hours:focus + .break-label-hours {
+  transform: translate(-47px, 7px);
 }
 
 .break-text-field-indirect-cost:focus + .break-label-indirect-cost {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-43px, 7px);
 }
 
 .break-text-field-part:focus + .break-label-part {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-50px, 7px);
 }
 
 .break-text-field-rate:focus + .break-label-rate {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-52px, 7px);
 }
 
 .break-text-field-raw-material:focus + .break-label-raw-material {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-32px, 7px);
 }
 
 .break-text-field-sales:focus + .break-label-sales {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-35px, 7px);
 }
