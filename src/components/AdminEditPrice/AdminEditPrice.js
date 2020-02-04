@@ -4,13 +4,7 @@ import {connect} from 'react-redux';
 class AdminEditPrice extends Component{
 
   state = {
-    sales: '',
-    direct: '',
-    indirect: '',
-    pricePer: '',
-    directSub: {
 
-    }
   }
 
   componentDidMount(){
@@ -19,9 +13,7 @@ class AdminEditPrice extends Component{
 
   componentDidUpdate(prevProps){
     if(this.props.question !== prevProps.question){
-      // this.setState({
-      //   this.props.question
-      // });
+      this.setState({...this.props.question});
     }
   }
 
