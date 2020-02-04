@@ -14,19 +14,19 @@
 }
 
 .admin-industry-label-industry {
-  transform: translate(-43px, 23px);
+  transform: translate(-54px, 23px);
 }
 
 .admin-industry-label-margin {
-  transform: translate(-52px, 23px);
+  transform: translate(-46px, 23px);
 }
 
 .admin-industry-mask-industry {
-  width: 58px;
+  width: 43px;
 }
 
 .admin-industry-mask-margin {
-  width: 45px;
+  width: 55px;
 }
 
 .admin-industry-table {
@@ -55,17 +55,17 @@
 }
 
 .admin-industry-text-field-industry:focus + .admin-industry-label-industry {
-  transform: translate(-46px, 6px);
+  transform: translate(-53px, 6px);
 }
 
 .admin-industry-text-field-margin:focus + .admin-industry-label-margin {
-  transform: translate(-52px, 6px);
+  transform: translate(-47px, 6px);
 }
 
 .text-field-active + .admin-industry-label-industry {
-  transform: translate(-46px, 6px);
+  transform: translate(-53px, 6px);
 }
 
 .text-field-active + .admin-industry-label-margin {
-  transform: translate(-52px, 6px);
+  transform: translate(-47px, 6px);
 }
