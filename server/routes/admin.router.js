@@ -2,6 +2,19 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// GET route for admin question editing
+router.get('/questions', (req, res) => {
+  let sqlQuery = `SELECT * FROM questions;`;
+  pool.query(sqlQuery)
+    .then(result => {
+    res.send(result.rows);
+  })
+  .catch( error => {
+    console.log('Error with GET admin questions', error);
+    res.sendStatus(500);
+  });
+});
+
 // GET route for admin user information
 router.get('/user-info', (req, res) => {
   let sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, i.industry
