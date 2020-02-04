@@ -1,14 +1,28 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './Login.css';
+// import { stat } from 'fs';
 
 class Login extends Component{
-
   state = {
     email: '',
-    password: ''
-  }
+    password: '',
+  };
 
+  login = (event) => {
+    event.preventDefault();
+    if (this.state.email && this.state.password) {
+      this.props.dispatch({
+        type: 'LOGIN',
+        payload: {
+          username: this.state.email,
+          password: this.state.password,
+        },
+      });
+    } else {
+      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+    }
+  }
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
@@ -21,9 +35,7 @@ class Login extends Component{
     this.checkForValue(e);
   }
   
-  handleLogin = () => {
-    // Enter code to handle logging user in
-  }
+
 
   handleRegister = () => {
     this.props.history.push('/register');
@@ -33,11 +45,19 @@ class Login extends Component{
     return(
       <center>
         <div className="login-container">
-
+        {this.props.errors.loginMessage && (
+          <h2
+            className="alert"
+            role="alert"
+          >
+            {this.props.errors.loginMessage}
+          </h2>
+        )}
           <div>
             <img className="login-logo" src="illume-logo180.png" alt="illume logo" />
             <span className="login-brand-name">illume decision hub</span>
           </div>
+          <form onSubmit={this.login}>
 
           <div className="login-text-field-container">
             <input 
@@ -59,16 +79,21 @@ class Login extends Component{
             <div className="text-field-mask login-password-mask"></div>
           </div>
 
-          <button className="normal-btn login-login-btn" onClick={this.handleLogin}>Log In</button>
+          <button className="normal-btn login-login-btn" onClick={this.login}>Log In</button>
           
           <hr className="login-hr" />
 
           <button className="login-register-btn" onClick={this.handleRegister}>register</button>
-
+          </form>
         </div>
       </center>
     );
   }
 }
 
-export default connect()(Login);
+
+const mapStateToProps = state => ({
+    errors: state.errors,
+});
+
+export default connect(mapStateToProps)(Login);
