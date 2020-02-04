@@ -131,6 +131,14 @@ VALUES (
   FALSE
 ),
 (
+  'Would you like to input your direct costs as a total or walkthrough the categories?',
+  'radio',
+  'A total will just be one input field where the walkthrough will bring you through possible direct cost categories.',
+  NULL,
+  TRUE,
+  FALSE
+),
+(
   'What is the rate per of this labor?',
   'number',
   'Consider just one labor rate for this field.',
@@ -284,18 +292,23 @@ VALUES ('Define Your Profit Lever', 1),
 
 INSERT INTO "question_calculator" ("calculator_id", "question_id", "next_id")
 VALUES (1,1,2),
-(1,2,3),
+(1,2,13),
 (1,3,4),
 (1,4,NULL),
-(1,5,2),
-(2,2,7),
+(1,5,6),
+(2,2,14),
 (2,3,8),
 (2,4,NULL),
-(3,5,10),
+(3,5,15),
 (3,3,11),
 (3,4,12),
-(3,6,NULL);
+(3,6,NULL),
+(1,7,3),
+(2,7,7),
+(3,7,10),
+
 
 INSERT INTO "split" ("calculator_id", "question_id","split_text","next_id")
 VALUES(2,1,'Single Product',2),
-(2,1,'Total Product', 5);
+(2,1,'Total Product', 5)
+(3,7, '');
