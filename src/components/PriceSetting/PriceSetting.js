@@ -40,8 +40,8 @@ function PriceSetting() {
         <h1 className="main-heading">Price Setting</h1>
         <div className="inputs"> 
           <form>
-            <select onChange={(event)=>handleChange(event, setMargin)}>
-              <option disabled selected value>Industry</option>
+            <select onChange={(event)=>handleChange(event, setMargin)} defaultValue="Select Industry">
+              <option disabled>Select Industry</option>
               <option value={.15}>A</option>
               <option value={.20}>B</option>
               <option value={.25}>C</option>
