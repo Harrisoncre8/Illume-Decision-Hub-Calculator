@@ -9,6 +9,7 @@ let dispatch = useDispatch();
 let userData = useSelector(state => state.admin.adminUserInfo);
 // let industryData = useSelector(state => state.industry);
 const [modal, setModal] = useState(false);
+const [passwordModal, setPasswordModal] = useState(false);
 const [name, setName] = useState('');
 const [company, setCompany] = useState('');
 const [phone, setPhone] = useState('');
@@ -20,19 +21,27 @@ useEffect(() => {
   dispatch({type: `GET_INDUSTRY`});
 }, [dispatch]);
 
-// change state to open modal
+// change state to open user info modal
 const openModal = () => {
     setModal(true);
 }
-// change state to close modal
+// change state to close user info modal
 const closeModal = () => {
     setModal(false);
+}
+// opens modal to change password
+const openPassModal = () => {
+  setPasswordModal(true);
+}
+// close modal to change password
+const closePassModal = () => {
+  setPasswordModal(false);
 }
 
   return(
     <center>
       <div className='main-container'>
-        <h1 className='user-spacing'>Hello, req.user.name!</h1>
+        <h1 className='user-spacing'>Welcome back, req.user.name!</h1>
         <h2 className='user-spacing'>What is the Illume Decision Hub Calculator?</h2>
         <h3 className='user-spacing'>The application is designed to help small business owners generate more profits. 
           Using conversational language through a “choose your own adventure” format, you will 
@@ -48,7 +57,7 @@ const closeModal = () => {
             <li>Comapny: {user.company}</li>
             <li>Phone: {user.phone}</li>
             <li>Email: {user.email}</li>
-            <li>Industry: {user.industry}</li>
+            <li className='user-spacing'>Industry: {user.industry}</li>
           </ul>
           )}
         <input type="button" value="Edit Profile" onClick={() => openModal()} />
@@ -67,11 +76,26 @@ const closeModal = () => {
                 <input placeholder={user.phone}></input>
                 <input placeholder={user.email}></input>
                 <input placeholder={user.industry}></input>
+                <input type="button" value="Change Password?" onClick={() => openPassModal()}></input>
               </div>
             )}
               <div className="modal-btn-container">
                 <button className="normal-btn" href="javascript:void(0);" 
                 onClick={() => closeModal()}>Close</button>
+              </div>
+          </Modal>
+
+          <Modal
+          visible={passwordModal}
+          width="400"
+          height="300"
+          effect="fadeInUp"
+          onClickAway={() => closePassModal()}
+        >
+          <h1 className="main-heading admin-user-heading">Please Confirm New Password</h1>
+              <div className="modal-btn-container">
+                <button className="normal-btn" href="javascript:void(0);" 
+                onClick={() => closePassModal()}>Close</button>
               </div>
           </Modal>
         </div>
