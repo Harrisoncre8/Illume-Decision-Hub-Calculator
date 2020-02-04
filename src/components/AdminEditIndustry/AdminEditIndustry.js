@@ -60,7 +60,6 @@ class AdminEditIndustry extends Component{
     return(
       <center>
         <div className="main-container">
-          {JSON.stringify(this.state)}
           <button className="close-window-button" onClick={this.pushHistoryBack}>x</button>
           <h1 className="main-heading admin-industry-heading">Industry Information</h1>
           <table className="admin-industry-table">
@@ -89,7 +88,6 @@ class AdminEditIndustry extends Component{
             onClickAway={this.closeModal}
           >
             <div className="modal-container">
-              {JSON.stringify(this.state.selectedIndustry)}
               <button className="close-window-button" onClick={this.closeModal}>x</button>
               <h1 className="main-heading modal-heading">{this.state.industry}</h1>
               
