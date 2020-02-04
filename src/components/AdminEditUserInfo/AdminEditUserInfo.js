@@ -14,6 +14,7 @@ class AdminEditUserInfo extends Component{
       phone: '',
       email: '',
       industry: '',
+      industryid: '',
       password: ''
     }
   }
@@ -44,7 +45,7 @@ class AdminEditUserInfo extends Component{
     this.setState({
       selectedUser: {
         ...this.state.selectedUser,
-        industry: e.target.value
+        industryid: e.target.value
       }
     });
   }
@@ -106,6 +107,7 @@ class AdminEditUserInfo extends Component{
             onClickAway={this.closeModal}
           >
             <div className="modal-container">
+              {JSON.stringify(this.state.selectedUser)}
               <button className="close-window-button" onClick={this.closeModal}>x</button>
               <h1 className="main-heading modal-heading">{this.state.username}</h1>
               
@@ -166,11 +168,11 @@ class AdminEditUserInfo extends Component{
               
               <select 
                 className="modal-input" 
-                value={this.state.selectedUser.industry || 'industry'}
+                value={this.state.selectedUser.industryid || 'industry'}
                 onChange={this.handleDropdownChange}
               >
                 {this.props.industry.map(industry =>
-                  <option key={industry.id}>{industry.industry}</option>
+                  <option key={industry.id} value={industry.id}>{industry.industry}</option>
                 )}
               </select>
 
