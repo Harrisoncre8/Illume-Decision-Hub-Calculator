@@ -14,7 +14,6 @@ import ProfitLever from '../ProfitLever/ProfitLever';
 import Register from '../Register/Register';
 import Stepper from '../Stepper/Stepper';
 
-
 function App() {
   return (
     <Router>
@@ -25,9 +24,9 @@ function App() {
         <Route exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
         <Route exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
         <Route exact path='/admin/edit-user-info' component={AdminEditUserInfo} />
-        <Route exact path='/break-even' component={BreakEven} /> 
+        <Route exact path='/break-even-pricing' component={BreakEven} /> 
         <Route exact path='/price-setting' component={PriceSetting} />
-        <Route exact path='/profit-lever' component={ProfitLever} />
+        <Route exact path='/define-your-profit-lever' component={ProfitLever} />
         <Route exact path='/questionnaire' component={Stepper} />
         <Route exact path='/register' component={Register} />
       </div>
