@@ -38,8 +38,6 @@ function ProfitLever() {
     
     <center>
       <div className="main-container">
-      {JSON.stringify(directCost)}
-      {JSON.stringify(indirectCost)}
         <h1 className="main-heading">Define Profit Levers</h1>
           <form>
             <div>
