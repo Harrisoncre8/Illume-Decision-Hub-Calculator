@@ -62,6 +62,10 @@ class AdminEditIndustry extends Component{
     this.checkForValue(e);
   }
 
+  handlePost = () => {
+    this.props.dispatch({type: `POST_ADMIN_INDUSTRY_INFO`, payload: this.state.newIndustry});
+  }
+
   handleSave = () => {
     this.props.dispatch({type: `PUT_ADMIN_INDUSTRY_INFO`, payload: this.state.selectedIndustry});
   }
@@ -182,7 +186,7 @@ class AdminEditIndustry extends Component{
                 </div>
 
                 <div className="modal-btn-container">
-                  <button className="normal-btn" onClick={this.handleSave}>Add New</button>
+                  <button className="normal-btn" onClick={this.handlePost}>Add New</button>
                 </div>
               </div>
             }
