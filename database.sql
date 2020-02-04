@@ -14,7 +14,8 @@ CREATE TABLE "industry" (
 
 CREATE TABLE "contact_info" (
   "user_id" INT PRIMARY KEY,
-  "buisiness_name" TEXT,
+  "name" TEXT,
+  "business_name" TEXT,
   "industry_id" INT,
   "phone_number" TEXT
 );
@@ -37,6 +38,7 @@ CREATE TABLE "inputs" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INT,
   "question_id" INT,
+  "sub_questions_id" INT,
   "value" INT
 );
 
@@ -50,7 +52,7 @@ CREATE TABLE "questions" (
 );
 
 CREATE TABLE "split" (
-  "id" INT,
+  "id" SERIAL PRIMARY KEY,
   "calculator_id" INT,
   "question_id" INT,
   "split_text" TEXT,
@@ -108,27 +110,31 @@ VALUES (
   'How much of this product or service do you sell?',
   FALSE,
   FALSE
-);
+),
+(
+  'What do you plan on pricing this for?',
+  'number',
+  'Consider your costs and the value you bring with this product.',
+  FALSE,
+  FALSE
+);;
 
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("industry_id") REFERENCES "industry" ("id");
 ALTER TABLE "revenue_cost" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "inputs" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "inputs" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "inputs" ADD FOREIGN KEY ("sub_questions_id") REFERENCES "sub_questions"("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "sub_questions" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
-ALTER TABLE contact_info
-ADD name text;
-ALTER TABLE "contact_info"
-RENAME "buisiness_name" TO "business_name";
 
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
 ('Break Even Pricing', 6),
-('Price Setting', NULL);
+('Price Setting', 9);
 
 INSERT INTO "question_calculator" ("calculator_id", "question_id", "next_id")
 VALUES (1,1,2),
@@ -138,7 +144,11 @@ VALUES (1,1,2),
 (1,5,2),
 (2,2,7),
 (2,3,8),
-(2,4,NULL);
+(2,4,NULL),
+(3,5,10),
+(3,3,11),
+(3,4,12),
+(3,6,NULL);
 
 INSERT INTO "sub_questions" ("question_id", "order", "question", "response_type", "help_text")
 VALUES (3,1,'What is the rate per of this labor?','number','Consider just one labor rate for this field.'),
