@@ -103,9 +103,9 @@ p, span, div, h1, h2, h3, label, button {
 }
 
 .dropdown {
-  position: relative;
   height: 30px;
   width: 160px;
+  margin: 0 auto;
 }
 
 .main-container {
