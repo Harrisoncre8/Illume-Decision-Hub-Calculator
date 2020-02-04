@@ -1,0 +1,20 @@
+.admin-button-flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.admin-btn-flex-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  text-align: center;
+  align-items: center;
+}
+
+.admin-padding {
+  padding-bottom: 30px;
+}

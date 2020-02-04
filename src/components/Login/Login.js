@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Link } from 'react-router-dom';
 import './Login.css';
 import { stat } from 'fs';
 
@@ -29,6 +28,10 @@ class Login extends Component{
     this.setState({
         [propertyName]: event.target.value,
     });
+  }
+
+  handleRegister = () => {
+    this.props.history.push('/register');
   }
 
   render(){
@@ -74,22 +77,21 @@ class Login extends Component{
               <div className="text-field-mask login-password-mask"></div>
             </div>
 
-            <button className="normal-btn login-login-btn">Log In</button>
-          </form>  
+          <button className="normal-btn login-login-btn" onClick={this.login}>Log In</button>
+          
           <hr className="login-hr" />
 
-          {/* <Link exact to="/register"> */}
-            <button className="login-register-btn">register</button>
-          {/* </Link> */}
-
+          <button className="login-register-btn" onClick={this.handleRegister}>register</button>
+          </form>
         </div>
       </center>
     );
   }
 }
 
+
 const mapStateToProps = state => ({
-  errors: state.errors,
+    errors: state.errors,
 });
 
 export default connect(mapStateToProps)(Login);

@@ -80,6 +80,16 @@ p, span, div, h1, h2, h3, label, button {
   transition: 0.3s;
 }
 
+.close-window-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  float: right;
+  font-size: 26px;
+  border-radius: 50%;
+  width: 20px;
+}
+
 .data-result {
   border: 4px solid black;
   padding: 10px;
@@ -92,9 +102,15 @@ p, span, div, h1, h2, h3, label, button {
   margin-bottom: 10px;
 }
 
+.dropdown {
+  height: 30px;
+  width: 160px;
+  margin: 0 auto;
+}
+
 .main-container {
   background-color: white;
-  box-shadow: 5px 5px 10px grey;
+  box-shadow: 5px 5px 10px #272727;
   padding: 20px;
   border-radius: 25px;
   height: 100%;
@@ -104,6 +120,23 @@ p, span, div, h1, h2, h3, label, button {
 .main-heading {
   text-decoration: underline;
   margin-bottom: 20px;
+}
+
+.modal-btn-container {
+  margin: 20px;
+}
+
+.modal-container {
+  padding: 20px;
+}
+
+.modal-heading {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.modal-input {
+  margin: 5px;
 }
 
 .normal-btn {
@@ -167,12 +200,6 @@ p, span, div, h1, h2, h3, label, button {
   left: 128px;
   height: 4px;
   background-color: #FFF;
-}
-
-.dropdown {
-  position: relative;
-  height: 30px;
-  width: 160px;
 }
 
 
