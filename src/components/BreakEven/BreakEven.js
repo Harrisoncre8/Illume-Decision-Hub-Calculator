@@ -12,8 +12,17 @@ function BreakEven() {
   const [type, setType] = useState('single');
   const [sales, setSales] = useState(1);
 
+  // Adds class if input has a value, removes the class if input has no value
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
+  
+  // Sets local state to current input value, adds or removes class based on input's value
+  const handleChange = (e, propName) => {
+    propName(e.target.value);
+    checkForValue(e);
+  }
+
   useEffect(()=>{
-    setPrice((hours*rate+raw+part+indirect)/(sales))
+    setPrice(((hours * rate) + +raw + +part + +indirect)/(sales))
   },[hours, rate, raw, part, indirect, setPrice, type, sales])
 
   return (
@@ -56,7 +65,7 @@ function BreakEven() {
               className="text-field break-text-field-hours"
               type='number' 
               value={hours} 
-              onChange={(event)=>{setHours(Number(event.target.value))}}
+              onChange={(event)=>handleChange(event, setHours)}
             />
             <label className="text-field-label break-label-hours">labor hours</label>
             <div className="text-field-mask break-mask-hours"></div>
@@ -70,7 +79,7 @@ function BreakEven() {
               className="text-field break-text-field-rate"
               type='number' 
               value={rate} 
-              onChange={(event)=>{setRate(Number(event.target.value))}}
+              onChange={(event)=>handleChange(event, setRate)}
             />
             <label className="text-field-label break-label-rate">labor rate</label>
             <div className="text-field-mask break-mask-rate"></div>
@@ -84,7 +93,7 @@ function BreakEven() {
               className="text-field break-text-field-raw-material"
               type='number' 
               value={raw} 
-              onChange={(event)=>{setRaw(Number(event.target.value))}}
+              onChange={(event)=>handleChange(event, setRaw)}
             />
             <label className="text-field-label break-label-raw-material">raw material costs</label>
             <div className="text-field-mask break-mask-raw-material"></div>
@@ -98,7 +107,7 @@ function BreakEven() {
               className="text-field break-text-field-part"
               type='number' 
               value={part} 
-              onChange={(event)=>{setPart(Number(event.target.value))}}
+              onChange={(event)=>handleChange(event, setPart)}
             />
             <label className="text-field-label break-label-part">part costs</label>
             <div className="text-field-mask break-mask-part"></div>
@@ -112,7 +121,7 @@ function BreakEven() {
               className="text-field break-text-field-indirect-cost"
               type='number' 
               value={indirect} 
-              onChange={(event)=>{setIndirect(Number(event.target.value))}}
+              onChange={(event)=>handleChange(event, setIndirect)}
             />
             <label className="text-field-label break-label-indirect-cost">indirect costs</label>
             <div className="text-field-mask break-mask-indirect-cost"></div>
@@ -126,18 +135,18 @@ function BreakEven() {
               <span>How many Total Sales do you have?</span>
               <div className="break-text-field-container">
                 <input 
-                  className="text-field break-text-field-sales"
+                  className="text-field break-text-field-sales text-field-active"
                   type='number' 
                   value={sales} 
                   min={1}
-                  onChange={(event)=>{setSales(Number(event.target.value))}}
+                  onChange={(event)=>handleChange(event, setSales)}
                 />
                 <label className="text-field-label break-label-sales">number of sales</label>
                 <div className="text-field-mask break-mask-sales"></div>
               </div>
             </div>
             :
-            null
+            ''
           }
         </form>
         <div className="data-result">

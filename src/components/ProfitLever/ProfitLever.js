@@ -11,6 +11,15 @@ function ProfitLever() {
   const [growth, setGrowth] = useState(0);
   const [directCostChange, setDirectCostChange] = useState(0);
   const [indirectCostChange, setIndirectCostChange] = useState(0);
+  
+  // Adds class if input has a value, removes the class if input has no value
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
+  
+  // Sets local state to current input value, adds or removes class based on input's value
+  const handleChange = (e, propName) => {
+    propName(e.target.value);
+    checkForValue(e);
+  }
 
   useEffect(()=>{
     if(revenue !== '' && directCost !== '' && indirectCost !== ''){
@@ -20,6 +29,7 @@ function ProfitLever() {
       setIndirectCostChange((((revenue - directCost - (indirectCost * .99))/(revenue - directCost - indirectCost))-1)*100);
     }
   },[revenue, directCost, indirectCost]);
+
 
   return (
 
@@ -37,7 +47,7 @@ function ProfitLever() {
                     className="text-field lever-text-field-direct-cost"
                     type="number" 
                     value={directCost}
-                    onChange={(event)=>setDirectCost(event.target.value)} 
+                    onChange={(event)=>handleChange(event, setDirectCost)} 
                   />
                   <label className="text-field-label lever-label-direct-cost">direct costs</label>
                   <div className="text-field-mask lever-mask-direct-cost"></div>
@@ -51,7 +61,7 @@ function ProfitLever() {
                     className="text-field lever-text-field-indirect-cost" 
                     type="number"
                     value={indirectCost}
-                    onChange={(event)=>setIndirectCost(event.target.value)}
+                    onChange={(event)=>handleChange(event, setIndirectCost)}
                     />
                   <label className="text-field-label lever-label-indirect-cost">indirect costs</label>
                   <div className="text-field-mask lever-mask-indirect-cost"></div>
@@ -65,7 +75,7 @@ function ProfitLever() {
                     className="text-field lever-text-field-revenue" 
                     type="number" 
                     value={revenue}
-                    onChange={(event)=>setRevenue(event.target.value)}
+                    onChange={(event)=>handleChange(event, setRevenue)}
                   />
                   <label className="text-field-label lever-label-revenue">revenue</label>
                   <div className="text-field-mask lever-mask-revenue"></div>

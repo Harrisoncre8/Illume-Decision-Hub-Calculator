@@ -8,11 +8,24 @@ class Register extends Component{
     name: '',
     company: '',
     phone: '',
-    industry: 3 || '',
+    industry: '',
     email: '',
     password: '',
-    }
+    confirmPassword: ''
+  }
 
+  // Adds class if input has a value, removes the class if input has no value
+  checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
+
+  // Sets local state to current input value, adds or removes class based on input's value
+  handleChange = (e, propName) => {
+    this.setState({
+      ...this.state,
+      [propName]: e.target.value
+    });
+    this.checkForValue(e);
+  }
+  
   handleCancel = () => {
     this.props.history.push('/');
   }
@@ -36,14 +49,6 @@ class Register extends Component{
     }
 }
 
-handleInputChangeFor = propertyName => (event) => {
-    console.log('changing', event.target.value);
-    this.setState({
-        [propertyName]: event.target.value,
-    });
-    console.log('this is state', this.state);
-    
-}
 
   render(){
     return(
@@ -61,7 +66,7 @@ handleInputChangeFor = propertyName => (event) => {
               type="text" 
               name="name"
               value={this.state.name}
-              onChange={this.handleInputChangeFor('name')}
+              onChange={(event)=>this.handleChange(event, 'name')}
             />
             <label className="text-field-label register-label-name">name</label>
             <div className="text-field-mask register-mask-name"></div>
@@ -73,7 +78,7 @@ handleInputChangeFor = propertyName => (event) => {
                 type="text" 
                 name="company"
                 value={this.state.company}
-                onChange={this.handleInputChangeFor('company')}
+                onChange={(event)=>this.handleChange(event, 'company')}
             />
             <label className="text-field-label register-label-company">company</label>
             <div className="text-field-mask register-mask-company"></div>
@@ -85,7 +90,7 @@ handleInputChangeFor = propertyName => (event) => {
               type="text" 
               name="phone"
               value={this.state.phone}
-              onChange={this.handleInputChangeFor('phone')}
+              onChange={(event)=>this.handleChange(event, 'phone')}
             />
             <label className="text-field-label register-label-phone">phone #</label>
             <div className="text-field-mask register-mask-phone"></div>
@@ -97,9 +102,9 @@ handleInputChangeFor = propertyName => (event) => {
               defaultValue="Select Industry"
               name="industry"
               value={this.state.industry}
-              onChange={this.handleInputChangeFor('industry')}
+              onChange={(event)=>this.handleChange(event, 'industry')}
             >
-              <option disabled>Select Industry</option>
+              <option value='' disabled>Select Industry</option>
               <option value={3}>Attorney</option>
               <option value={4}>Cleaning</option>
               <option value={5}>Massage</option>
@@ -112,7 +117,7 @@ handleInputChangeFor = propertyName => (event) => {
               type="text" 
               name="email"
               value={this.state.email}
-              onChange={this.handleInputChangeFor('email')}
+              onChange={(event)=>this.handleChange(event, 'email')}
             />
             <label className="text-field-label register-label-email">email</label>
             <div className="text-field-mask register-mask-email"></div>
@@ -124,7 +129,7 @@ handleInputChangeFor = propertyName => (event) => {
               type="password" 
               name="password"
               value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
+              onChange={(event)=>this.handleChange(event, 'password')}
             />
             <label className="text-field-label register-label-password">password</label>
             <div className="text-field-mask register-mask-password"></div>
@@ -132,7 +137,11 @@ handleInputChangeFor = propertyName => (event) => {
 
 {/* confirm not set up yet with state payload */}
           <div className="register-text-field-container">
-            <input className="text-field register-text-field-confirm-password" type="password" />
+            <input 
+              className="text-field register-text-field-confirm-password" 
+              type="password" 
+              onChange={(event)=>this.handleChange(event, 'confirmPassword')}
+            />
             <label className="text-field-label register-label-confirm-password">confirm password</label>
             <div className="text-field-mask register-mask-confirm-password"></div>
           </div>
