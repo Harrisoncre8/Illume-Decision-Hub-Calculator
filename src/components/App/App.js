@@ -9,6 +9,7 @@ import AdminEditUserInfo from '../AdminEditUserInfo/AdminEditUserInfo';
 import BreakEven from '../BreakEven/BreakEven';
 import Login from '../Login/Login';
 import Nav from '../Nav/Nav';
+import NewUser from '../NewUser/NewUser';
 import PriceSetting from '../PriceSetting/PriceSetting';
 import ProfitLever from '../ProfitLever/ProfitLever';
 import Register from '../Register/Register';
@@ -27,6 +28,7 @@ function App() {
         <Route exact path='/admin/edit-user-info' component={AdminEditUserInfo} />
         <Route exact path='/break-even-pricing' component={BreakEven} /> 
         <Route exact path='/price-setting' component={PriceSetting} />
+        <Route exact path='/new-user' component={NewUser} />
         <Route exact path='/define-your-profit-lever' component={ProfitLever} />
         <Route exact path='/questionnaire' component={Stepper} />
         <Route exact path='/register' component={Register} />
