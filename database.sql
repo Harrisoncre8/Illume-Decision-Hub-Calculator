@@ -11,7 +11,6 @@ CREATE TABLE "industry" (
   "margin" DECIMAL(4,2)
 );
 
-
 CREATE TABLE "contact_info" (
   "user_id" INT PRIMARY KEY,
   "buisiness_name" TEXT,

@@ -105,9 +105,9 @@ class Register extends Component{
               onChange={(event)=>this.handleChange(event, 'industry')}
             >
               <option value='' disabled>Select Industry</option>
-              <option value={3}>Attorney</option>
-              <option value={4}>Cleaning</option>
-              <option value={5}>Massage</option>
+              <option value={1}>Attorney</option>
+              <option value={2}>Cleaning</option>
+              <option value={3}>Massage</option>
             </select>
           </div>
 

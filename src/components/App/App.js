@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
-
 import Admin from '../Admin/Admin';
 import AdminEditCalc from '../AdminEditCalc/AdminEditCalc';
 import AdminEditIndustry from '../AdminEditIndustry/AdminEditIndustry';
@@ -14,7 +13,6 @@ import PriceSetting from '../PriceSetting/PriceSetting';
 import ProfitLever from '../ProfitLever/ProfitLever';
 import Register from '../Register/Register';
 import Stepper from '../Stepper/Stepper';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
