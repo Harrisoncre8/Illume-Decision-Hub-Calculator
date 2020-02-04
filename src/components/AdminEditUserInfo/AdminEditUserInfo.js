@@ -23,6 +23,9 @@ class AdminEditUserInfo extends Component{
     this.props.dispatch({type: `GET_INDUSTRY`});
   }
 
+  // Adds class if input has a value, removes the class if input has no value
+  checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
+
   closeModal = () => {
     this.setState({visible : false});
   }
@@ -34,6 +37,7 @@ class AdminEditUserInfo extends Component{
         [propName]: e.target.value
       }
     });
+    this.checkForValue(e);
   }
 
   handleDropdownChange = e => {
@@ -52,6 +56,7 @@ class AdminEditUserInfo extends Component{
   openModal = user => {
     this.setState({
       visible: true,
+      username: user.name,
       selectedUser: {
         ...user,
         password: ''
@@ -95,43 +100,70 @@ class AdminEditUserInfo extends Component{
           </table>
           <Modal 
             visible={this.state.visible}
-            width="400"
-            height="300"
+            width="440"
+            height="500"
             effect="fadeInUp"
             onClickAway={this.closeModal}
           >
             <div className="modal-container">
-              {JSON.stringify(this.state.selectedUser)}
               <button className="close-window-button" onClick={this.closeModal}>x</button>
-              <h1 className="main-heading modal-heading">{editUser.name}</h1>
-              <input 
-                className="modal-input" 
-                type="text" 
-                value={editUser.name} 
-                onChange={(event)=>this.handleChange(event, 'name')}
-                placeholder="user's name" 
-              />
-              <input 
-                className="modal-input" 
-                type="text" 
-                value={editUser.company} 
-                onChange={(event)=>this.handleChange(event, 'company')}
-                placeholder="company" 
-              />
-              <input 
-                className="modal-input" 
-                type="tel" 
-                value={editUser.phone} 
-                onChange={(event)=>this.handleChange(event, 'phone')}
-                placeholder="phone #" 
-              />
-              <input 
-                className="modal-input" 
-                type="text" 
-                value={editUser.email} 
-                onChange={(event)=>this.handleChange(event, 'email')}
-                placeholder="email" 
-              />
+              <h1 className="main-heading modal-heading">{this.state.username}</h1>
+              
+              <div className="admin-user-text-field-container">
+                <input 
+                  className="text-field admin-user-text-field-name text-field-active" 
+                  type="text" 
+                  value={editUser.name}
+                  onChange={(event)=>this.handleChange(event, 'name')}
+                />
+                <label className="text-field-label admin-user-label-name">user's name</label>
+                <div className="text-field-mask admin-user-mask-name"></div>
+              </div>
+
+              <div className="admin-user-text-field-container">
+                <input 
+                  className="text-field admin-user-text-field-company text-field-active" 
+                  type="text" 
+                  value={editUser.company} 
+                  onChange={(event)=>this.handleChange(event, 'company')}
+                />
+                <label className="text-field-label admin-user-label-company">company</label>
+                <div className="text-field-mask admin-user-mask-company"></div>
+              </div>
+
+              <div className="admin-user-text-field-container">
+                <input 
+                  className="text-field admin-user-text-field-phone text-field-active" 
+                  type="text" 
+                  value={editUser.phone} 
+                  onChange={(event)=>this.handleChange(event, 'phone')}
+                />
+                <label className="text-field-label admin-user-label-phone">phone #</label>
+                <div className="text-field-mask admin-user-mask-phone"></div>
+              </div>
+
+              <div className="admin-user-text-field-container">
+                <input 
+                  className="text-field admin-user-text-field-email text-field-active" 
+                  type="text" 
+                  value={editUser.email} 
+                  onChange={(event)=>this.handleChange(event, 'email')}
+                />
+                <label className="text-field-label admin-user-label-email">email</label>
+                <div className="text-field-mask admin-user-mask-email"></div>
+              </div>
+
+              <div className="admin-user-text-field-container">
+                <input 
+                  className="text-field admin-user-text-field-password text-field-active" 
+                  type="text" 
+                  value={editUser.password} 
+                  onChange={(event)=>this.handleChange(event, 'password')}
+                />
+                <label className="text-field-label admin-user-label-password">password</label>
+                <div className="text-field-mask admin-user-mask-password"></div>
+              </div>
+              
               <select 
                 className="modal-input" 
                 value={this.state.selectedUser.industry || 'industry'}
@@ -141,13 +173,7 @@ class AdminEditUserInfo extends Component{
                   <option key={industry.id}>{industry.industry}</option>
                 )}
               </select>
-              <input 
-                className="modal-input" 
-                type="text" 
-                value={editUser.password} 
-                onChange={(event)=>this.handleChange(event, 'password')}
-                placeholder="reset password" 
-              />
+
               <div className="modal-btn-container">
                 <button className="normal-btn" onClick={this.handleSave}>Save</button>
               </div>
