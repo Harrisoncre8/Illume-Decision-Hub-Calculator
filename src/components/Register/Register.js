@@ -8,7 +8,7 @@ class Register extends Component{
     name: '',
     company: '',
     phone: '',
-    industry: '',
+    industry: 3 || '',
     email: '',
     password: '',
     }
@@ -41,6 +41,8 @@ handleInputChangeFor = propertyName => (event) => {
     this.setState({
         [propertyName]: event.target.value,
     });
+    console.log('this is state', this.state);
+    
 }
 
   render(){
@@ -98,9 +100,9 @@ handleInputChangeFor = propertyName => (event) => {
               onChange={this.handleInputChangeFor('industry')}
             >
               <option disabled>Select Industry</option>
-              <option>Attorney</option>
-              <option>Cleaning</option>
-              <option>Massage</option>
+              <option value={3}>Attorney</option>
+              <option value={4}>Cleaning</option>
+              <option value={5}>Massage</option>
             </select>
           </div>
 

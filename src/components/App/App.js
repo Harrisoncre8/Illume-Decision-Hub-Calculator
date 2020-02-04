@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 
 import BreakEven from '../BreakEven/BreakEven';
@@ -18,13 +19,13 @@ function App() {
       <Nav />
       <div className="App">
         <Route exact path='/' component={Login} />
-        <Route exact path='/break-even' component={BreakEven} /> 
-        <Route exact path='/price-setting' component={PriceSetting} />
+        <ProtectedRoute exact path='/break-even' component={BreakEven} /> 
+        <ProtectedRoute exact path='/price-setting' component={PriceSetting} />
         <Route exact path='/register' component={Register} />
-        <Route exact path='/profit-lever' component={ProfitLever} />
-        <Route exact path ='/questionaire' component={Stepper} />
-        <Route exact path ='/admin' component={Admin} />
-        <Route exact path ='/admin/edit-user-info' component={AdminEditUserInfo} />
+        <ProtectedRoute exact path='/profit-lever' component={ProfitLever} />
+        <ProtectedRoute exact path ='/questionaire' component={Stepper} />
+        <ProtectedRoute exact path ='/admin' component={Admin} />
+        <ProtectedRoute exact path ='/admin/edit-user-info' component={AdminEditUserInfo} />
       </div>
     </Router>
   );
