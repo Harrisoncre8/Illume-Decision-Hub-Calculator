@@ -5,10 +5,10 @@ const router = express.Router();
 // GET route for admin user information
 router.get('/user-info', (req, res) => {
   const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, i.industry, i.id as industryID
-                  FROM contact_info c
-                  JOIN users u ON u.id = c.user_id
-                  JOIN industry i ON i.id = c.industry_id
-                  ORDER BY c.business_name;`;
+                    FROM contact_info c
+                    JOIN users u ON u.id = c.user_id
+                    JOIN industry i ON i.id = c.industry_id
+                    ORDER BY c.business_name;`;
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
