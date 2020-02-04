@@ -190,5 +190,5 @@ INSERT INTO users (email)
 VALUES ('jack@hennepin.gov'), ('crystal@primeacademy.io');
 
 INSERT INTO industry (industry, margin)
-VALUES ('commercial cleaning', .3),
-('technical instruction', .4);
+VALUES ('Commercial Cleaning', .3),
+('Technical Instruction', .4);
