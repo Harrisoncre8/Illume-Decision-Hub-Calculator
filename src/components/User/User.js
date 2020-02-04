@@ -7,7 +7,7 @@ export default function User(){
 
 let dispatch = useDispatch();
 let userData = useSelector(state => state.admin.adminUserInfo);
-// let industryData = useSelector(state => state.industry);
+let industryData = useSelector(state => state.industry.industry);
 const [modal, setModal] = useState(false);
 const [passwordModal, setPasswordModal] = useState(false);
 const [name, setName] = useState('');
@@ -63,14 +63,20 @@ const closePassModal = () => {
           <h1 className="main-heading admin-user-heading">Edit User Information</h1>
             {userData.map((user, i) => 
               <div key={i}>
-                <input placeholder={user.name}></input>
-                <input placeholder={user.company}></input>
-                <input placeholder={user.phone}></input>
-                <input placeholder={user.email}></input>
-                <input placeholder={user.industry}></input>
-                <input type="button" value="Change Password?" onClick={() => openPassModal()}></input>
+                <input value={name} placeholder={user.name}
+                 onChange={(event) => setName(event.target.value)}></input>
+                <input value={company} placeholder={user.company} 
+                 onChange={(event) => setCompany(event.target.value)}></input>
+                <input value={phone} placeholder={user.phone}
+                 onChange={(event) => setPhone(event.target.value)}></input>
+                <input value={email} placeholder={user.email}
+                 onChange={(event) => setEmail(event.target.value)}></input>
+
+                <select className="modal-input" value={industry}></select>
               </div>
             )}
+            
+              <input type="button" value="Change Password?" onClick={() => openPassModal()}></input>
               <div className="modal-btn-container">
                 <button className="normal-btn" href="javascript:void(0);" 
                 onClick={() => closeModal()}>Close</button>
