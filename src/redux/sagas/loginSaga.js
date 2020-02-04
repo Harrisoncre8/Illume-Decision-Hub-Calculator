@@ -5,18 +5,15 @@ import axios from 'axios';
 function* loginUser(action) {
   try {
     // clear any existing error on the login page
-    yield put({ type: 'CLEAR_LOGIN_ERROR' });
-
+    yield put({ type: 'CLEAR_LOGIN_ERROR' });    
     const config = {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
-    yield axios.post('/api/user/login', action.payload, config);
-    
+    yield axios.post('/api/user/login', action.payload, config);    
     // after the user has logged in
     // get the user information from the server
     yield put({type: 'FETCH_USER'});

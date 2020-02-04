@@ -52,26 +52,30 @@ class Login extends Component{
           </div>
           <form onSubmit={this.login}>
             <div className="login-text-field-container">
-              <input className="text-field login-text-field-email" type="text" />
-              <label 
-                className="text-field-label login-label-email"
-                type="text"
+              <input 
+                className="text-field login-text-field-email" 
+                type="text" 
                 name="email"
                 value={this.state.email}
-                onChange={this.handleInputChangeFor('email')}>
+                onChange={this.handleInputChangeFor('email')}/>
+              <label 
+                className="text-field-label login-label-email"
+                type="text">
                   email
               </label>
               <div className="text-field-mask login-email-mask"></div>
             </div>
 
             <div className="login-text-field-container">
-              <input className="text-field login-text-field-password" type="password" />
-              <label 
-                className="text-field-label login-label-password"
-                type="password"
+              <input 
+                className="text-field login-text-field-password" 
+                type="password" 
                 name="password"
                 value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}>
+                onChange={this.handleInputChangeFor('password')}/>
+              <label 
+                className="text-field-label login-label-password"
+                type="password">
                   password
               </label>
               <div className="text-field-mask login-password-mask"></div>
