@@ -19,6 +19,22 @@ router.get('/user-info', (req, res) => {
   });
 });
 
+// PUT route for admin to update industry information
+router.put('/industry-info', (req, res) => {
+  let id = [req.body.id, req.body.industry, req.body.margin];
+  let sqlQuery = `UPDATE industry 
+                  SET industry = $2, margin = $3
+                  WHERE id = $1;`;
+  pool.query(sqlQuery, id)
+    .then(result => {
+    res.send(result.rows);
+  })
+  .catch( error => {
+    console.log('Error with PUT admin user info', error);
+    res.sendStatus(500);
+  });
+});
+
 // PUT route for admin to update user information
 router.put('/user-info', (req, res) => {
   let id = [req.body.id, req.body.name, req.body.company, req.body.phone, req.body.email, req.body.industry, req.body.password];

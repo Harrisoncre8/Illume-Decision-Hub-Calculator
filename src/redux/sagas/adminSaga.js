@@ -10,6 +10,15 @@ function* getAdminUserInfo(action){
   }
 }
 
+function* putAdminIndustryInfo(action){
+  try{
+    yield axios.put(`/api/admin/industry-info`, action.payload);
+    yield put({type: `GET_INDUSTRY`});
+  } catch(error){
+    console.log('Error in admin industry info PUT', error);
+  }
+}
+
 function* putAdminUserInfo(action){
   try{
     yield axios.put(`/api/admin/user-info`, action.payload);
@@ -21,6 +30,7 @@ function* putAdminUserInfo(action){
 
 function* adminSaga() {
   yield takeLatest(`GET_ADMIN_USER_INFO`, getAdminUserInfo);
+  yield takeLatest(`PUT_ADMIN_INDUSTRY_INFO`, putAdminIndustryInfo);
   yield takeLatest(`PUT_ADMIN_USER_INFO`, putAdminUserInfo);
 }
   
