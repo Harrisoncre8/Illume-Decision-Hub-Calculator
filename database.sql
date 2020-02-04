@@ -77,11 +77,11 @@ CREATE TABLE "user_checks" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INT,
   "question_id" INT
-)
+);
 --#endregion
 
 --#region Insert into questions
-INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questions", "split")
+INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questions", "split", "checkboxes")
 VALUES (
   'Is this for a single sale or total product sales?',
   'radio',
@@ -282,10 +282,8 @@ ALTER TABLE "contact_info" ADD FOREIGN KEY ("industry_id") REFERENCES "industry"
 ALTER TABLE "revenue_cost" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "inputs" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "inputs" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
-ALTER TABLE "inputs" ADD FOREIGN KEY ("sub_questions_id") REFERENCES "sub_questions"("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
-ALTER TABLE "sub_questions" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 ALTER TABLE "checkboxes" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
