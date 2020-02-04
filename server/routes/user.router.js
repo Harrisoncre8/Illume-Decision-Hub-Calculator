@@ -32,7 +32,7 @@ router.post('/register', async (req, res, next) => {
   try {
     await connection.query(`BEGIN`);
     const id = await connection.query(queryTextUser, [email, password]);
-    await connection.query(queryTextContact, [company, phone, industry, id.rows[0].id]);
+    await connection.query(queryTextContact, [company, industry, phone, id.rows[0].id]);
     await connection.query(`COMMIT`);
     res.sendStatus(201);
   }catch(error){

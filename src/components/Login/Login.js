@@ -15,7 +15,7 @@ class Login extends Component{
       this.props.dispatch({
         type: 'LOGIN',
         payload: {
-          email: this.state.email,
+          username: this.state.email,
           password: this.state.password,
         },
       });
@@ -34,6 +34,7 @@ class Login extends Component{
     });
     this.checkForValue(e);
   }
+  
 
 
   handleRegister = () => {
@@ -57,7 +58,6 @@ class Login extends Component{
             <span className="login-brand-name">illume decision hub</span>
           </div>
           <form onSubmit={this.login}>
-
 
           <div className="login-text-field-container">
             <input 
