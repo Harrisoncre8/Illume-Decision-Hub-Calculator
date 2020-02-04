@@ -4,6 +4,10 @@ import './Register.css';
 
 class Register extends Component{
 
+  handleCancel = () => {
+    this.props.history.push('/');
+  }
+
   render(){
     return(
       <center>
@@ -42,16 +46,6 @@ class Register extends Component{
           </div>
 
           <div className="register-text-field-container">
-            <select className="dropdown register-dropdown">
-              <option disabled selected value>Select Region</option>
-              <option>Midwest</option>
-              <option>Northeast</option>
-              <option>Southwest</option>
-            </select>
-          </div>
-
-
-          <div className="register-text-field-container">
             <input className="text-field register-text-field-email" type="text" />
             <label className="text-field-label register-label-email">email</label>
             <div className="text-field-mask register-mask-email"></div>
@@ -72,9 +66,7 @@ class Register extends Component{
           <button className="normal-btn register-register-btn">Confirm</button>
           <hr className="register-hr" />
 
-          {/* <Link exact to="/"> */}
-            <button className="register-cancel-btn">cancel</button>
-          {/* </Link> */}
+          <button className="register-cancel-btn" onClick={this.handleCancel}>cancel</button>
 
         </div>
       </center>
