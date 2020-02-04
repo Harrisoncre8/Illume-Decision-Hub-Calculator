@@ -14,17 +14,16 @@ export default function Stepper() {
   function nextPage() {
     if (questionData.next_id == null) {
       const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
-      history.push(`/${url}`)
+      history.push(`/${url}`);
 		} else if(questionData.split){
-			dispatch({ type: 'GET_QUESTION', payload: { querry: { id: splitNext } } })
+			dispatch({ type: 'GET_QUESTION', payload: { query: { id: splitNext } } });
 		} else {
-      dispatch({ type: 'GET_QUESTION', payload: { querry: { id: questionData.next_id } } })
+      dispatch({ type: 'GET_QUESTION', payload: { query: { id: questionData.next_id } } });
     }
   }
 
   return (
     <div className='main-container'>
-      {JSON.stringify(questionData)}
       <p>
         {questionData.question} 
         {questionData.split? 

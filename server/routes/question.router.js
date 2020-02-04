@@ -4,7 +4,6 @@ const router = express.Router();
 
 // GET route for questions
 router.get('/', async (req, res) => {
-  console.log('In getQuestion route with');
   const sqlQuery = `
       SELECT 
         "qc"."id", 
@@ -25,9 +24,7 @@ router.get('/', async (req, res) => {
   try {
     if(req.query.start){
       const startId = await client.query(`SELECT "start_id" FROM "calculators" WHERE "id" = $1;`, [req.query.start]);
-      console.log(startId.rows[0].start_id)
       const results = await client.query(sqlQuery,[startId.rows[0].start_id]);
-      console.log(results.rows);
       res.send(results.rows);
     } else {
       const results = await client.query(sqlQuery,[req.query.id]);

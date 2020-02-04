@@ -10,29 +10,29 @@ export default function Nav() {
 
   function profitLever() {
     dispatch({type: 'GET_QUESTION', payload: {
-      querry: {
+      query: {
         start: 1
       }
-    }})
-    history.push('/questionaire')
+    }});
+    history.push('/questionnaire');
   }
 
   function priceSetting() {
     dispatch({type: 'GET_QUESTION', payload: {
-      querry: {
+      query: {
         start: 3
       }
-    }})
-    history.push('/questionaire')
+    }});
+    history.push('/questionnaire');
   }
 
   function breakEven() {
     dispatch({type: 'GET_QUESTION', payload: {
-      querry: {
+      query: {
         start: 2
       }
-    }})
-    history.push('/questionaire')
+    }});
+    history.push('/questionnaire');
   }
 
   return (

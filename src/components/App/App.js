@@ -22,7 +22,7 @@ function App() {
         <Route exact path='/price-setting' component={PriceSetting} />
         <Route exact path='/register' component={Register} />
         <Route exact path='/define-your-profit-lever' component={ProfitLever} />
-        <Route exact path ='/questionaire' component={Stepper} />
+        <Route exact path ='/questionnaire' component={Stepper} />
         <Route exact path ='/admin' component={Admin} />
         <Route exact path ='/admin/edit-user-info' component={AdminEditUserInfo} />
       </div>
