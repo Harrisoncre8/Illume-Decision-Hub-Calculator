@@ -11,6 +11,7 @@ import Register from '../Register/Register';
 import Stepper from '../Stepper/Stepper';
 import Admin from '../Admin/Admin';
 import AdminEditUserInfo from '../AdminEditUserInfo/AdminEditUserInfo';
+import User from '../User/User';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route exact path ='/questionaire' component={Stepper} />
         <Route exact path ='/admin' component={Admin} />
         <Route exact path ='/admin/edit-user-info' component={AdminEditUserInfo} />
+        <Route exact path ='/user' component={User} />
       </div>
     </Router>
   );
