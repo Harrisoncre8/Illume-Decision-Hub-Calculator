@@ -15,22 +15,33 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {  
+router.post('/register', async (req, res, next) => {  
   console.log('req body is:', req.body);
-    
+  const name = req.body.name;
+  const company = req.body.company;
+  const phone = req.body.phone;
+  const industry = req.body.industry;
   const email = req.body.email;
   const password = encryptLib.encryptPassword(req.body.password);
+  const connection = await pool.connect();
 
-
-  const queryText = `INSERT INTO "consumer" (email, password) 
-  VALUES ($1, $2) RETURNING user_id`;
-  pool.query(queryText, [email, password])
-    .then( (result) => {
-      res.send(result.rows[0].id);
-    })
-    .catch((error) => {
-      console.log('-------error----', error);
-      res.sendStatus(500)});
+  const queryTextUser = `INSERT INTO "users" (email, hashedpassword) 
+                          VALUES ($1, $2) RETURNING id`;
+  const queryTextContact = `INSERT INTO "contact_info" (business_name, industry_id, phone_number, user_id)
+                            VALUES ($1, $2, $3, $4)`
+  try {
+    await connection.query(`BEGIN`);
+    const id = await connection.query(queryTextUser, [email, password]);
+    await connection.query(queryTextContact, [company, phone, industry, id.rows[0].id]);
+    await connection.query(`COMMIT`);
+    res.sendStatus(201);
+  }catch(error){
+    console.log('----------->error in registration:', error);
+    await connection.query(`ROLLBACK`);
+    res.sendStatus(500);
+  }finally{
+    connection.release();
+  }
 });
 
 // Handles login form authenticate/login POST
