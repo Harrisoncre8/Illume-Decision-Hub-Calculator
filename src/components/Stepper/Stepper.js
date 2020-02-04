@@ -27,9 +27,9 @@ export default function Stepper() {
       <p>
         {questionData.question} 
         {questionData.split? 
-          splitData.map((split)=>{
+          splitData.map(split=>{
             return(
-              <>
+              <span key={split.id}>
 									<input 
 										type="radio" 
 										name="next" 
@@ -38,7 +38,7 @@ export default function Stepper() {
 										onChange={()=>{setSplitNext(split.next_id)}}
 								/> 
 								{split.split_text}
-							</>
+							</span>
           )})
           :
           <input type={questionData.response_type} />}
