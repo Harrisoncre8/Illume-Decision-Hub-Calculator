@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './AdminEditCalc.css';
 import AdminEditPrice from '../AdminEditPrice/AdminEditPrice';
 
 class AdminEditCalc extends Component{
@@ -44,13 +45,13 @@ class AdminEditCalc extends Component{
             </div>
           </div>
         </div>
-        <div className="admin-edit-calc-render-container">
           {this.state.price ?
-            <AdminEditPrice />
+            <div className="admin-edit-calc-render-container">
+              <AdminEditPrice />
+            </div>
             :
             ''
           }
-        </div>
       </center>
     );
   }
