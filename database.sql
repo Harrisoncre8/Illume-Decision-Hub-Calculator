@@ -2,15 +2,7 @@ CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
   "email" TEXT,
   "hashedpassword" TEXT,
-  "admin" BOOLEAN
-);
-
-CREATE TABLE "contact_info" (
-  "user_id" INT PRIMARY KEY REFERENCES "users"."id",
-  "buisiness_name" TEXT,
-  "industry_id" INT REFERENCES "industry"."id",
-  "region_id" INT REFERENCES "region"."id",
-  "phone_number" TEXT
+  "admin" BOOLEAN DEFAULT false
 );
 
 CREATE TABLE "industry" (
@@ -19,14 +11,17 @@ CREATE TABLE "industry" (
   "margin" DECIMAL(4,2)
 );
 
-CREATE TABLE "region" (
-  "id" SERIAL PRIMARY KEY,
-  "region" TEXT
+
+CREATE TABLE "contact_info" (
+  "user_id" INT PRIMARY KEY,
+  "buisiness_name" TEXT,
+  "industry_id" INT,
+  "phone_number" TEXT
 );
 
 CREATE TABLE "revenue_cost" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" INT REFERENCES "users"."id",
+  "user_id" INT,
   "r_c" TEXT,
   "value" INT,
   "category" TEXT
@@ -35,13 +30,13 @@ CREATE TABLE "revenue_cost" (
 CREATE TABLE "calculators" (
   "id" SERIAL PRIMARY KEY,
   "calculator" TEXT,
-  "start_id" INT REFERENCES "question_calculator"."id"
+  "start_id" INT
 );
 
 CREATE TABLE "inputs" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" INT REFERENCES "users"."id",
-  "question_id" INT REFERENCES "questions"."id",
+  "user_id" INT,
+  "question_id" INT,
   "value" INT
 );
 
@@ -49,22 +44,22 @@ CREATE TABLE "questions" (
   "id" SERIAL PRIMARY KEY,
   "question" TEXT,
   "response_type" TEXT,
-  "help_TEXT" TEXT,
+  "help_text" TEXT,
   "sub_questions" BOOLEAN,
   "split" BOOLEAN
 );
 
 CREATE TABLE "split" (
   "id" INT,
-  "calculator_id" INT REFERENCES "calculators"."id",
-  "question_id" INT REFERENCES "questions"."id",
+  "calculator_id" INT,
+  "question_id" INT,
   "split_text" TEXT,
   "next_id" INT
-)
+);
 
 CREATE TABLE "sub_questions" (
   "id" SERIAL PRIMARY KEY,
-  "question_id" INT REFERENCES "questions"."id",
+  "question_id" INT,
   "order" INT,
   "question" TEXT,
   "response_type" TEXT,
@@ -73,12 +68,12 @@ CREATE TABLE "sub_questions" (
 
 CREATE TABLE "question_calculator" (
   "id" SERIAL PRIMARY KEY,
-  "calculator_id" INT REFERENCES "calculators"."id",
-  "question_id" INT REFERENCES "questions"."id",
+  "calculator_id" INT,
+  "question_id" INT,
   "next_id" int
 );
 
-INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questiosn", "split")
+INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questions", "split")
 VALUES (
   'Is this for a single sale or total product sales?',
   'radio',
@@ -115,6 +110,21 @@ VALUES (
   FALSE
 );
 
+ALTER TABLE "contact_info" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "contact_info" ADD FOREIGN KEY ("industry_id") REFERENCES "industry" ("id");
+ALTER TABLE "revenue_cost" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "inputs" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "inputs" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "split" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
+ALTER TABLE "split" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "sub_questions" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
+ALTER TABLE "question_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
+ALTER TABLE contact_info
+ADD name text;
+ALTER TABLE "contact_info"
+RENAME "buisiness_name" TO "business_name";
+
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
 ('Break Even Pricing', 6),
@@ -140,3 +150,14 @@ VALUES (3,1,'What is the rate per of this labor?','number','Consider just one la
 INSERT INTO "split" ("calculator_id", "question_id","split_text","next_id")
 VALUES(2,1,'Single Product',2),
 (2,1,'Total Product', 5);
+
+INSERT INTO contact_info (user_id, business_name, industry_id, phone_number, "name")
+VALUES (1, 'Hennepin County', 1, '651-288-1234', 'Jack'),
+(2, 'Prime Academy', 2, '651-234-9172', 'Crystal');
+
+INSERT INTO users (email) 
+VALUES ('jack@hennepin.gov'), ('crystal@primeacademy.io');
+
+INSERT INTO industry (industry, margin)
+VALUES ('commercial cleaning', .3),
+('technical instruction', .4);
