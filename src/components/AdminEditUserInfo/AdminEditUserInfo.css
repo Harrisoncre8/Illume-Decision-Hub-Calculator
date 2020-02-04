@@ -13,6 +13,46 @@
   margin-top: 20px;
 }
 
+.admin-user-label-company {
+  transform: translate(-52px, 23px);
+}
+
+.admin-user-label-email {
+  transform: translate(-61px, 23px);
+}
+
+.admin-user-label-name {
+  transform: translate(-43px, 23px);
+}
+
+.admin-user-label-password {
+  transform: translate(-50px, 23px);
+}
+
+.admin-user-label-phone {
+  transform: translate(-53px, 23px);
+}
+
+.admin-user-mask-company {
+  width: 45px;
+}
+
+.admin-user-mask-email {
+  width: 32px;
+}
+
+.admin-user-mask-name {
+  width: 58px;
+}
+
+.admin-user-mask-password {
+  width: 48px;
+}
+
+.admin-user-mask-phone {
+  width: 42px;
+}
+
 .admin-user-table {
   width: 80%;
   text-align: center;
@@ -31,4 +71,49 @@
 
 .admin-user-table tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+.admin-user-text-field-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-user-text-field-company:focus + .admin-user-label-company {
+  transform: translate(-52px, 6px);
+}
+
+.admin-user-text-field-email:focus + .admin-user-label-email {
+  transform: translate(-59px, 6px);
+}
+
+.admin-user-text-field-name:focus + .admin-user-label-name {
+  transform: translate(-46px, 6px);
+}
+
+.admin-user-text-field-password:focus + .admin-user-label-password {
+  transform: translate(-51px, 6px);
+}
+
+.admin-user-text-field-phone:focus + .admin-user-label-phone {
+  transform: translate(-54px, 6px);
+}
+
+.text-field-active + .admin-user-label-company {
+  transform: translate(-52px, 6px);
+}
+
+.text-field-active + .admin-user-label-email {
+  transform: translate(-59px, 6px);
+}
+
+.text-field-active + .admin-user-label-name {
+  transform: translate(-46px, 6px);
+}
+
+.text-field-active + .admin-user-label-password {
+  transform: translate(-51px, 6px);
+}
+
+.text-field-active + .admin-user-label-phone {
+  transform: translate(-54px, 6px);
 }

@@ -187,13 +187,13 @@ p, span, div, h1, h2, h3, label, button {
   border: 3px solid #000;
 }
 
+.text-field-active:hover {
+  border: 3px solid #f0aa42;
+}
+
 .text-field-active + .text-field-label {
   color: black;
   font-size: 0.8em;
-}
-
-.text-field-active:hover {
-  border: 3px solid #f0aa42;
 }
 
 .text-field-label {
