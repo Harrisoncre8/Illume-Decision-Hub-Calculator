@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET route for admin question editing
 router.get('/questions', (req, res) => {
-  let sqlQuery = `SELECT * FROM questions;`;
+  let sqlQuery = `SELECT id, question, help_text FROM questions;`;
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
