@@ -22,6 +22,10 @@
   width: 400px;
 }
 
+.register-dropdown {
+  margin-top: 10px;
+}
+
 .register-hr {
   width: 80%;
 }
@@ -79,52 +83,59 @@
 }
 
 .register-register-btn {
-  margin-top: 20px;
+  margin-top: 40px;
   margin-bottom: 15px;
 }
 
 .register-text-field-container {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid black; */
-}
-
-.register-dropdown {
-  margin-top: 10px;
 }
 
 .register-text-field-company:focus + .register-label-company {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-53px, 6px);
 }
 
 .register-text-field-confirm-password:focus + .register-label-confirm-password {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-35px, 6px);
 }
 
 .register-text-field-email:focus + .register-label-email {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-60px, 6px);
 }
 
 .register-text-field-name:focus + .register-label-name {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-60px, 6px);
 }
 
 .register-text-field-password:focus + .register-label-password {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-52px, 6px);
 }
 
 .register-text-field-phone:focus + .register-label-phone {
-  color: #f0aa42;
-  font-size: 0.8em;
+  transform: translate(-53px, 6px);
+}
+
+.text-field-active + .register-label-company {
+  transform: translate(-53px, 6px);
+}
+
+.text-field-active + .register-label-confirm-password {
+  transform: translate(-35px, 6px);
+}
+
+.text-field-active + .register-label-email {
+  transform: translate(-60px, 6px);
+}
+
+.text-field-active + .register-label-name {
+  transform: translate(-60px, 6px);
+}
+
+.text-field-active + .register-label-password {
+  transform: translate(-52px, 6px);
+}
+
+.text-field-active + .register-label-phone {
   transform: translate(-53px, 6px);
 }

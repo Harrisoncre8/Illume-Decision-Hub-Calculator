@@ -102,6 +102,12 @@ p, span, div, h1, h2, h3, label, button {
   margin-bottom: 10px;
 }
 
+.dropdown {
+  height: 30px;
+  width: 160px;
+  margin: 0 auto;
+}
+
 .main-container {
   background-color: white;
   box-shadow: 5px 5px 10px #272727;
@@ -178,6 +184,24 @@ p, span, div, h1, h2, h3, label, button {
   border: 3px solid #f0aa42;
 }
 
+.text-field:focus + .text-field-label {
+  color: #f0aa42;
+  font-size: 0.8em;
+}
+
+.text-field-active {
+  border: 3px solid #000;
+}
+
+.text-field-active:hover {
+  border: 3px solid #f0aa42;
+}
+
+.text-field-active + .text-field-label {
+  color: black;
+  font-size: 0.8em;
+}
+
 .text-field-label {
   position: relative;
   color: lightgrey;
@@ -194,12 +218,6 @@ p, span, div, h1, h2, h3, label, button {
   left: 128px;
   height: 4px;
   background-color: #FFF;
-}
-
-.dropdown {
-  position: relative;
-  height: 30px;
-  width: 160px;
 }
 
 

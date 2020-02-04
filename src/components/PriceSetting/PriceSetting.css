@@ -22,13 +22,17 @@
 }
 
 .price-text-field-product-cost:focus + .price-label-product-cost {
-  color: #f0aa42;
-  font-size: 0.8em;
   transform: translate(-46px, 7px);
 }
 
 .price-text-field-product-price:focus + .price-label-product-price {
-  color: #f0aa42;
-  font-size: 0.8em;
+  transform: translate(-44px, 7px);
+}
+
+.text-field-active + .price-label-product-cost {
+  transform: translate(-46px, 7px);
+}
+
+.text-field-active + .price-label-product-price {
   transform: translate(-44px, 7px);
 }
