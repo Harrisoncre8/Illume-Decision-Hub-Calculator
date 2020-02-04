@@ -71,11 +71,13 @@ const closePassModal = () => {
                  onChange={(event) => setPhone(event.target.value)}></input>
                 <input value={email} placeholder={user.email}
                  onChange={(event) => setEmail(event.target.value)}></input>
-
-                <select className="modal-input" value={industry}></select>
               </div>
             )}
-            
+            <select>
+              {industryData.map((industry, i) => 
+                    <option>{industry.industry}</option>
+              )}
+            </select>
               <input type="button" value="Change Password?" onClick={() => openPassModal()}></input>
               <div className="modal-btn-container">
                 <button className="normal-btn" href="javascript:void(0);" 
