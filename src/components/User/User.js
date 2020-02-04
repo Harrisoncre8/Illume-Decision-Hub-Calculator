@@ -32,11 +32,18 @@ const closeModal = () => {
   return(
     <center>
       <div className='main-container'>
-        <h1>Hello, req.user.name!</h1>
-        <h2>Description of Calculator</h2>
-        <h2>Profile Information</h2>
+        <h1 className='user-spacing'>Hello, req.user.name!</h1>
+        <h2 className='user-spacing'>What is the Illume Decision Hub Calculator?</h2>
+        <h3 className='user-spacing'>The application is designed to help small business owners generate more profits. 
+          Using conversational language through a “choose your own adventure” format, you will 
+          be prompted to enter your financial information to create predictive calculations based 
+          on business decisions you can make around product pricing, operating costs, and total revenue. 
+          This will help you better understand how changes in your decision-making and pricing could affect 
+          your future profitability.
+        </h3>
+        <h2 className='user-spacing'>Profile Information</h2>
           {userData.map((user, i) => 
-          <ul className="user-info" key={i}>
+          <ul className='user-info' key={i}>
             <li>Name: {user.name}</li>
             <li>Comapny: {user.company}</li>
             <li>Phone: {user.phone}</li>

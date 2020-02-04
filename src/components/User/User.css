@@ -1,3 +1,7 @@
 .user-info {
   list-style-type: none;
 }
+
+.user-spacing {
+  margin-bottom: 20px;
+}
