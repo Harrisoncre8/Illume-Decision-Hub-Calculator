@@ -37,27 +37,41 @@ export default function Nav(){
             <button className='circle-btn' onClick={() => history.push('/')}>
                 Log <br/> Out</button>
             <input type="button" value="Edit Profile" onClick={() => openModal()} />
-            <Modal 
+            <Modal
                     visible={modal}
                     width="400"
                     height="300"
                     effect="fadeInUp"
                     onClickAway={() => closeModal()}
                 >
-                    <div>
-                        <h1>Hello!</h1>
-                        <p>User Information</p>
-                        {/* {JSON.stringify(userData)} */}
+                    <h1 className="main-heading admin-user-heading">User Information</h1>
+                    <table className="admin-user-table">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Company</th>
+                          <th>Phone</th>
+                          <th>Email</th>
+                          <th>Industry</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
                         {userData.map((user, i) => 
-                          <ul key={i}>
-                            <li>Name: {user.name}</li>
-                            <li>Company: {user.company}</li>
-                            <li>Phone: {user.phone}</li>
-                            <li>Email: {user.email}</li>
-                            <li>Industry: {user.industry}</li>
-                          </ul>
+                          <tr key={i}>
+                            <td>{user.name}</td>
+                            <td>{user.company}</td>
+                            <td>{user.phone}</td>
+                            <td>{user.email}</td>
+                            <td>{user.industry}</td>
+                            <td className="admin-edit-user-cell">Edit</td>
+                          </tr>
                         )}
-                        <a href="javascript:void(0);" onClick={() => closeModal()}>Close</a>
+                        </tbody>
+                    </table>
+                    <div className="modal-btn-container">
+                      <button className="normal-btn" href="javascript:void(0);" 
+                       onClick={() => closeModal()}>Close</button>
                     </div>
                 </Modal>
         </div>
