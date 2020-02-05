@@ -11,7 +11,6 @@ CREATE TABLE "industry" (
   "margin" DECIMAL(4,2)
 );
 
-
 CREATE TABLE "contact_info" (
   "user_id" INT PRIMARY KEY,
   "buisiness_name" TEXT,
@@ -158,6 +157,5 @@ VALUES (1, 'Hennepin County', 1, '651-288-1234', 'Jack'),
 INSERT INTO users (email) 
 VALUES ('jack@hennepin.gov'), ('crystal@primeacademy.io');
 
-INSERT INTO industry (industry, margin)
-VALUES ('Commercial Cleaning', .3),
-('Technical Instruction', .4);
+INSERT INTO industry ("industry", "margin") 
+VALUES ('Attorney', 30), ('Cleaning', 20), ('Massage', 25);
