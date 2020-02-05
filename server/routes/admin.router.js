@@ -20,6 +20,24 @@ router.get('/questions/:id', (req, res) => {
   });
 });
 
+// GET route for admin sub-question editing
+router.get('/subquestions/:id', (req, res) => {
+  let id = [req.params.id];
+  let sqlQuery = `SELECT DISTINCT q.id, q.question, q.help_text, q.sub_questions
+                  FROM calculators c
+                  JOIN question_calculator qc ON qc.calculator_id = c.id
+                  JOIN questions q ON q.id = qc.question_id
+                  WHERE q.sub_questions = $1;`;
+  pool.query(sqlQuery, id)
+    .then(result => {
+    res.send(result.rows);
+  })
+  .catch( error => {
+    console.log('Error with GET admin sub-questions', error);
+    res.sendStatus(500);
+  });
+});
+
 // GET route for admin user information
 router.get('/user-info', (req, res) => {
   const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, i.industry, i.id as industryID
