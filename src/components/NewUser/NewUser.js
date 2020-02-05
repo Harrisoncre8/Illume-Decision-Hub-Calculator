@@ -26,6 +26,9 @@ export default function NewUser(){
           on business decisions you can make around product pricing, operating costs, and total revenue. 
           This will help you better understand how changes in your decision-making and pricing could affect 
           your future profitability.
+          <br/>
+          <br/>
+          Click on a Calculator above to begin!
         </h3>
       </div>
     </center>
