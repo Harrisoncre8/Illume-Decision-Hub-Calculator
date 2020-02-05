@@ -383,3 +383,7 @@ VALUES(2,1,'Single Product',2),
 (3,24,'Single',11),
 (3,24,'Walkthrough',55);
 --#endregion
+
+-- dummy industry data 
+INSERT INTO industry ("industry", "margin") 
+VALUES ('Attorney', 30), ('Cleaning', 20), ('Massage', 25);
