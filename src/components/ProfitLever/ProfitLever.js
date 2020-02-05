@@ -47,12 +47,19 @@ function ProfitLever() {
     if(Object.values(splits).length>0){
       const temp = {}
       Object.values(splits).forEach(arr=>{
-        console.log(arr[0].question_id,arr[0].next_id)
         temp[arr[0].question_id] = arr[0].next_id
       })
       setSplitPath(temp);
     }
   },[splits])
+
+  function radioChange(e, question){
+    let temp = {...splitPath};
+    console.log(temp);
+    temp[question] = Number(e.target.value);
+    console.log(temp);
+    setSplitPath(temp);
+  }
 
   function stepper(start){
     function splitter(split){
@@ -61,13 +68,22 @@ function ProfitLever() {
         <>
           {
             splits[split]? 
-              splits[split].map(radio=>{
-                return(
-                  <>
-                    <input type='radio'/> {radio.split_text}
-                  </>
-                )
-              }):
+              <form>
+                {splits[split].map(radio=>{
+                  return(
+                    <span key={radio.id}>
+                      <input 
+                        type='radio'
+                        name="next"
+                        value={radio.next_id}
+                        checked={+splitPath[split] === +radio.next_id }
+                        onChange={(e)=>{radioChange(e, split)}}
+                      /> 
+                      {radio.split_text}
+                    </span>
+                  )
+                })}
+              </form>:
               null
           }
           {
@@ -98,7 +114,6 @@ function ProfitLever() {
   return (
     <div style={{backgroundColor: 'white'}}>
       {stepper(1)}
-      {JSON.stringify(splitPath)}
     </div>
   )
 
