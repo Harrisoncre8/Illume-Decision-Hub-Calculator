@@ -9,10 +9,12 @@ import AdminEditUserInfo from '../AdminEditUserInfo/AdminEditUserInfo';
 import BreakEven from '../BreakEven/BreakEven';
 import Login from '../Login/Login';
 import Nav from '../Nav/Nav';
+import NewUser from '../NewUser/NewUser';
 import PriceSetting from '../PriceSetting/PriceSetting';
 import ProfitLever from '../ProfitLever/ProfitLever';
 import Register from '../Register/Register';
 import Stepper from '../Stepper/Stepper';
+import User from '../User/User';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <ProtectedRoute exact path='/define-your-profit-lever' component={ProfitLever} />
         <ProtectedRoute exact path='/questionnaire' component={Stepper} />
         <Route exact path='/register' component={Register} />
+        <Route exact path='/new-user' component={NewUser} />
+        <Route exact path ='/user' component={User} />
       </div>
     </Router>
   );
