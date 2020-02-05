@@ -9,29 +9,38 @@ export default function Nav() {
   const dispatch = useDispatch();
 
   function profitLever() {
-    dispatch({type: 'GET_QUESTION', payload: {
-      query: {
-        start: 1
+    dispatch({ type: 'CLEAR_PREVIOUS_QUESTION' });
+    dispatch({
+      type: 'GET_QUESTION', payload: {
+        query: {
+          start: 1
+        }
       }
-    }});
+    });
     history.push('/questionnaire');
   }
 
   function priceSetting() {
-    dispatch({type: 'GET_QUESTION', payload: {
-      query: {
-        start: 3
+    dispatch({ type: 'CLEAR_PREVIOUS_QUESTION' });
+    dispatch({
+      type: 'GET_QUESTION', payload: {
+        query: {
+          start: 3
+        }
       }
-    }});
+    });
     history.push('/questionnaire');
   }
 
   function breakEven() {
-    dispatch({type: 'GET_QUESTION', payload: {
-      query: {
-        start: 2
+    dispatch({ type: 'CLEAR_PREVIOUS_QUESTION' });
+    dispatch({
+      type: 'GET_QUESTION', payload: {
+        query: {
+          start: 2
+        }
       }
-    }});
+    });
     history.push('/questionnaire');
   }
 

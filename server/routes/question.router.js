@@ -9,6 +9,7 @@ router.get('/', async (req, res) => {
         "qc"."id", 
         "qc"."question_id", 
         "qc"."next_id",
+        "qc"."calculator_id",
         "q"."question",
         "q"."response_type",
         "q"."help_text",
@@ -21,14 +22,9 @@ router.get('/', async (req, res) => {
       WHERE "qc"."id" = $1;
     `;
   const client = await pool.connect();
-  console.log('req.query is', req.query);
-  
   try {
     if(req.query.start){
       const startId = await client.query(`SELECT "start_id" FROM "calculators" WHERE "id" = $1;`, [req.query.start]);
-      console.log('--------start id', start_id);
-      console.log('-----req.query.start', req.query.start);
-    
       const results = await client.query(sqlQuery,[startId.rows[0].start_id]);
       res.send(results.rows);
     } else {
