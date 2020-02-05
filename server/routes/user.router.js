@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
-// is that the password gets encrypted before being inserted
+// is that the password gets encrypted before being inserted.
 router.post('/register', async (req, res, next) => {  
   console.log('req body is:', req.body);
   const name = req.body.name;
@@ -27,12 +27,12 @@ router.post('/register', async (req, res, next) => {
 
   const queryTextUser = `INSERT INTO "users" (email, hashedpassword) 
                           VALUES ($1, $2) RETURNING id`;
-  const queryTextContact = `INSERT INTO "contact_info" (business_name, industry_id, phone_number, user_id)
-                            VALUES ($1, $2, $3, $4)`
+  const queryTextContact = `INSERT INTO "contact_info" (name, business_name, industry_id, phone_number, user_id)
+                            VALUES ($1, $2, $3, $4, $5)`
   try {
     await connection.query(`BEGIN`);
     const id = await connection.query(queryTextUser, [email, password]);
-    await connection.query(queryTextContact, [company, industry, phone, id.rows[0].id]);
+    await connection.query(queryTextContact, [name, company, industry, phone, id.rows[0].id]);
     await connection.query(`COMMIT`);
     res.sendStatus(201);
   }catch(error){
