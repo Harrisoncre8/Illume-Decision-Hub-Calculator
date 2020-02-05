@@ -14,7 +14,7 @@ export default function AdminEditLever() {
 
   return(
     <div className="main-container">
-      <h1 className="main-heading">Edit Break Even Calculator</h1>
+      <h1 className="main-heading">Edit Profit Lever Calculator</h1>
       <div>
         <span className="admin-price-q">Question</span>
         <span className="admin-price-tooltip">Tooltip</span>
