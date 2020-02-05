@@ -4,10 +4,11 @@ import Modal from 'react-awesome-modal';
 import './User.css'
 
 export default function User(){
-
+// hooks for redux and sagas
 let dispatch = useDispatch();
 let userData = useSelector(state => state.admin.adminUserInfo);
 let industryData = useSelector(state => state.industry.industry);
+// setting state
 const [modal, setModal] = useState(false);
 const [passwordModal, setPasswordModal] = useState(false);
 const [name, setName] = useState('');
@@ -24,6 +25,7 @@ useEffect(() => {
 // change state to open user info modal
 const openModal = () => {
     setModal(true);
+    userData.map((item, i) => setIndustry(item.industry))
 }
 // change state to close user info modal
 const closeModal = () => {
@@ -73,9 +75,11 @@ const closePassModal = () => {
                  onChange={(event) => setEmail(event.target.value)}></input>
               </div>
             )}
-            <select>
-              {industryData.map((industry, i) => 
-                    <option>{industry.industry}</option>
+            {JSON.stringify(industry)}
+            <select className="modal-input"  value={industry} 
+             onChange={(event) => setIndustry(event.target.value)}>
+              {industryData.map((item, i) => 
+                    <option>{item.industry}</option>
               )}
             </select>
               <input type="button" value="Change Password?" onClick={() => openPassModal()}></input>
