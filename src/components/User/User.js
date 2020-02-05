@@ -8,6 +8,7 @@ export default function User(){
 let dispatch = useDispatch();
 let industryData = useSelector(state => state.industry.industry);
 let userData = useSelector(state => state.userInfo);
+
 // setting state
 const [modal, setModal] = useState(false);
 const [passwordModal, setPasswordModal] = useState(false);
@@ -17,8 +18,10 @@ const [phone, setPhone] = useState('');
 const [email, setEmail] = useState('');
 const [industry, setIndustry] = useState('');
 
+// on page load, get user and industry info
 useEffect(() => {
   dispatch({type: `GET_USER_INFO`});
+  dispatch({type: `GET_INDUSTRY`});
 }, [dispatch]);
 
 // change state to open user info modal
@@ -38,12 +41,10 @@ const openPassModal = () => {
 const closePassModal = () => {
   setPasswordModal(false);
 }
-
   return(
     <center>
       <div className='main-container'>
-        {/* {JSON.stringify(userData)} */}
-        
+        {JSON.stringify(industryData)}
           {userData.map((user, i) => 
           <ul className='user-info' key={i}>
             <h1 className='user-spacing'>Welcome back, {user.name}</h1>
