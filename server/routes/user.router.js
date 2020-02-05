@@ -12,6 +12,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+// Handles Ajax request for user information if user is authenticated
+router.get('/info', rejectUnauthenticated, (req, res) => {
+  const sqlQuery = `SELECT "user_id", "name", "business_name", "industry"."industry", "users"."email", "phone_number" 
+                    FROM "contact_info"
+                    JOIN "users" ON "contact_info"."user_id" = "users"."id"
+                    JOIN "industry" ON "contact_info"."industry_id" = "industry"."id";`;
+  pool.query(sqlQuery)
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch( error => {
+      console.log('Error with GET user info', error);
+      res.sendStatus(500);
+    });
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted.

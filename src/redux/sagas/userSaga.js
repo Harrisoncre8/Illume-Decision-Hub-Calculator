@@ -24,8 +24,19 @@ function* fetchUser() {
   }
 }
 
+// worker Saga: will be fired on "GET_USER_INFO" actions
+function* getUserInfo() {
+  try {
+    const response = yield axios.get('/api/user/info');
+    yield put({ type: 'SET_USER_INFO', payload: response.data });
+  } catch (error) {
+    console.log('User get info request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('GET_USER_INFO', getUserInfo)
 }
 
 export default userSaga;

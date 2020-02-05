@@ -6,9 +6,9 @@ import './User.css'
 export default function User(){
 // hooks for redux and sagas
 let dispatch = useDispatch();
-let daUser = useSelector(state => state.user)
-let userData = useSelector(state => state.admin.adminUserInfo);
 let industryData = useSelector(state => state.industry.industry);
+let userData = useSelector(state => state.userInfo);
+
 // setting state
 const [modal, setModal] = useState(false);
 const [passwordModal, setPasswordModal] = useState(false);
@@ -18,8 +18,9 @@ const [phone, setPhone] = useState('');
 const [email, setEmail] = useState('');
 const [industry, setIndustry] = useState('');
 
+// on page load, get user and industry info
 useEffect(() => {
-  dispatch({type: `GET_ADMIN_USER_INFO`});
+  dispatch({type: `GET_USER_INFO`});
   dispatch({type: `GET_INDUSTRY`});
 }, [dispatch]);
 
@@ -27,11 +28,23 @@ useEffect(() => {
 const openModal = () => {
     setModal(true);
     userData.map((item, i) => setIndustry(item.industry));
+    userData.map((item, i) => setName(item.name));
+    userData.map((item, i) => setCompany(item.business_name));
+    userData.map((item, i) => setPhone(item.phone_number));
+    userData.map((item, i) => setEmail(item.email));
 }
 // change state to close user info modal
 const closeModal = () => {
     setModal(false);
 }
+
+const saveChanges = () => {
+  let userInfo = {name, company, phone, email, industry};
+  console.log('what is this', userInfo)
+  dispatch({type: `PUT_USER_INFO`, payload: userInfo});
+  setModal(false);
+}
+
 // opens modal to change password
 const openPassModal = () => {
   setPasswordModal(true);
@@ -40,17 +53,16 @@ const openPassModal = () => {
 const closePassModal = () => {
   setPasswordModal(false);
 }
-
   return(
     <center>
       <div className='main-container'>
-        <h1 className='user-spacing'>Welcome back, req.user.name!</h1>
-        <h2 className='user-spacing'>Profile Information</h2>
           {userData.map((user, i) => 
           <ul className='user-info' key={i}>
+            <h1 className='user-spacing'>Welcome back, {user.name}</h1>
+            <h2 className='user-spacing'>Profile Information</h2>
             <li>Name: {user.name}</li>
-            <li>Comapny: {user.company}</li>
-            <li>Phone: {user.phone}</li>
+            <li>Comapny: {user.business_name}</li>
+            <li>Phone: {user.phone_number}</li>
             <li>Email: {user.email}</li>
             <li className='user-spacing'>Industry: {user.industry}</li>
           </ul>
@@ -68,15 +80,14 @@ const closePassModal = () => {
               <div key={i}>
                 <input value={name} placeholder={user.name}
                  onChange={(event) => setName(event.target.value)}></input>
-                <input value={company} placeholder={user.company} 
+                <input value={company} placeholder={user.business_name} 
                  onChange={(event) => setCompany(event.target.value)}></input>
-                <input value={phone} placeholder={user.phone}
+                <input value={phone} placeholder={user.phone_number}
                  onChange={(event) => setPhone(event.target.value)}></input>
                 <input value={email} placeholder={user.email}
                  onChange={(event) => setEmail(event.target.value)}></input>
               </div>
             )}
-            {JSON.stringify(industry)}
             <select className="modal-input"  value={industry} 
              onChange={(event) => setIndustry(event.target.value)}>
               {industryData.map((item, i) => 
@@ -86,7 +97,9 @@ const closePassModal = () => {
               <input type="button" value="Change Password?" onClick={() => openPassModal()}></input>
               <div className="modal-btn-container">
                 <button className="normal-btn" href="javascript:void(0);" 
-                onClick={() => closeModal()}>Close</button>
+                  onClick={() => saveChanges()}>Save</button>
+                <button className="normal-btn" href="javascript:void(0);" 
+                onClick={() => closeModal()}>Cancel</button>
               </div>
           </Modal>
 
