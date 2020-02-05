@@ -1,9 +1,16 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 
 export default function AdminCalcSubquestion(props) {
 
+  const dispatch = useDispatch();
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
+
+  const handleSave = () => {
+    let id = [props.id, question, tooltip, 3];
+    dispatch({type: `PUT_ADMIN_SUB_QUESTION`, payload: id});
+  }
 
   return(
     <>
@@ -19,7 +26,7 @@ export default function AdminCalcSubquestion(props) {
         value={tooltip} 
         onChange={(event)=>setTooltip(event.target.value)}
       />
-      <button>SAVE</button>
+      <button onClick={handleSave}>SAVE</button>
     </>
   );
 }

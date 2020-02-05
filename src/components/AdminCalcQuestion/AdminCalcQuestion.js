@@ -22,9 +22,20 @@ export default function AdminCalcQuestion(props) {
 
   return(
     <>
-      <textarea rows="6" cols="30" value={question} onChange={(event)=>setQuestion(event.target.value)} />
-      <textarea rows="6" cols="30" value={tooltip} onChange={(event)=>setTooltip(event.target.value)} />
-      <span>
+      <textarea 
+        rows="6" 
+        cols="30" 
+        value={question} 
+        onChange={(event)=>setQuestion(event.target.value)} 
+      />
+      <textarea 
+        rows="6" 
+        cols="30" 
+        value={tooltip} 
+        onChange={(event)=>setTooltip(event.target.value)} 
+      />
+      <button onClick={handleSave}>SAVE</button>
+      <div>
       {props.id === 3 || props.id === 4 ?
         subQuestion.map(q=>
           <span key={q.id}>
@@ -34,8 +45,7 @@ export default function AdminCalcQuestion(props) {
         :
         ''
       }
-      </span>
-      <button onClick={handleSave}>SAVE</button>
+      </div>
     </>
   );
 }
