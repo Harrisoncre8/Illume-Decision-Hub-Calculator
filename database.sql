@@ -386,4 +386,4 @@ VALUES(2,1,'Single Product',2),
 
 -- dummy industry data 
 INSERT INTO industry ("industry", "margin") 
-VALUES ('Attorney', 30), ('Cleaning', 20), ('Massage', 25);
+VALUES ('Attorney', 0.30), ('Cleaning', 0.20), ('Massage', 0.25);
