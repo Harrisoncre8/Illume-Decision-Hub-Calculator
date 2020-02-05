@@ -11,11 +11,17 @@ export default function Stepper() {
   const lastPageID = useSelector(state => state.previousQuestion)
   const history = useHistory();
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
+  const [splitNext, setSplitNext] = useState('');
 
   useEffect(()=>{
     setInput(inputData[questionData.question_id] || '');
   }, [inputData, questionData.question_id])
-  const [splitNext, setSplitNext] = useState('');
+  
+  useEffect(()=>{
+    if(questionData.split){
+      setSplitNext(inputData[questionData.question_id] || '')
+    }
+  }, [questionData.split, inputData, questionData.question_id])
 
   function nextPage() {
     dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
@@ -53,8 +59,8 @@ export default function Stepper() {
                   type="radio"
                   name="next"
                   value={split.next_id}
-                  checked={splitNext === split.next_id}
-                  onChange={() => { setSplitNext(split.next_id) }}
+                  checked={+splitNext === split.next_id}
+                  onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
                 />
                 {split.split_text}
               </span>
