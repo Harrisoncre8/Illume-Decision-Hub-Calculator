@@ -43,7 +43,7 @@ export default function Nav() {
         Profit Lever Calculator</button>
       <button className='circle-btn' onClick={priceSetting}>
         Price Setting Calculator</button>
-      <button className='circle-btn' onClick={() => history.push('/')}>
+      <button className='circle-btn' onClick={() => dispatch({ type: 'LOGOUT' })}>
         Log <br /> Out</button>
     </div>
   );
