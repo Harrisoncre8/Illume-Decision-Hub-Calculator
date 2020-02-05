@@ -10,7 +10,7 @@ export default function AdminCalcQuestion(props) {
   const [tooltip, setTooltip] = useState(props.tooltip);
 
   const handleSave = () => {
-    let id = [props.id, question, tooltip];
+    let id = [props.id, question, tooltip, 3];
     dispatch({type: `PUT_ADMIN_QUESTION`, payload: id});
   }
 
@@ -35,7 +35,7 @@ export default function AdminCalcQuestion(props) {
         ''
       }
       </span>
-      <button onChange={handleSave}>SAVE</button>
+      <button onClick={handleSave}>SAVE</button>
     </>
   );
 }

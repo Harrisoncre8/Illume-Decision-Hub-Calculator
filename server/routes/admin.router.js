@@ -59,7 +59,7 @@ router.get('/user-info', (req, res) => {
 router.post('/industry-info', (req, res) => {
   const id = [req.body.industry, req.body.margin];
   const sqlQuery = `INSERT INTO industry (industry, margin)
-                  VALUES ($1, $2);`;
+                    VALUES ($1, $2);`;
   pool.query(sqlQuery, id)
     .then(result => {
     res.sendStatus(201);
@@ -74,11 +74,27 @@ router.post('/industry-info', (req, res) => {
 router.put('/industry-info', (req, res) => {
   const id = [req.body.id, req.body.industry, req.body.margin];
   const sqlQuery = `UPDATE industry 
-                  SET industry = $2, margin = $3
-                  WHERE id = $1;`;
+                    SET industry = $2, margin = $3
+                    WHERE id = $1;`;
   pool.query(sqlQuery, id)
-    .then(result => {
-    res.send(result.rows);
+  .then(result => {
+    res.sendStatus(200);
+  })
+  .catch( error => {
+    console.log('Error with PUT admin industry info', error);
+    res.sendStatus(500);
+  });
+});
+
+// PUT route for admin to update calculator questions
+router.put('/question', (req, res) => {
+  const id = [req.body[0], req.body[1], req.body[2]];
+  const sqlQuery = `UPDATE questions 
+                    SET question = $2, help_text = $3
+                    WHERE id = $1;`;
+  pool.query(sqlQuery, id)
+  .then(result => {
+    res.sendStatus(200);
   })
   .catch( error => {
     console.log('Error with PUT admin industry info', error);

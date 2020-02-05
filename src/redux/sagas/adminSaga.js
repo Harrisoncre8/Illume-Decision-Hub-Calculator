@@ -51,7 +51,7 @@ function* putAdminIndustryInfo(action){
 function* putAdminQuestion(action){
   try{
     yield axios.put(`/api/admin/question`, action.payload);
-    yield put({type: `GET_ADMIN_QUESTION`});
+    yield put({type: `GET_ADMIN_QUESTION`, payload: action.payload[3]});
   } catch(error){
     console.log('Error in admin question PUT', error);
   }
