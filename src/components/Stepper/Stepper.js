@@ -19,9 +19,10 @@ export default function Stepper() {
   
   useEffect(()=>{
     if(questionData.split){
-      setSplitNext(inputData[questionData.question_id] || '')
+      setSplitNext(inputData[questionData.question_id] || splitData[0] && splitData[0].next_id || '')
     }
-  }, [questionData.split, inputData, questionData.question_id])
+  }, [questionData.split, inputData, questionData.question_id, splitData])
+
 
   function nextPage() {
     dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
