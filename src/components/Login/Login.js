@@ -34,8 +34,6 @@ class Login extends Component{
     });
     this.checkForValue(e);
   }
-  
-
 
   handleRegister = () => {
     this.props.history.push('/register');
