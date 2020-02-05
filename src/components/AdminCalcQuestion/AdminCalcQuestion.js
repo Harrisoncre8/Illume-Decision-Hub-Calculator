@@ -10,7 +10,7 @@ export default function AdminCalcQuestion(props) {
 
   useEffect(()=>{
     if(id === 3 || id === 4){
-      dispatch({type: `GET_ADMIN_SUB_QUESTIONS`, payload: id});
+      dispatch({type: `GET_ADMIN_SUB_QUESTION`, payload: id});
     }
   }, [id]);
 

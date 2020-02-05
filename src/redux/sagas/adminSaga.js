@@ -11,6 +11,16 @@ function* getAdminQuestion(action){
   }
 }
 
+function* getAdminSubquestion(action){
+  try{
+    console.log('action.payload', action.payload);
+    const response = yield axios.get(`/api/admin/questions/${action.payload}`);
+    yield put({type: `SET_ADMIN_SUB_QUESTION`, payload: response.data});
+  } catch(error){
+    console.log('Error in admin sub-questions GET', error);
+  }
+}
+
 function* getAdminUserInfo(action){
   try{
     const response = yield axios.get(`/api/admin/user-info`);
@@ -49,6 +59,7 @@ function* putAdminUserInfo(action){
 
 function* adminSaga() {
   yield takeLatest(`GET_ADMIN_QUESTION`, getAdminQuestion);
+  yield takeLatest(`GET_ADMIN_SUB_QUESTION`, getAdminSubquestion);
   yield takeLatest(`GET_ADMIN_USER_INFO`, getAdminUserInfo);
   yield takeLatest(`POST_ADMIN_INDUSTRY_INFO`, postAdminIndustryInfo);
   yield takeLatest(`PUT_ADMIN_INDUSTRY_INFO`, putAdminIndustryInfo);
