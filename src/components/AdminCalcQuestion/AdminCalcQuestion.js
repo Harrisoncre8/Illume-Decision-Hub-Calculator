@@ -9,6 +9,11 @@ export default function AdminCalcQuestion(props) {
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
 
+  const handleSave = () => {
+    let id = [props.id, question, tooltip];
+    dispatch({type: `PUT_ADMIN_QUESTION`, payload: id});
+  }
+
   useEffect(()=>{
     if(props.id === 3 || props.id === 4){
       dispatch({type: `GET_ADMIN_SUB_QUESTION`, payload: props.id});
@@ -30,7 +35,7 @@ export default function AdminCalcQuestion(props) {
         ''
       }
       </span>
-      <button>SAVE</button>
+      <button onChange={handleSave}>SAVE</button>
     </>
   );
 }

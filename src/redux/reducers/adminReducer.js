@@ -14,15 +14,11 @@ const adminSubquestion = (state = [], action) => {
   return state;
 }
 
-// Store edited calculator sub-questions
-const adminSubquestionEdit = (state = [], action) => action.type === `SET_ADMIN_SUB_QUESTION_EDIT` ? [...action.payload, action.payload] : state;
-
 // Store user information for admin to edit
 const adminUserInfo = (state = [], action) => action.type === `SET_ADMIN_USER_INFO` ? action.payload : state;
   
 export default combineReducers({
   adminQuestion,
   adminSubquestion,
-  adminSubquestionEdit,
   adminUserInfo,
 });
