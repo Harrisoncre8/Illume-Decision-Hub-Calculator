@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import AdminCalcSubquestion from '../AdminCalcSubquestion/AdminCalcSubquestion';
 
 export default function AdminCalcQuestion(props) {
 
   const subQuestion = useSelector((state)=>state.admin.adminSubquestion);
-
-
   const dispatch = useDispatch();
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
@@ -24,7 +23,7 @@ export default function AdminCalcQuestion(props) {
       {props.id === 3 || props.id === 4 ?
         subQuestion.map(q=>
           <span key={q.id}>
-            <AdminCalcSubquestion rows="6" cols="30" value={q.question} onChange={(event)=>setQuestion(event.target.value)} />
+            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} />
           </span>
         )
         :
