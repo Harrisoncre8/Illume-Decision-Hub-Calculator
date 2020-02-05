@@ -10,7 +10,7 @@ export default function AdminCalcQuestion(props) {
   const [tooltip, setTooltip] = useState(props.tooltip);
 
   const handleSave = () => {
-    let id = [props.id, question, tooltip, 3];
+    let id = [props.id, question, tooltip, props.calcID];
     dispatch({type: `PUT_ADMIN_QUESTION`, payload: id});
   }
 
@@ -39,7 +39,7 @@ export default function AdminCalcQuestion(props) {
       {props.id === 3 || props.id === 4 ?
         subQuestion.map(q=>
           <span key={q.id}>
-            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} />
+            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
           </span>
         )
         :

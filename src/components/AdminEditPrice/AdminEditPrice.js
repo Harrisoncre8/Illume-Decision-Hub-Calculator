@@ -22,7 +22,7 @@ export default function AdminEditPrice() {
       <div>
         {question.map(q =>
           <div key={q.id}>
-            <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} />
+            <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} calcID={3} />
           </div>
         )}
       </div>

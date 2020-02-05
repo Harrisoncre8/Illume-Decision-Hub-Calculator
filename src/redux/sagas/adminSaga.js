@@ -57,7 +57,7 @@ function* putAdminQuestion(action){
   }
 }
 
-function* putAdminSubuestion(action){
+function* putAdminSubquestion(action){
   try{
     yield axios.put(`/api/admin/question`, action.payload);
     yield put({type: `GET_ADMIN_SUB_QUESTION`, payload: action.payload[3]});
@@ -82,7 +82,7 @@ function* adminSaga() {
   yield takeLatest(`POST_ADMIN_INDUSTRY_INFO`, postAdminIndustryInfo);
   yield takeLatest(`PUT_ADMIN_INDUSTRY_INFO`, putAdminIndustryInfo);
   yield takeLatest(`PUT_ADMIN_QUESTION`, putAdminQuestion);
-  yield takeLatest(`PUT_ADMIN_SUB_QUESTION`, putAdminQuestion);
+  yield takeLatest(`PUT_ADMIN_SUB_QUESTION`, putAdminSubquestion);
   yield takeLatest(`PUT_ADMIN_USER_INFO`, putAdminUserInfo);
 }
   
