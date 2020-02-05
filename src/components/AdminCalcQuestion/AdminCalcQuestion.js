@@ -1,18 +1,15 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, {useState} from 'react';
 
-class AdminCalcQuestion extends Component{
+export default function AdminCalcQuestion(props) {
 
-  render(){
-    return(
-      <>
-      </>
-    );
-  }
+  const [id, setID] = useState(props.id);
+  const [question, setQuestion] = useState(props.question);
+  const [tooltip, setTooltip] = useState(props.tooltip);
+
+  return(
+    <>
+      <textarea rows="6" cols="30" value={question} onChange={(event)=>setQuestion(event.target.value)} />
+      <textarea rows="6" cols="30" value={tooltip} onChange={(event)=>setTooltip(event.target.value)} />
+    </>
+  );
 }
-
-const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.OBJECT
-});
-
-export default connect(putReduxStateOnProps)(AdminCalcQuestion);
