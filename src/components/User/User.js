@@ -28,11 +28,23 @@ useEffect(() => {
 const openModal = () => {
     setModal(true);
     userData.map((item, i) => setIndustry(item.industry));
+    userData.map((item, i) => setName(item.name));
+    userData.map((item, i) => setCompany(item.business_name));
+    userData.map((item, i) => setPhone(item.phone_number));
+    userData.map((item, i) => setEmail(item.email));
 }
 // change state to close user info modal
 const closeModal = () => {
     setModal(false);
 }
+
+const saveChanges = () => {
+  let userInfo = {name, company, phone, email, industry};
+  console.log('what is this', userInfo)
+  dispatch({type: `PUT_USER_INFO`, payload: userInfo});
+  setModal(false);
+}
+
 // opens modal to change password
 const openPassModal = () => {
   setPasswordModal(true);
@@ -44,7 +56,6 @@ const closePassModal = () => {
   return(
     <center>
       <div className='main-container'>
-        {JSON.stringify(industryData)}
           {userData.map((user, i) => 
           <ul className='user-info' key={i}>
             <h1 className='user-spacing'>Welcome back, {user.name}</h1>
@@ -77,7 +88,6 @@ const closePassModal = () => {
                  onChange={(event) => setEmail(event.target.value)}></input>
               </div>
             )}
-            {JSON.stringify(industry)}
             <select className="modal-input"  value={industry} 
              onChange={(event) => setIndustry(event.target.value)}>
               {industryData.map((item, i) => 
@@ -87,7 +97,9 @@ const closePassModal = () => {
               <input type="button" value="Change Password?" onClick={() => openPassModal()}></input>
               <div className="modal-btn-container">
                 <button className="normal-btn" href="javascript:void(0);" 
-                onClick={() => closeModal()}>Close</button>
+                  onClick={() => saveChanges()}>Save</button>
+                <button className="normal-btn" href="javascript:void(0);" 
+                onClick={() => closeModal()}>Cancel</button>
               </div>
           </Modal>
 
