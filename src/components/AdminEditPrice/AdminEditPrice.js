@@ -12,15 +12,14 @@ class AdminEditPrice extends Component{
   render(){
     return(
       <div className="main-container">
-        {JSON.stringify(this.props.question)}
         <h1 className="main-heading">Edit Price Setting Calculator</h1>
         <div>
           <span className="admin-price-q">Question</span>
           <span className="admin-price-tooltip">Tooltip</span>
         </div>
-        <div className="admin-price-map-flex-container">
+        <div>
           {this.props.question.map(q =>
-            <div className="admin-price-edit-div" key={q.id}>
+            <div key={q.id}>
               <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} />
             </div>
           )}

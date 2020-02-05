@@ -14,18 +14,23 @@ export default function AdminCalcQuestion(props) {
     if(props.id === 3 || props.id === 4){
       dispatch({type: `GET_ADMIN_SUB_QUESTION`, payload: props.id});
     }
-    else if(props.id !== 3 || props.id !== 4){
-      dispatch({type: `CLEAR_ADMIN_SUB_QUESTION`});
-    }
   }, [props.id]);
 
   return(
     <>
-      {subQuestion.map(q=>
-        <textarea rows="6" cols="30" value={q.question} onChange={(event)=>setQuestion(event.target.value)} />
-      )}
       <textarea rows="6" cols="30" value={question} onChange={(event)=>setQuestion(event.target.value)} />
       <textarea rows="6" cols="30" value={tooltip} onChange={(event)=>setTooltip(event.target.value)} />
+      <span>
+      {props.id === 3 || props.id === 4 ?
+        subQuestion.map(q=>
+          <span key={q.id}>
+            <AdminCalcSubquestion rows="6" cols="30" value={q.question} onChange={(event)=>setQuestion(event.target.value)} />
+          </span>
+        )
+        :
+        ''
+      }
+      </span>
     </>
   );
 }
