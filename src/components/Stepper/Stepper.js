@@ -1,51 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 export default function Stepper() {
   // Using hooks to access redux and saga
-  let dispatch = useDispatch();
-  let questionData = useSelector(state => state.question);
-  let splitData = useSelector(state => state.split);
-  let history = useHistory();
+  const dispatch = useDispatch();
+  const inputData = useSelector(state => state.input);
+  const questionData = useSelector(state => state.question);
+  const splitData = useSelector(state => state.split);
+  const lastPageID = useSelector(state => state.previousQuestion)
+  const history = useHistory();
+  const [input, setInput] = useState(inputData[questionData.question_id] || '');
 
-	const [splitNext, setSplitNext] = useState('');
+  useEffect(()=>{
+    setInput(inputData[questionData.question_id] || '');
+  }, [inputData, questionData.question_id])
+  const [splitNext, setSplitNext] = useState('');
 
   function nextPage() {
+    dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
+    dispatch({type: 'ADD_INPUT_VALUE', payload:{key: questionData.question_id, value: input}})
+    setInput('');
     if (questionData.next_id == null) {
       const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
       history.push(`/${url}`);
-		} else if(questionData.split){
-			dispatch({ type: 'GET_QUESTION', payload: { query: { id: splitNext } } });
-		} else {
+    } else if (questionData.split) {
+      dispatch({ type: 'GET_QUESTION', payload: { query: { id: splitNext } } });
+    } else {
       dispatch({ type: 'GET_QUESTION', payload: { query: { id: questionData.next_id } } });
+    }
+  }
+
+  function lastPage() {
+    if (lastPageID.length === 0) {
+      history.push('/');
+    } else {
+      dispatch({ type: 'GET_QUESTION', payload: { query: { id: lastPageID.pop() } } });
+      let holder = lastPageID; // used because lastPageID is modified on the previous line
+      dispatch({ type: 'NEXT_PREVIOUS_QUESTION', payload: holder });
     }
   }
 
   return (
     <div className='main-container'>
       <p>
-        {questionData.question} 
-        {questionData.split? 
-          splitData.map(split=>{
-            return(
+        {questionData.question}
+        {questionData.split ?
+          splitData.map(split => {
+            return (
               <span key={split.id}>
-									<input 
-										type="radio" 
-										name="next" 
-										value={split.next_id}
-										checked={splitNext === split.next_id}
-										onChange={()=>{setSplitNext(split.next_id)}}
-								/> 
-								{split.split_text}
-							</span>
-          )})
+                <input
+                  type="radio"
+                  name="next"
+                  value={split.next_id}
+                  checked={splitNext === split.next_id}
+                  onChange={() => { setSplitNext(split.next_id) }}
+                />
+                {split.split_text}
+              </span>
+            )
+          })
           :
-          <input type={questionData.response_type} />}
+          <input value={input} onChange={(e)=>setInput(e.target.value)} type={questionData.response_type} />}
         {questionData.help_text}
       </p>
-      <div className='arrow-left' />
-      <div onClick={nextPage} className='arrow-right' />
+      <div onClick={()=>lastPage()} className='arrow-left' />
+      <div onClick={()=>nextPage()} className='arrow-right' />
     </div>
   );
 }
