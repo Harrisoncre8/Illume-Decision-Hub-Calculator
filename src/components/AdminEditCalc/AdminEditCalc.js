@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './AdminEditCalc.css';
 import AdminEditPrice from '../AdminEditPrice/AdminEditPrice';
 import AdminEditBreak from '../AdminEditBreak/AdminEditBreak';
+import AdminEditLever from '../AdminEditLever/AdminEditLever';
 
 class AdminEditCalc extends Component{
 
@@ -56,6 +57,13 @@ class AdminEditCalc extends Component{
           {this.state.break ?
             <div className="admin-edit-calc-render-container">
               <AdminEditBreak />
+            </div>
+            :
+            ''
+          }
+          {this.state.lever ?
+            <div className="admin-edit-calc-render-container">
+              <AdminEditLever />
             </div>
             :
             ''
