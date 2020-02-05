@@ -4,7 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 // worker Saga: will be fired on 'GET_SPLIT' action
 function* getSplit(action) {
   try {
-    const response = yield axios.get(`/api/split/${action.payload}`);
+    const response = yield axios.get(`/api/split?calculator_id=${action.payload.calculator_id}&question_id=${action.payload.question_id}`);
     yield put({ type: `SET_SPLIT`, payload: response.data })
   } catch (error) {
     // alert('Sorry, something went wrong while getting questions')
