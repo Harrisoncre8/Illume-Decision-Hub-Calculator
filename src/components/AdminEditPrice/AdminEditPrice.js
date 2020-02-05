@@ -6,7 +6,7 @@ import AdminCalcQuestion from '../AdminCalcQuestion/AdminCalcQuestion';
 class AdminEditPrice extends Component{
 
   componentDidMount(){
-    this.props.dispatch({type: `GET_ADMIN_QUESTION`});
+    this.props.dispatch({type: `GET_ADMIN_QUESTION`, payload: 3});
   }
 
   render(){

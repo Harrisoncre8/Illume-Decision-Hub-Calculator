@@ -3,9 +3,14 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // GET route for admin question editing
-router.get('/questions', (req, res) => {
-  let sqlQuery = `SELECT id, question, help_text FROM questions;`;
-  pool.query(sqlQuery)
+router.get('/questions/:id', (req, res) => {
+  let id = [req.params.id];
+  let sqlQuery = `SELECT q.id, q.question, q.help_text, q.sub_questions
+                  FROM calculators c
+                  JOIN question_calculator qc ON qc.calculator_id = c.id
+                  JOIN questions q ON q.id = qc.question_id
+                  WHERE c.id = $1 AND q.sub_questions IS NULL;`;
+  pool.query(sqlQuery, id)
     .then(result => {
     res.send(result.rows);
   })

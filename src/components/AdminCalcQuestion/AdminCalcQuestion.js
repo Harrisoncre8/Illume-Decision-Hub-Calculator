@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 export default function AdminCalcQuestion(props) {
 
-  const [id, setID] = useState(props.id);
+  const id = useState(props.id);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
 
