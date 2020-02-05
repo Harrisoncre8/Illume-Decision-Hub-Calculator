@@ -43,7 +43,8 @@ class Register extends Component{
               email: this.state.email,
               password: this.state.password,
             },
-        });
+        });           
+    this.props.history.push('/new-user');
     } else {
         this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
