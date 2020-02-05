@@ -6,6 +6,7 @@ import './User.css'
 export default function User(){
 // hooks for redux and sagas
 let dispatch = useDispatch();
+let daUser = useSelector(state => state.user)
 let userData = useSelector(state => state.admin.adminUserInfo);
 let industryData = useSelector(state => state.industry.industry);
 // setting state
@@ -25,7 +26,7 @@ useEffect(() => {
 // change state to open user info modal
 const openModal = () => {
     setModal(true);
-    userData.map((item, i) => setIndustry(item.industry))
+    userData.map((item, i) => setIndustry(item.industry));
 }
 // change state to close user info modal
 const closeModal = () => {
