@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
-import Register from '../Register/Register';
+// import Register from '../Register/Register';
 import Login from '../Login/Login';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
@@ -38,7 +38,7 @@ const ProtectedRoute = (props) => {
   } else {
     // the the user is not logged in and the mode is not 'login'
     // show the RegisterPage
-    ComponentToShow = Register;
+    ComponentToShow = Login;
   }
 
   // We return a Route component that gets added to our list of routes
