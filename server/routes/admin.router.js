@@ -73,6 +73,7 @@ router.put('/user-info', async (req, res) => {
     await connection.query(sqlQueryContactInfo, [name, company, phone, industry, id]);
     password ? await connection.query(sqlQueryUsers, [email, password]) : await connection.query(sqlQueryUsers, [email]);
     await connection.query(`COMMIT`);
+    res.sendStatus(200);
   } catch(error) {
     console.log('Error with PUT admin edit user info', error);
     await connection.query(`ROLLBACK`);

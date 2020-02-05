@@ -52,6 +52,9 @@ class AdminEditUserInfo extends Component{
 
   handleSave = () => {
     this.props.dispatch({type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser});
+    this.setState({
+      visible: false
+    });
   }
 
   openModal = user => {
