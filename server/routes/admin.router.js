@@ -66,7 +66,7 @@ router.put('/user-info', async (req, res) => {
   const connection = await pool.connect();
 
 
-  password ? sqlQueryUsers = `UPDATE users SET email = $1, password = $2;` : sqlQueryUsers = `UPDATE users SET email = $1;`
+  password ? sqlQueryUsers = `UPDATE users SET email = $1, hashedpassword = $2;` : sqlQueryUsers = `UPDATE users SET email = $1;`
   
   try {
     await connection.query(`BEGIN`);
