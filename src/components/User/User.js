@@ -6,9 +6,8 @@ import './User.css'
 export default function User(){
 // hooks for redux and sagas
 let dispatch = useDispatch();
-let daUser = useSelector(state => state.user)
-let userData = useSelector(state => state.admin.adminUserInfo);
 let industryData = useSelector(state => state.industry.industry);
+let userData = useSelector(state => state.userInfo);
 // setting state
 const [modal, setModal] = useState(false);
 const [passwordModal, setPasswordModal] = useState(false);
@@ -19,8 +18,7 @@ const [email, setEmail] = useState('');
 const [industry, setIndustry] = useState('');
 
 useEffect(() => {
-  dispatch({type: `GET_ADMIN_USER_INFO`});
-  dispatch({type: `GET_INDUSTRY`});
+  dispatch({type: `GET_USER_INFO`});
 }, [dispatch]);
 
 // change state to open user info modal
@@ -44,13 +42,15 @@ const closePassModal = () => {
   return(
     <center>
       <div className='main-container'>
-        <h1 className='user-spacing'>Welcome back, req.user.name!</h1>
-        <h2 className='user-spacing'>Profile Information</h2>
+        {/* {JSON.stringify(userData)} */}
+        
           {userData.map((user, i) => 
           <ul className='user-info' key={i}>
+            <h1 className='user-spacing'>Welcome back, {user.name}</h1>
+            <h2 className='user-spacing'>Profile Information</h2>
             <li>Name: {user.name}</li>
-            <li>Comapny: {user.company}</li>
-            <li>Phone: {user.phone}</li>
+            <li>Comapny: {user.business_name}</li>
+            <li>Phone: {user.phone_number}</li>
             <li>Email: {user.email}</li>
             <li className='user-spacing'>Industry: {user.industry}</li>
           </ul>
@@ -68,9 +68,9 @@ const closePassModal = () => {
               <div key={i}>
                 <input value={name} placeholder={user.name}
                  onChange={(event) => setName(event.target.value)}></input>
-                <input value={company} placeholder={user.company} 
+                <input value={company} placeholder={user.business_name} 
                  onChange={(event) => setCompany(event.target.value)}></input>
-                <input value={phone} placeholder={user.phone}
+                <input value={phone} placeholder={user.phone_number}
                  onChange={(event) => setPhone(event.target.value)}></input>
                 <input value={email} placeholder={user.email}
                  onChange={(event) => setEmail(event.target.value)}></input>
