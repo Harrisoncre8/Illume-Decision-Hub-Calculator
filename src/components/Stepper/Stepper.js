@@ -49,30 +49,37 @@ export default function Stepper() {
   }
 
   return (
-    <div className='main-container'>
-      <p>
-        {questionData.question}
-        {questionData.split ?
-          splitData.map(split => {
-            return (
-              <span key={split.id}>
-                <input
-                  type="radio"
-                  name="next"
-                  value={split.next_id}
-                  checked={+splitNext === split.next_id}
-                  onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
-                />
-                {split.split_text}
-              </span>
-            )
-          })
-          :
-          <input value={input} onChange={(e)=>setInput(e.target.value)} type={questionData.response_type} />}
-        {questionData.help_text}
-      </p>
-      <div onClick={()=>lastPage()} className='arrow-left' />
-      <div onClick={()=>nextPage()} className='arrow-right' />
-    </div>
+    <center>
+      <div className='stepper-container'>
+        <p>
+          {questionData.question}<br/>
+          {questionData.split ?
+            splitData.map(split => {
+              return (
+                <span key={split.id}>
+                  <input
+                    type="radio"
+                    name="next"
+                    value={split.next_id}
+                    checked={+splitNext === split.next_id}
+                    onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
+                  />
+                  {split.split_text}
+                </span>
+              )
+            })
+            :
+            <input 
+              className="stepper-input"
+              value={input} 
+              onChange={(e)=>setInput(e.target.value)} 
+              type={questionData.response_type} 
+            />}
+          <br/>{questionData.help_text}
+        </p>
+        <div onClick={()=>lastPage()} className='arrow-left' />
+        <div onClick={()=>nextPage()} className='arrow-right' />
+      </div>
+    </center>
   );
 }
