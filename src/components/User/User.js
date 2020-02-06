@@ -10,54 +10,65 @@ let industryData = useSelector(state => state.industry);
 let userData = useSelector(state => state.userInfo);
 let userID = useSelector(state => state.user.id);
 
-  // setting state
-  const [modal, setModal] = useState(false);
-  const [passwordModal, setPasswordModal] = useState(false);
-  const [name, setName] = useState('');
-  const [company, setCompany] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [industry, setIndustry] = useState('');
+// setting state for modal
+const [modal, setModal] = useState(false);
+const [passwordModal, setPasswordModal] = useState(false);
 
-  // on page load, get user and industry info
-  useEffect(() => {
-    if(userID){
-      dispatch({type: `GET_USER_INFO`, payload: userID});
-      dispatch({type: `GET_INDUSTRY`});
-    }
-  }, [userID]);
+// setting state for user information
+const [company, setCompany] = useState('');
+const [email, setEmail] = useState('');
+const [id, setId] = useState('');
+const [industry, setIndustry] = useState('');
+const [industryID, setIndustryID] = useState('');
+const [name, setName] = useState('');
+const [phone, setPhone] = useState('');
 
-  // change state to open user info modal
-  const openModal = () => {
-      setModal(true);
-      userData.map((item, i) => setIndustry(item.industry));
-      userData.map((item, i) => setName(item.name));
-      userData.map((item, i) => setCompany(item.business_name));
-      userData.map((item, i) => setPhone(item.phone_number));
-      userData.map((item, i) => setEmail(item.email));
+// on page load, get user and industry info and set state to userID
+useEffect(() => {
+  if(userID){
+    setId(userID);
+    dispatch({type: `GET_USER_INFO`, payload: userID});
+    dispatch({type: `GET_INDUSTRY`});
   }
+}, [userID, dispatch]);
 
-  // change state to close user info modal
-  const closeModal = () => {
-      setModal(false);
-  }
-
-  // Dispatch updates to saga
-  const saveChanges = () => {
-    let userInfo = {name, company, phone, email, industry};
-    dispatch({type: `PUT_USER_INFO`, payload: userInfo});
+// change state to open user info modal and set default info to the modal
+const openModal = () => {
+  setModal(true);
+  setIndustry(userData[0].industry);
+  setName(userData[0].name);
+  setCompany(userData[0].business_name);
+  setPhone(userData[0].phone_number);
+  setEmail(userData[0].email);
+  setIndustryID(userData[0].industry_id);
+}
+// change state to close user info modal
+const closeModal = () => {
     setModal(false);
   }
 
-  // opens modal to change password
-  const openPassModal = () => {
-    setPasswordModal(true);
-  }
+// save user info changes and sends to DB
+const saveChanges = () => {
+  let userInfo = {id, name, company, phone, email, industryID};
+  dispatch({type: `PUT_USER_INFO`, payload: userInfo});
+  setModal(false);
+}
 
-  // close modal to change password
-  const closePassModal = () => {
-    setPasswordModal(false);
-  }
+// opens modal to change password
+const openPassModal = () => {
+  setPasswordModal(true);
+}
+// close modal to change password
+const closePassModal = () => {
+  setPasswordModal(false);
+}
+
+// handle change for industry drop down
+const handleUserIndustry = (event) => {
+  setIndustry(event.target.value);
+  setIndustryID(industryData[industryData.findIndex(el => el.industry === event.target.value)] &&
+  industryData[industryData.findIndex(el => el.industry === event.target.value)].id);  
+}
 
   return(
     <center>
@@ -95,7 +106,7 @@ let userID = useSelector(state => state.user.id);
               </div>
             )}
             <select className="modal-input"  value={industry} 
-             onChange={(event) => setIndustry(event.target.value)}>
+             onChange={(event) => handleUserIndustry(event)}>
               {industryData.map((item, i) => 
                     <option>{item.industry}</option>
               )}
