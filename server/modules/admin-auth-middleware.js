@@ -1,3 +1,5 @@
+const pool = require('../modules/pool');
+
 const rejectNonAdmin = async (req, res, next) =>{
     // check if admin status is true for user
     const admin = await pool.query(`SELECT "admin" FROM "users" WHERE "id" = $1;`, [req.session.passport.user]);
