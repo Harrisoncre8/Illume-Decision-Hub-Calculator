@@ -20,16 +20,17 @@ function ProfitLever() {
 
   // MATH
   useEffect(() => {
-    let directCosts = +splitPath[7] === 3?
-      +inputData[3]:
-      (+inputData[8] * +inputData[9]) + +inputData[10] + +inputData[11];
-    
-    let indirectCosts = +splitPath[24] === 4?
-      + inputData[4]:
-      +inputData[12] + +inputData[13] + +inputData[14] + +inputData[15] + +inputData[16] +
-          +inputData[17] + +inputData[18] + +inputData[19] + +inputData[20] + +inputData[21] +
-          +inputData[22] + +inputData[23];
-    let divisor = +splitPath[1] === 2? 1: +inputData[5]
+    let directCosts = +splitPath[7] === 3 ?
+        +inputData[3] :
+        (+inputData[8] * +inputData[9]) + +inputData[10] + +inputData[11];
+
+    let indirectCosts = +splitPath[24] === 4 ?
+        + inputData[4] :
+        +inputData[12] + +inputData[13] + +inputData[14] + +inputData[15] + +inputData[16] +
+            +inputData[17] + +inputData[18] + +inputData[19] + +inputData[20] + +inputData[21] +
+            +inputData[22] + +inputData[23];
+      
+    let divisor = +splitPath[1] === 2 ? 1 : +inputData[5]
     setPrice(
       (
         (
@@ -58,7 +59,7 @@ function ProfitLever() {
     setIndirectCostChange(
       (
         (
-          (+inputData[2] - directCosts - (indirectCosts * .99)) / 
+          (+inputData[2] - directCosts - (indirectCosts * .99)) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
       ) * 100 / divisor
@@ -71,8 +72,10 @@ function ProfitLever() {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
           let id = arr.id
-          let text = acum[id] && acum[id]['split_text'] ? [...acum[id]['split_text'], arr.split_text] : [arr.split_text]
-          let next = acum[id] && acum[id]['split_next_id'] ? [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id]
+          let text = acum[id] && acum[id]['split_text'] ? 
+              [...acum[id]['split_text'], arr.split_text] : [arr.split_text]
+          let next = acum[id] && acum[id]['split_next_id'] ? 
+              [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id]
           delete arr.id
           delete arr.split_text;
           delete arr.split_next_id;
@@ -153,7 +156,7 @@ function ProfitLever() {
     let questionId = paths[start] && paths[start].question_id
     return (
       <div>
-  <p>{paths[start] && paths[start].question} {paths[start] && paths[start].question_id}</p>
+        <p>{paths[start] && paths[start].question}</p>
         {
           doesSplit ?
             null :
