@@ -20,40 +20,50 @@ function ProfitLever() {
 
   // MATH
   useEffect(() => {
+    let directCosts = +splitPath[7] === 3?
+      +inputData[3]:
+      (+inputData[8] * +inputData[9]) + +inputData[10] + +inputData[11];
+    
+    let indirectCosts = +splitPath[24] === 4?
+      + inputData[4]:
+      +inputData[12] + +inputData[13] + +inputData[14] + +inputData[15] + +inputData[16] +
+          +inputData[17] + +inputData[18] + +inputData[19] + +inputData[20] + +inputData[21] +
+          +inputData[22] + +inputData[23];
+    let divisor = +splitPath[1] === 2? 1: +inputData[5]
     setPrice(
       (
         (
-          (inputData[2] * 1.01 - inputData[3] - inputData[4]) /
-          (inputData[2] - inputData[3] - inputData[4])
+          (+inputData[2] * 1.01 - directCosts - indirectCosts) /
+          (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100
+      ) * 100 / divisor
     );
     setGrowth(
       (
         (
           (
-            (inputData[2] * 1.01 - inputData[3] * 1.01) - inputData[4]) /
-            (inputData[2] - inputData[3] - inputData[4])
+            (+inputData[2] * 1.01 - directCosts * 1.01) - indirectCosts) /
+            (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100
+      ) * 100 / divisor
     );
     setDirectCostChange(
       (
         (
-          (inputData[2] - (inputData[3] * .99) - inputData[4]) /
-          (inputData[2] - inputData[3] - inputData[4])
+          (+inputData[2] - (directCosts * .99) - indirectCosts) /
+          (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100
+      ) * 100 / divisor
     );
     setIndirectCostChange(
       (
         (
-          (inputData[2] - inputData[3] - (inputData[4] * .99)) / 
-          (inputData[2] - inputData[3] - inputData[4])
+          (+inputData[2] - directCosts - (indirectCosts * .99)) / 
+          (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100
+      ) * 100 / divisor
     );
-  }, [inputData]);
+  }, [inputData, splitPath]);
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
@@ -102,15 +112,12 @@ function ProfitLever() {
 
   function radioChange(e, question) {
     let temp = { ...splitPath };
-    console.log(temp);
     temp[question] = Number(e.target.value);
-    console.log(temp);
     setSplitPath(temp);
   }
 
   function stepper(start) {
     function splitter(split) {
-      console.log(splitPath[split.toString()]);
       return (
         <>
           {
@@ -146,7 +153,7 @@ function ProfitLever() {
     let questionId = paths[start] && paths[start].question_id
     return (
       <div>
-        <p>{paths[start] && paths[start].question}</p>
+  <p>{paths[start] && paths[start].question} {paths[start] && paths[start].question_id}</p>
         {
           doesSplit ?
             null :
