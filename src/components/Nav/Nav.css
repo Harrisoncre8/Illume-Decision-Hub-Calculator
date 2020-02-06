@@ -1,4 +1,23 @@
-.nav-div{
-  margin: auto;
-  width: fit-content;
+/* .nav-ul {
+  list-style: none;
+}
+
+.nav-li {
+  display: inline-block;
+}
+
+.nav-li:hover {
+  background-color: white;
+} */
+
+.nav-btn {
+  margin: 10px;
+}
+
+.circle-btn-active {
+ background-color: #f0aa42;
+}
+
+.circle-btn-active:hover {
+  background-color: #f0aa42;
 }
