@@ -12,8 +12,9 @@ const PasswordInput = (props) => {
     <input 
     {...props}
         type={passwordIsMasked ? 'password' : 'text'}
-
       />
+    // some sort of adornment goes heres
+    // w/ onClick={toggleMask}
   )
 }
 
