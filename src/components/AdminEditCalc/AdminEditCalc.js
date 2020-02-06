@@ -29,6 +29,8 @@ export default function AdminEditCalc() {
         setBreakEven(false);
         setLever(false);
         break;
+      default:
+        break;
     }
   }
 
