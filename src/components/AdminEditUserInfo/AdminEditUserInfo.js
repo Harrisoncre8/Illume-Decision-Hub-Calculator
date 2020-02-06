@@ -15,7 +15,8 @@ class AdminEditUserInfo extends Component{
       email: '',
       industry: '',
       industryid: '',
-      password: ''
+      password: '',
+      usertype: false,
     }
   }
 
@@ -41,17 +42,34 @@ class AdminEditUserInfo extends Component{
     this.checkForValue(e);
   }
 
-  handleDropdownChange = e => {
-    this.setState({
-      selectedUser: {
-        ...this.state.selectedUser,
-        industryid: e.target.value
-      }
-    });
+  handleDropdownChange = (e, propName) => {
+    console.log('alskjdf;kl', e.target.value);
+    switch (propName){
+      case 'industryid':
+        this.setState({
+          selectedUser: {
+            ...this.state.selectedUser,
+            [propName]: e.target.value
+          }
+        })
+        break;
+      case 'usertype':
+        this.setState({
+          selectedUser: {
+            ...this.state.selectedUser,
+            usertype: !this.state.selectedUser.usertype
+          }
+        })
+        break;
+      default:
+        break;
+    }
   }
 
   handleSave = () => {
     this.props.dispatch({type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser});
+    console.log('user to save is:', this.state.selectedUser );
+    
     this.setState({
       visible: false
     });
@@ -110,7 +128,7 @@ class AdminEditUserInfo extends Component{
             onClickAway={this.closeModal}
           >
             <div className="modal-container">
-              {JSON.stringify(this.state.selectedUser)}
+              {JSON.stringify(this.state.selectedUser.usertype)}
               <button className="close-window-button" onClick={this.closeModal}>x</button>
               <h1 className="main-heading modal-heading">{this.state.username}</h1>
               
@@ -172,14 +190,23 @@ class AdminEditUserInfo extends Component{
               <select 
                 className="modal-input" 
                 value={this.state.selectedUser.industryid || 'industry'}
-                onChange={this.handleDropdownChange}
-              >
+                onChange={(event)=>this.handleDropdownChange(event, 'industryid')}
+                >
                 {this.props.industry.map(industry =>
                   <option key={industry.id} value={industry.id}>{industry.industry}</option>
                 )}
               </select>
 
-              <div className="modal-btn-container">
+              <select 
+                className="modal-input" 
+                value={this.state.selectedUser.usertype || 'usertype'}
+                onChange={(event)=>this.handleDropdownChange(event, 'usertype')}
+              >
+                  <option key={1} value={false}>User</option>
+                  <option key={2} value={true}>Admin</option>
+              </select>
+
+              <div className="modal-btn-container"> 
                 <button className="normal-btn" onClick={this.handleSave}>Save</button>
               </div>
             </div>

@@ -3,7 +3,7 @@ CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
   "email" TEXT,
   "hashedpassword" TEXT,
-  "admin" BOOLEAN DEFAULT false
+  "admin" BOOLEAN DEFAULT false,
   "super_admin" BOOLEAN DEFAULT false
 );
 

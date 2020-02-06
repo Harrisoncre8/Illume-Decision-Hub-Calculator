@@ -42,8 +42,8 @@ router.get('/subquestions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res
 });
 
 // GET route for admin user information
-router.get('/user-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, i.industry, i.id as industryID
+router.get('/user-info', (req, res) => {
+  const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, u.admin as usertype, i.industry, i.id as industryID
                     FROM contact_info c
                     JOIN users u ON u.id = c.user_id
                     JOIN industry i ON i.id = c.industry_id
@@ -60,8 +60,8 @@ router.get('/user-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 });
 
 // POST route for admin to add new industry information
-router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const id = [req.body.industry, req.body.margin];
+router.post('/industry-info', (req, res) => {
+  const id = [req.body.industry, req.body.margin/100];
   const sqlQuery = `INSERT INTO industry (industry, margin)
                     VALUES ($1, $2);`;
   pool.query(sqlQuery, id)
@@ -75,8 +75,8 @@ router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) 
 });
 
 // PUT route for admin to update industry information
-router.put('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const id = [req.body.id, req.body.industry, req.body.margin];
+router.put('/industry-info', (req, res) => {
+  const id = [req.body.id, req.body.industry, req.body.margin/100];
   const sqlQuery = `UPDATE industry 
                     SET industry = $2, margin = $3
                     WHERE id = $1;`;
@@ -115,19 +115,21 @@ router.put('/user-info', rejectUnauthenticated, rejectNonAdmin, async (req, res)
   const industry = req.body.industryid;
   const email = req.body.email;
   const password = req.body.password;
+  const usertype = req.body.usertype;
   const sqlQueryContactInfo = ` UPDATE contact_info
-                                SET name = $1, business_name = $2, phone_number = $3, industry_id = $4
+                                SET "name" = $1, "business_name" = $2, phone_number = $3, industry_id = $4
                                 WHERE user_id = $5;`;
   let sqlQueryUsers = ``;
   const connection = await pool.connect();
 
-
-  password ? sqlQueryUsers = `UPDATE users SET email = $1, hashedpassword = $2;` : sqlQueryUsers = `UPDATE users SET email = $1;`
+  password ? sqlQueryUsers = `UPDATE users SET email = $1, hashedpassword = $2, admin = $3 WHERE id = $4;` 
+            : sqlQueryUsers = `UPDATE users SET email = $1, admin = $3 WHERE id = $2;`
+  const params = password ?[email, password, usertype, id] : [email, id, usertype];
   
   try {
     await connection.query(`BEGIN`);
     await connection.query(sqlQueryContactInfo, [name, company, phone, industry, id]);
-    password ? await connection.query(sqlQueryUsers, [email, password]) : await connection.query(sqlQueryUsers, [email]);
+    await connection.query(sqlQueryUsers, params);
     await connection.query(`COMMIT`);
     res.sendStatus(200);
   } catch(error) {

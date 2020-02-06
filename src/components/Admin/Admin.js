@@ -1,72 +1,43 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import './Admin.css';
 
-class Admin extends Component{
+export default function Admin() {
 
-  pushHistoryToEditCalculatorInfo = () => {
-    this.props.history.push('/admin/edit-calculator-info');
-  }
+  const history = useHistory();
+  const pushHistory = url => history.push(url);
 
-  pushHistoryToEditIndustryInfo = () => {
-    this.props.history.push('/admin/edit-industry-info');
-  }
-
-  pushHistoryToEditUserInfo = () => {
-    this.props.history.push('/admin/edit-user-info');
-  }
-
-  addAdmin = () => {
-    this.props.history.push('/admin/create-admin')
-  }
-
-  render(){
-    return(
-      <center>
-        <div className="main-container admin-padding">
-          <h1>Welcome, JENNY OR SUSAN!</h1>
-          <div className="admin-button-flex-container">
-            <div className="admin-btn-flex-column">
-              <button 
-                className="circle-btn" 
-                onClick={this.pushHistoryToEditCalculatorInfo}
-              >
-                Edit Calculators
-              </button>
-            </div>
-            <div className="admin-btn-flex-column">
-              <button 
-                className="circle-btn" 
-                onClick={this.pushHistoryToEditUserInfo}
-              >
-                Edit User Information
-              </button>
-            </div>
-            <div className="admin-btn-flex-column">
-              <button 
-                className="circle-btn" 
-                onClick={this.pushHistoryToEditIndustryInfo}
-              >
-                Edit Industries
-              </button>
-            </div>
-            <div className="admin-btn-flex-column">
-              <button 
-                className="circle-btn" 
-                onClick={this.addAdmin}
-              >
-                Add Admin
-              </button>
-            </div>
+  return(
+    <center>
+      <div className="main-container admin-padding">
+        <h1>Welcome, JENNY OR SUSAN!</h1>
+        <div className="admin-button-flex-container">
+          <div className="admin-btn-flex-column">
+            <button 
+              className="circle-btn" 
+              onClick={()=>pushHistory('/admin/edit-calculator-info')}
+            >
+              Edit Calculators
+            </button>
+          </div>
+          <div className="admin-btn-flex-column">
+            <button 
+              className="circle-btn" 
+              onClick={()=>pushHistory('/admin/edit-user-info')}
+            >
+              Edit User Information
+            </button>
+          </div>
+          <div className="admin-btn-flex-column">
+            <button 
+              className="circle-btn" 
+              onClick={()=>pushHistory('/admin/edit-industry-info')}
+            >
+              Edit Industries
+            </button>
           </div>
         </div>
-      </center>
-    );
-  }
+      </div>
+    </center>
+  );
 }
-
-const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.OBJECT
-});
-
-export default connect(putReduxStateOnProps)(Admin);
