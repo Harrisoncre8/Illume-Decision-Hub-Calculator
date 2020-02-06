@@ -15,7 +15,8 @@ class AdminEditUserInfo extends Component{
       email: '',
       industry: '',
       industryid: '',
-      password: ''
+      password: '',
+      usertype: false,
     }
   }
 
@@ -41,17 +42,19 @@ class AdminEditUserInfo extends Component{
     this.checkForValue(e);
   }
 
-  handleDropdownChange = e => {
+  handleDropdownChange = (e, propName) => {
     this.setState({
       selectedUser: {
         ...this.state.selectedUser,
-        industryid: e.target.value
+        [propName]: e.target.value
       }
     });
   }
 
   handleSave = () => {
     this.props.dispatch({type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser});
+    console.log('user to save is:', this.state.selectedUser );
+    
     this.setState({
       visible: false
     });
@@ -172,14 +175,23 @@ class AdminEditUserInfo extends Component{
               <select 
                 className="modal-input" 
                 value={this.state.selectedUser.industryid || 'industry'}
-                onChange={this.handleDropdownChange}
-              >
+                onChange={(event)=>this.handleDropdownChange(event, 'industryid')}
+                >
                 {this.props.industry.map(industry =>
                   <option key={industry.id} value={industry.id}>{industry.industry}</option>
                 )}
               </select>
 
-              <div className="modal-btn-container">
+              <select 
+                className="modal-input" 
+                value={this.state.selectedUser.usertype || 'usertype'}
+                onChange={(event)=>this.handleDropdownChange(event, 'usertype')}
+              >
+                  <option value='true'>Admin</option>
+                  <option value='false'>User</option>
+              </select>
+
+              <div className="modal-btn-container"> 
                 <button className="normal-btn" onClick={this.handleSave}>Save</button>
               </div>
             </div>

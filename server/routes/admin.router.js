@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET route for admin user information
 router.get('/user-info', (req, res) => {
-  const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, i.industry, i.id as industryID
+  const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, u.admin as userType, i.industry, i.id as industryID
                     FROM contact_info c
                     JOIN users u ON u.id = c.user_id
                     JOIN industry i ON i.id = c.industry_id
@@ -52,6 +52,7 @@ router.put('/industry-info', (req, res) => {
 
 // PUT route for admin to update user information
 router.put('/user-info', async (req, res) => {
+  console.log('REQ BODY IN USER INFO PUT IS', req.body);
   const id = req.body.id;
   const name = req.body.name;
   const company = req.body.company;
@@ -59,19 +60,22 @@ router.put('/user-info', async (req, res) => {
   const industry = req.body.industryid;
   const email = req.body.email;
   const password = req.body.password;
+  const usertype = req.body.usertype;
   const sqlQueryContactInfo = ` UPDATE contact_info
-                                SET name = $1, business_name = $2, phone_number = $3, industry_id = $4
+                                SET "name" = $1, "business_name" = $2, phone_number = $3, industry_id = $4
                                 WHERE user_id = $5;`;
   let sqlQueryUsers = ``;
   const connection = await pool.connect();
 
 
-  password ? sqlQueryUsers = `UPDATE users SET email = $1, hashedpassword = $2;` : sqlQueryUsers = `UPDATE users SET email = $1;`
+  password ? sqlQueryUsers = `UPDATE users SET email = $1, hashedpassword = $2, admin = $3 WHERE id = $4;` 
+            : sqlQueryUsers = `UPDATE users SET email = $1 WHERE id = $2;`
+  const params = password ?[email, password, usertype, id] : [email, id];
   
   try {
     await connection.query(`BEGIN`);
     await connection.query(sqlQueryContactInfo, [name, company, phone, industry, id]);
-    password ? await connection.query(sqlQueryUsers, [email, password]) : await connection.query(sqlQueryUsers, [email]);
+    await connection.query(sqlQueryUsers, params);
     await connection.query(`COMMIT`);
     res.sendStatus(200);
   } catch(error) {
