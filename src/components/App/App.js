@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRouteAdmin from '../ProtectedRouteAdmin/ProtectedRouteAdmin';
 import {connect} from 'react-redux';
 import './App.css';
 import Admin from '../Admin/Admin';
@@ -29,10 +30,10 @@ class App extends Component {
         <Switch>
           <div className="App">
             <Route exact path='/' component={Login} />
-            <Route exact path='/admin' component={Admin} />
-            <Route exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
-            <Route exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
-            <Route exact path='/admin/edit-user-info' component={AdminEditUserInfo} />
+            <ProtectedRouteAdmin exact path='/admin' component={Admin} />
+            <ProtectedRouteAdmin exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
+            <ProtectedRouteAdmin exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
+            <ProtectedRouteAdmin exact path='/admin/edit-user-info' component={AdminEditUserInfo} />
             <ProtectedRoute exact path='/break-even-pricing' component={BreakEven} /> 
             <ProtectedRoute exact path='/price-setting' component={PriceSetting} />
             <ProtectedRoute exact path='/define-your-profit-lever' component={ProfitLever} />
