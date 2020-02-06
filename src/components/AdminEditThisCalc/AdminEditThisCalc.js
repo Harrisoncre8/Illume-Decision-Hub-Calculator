@@ -13,19 +13,21 @@ export default function AdminEditThisCalc(props) {
   }, []);
 
   return(
+    <>
     <div className="main-container">
-      <h1 className="main-heading">Edit Break Even Calculator</h1>
-      <div>
-        <span className="admin-this-calc-q">Question</span>
-        <span className="admin-this-calc-tooltip">Tooltip</span>
-      </div>
-      <div>
-        {question.map(q =>
-          <div key={q.id}>
-            <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} />
-          </div>
-        )}
-      </div>
+      <h1 className="main-heading">Edit {props.name} Calculator</h1>
     </div>
+    <div>
+      <span className="admin-this-calc-q">Question</span>
+      <span className="admin-this-calc-tooltip">Tooltip</span>
+    </div>
+    <div>
+      {question.map(q =>
+        <div key={q.id}>
+          <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} />
+        </div>
+      )}
+    </div>
+    </>
   );
 }
