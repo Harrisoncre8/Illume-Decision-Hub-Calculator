@@ -8,6 +8,7 @@ export default function User(){
 let dispatch = useDispatch();
 let industryData = useSelector(state => state.industry.industry);
 let userData = useSelector(state => state.userInfo);
+let userID = useSelector(state => state.user.id);
 
 // setting state
 const [modal, setModal] = useState(false);
@@ -20,7 +21,7 @@ const [industry, setIndustry] = useState('');
 
 // on page load, get user and industry info
 useEffect(() => {
-  dispatch({type: `GET_USER_INFO`});
+  dispatch({type: `GET_USER_INFO`, payload: userID});
   dispatch({type: `GET_INDUSTRY`});
 }, [dispatch]);
 
