@@ -18,12 +18,8 @@ export default function AdminEditThisCalc(props) {
       <h1 className="main-heading">Edit {props.name} Calculator</h1>
     </div>
     <div>
-      <span className="admin-this-calc-q">Question</span>
-      <span className="admin-this-calc-tooltip">Tooltip</span>
-    </div>
-    <div>
       {question.map(q =>
-        <div key={q.id}>
+        <div className="admin-question-card" key={q.id}>
           <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} />
         </div>
       )}
