@@ -19,7 +19,6 @@ function PriceSetting() {
   const [userMargin, setUserMargin] = useState(0);
   const [productMargin, setProductMargin] = useState(0);
   const [industryNorm, setIndustryNorm] = useState(0);
-  const [percentDifference, setPercentDifference] = useState(0);
   const [difference, setDifference] = useState(0);
 
   useEffect(() => {
@@ -62,12 +61,6 @@ function PriceSetting() {
     setProductMargin(+pm.toFixed(2));
     setUserMargin(+um.toFixed(2));
     setDifference(+Math.abs(Math.ceil(totalSales * ((pm/um) - 1))) || 0);
-
-    if (pm >= um) {
-      setPercentDifference(pm / um || 0);
-    } else if (pm < um) {
-      setPercentDifference(um / pm || 0);
-    }
   }, [margin, productMargin, userMargin, inputData, splitPath])
 
   // Gets the questions and splits for the given results page
