@@ -57,7 +57,7 @@ router.get('/user-info', (req, res) => {
 
 // POST route for admin to add new industry information
 router.post('/industry-info', (req, res) => {
-  const id = [req.body.industry, req.body.margin];
+  const id = [req.body.industry, req.body.margin/100];
   const sqlQuery = `INSERT INTO industry (industry, margin)
                     VALUES ($1, $2);`;
   pool.query(sqlQuery, id)
@@ -72,7 +72,7 @@ router.post('/industry-info', (req, res) => {
 
 // PUT route for admin to update industry information
 router.put('/industry-info', (req, res) => {
-  const id = [req.body.id, req.body.industry, req.body.margin];
+  const id = [req.body.id, req.body.industry, req.body.margin/100];
   const sqlQuery = `UPDATE industry 
                     SET industry = $2, margin = $3
                     WHERE id = $1;`;
