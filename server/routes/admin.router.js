@@ -42,7 +42,7 @@ router.get('/subquestions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res
 });
 
 // GET route for admin user information
-router.get('/user-info', (req, res) => {
+router.get('/user-info',rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, u.admin as usertype, i.industry, i.id as industryID
                     FROM contact_info c
                     JOIN users u ON u.id = c.user_id
@@ -60,7 +60,7 @@ router.get('/user-info', (req, res) => {
 });
 
 // POST route for admin to add new industry information
-router.post('/industry-info', (req, res) => {
+router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const id = [req.body.industry, req.body.margin/100];
   const sqlQuery = `INSERT INTO industry (industry, margin)
                     VALUES ($1, $2);`;
@@ -75,7 +75,7 @@ router.post('/industry-info', (req, res) => {
 });
 
 // PUT route for admin to update industry information
-router.put('/industry-info', (req, res) => {
+router.put('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const id = [req.body.id, req.body.industry, req.body.margin/100];
   const sqlQuery = `UPDATE industry 
                     SET industry = $2, margin = $3
