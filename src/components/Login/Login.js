@@ -27,9 +27,6 @@ class Login extends Component{
     this.props.history.push('/register');
   }
 
-  // Temporary button to get to admin page
-  handleClick = () => this.props.history.push(`/admin`);
-
   // Handle user log-in and push history to main user page, otherwise return an error message
   login = e => {
     e.preventDefault();
@@ -93,8 +90,6 @@ class Login extends Component{
           <hr className="login-hr" />
 
           <button className="login-register-btn" onClick={this.handleRegister}>register</button>
-          <br />
-          <button onClick={this.handleClick}>admin</button>
           </form>
         </div>
       </center>
