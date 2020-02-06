@@ -390,4 +390,4 @@ INSERT INTO industry ("industry", "margin")
 VALUES ('Attorney', 0.30), ('Cleaning', 0.20), ('Massage', 0.25);
 
 -- create super admin
--- NEEDED LATER
+ALTER TABLE "users" ADD "super_admin" BOOLEAN DEFAULT false;
