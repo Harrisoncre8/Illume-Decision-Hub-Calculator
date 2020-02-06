@@ -12,12 +12,14 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
-// Handles Ajax request for user information if user is authenticated
-router.get('/info', rejectUnauthenticated, (req, res) => {
+// GET user information by user id
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  let userID = req.params.id
   const sqlQuery = `SELECT "user_id", "name", "business_name", "industry"."industry", "users"."email", "phone_number" 
                     FROM "contact_info"
                     JOIN "users" ON "contact_info"."user_id" = "users"."id"
-                    JOIN "industry" ON "contact_info"."industry_id" = "industry"."id";`;
+                    JOIN "industry" ON "contact_info"."industry_id" = "industry"."id"
+                    WHERE "user_id" = ${userID};`;
   pool.query(sqlQuery)
     .then(result => {
       res.send(result.rows);
@@ -41,9 +43,9 @@ router.post('/register', async (req, res, next) => {
   const connection = await pool.connect();
 
   const queryTextUser = `INSERT INTO "users" (email, hashedpassword) 
-                          VALUES ($1, $2) RETURNING id`;
+                          VALUES ($1, $2) RETURNING id;`;
   const queryTextContact = `INSERT INTO "contact_info" (name, business_name, industry_id, phone_number, user_id)
-                            VALUES ($1, $2, $3, $4, $5)`
+                            VALUES ($1, $2, $3, $4, $5);`;
   try {
     await connection.query(`BEGIN`);
     const id = await connection.query(queryTextUser, [email, password]);

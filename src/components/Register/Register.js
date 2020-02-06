@@ -5,6 +5,7 @@ import PasswordInput from '../PasswordInput/PasswordInput';
 
 class Register extends Component{
 
+  //Store local state
   state = {
     name: '',
     company: '',
@@ -27,12 +28,19 @@ class Register extends Component{
     this.checkForValue(e);
   }
   
+  // Return to login page
   handleCancel = () => {
     this.props.history.push('/');
   }
 
-  registerUser = (event) => {
-    event.preventDefault();
+  // Push history to new user page
+  pushHistoryToUser = () => {
+    this.props.history.push('/new-user');
+  }
+
+  // Log new user information into database, push history to new user page
+  registerUser = e => {
+    e.preventDefault();
     if (this.state.name && this.state.company && this.state.phone && this.state.industry && this.state.email && this.state.password){
         this.props.dispatch({
             type: 'REGISTER',
@@ -45,12 +53,11 @@ class Register extends Component{
               password: this.state.password,
             },
         });           
-    this.props.history.push('/new-user');
+    this.pushHistoryToUser();
     } else {
-        this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+    }
   }
-}
-
 
   render(){
     return(

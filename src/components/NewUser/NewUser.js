@@ -7,12 +7,11 @@ export default function NewUser(){
   let dispatch = useDispatch();
   let userData = useSelector(state => state.admin.adminUserInfo);
 
-
+  // Run on component mount
   useEffect(() => {
     dispatch({type: `GET_ADMIN_USER_INFO`});
     console.log('------------->user info', userData);
   }, [dispatch]);
-
 
   return(
     <center>
@@ -32,5 +31,5 @@ export default function NewUser(){
         </h3>
       </div>
     </center>
-  )
+  );
 }

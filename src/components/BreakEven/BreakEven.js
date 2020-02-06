@@ -20,6 +20,7 @@ function BreakEven() {
     checkForValue(e);
   }
 
+  // MATH
   useEffect(()=>{
     setPrice(((hours * rate) + +raw + +part + +indirect)/(sales))
   },[hours, rate, raw, part, indirect, setPrice, type, sales])
