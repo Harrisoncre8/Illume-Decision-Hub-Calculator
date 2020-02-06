@@ -3,6 +3,8 @@ import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 // import Register from '../Register/Register';
 import Login from '../Login/Login';
+import User from '../User/User';
+
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -14,7 +16,7 @@ import Login from '../Login/Login';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-const ProtectedRoute = (props) => {
+const ProtectedRouteAdmin = (props) => {
   // Using destructuring, this takes ComponentToProtect from component
   // prop and grabs all other props to pass them along to Route
   const {
@@ -27,18 +29,17 @@ const ProtectedRoute = (props) => {
 
   let ComponentToShow;
 
-  if(user && user.id) {
+  if(user && user.id && user.admin) {
     // if the user is logged in (only logged in users have ids)
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
-  } else if (loginMode === 'login') {
+  } else if (loginMode === 'user') {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
-    ComponentToShow = Login;
+    ComponentToShow = User;
   } else {
-    // the the user is not logged in and the mode is not 'login'
-
-    ComponentToShow = Login;
+    // the the user is not logged in and the mode is not 'user'
+    ComponentToShow = User;
   }
 
   // We return a Route component that gets added to our list of routes
@@ -63,6 +64,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(ProtectedRoute)
+export default connect(mapStateToProps)(ProtectedRouteAdmin)
 
 
