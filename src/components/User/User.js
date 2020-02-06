@@ -4,11 +4,11 @@ import Modal from 'react-awesome-modal';
 import './User.css';
 
 export default function User(){
-// hooks for redux and sagas
-let dispatch = useDispatch();
-let industryData = useSelector(state => state.industry.industry);
-let userData = useSelector(state => state.userInfo);
-let userID = useSelector(state => state.user.id);
+  // hooks for redux and sagas
+  let dispatch = useDispatch();
+  let industryData = useSelector(state => state.industry.industry);
+  let userData = useSelector(state => state.userInfo);
+  let userID = useSelector(state => state.user.id);
 
 // setting state for modal
 const [modal, setModal] = useState(false);
@@ -45,7 +45,7 @@ const openModal = () => {
 // change state to close user info modal
 const closeModal = () => {
     setModal(false);
-}
+  }
 
 // save user info changes and sends to DB
 const saveChanges = () => {
@@ -73,7 +73,7 @@ const handleUserIndustry = (event) => {
   return(
     <center>
       <div className='main-container'>
-          {userData.map((user, i) => 
+        {userData.map((user, i) => 
           <ul className='user-info' key={i}>
             <h1 className='user-spacing'>Welcome back, {user.name}</h1>
             <h2 className='user-spacing'>Profile Information</h2>
@@ -83,7 +83,7 @@ const handleUserIndustry = (event) => {
             <li>Email: {user.email}</li>
             <li className='user-spacing'>Industry: {user.industry}</li>
           </ul>
-          )}
+        )}
         <input type="button" value="Edit Profile" onClick={() => openModal()} />
         <Modal
           visible={modal}
@@ -111,29 +111,29 @@ const handleUserIndustry = (event) => {
                     <option>{item.industry}</option>
               )}
             </select>
-              <input type="button" value="Change Password?" onClick={() => openPassModal()}></input>
-              <div className="modal-btn-container">
-                <button className="normal-btn" href="javascript:void(0);" 
-                  onClick={() => saveChanges()}>Save</button>
-                <button className="normal-btn" href="javascript:void(0);" 
-                onClick={() => closeModal()}>Cancel</button>
-              </div>
-          </Modal>
+            <input type="button" value="Change Password?" onClick={openPassModal}></input>
+            <div className="modal-btn-container">
+              <button className="normal-btn" href="javascript:void(0);" 
+                onClick={saveChanges}>Save</button>
+              <button className="normal-btn" href="javascript:void(0);" 
+              onClick={closeModal}>Cancel</button>
+            </div>
+        </Modal>
 
           <Modal
           visible={passwordModal}
           width="400"
           height="300"
           effect="fadeInUp"
-          onClickAway={() => closePassModal()}
+          onClickAway={closePassModal}
         >
           <h1 className="main-heading admin-user-heading">Please Confirm New Password</h1>
-              <div className="modal-btn-container">
-                <button className="normal-btn" href="javascript:void(0);" 
-                onClick={() => closePassModal()}>Close</button>
-              </div>
-          </Modal>
-        </div>
-      </center>
-  )
+            <div className="modal-btn-container">
+              <button className="normal-btn" href="javascript:void(0);" 
+              onClick={closePassModal}>Close</button>
+            </div>
+        </Modal>
+      </div>
+    </center>
+  );
 }

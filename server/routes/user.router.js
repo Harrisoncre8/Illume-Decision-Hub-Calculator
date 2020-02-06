@@ -72,9 +72,9 @@ router.post('/register', async (req, res, next) => {
   const connection = await pool.connect();
 
   const queryTextUser = `INSERT INTO "users" (email, hashedpassword) 
-                          VALUES ($1, $2) RETURNING id`;
+                          VALUES ($1, $2) RETURNING id;`;
   const queryTextContact = `INSERT INTO "contact_info" (name, business_name, industry_id, phone_number, user_id)
-                            VALUES ($1, $2, $3, $4, $5)`
+                            VALUES ($1, $2, $3, $4, $5);`;
   try {
     await connection.query(`BEGIN`);
     const id = await connection.query(queryTextUser, [email, password]);
