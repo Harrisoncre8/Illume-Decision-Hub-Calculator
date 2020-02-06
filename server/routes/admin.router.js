@@ -2,10 +2,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectNonAdmin } = require('../modules/admin-auth-middleware');
 
 
 // GET route for admin question editing
-router.get('/questions/:id', rejectUnauthenticated, (req, res) => {
+router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   let id = [req.params.id];
   let sqlQuery = `SELECT q.id, q.question, q.help_text, q.sub_questions
                   FROM calculators c
@@ -23,7 +24,7 @@ router.get('/questions/:id', rejectUnauthenticated, (req, res) => {
 });
 
 // GET route for admin sub-question editing
-router.get('/subquestions/:id', rejectUnauthenticated, (req, res) => {
+router.get('/subquestions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   let id = [req.params.id];
   let sqlQuery = `SELECT DISTINCT q.id, q.question, q.help_text, q.sub_questions
                   FROM calculators c
