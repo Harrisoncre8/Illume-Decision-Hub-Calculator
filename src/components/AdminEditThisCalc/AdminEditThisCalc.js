@@ -1,23 +1,23 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import './AdminEditLever.css';
+import './AdminEditThisCalc.css';
 import AdminCalcQuestion from '../AdminCalcQuestion/AdminCalcQuestion';
 
-export default function AdminEditLever() {
+export default function AdminEditThisCalc(props) {
 
   const question = useSelector((state)=>state.admin.adminQuestion);
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch({type: `GET_ADMIN_QUESTION`, payload: 1});
+    dispatch({type: `GET_ADMIN_QUESTION`, payload: props.calcID});
   }, []);
 
   return(
     <div className="main-container">
-      <h1 className="main-heading">Edit Profit Lever Calculator</h1>
+      <h1 className="main-heading">Edit Break Even Calculator</h1>
       <div>
-        <span className="admin-price-q">Question</span>
-        <span className="admin-price-tooltip">Tooltip</span>
+        <span className="admin-this-calc-q">Question</span>
+        <span className="admin-this-calc-tooltip">Tooltip</span>
       </div>
       <div>
         {question.map(q =>

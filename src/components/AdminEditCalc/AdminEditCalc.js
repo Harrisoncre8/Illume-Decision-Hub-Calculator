@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import './AdminEditCalc.css';
-import AdminEditPrice from '../AdminEditPrice/AdminEditPrice';
-import AdminEditBreak from '../AdminEditBreak/AdminEditBreak';
-import AdminEditLever from '../AdminEditLever/AdminEditLever';
+import AdminEditThisCalc from '../AdminEditThisCalc/AdminEditThisCalc';
 
 export default function AdminEditCalc() {
 
@@ -66,21 +64,21 @@ export default function AdminEditCalc() {
       </div>
         {price ?
           <div className="admin-edit-calc-render-container">
-            <AdminEditPrice />
+            <AdminEditThisCalc calcID={3} />
           </div>
           :
           ''
         }
         {breakEven ?
           <div className="admin-edit-calc-render-container">
-            <AdminEditBreak />
+            <AdminEditThisCalc calcID={2} />
           </div>
           :
           ''
         }
         {lever ?
           <div className="admin-edit-calc-render-container">
-            <AdminEditLever />
+            <AdminEditThisCalc calcID={1} />
           </div>
           :
           ''
