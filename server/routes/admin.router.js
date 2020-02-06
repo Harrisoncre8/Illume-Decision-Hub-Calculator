@@ -120,8 +120,8 @@ router.put('/user-info', async (req, res) => {
   const connection = await pool.connect();
 
   password ? sqlQueryUsers = `UPDATE users SET email = $1, hashedpassword = $2, admin = $3 WHERE id = $4;` 
-            : sqlQueryUsers = `UPDATE users SET email = $1 WHERE id = $2;`
-  const params = password ?[email, password, usertype, id] : [email, id];
+            : sqlQueryUsers = `UPDATE users SET email = $1, admin = $3 WHERE id = $2;`
+  const params = password ?[email, password, usertype, id] : [email, id, usertype];
   
   try {
     await connection.query(`BEGIN`);
