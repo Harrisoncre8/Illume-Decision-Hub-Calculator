@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import './AdminEditCalc.css';
 import AdminEditThisCalc from '../AdminEditThisCalc/AdminEditThisCalc';
 
 export default function AdminEditCalc() {
 
+  const history = useHistory();
   const [breakEven, setBreakEven] = useState(false);
   const [lever, setLever] = useState(false);
   const [price, setPrice] = useState(false);
-
   const handleBreakClick = () => breakEven ? setBreakEven(false) : closeOthers('break');
   const handleLeverClick = () => lever ? setLever(false) : closeOthers('lever');
   const handlePriceClick = () => price ? setPrice(false) : closeOthers('price');
+  const pushHistoryBack = () => history.push('/admin');
 
   const closeOthers = (state) => {
     switch (state){
@@ -37,6 +39,8 @@ export default function AdminEditCalc() {
   return(
     <center>
       <div className="main-container admin-padding">
+      <button className="close-window-button" onClick={pushHistoryBack}>x</button>
+      <h1 className="main-heading">Select a Calculator to Edit</h1>
         <div className="admin-button-flex-container">
           <div className="admin-btn-flex-column">
             <button 
