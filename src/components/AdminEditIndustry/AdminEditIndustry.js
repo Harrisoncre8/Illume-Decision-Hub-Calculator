@@ -86,7 +86,8 @@ class AdminEditIndustry extends Component{
         visible: true,
         industry: industry.industry,
         selectedIndustry: {
-          ...industry
+          ...industry,
+          margin: industry.margin*100
         }
       });
     }
