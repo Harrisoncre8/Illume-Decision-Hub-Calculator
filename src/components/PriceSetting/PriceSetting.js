@@ -41,15 +41,16 @@ function PriceSetting() {
 
   // MATH
   useEffect(() => {
-    let directCosts = +splitPath[7] === 10 ?
+    let directCosts = +splitPath[7] === 7 ?
       +inputData[3] :
-      (+inputData[8] * +inputData[9]) + +inputData[10] + +inputData[11];
+      ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10]||0) + (+inputData[11]||0);
 
-    let indirectCosts = +splitPath[24] === 11 ?
+    let indirectCosts = +splitPath[24] === 8 ?
       + inputData[4] :
-      +inputData[12] + +inputData[13] + +inputData[14] + +inputData[15] + +inputData[16] +
-      +inputData[17] + +inputData[18] + +inputData[19] + +inputData[20] + +inputData[21] +
-      +inputData[22] + +inputData[23];
+      (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) + 
+      (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) + 
+      (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) + 
+      (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
 
     let cost = directCosts + indirectCosts || 0;
     let price = +inputData[6] || 0;
