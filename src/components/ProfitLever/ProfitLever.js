@@ -12,7 +12,6 @@ function ProfitLever() {
   const inputData = useSelector(state => state.input);
   const dispatch = useDispatch();
 
-
   const [price, setPrice] = useState(0);
   const [growth, setGrowth] = useState(0);
   const [directCostChange, setDirectCostChange] = useState(0);
@@ -20,18 +19,19 @@ function ProfitLever() {
 
   // MATH
   useEffect(() => {
-    let directCosts = +splitPath[7] === 7 ?
+    let directCosts = +splitPath[7] === 3 ?
       +inputData[3] :
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10]||0) + (+inputData[11]||0);
 
-    let indirectCosts = +splitPath[24] === 8 ?
+    let indirectCosts = +splitPath[24] === 4 ?
       + inputData[4] :
       (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) + 
       (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) + 
       (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) + 
       (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
 
-    let divisor = +splitPath[1] === 14 ? 1 : +inputData[5] || 1
+    let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
+    console.log(directCosts, indirectCosts, divisor)
     setPrice(
       (
         (
@@ -89,9 +89,9 @@ function ProfitLever() {
           acum[id] = { ...arr }
         }
         return acum;
-      }, {})
+      }, {});
       setPaths(temp);
-    })
+    });
 
     Axios.get('/api/question/splits/' + 1).then(response => {
       let temp = response.data.reduce((acum, arr) => {
@@ -102,7 +102,7 @@ function ProfitLever() {
     }).catch(err => {
       console.log(err);
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (Object.values(splits).length > 0) {
@@ -114,12 +114,14 @@ function ProfitLever() {
     }
   }, [splits])
 
+  // Handle radio button change
   function radioChange(e, question) {
     let temp = { ...splitPath };
     temp[question] = Number(e.target.value);
     setSplitPath(temp);
   }
 
+  // Determine which question is next, render inputs and questions
   function stepper(start) {
     function splitter(split) {
       return (
@@ -150,11 +152,12 @@ function ProfitLever() {
               null
           }
         </>
-      )
+      );
     }
     let next = paths[start] && paths[start].next_id
     let doesSplit = paths[start] && paths[start].split
     let questionId = paths[start] && paths[start].question_id
+    
     return (
       <div>
         <p>{paths[start] && paths[start].question}</p>
@@ -184,11 +187,13 @@ function ProfitLever() {
             null // for next?
         }
       </div>
-    )
+    );
   }
+
   return (
     <center>
       <div className="main-container">
+        {JSON.stringify(splitPath)}
         <h1 className="main-heading">Define Profit Levers</h1>
         {stepper(1)}
         <div className="data-result">
@@ -207,7 +212,7 @@ function ProfitLever() {
         </div>
       </div>
     </center>
-  )
+  );
 }
 
 export default ProfitLever;

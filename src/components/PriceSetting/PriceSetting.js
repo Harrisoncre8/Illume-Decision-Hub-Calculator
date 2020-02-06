@@ -40,11 +40,11 @@ function PriceSetting() {
 
   // MATH
   useEffect(() => {
-    let directCosts = +splitPath[7] === 7 ?
+    let directCosts = +splitPath[7] === 10 ?
       +inputData[3] :
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10]||0) + (+inputData[11]||0);
 
-    let indirectCosts = +splitPath[24] === 8 ?
+    let indirectCosts = +splitPath[24] === 11 ?
       + inputData[4] :
       (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) + 
       (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) + 
@@ -229,6 +229,7 @@ function PriceSetting() {
                 ' less '
             }
             units to make the same revenue as the industry norm price would.</p>
+            {margin}
         </div>
       </div>
     </center>
