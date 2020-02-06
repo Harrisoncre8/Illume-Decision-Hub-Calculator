@@ -21,9 +21,11 @@ const [industry, setIndustry] = useState('');
 
 // on page load, get user and industry info
 useEffect(() => {
-  dispatch({type: `GET_USER_INFO`, payload: userID});
-  dispatch({type: `GET_INDUSTRY`});
-}, [dispatch]);
+  if(userID){
+    dispatch({type: `GET_USER_INFO`, payload: userID});
+    dispatch({type: `GET_INDUSTRY`});
+  }
+}, [userID]);
 
 // change state to open user info modal
 const openModal = () => {
