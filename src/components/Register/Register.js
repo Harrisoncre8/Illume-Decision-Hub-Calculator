@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './Register.css';
+import PasswordInput from '../PasswordInput/PasswordInput';
 
 class Register extends Component{
 
+  //Store local state
   state = {
     name: '',
     company: '',
@@ -11,8 +13,8 @@ class Register extends Component{
     industry: '',
     email: '',
     password: '',
-    confirmPassword: ''
-  }
+  } 
+
 
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
@@ -26,12 +28,19 @@ class Register extends Component{
     this.checkForValue(e);
   }
   
+  // Return to login page
   handleCancel = () => {
     this.props.history.push('/');
   }
 
-  registerUser = (event) => {
-    event.preventDefault();
+  // Push history to new user page
+  pushHistoryToUser = () => {
+    this.props.history.push('/new-user');
+  }
+
+  // Log new user information into database, push history to new user page
+  registerUser = e => {
+    e.preventDefault();
     if (this.state.name && this.state.company && this.state.phone && this.state.industry && this.state.email && this.state.password){
         this.props.dispatch({
             type: 'REGISTER',
@@ -44,12 +53,11 @@ class Register extends Component{
               password: this.state.password,
             },
         });           
-    this.props.history.push('/new-user');
+    this.pushHistoryToUser();
     } else {
-        this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
-}
-
+  }
 
   render(){
     return(
@@ -125,9 +133,8 @@ class Register extends Component{
           </div>
 
           <div className="register-text-field-container">
-            <input 
+            <PasswordInput 
               className="text-field register-text-field-password" 
-              type="password" 
               name="password"
               value={this.state.password}
               onChange={(event)=>this.handleChange(event, 'password')}
@@ -135,18 +142,6 @@ class Register extends Component{
             <label className="text-field-label register-label-password">password</label>
             <div className="text-field-mask register-mask-password"></div>
           </div>
-
-{/* confirm not set up yet with state payload */}
-          <div className="register-text-field-container">
-            <input 
-              className="text-field register-text-field-confirm-password" 
-              type="password" 
-              onChange={(event)=>this.handleChange(event, 'confirmPassword')}
-            />
-            <label className="text-field-label register-label-confirm-password">confirm password</label>
-            <div className="text-field-mask register-mask-confirm-password"></div>
-          </div>
-
           <button className="normal-btn register-register-btn" onClick={this.registerUser}>Confirm</button>
           <hr className="register-hr" />
 

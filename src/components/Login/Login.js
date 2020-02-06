@@ -1,30 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import './Login.css';
-// import { stat } from 'fs';
 
 class Login extends Component{
+
+  // Store local state
   state = {
     email: '',
     password: '',
   };
 
-  login = (event) => {
-    event.preventDefault();
-    if (this.state.email && this.state.password) {
-      this.props.dispatch({
-        type: 'LOGIN',
-        payload: {
-          username: this.state.email,
-          password: this.state.password,
-        },
-      });
-      this.props.history.push('/user');
-    } else {
-      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-    }
-  }
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
@@ -36,11 +21,31 @@ class Login extends Component{
     });
     this.checkForValue(e);
   }
+
+  // Push history to registration page
   handleRegister = () => {
     this.props.history.push('/register');
   }
 
-  handleClick = () => this.props.history.push(`/admin`);
+  // Handle user log-in and push history to main user page, otherwise return an error message
+  login = e => {
+    e.preventDefault();
+    if (this.state.email && this.state.password) {
+      this.props.dispatch({
+        type: 'LOGIN',
+        payload: {
+          username: this.state.email,
+          password: this.state.password,
+        },
+      });
+      this.pushHistoryToUser();
+    } else {
+      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+    }
+  }
+
+  // Push history to main user page
+  pushHistoryToUser = () => this.props.history.push('/user');
 
   render(){
     return(
@@ -85,8 +90,6 @@ class Login extends Component{
           <hr className="login-hr" />
 
           <button className="login-register-btn" onClick={this.handleRegister}>register</button>
-          <br />
-          <button onClick={this.handleClick}>admin</button>
           </form>
         </div>
       </center>
@@ -98,4 +101,4 @@ const mapStateToProps = state => ({
     errors: state.errors,
 });
 
-export default withRouter(connect(mapStateToProps)(Login));
+export default connect(mapStateToProps)(Login);
