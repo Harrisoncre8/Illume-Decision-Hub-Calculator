@@ -151,7 +151,7 @@ function PriceSetting() {
     let questionId = paths[start] && paths[start].question_id
     return (
       <div>
-        <p>{paths[start] && paths[start].question} {paths[start] && paths[start].question_id}</p>
+        <p>{paths[start] && paths[start].question}</p>
         {
           doesSplit ?
             null :
@@ -197,7 +197,6 @@ function PriceSetting() {
             </select>
           </form>
           {stepper(9)}
-          {JSON.stringify(splitPath)}
         </div>
         <div className="data-result">
           <h3 className="data-result-heading">Result</h3>

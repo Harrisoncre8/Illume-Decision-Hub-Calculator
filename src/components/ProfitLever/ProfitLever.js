@@ -193,7 +193,6 @@ function ProfitLever() {
   return (
     <center>
       <div className="main-container">
-        {JSON.stringify(splitPath)}
         <h1 className="main-heading">Define Profit Levers</h1>
         {stepper(1)}
         <div className="data-result">
