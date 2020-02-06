@@ -6,7 +6,7 @@ import './User.css'
 export default function User(){
 // hooks for redux and sagas
 let dispatch = useDispatch();
-let industryData = useSelector(state => state.industry.industry);
+let industryData = useSelector(state => state.industry);
 let userData = useSelector(state => state.userInfo);
 let userID = useSelector(state => state.user.id);
 

@@ -175,7 +175,7 @@ class AdminEditUserInfo extends Component{
                 onChange={this.handleDropdownChange}
               >
                 {this.props.industry.map(industry =>
-                  <option key={industry.id} value={industry.id}>{industry.industry}</option>
+                  <option key={industry.id} value={industry.id}>{industry}</option>
                 )}
               </select>
 
@@ -191,7 +191,7 @@ class AdminEditUserInfo extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  industry: reduxState.industry.industry,
+  industry: reduxState.industry,
   user: reduxState.admin.adminUserInfo
 });
 

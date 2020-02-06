@@ -74,7 +74,7 @@ class AdminEditIndustry extends Component{
     if(!industry.target){
       this.setState({
         visible: true,
-        industry: industry.industry,
+        industry: industry,
         selectedIndustry: {
           ...industry
         }
@@ -110,7 +110,7 @@ class AdminEditIndustry extends Component{
             <tbody>
               {this.props.industry.map(industry => 
                 <tr key={industry.id}>
-                  <td>{industry.industry}</td>
+                  <td>{industry}</td>
                   <td>{industry.margin * 100}%</td>
                   <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
                   <td className="admin-edit-industry-cell" onClick={this.openModal}>Add New Industry</td>
@@ -199,7 +199,7 @@ class AdminEditIndustry extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  industry: reduxState.industry.industry,
+  industry: reduxState.industry,
 });
 
 export default connect(putReduxStateOnProps)(AdminEditIndustry);
