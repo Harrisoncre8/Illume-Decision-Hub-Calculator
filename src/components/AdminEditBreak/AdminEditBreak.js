@@ -8,6 +8,7 @@ export default function AdminEditBreak() {
   const question = useSelector((state)=>state.admin.adminQuestion);
   const dispatch = useDispatch();
 
+  // Runs when component mounts
   useEffect(()=>{
     dispatch({type: `GET_ADMIN_QUESTION`, payload: 2});
   }, []);

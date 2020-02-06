@@ -20,6 +20,7 @@ function PriceSetting() {
     checkForValue(e);
   }
 
+  // MATH
   useEffect(()=>{
     let iNorm = cost/(1-margin)
     let pm = iNorm-cost;
