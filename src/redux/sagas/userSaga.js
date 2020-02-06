@@ -38,8 +38,8 @@ function* getUserInfo(action) {
 // worker Saga: will be fired on "PUT_USER_INFO" actions
 function* putUserInfo(action) {
   try {
-    const response = yield axios.put(`/api/user/info`, action.payload);
-    yield put({ type: 'SET_NEW_INFO', payload: response.data });
+    yield axios.put(`/api/user/info`, action.payload);
+    yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
   } catch (error) {
     console.log('User put new info request failed', error);
   }

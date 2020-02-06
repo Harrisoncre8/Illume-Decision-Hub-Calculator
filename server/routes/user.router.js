@@ -30,23 +30,33 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
-// PUT route to edit user information
+// PUT route to edit user information, handles two different tables in DB
 router.put('/info', rejectUnauthenticated, async (req, res) => {
   const id = req.body.id;
   const name = req.body.name;
   const company = req.body.company;
   const phone = req.body.phone;
   const email = req.body.email;
-  const industry = req.body.industry;
-
+  const industry = req.body.industryID;
   const sqlQueryContactInfo = `UPDATE "contact_info"
                                SET "name" = $2, "business_name" = $3, 
                                "industry_id" = $4, "phone_number" = $5
-                               WHERE "user_id" = $1`
-
-  const sqlQueryUsers = `UPDATE "users"
-                         SET "email" = $2,
-                         WHERE "id" = $1`
+                               WHERE "user_id" = $1;`;
+  const sqlQueryUsers = `UPDATE "users" SET "email" = $2 WHERE "id" = $1;`;
+  const connection = await pool.connect();
+  try{
+    await connection.query(`BEGIN`);
+    await connection.query(sqlQueryContactInfo, [id, name, company, industry, phone]);
+    await connection.query(sqlQueryUsers, [id, email]);
+    await connection.query(`COMMIT`);
+    res.sendStatus(200);
+  } catch (error){
+    console.log('Error in put route for user info', error);
+    await connection.query(`ROLLBACK`);
+    res.sendStatus(500);
+  } finally {
+    connection.release();
+  }
 })
 
 // Handles POST request with new user data
