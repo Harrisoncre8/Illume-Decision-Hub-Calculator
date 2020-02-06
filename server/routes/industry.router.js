@@ -4,7 +4,8 @@ const router = express.Router();
 
 // GET route for industry information
 router.get('/', (req, res) => {
-  let sqlQuery = `SELECT * FROM industry;`;
+  let sqlQuery = `SELECT * FROM industry
+                  ORDER BY industry;`;
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
