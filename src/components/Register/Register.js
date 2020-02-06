@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './Register.css';
+import PasswordInput from '../PasswordInput/PasswordInput';
 
 class Register extends Component{
 
@@ -11,8 +12,8 @@ class Register extends Component{
     industry: '',
     email: '',
     password: '',
-    confirmPassword: ''
-  }
+  } 
+
 
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
@@ -47,7 +48,7 @@ class Register extends Component{
     this.props.history.push('/new-user');
     } else {
         this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
-    }
+  }
 }
 
 
@@ -125,9 +126,8 @@ class Register extends Component{
           </div>
 
           <div className="register-text-field-container">
-            <input 
+            <PasswordInput 
               className="text-field register-text-field-password" 
-              type="password" 
               name="password"
               value={this.state.password}
               onChange={(event)=>this.handleChange(event, 'password')}
@@ -135,18 +135,6 @@ class Register extends Component{
             <label className="text-field-label register-label-password">password</label>
             <div className="text-field-mask register-mask-password"></div>
           </div>
-
-{/* confirm not set up yet with state payload */}
-          <div className="register-text-field-container">
-            <input 
-              className="text-field register-text-field-confirm-password" 
-              type="password" 
-              onChange={(event)=>this.handleChange(event, 'confirmPassword')}
-            />
-            <label className="text-field-label register-label-confirm-password">confirm password</label>
-            <div className="text-field-mask register-mask-confirm-password"></div>
-          </div>
-
           <button className="normal-btn register-register-btn" onClick={this.registerUser}>Confirm</button>
           <hr className="register-hr" />
 
