@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import './PriceSetting.css';
+import Nav from '../Nav/Nav';
 
 function PriceSetting() {
   const [margin, setMargin] = useState(.15);
@@ -36,6 +37,7 @@ function PriceSetting() {
 
   return (
     <center>
+      <Nav />
       <div className="main-container">
         <h1 className="main-heading">Price Setting</h1>
         <div className="inputs"> 

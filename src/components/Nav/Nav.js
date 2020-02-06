@@ -4,43 +4,14 @@ import './Nav.css';
 import { useDispatch } from 'react-redux';
 
 export default function Nav() {
+
   // react router hook
   let history = useHistory();
   const dispatch = useDispatch();
 
-  function profitLever() {
+  const setStart = id => {
     dispatch({ type: 'CLEAR_PREVIOUS_QUESTION' });
-    dispatch({
-      type: 'GET_QUESTION', payload: {
-        query: {
-          start: 1
-        }
-      }
-    });
-    history.push('/questionnaire');
-  }
-
-  function priceSetting() {
-    dispatch({ type: 'CLEAR_PREVIOUS_QUESTION' });
-    dispatch({
-      type: 'GET_QUESTION', payload: {
-        query: {
-          start: 3
-        }
-      }
-    });
-    history.push('/questionnaire');
-  }
-
-  function breakEven() {
-    dispatch({ type: 'CLEAR_PREVIOUS_QUESTION' });
-    dispatch({
-      type: 'GET_QUESTION', payload: {
-        query: {
-          start: 2
-        }
-      }
-    });
+    dispatch({type: 'GET_QUESTION', payload: {query: {start: id}}});
     history.push('/questionnaire');
   }
 
@@ -51,13 +22,13 @@ export default function Nav() {
 
   return (
     <div className='nav-div'>
-      <button className='circle-btn' onClick={breakEven}>
+      <button className='circle-btn' onClick={()=>setStart(2)}>
         Break Even Calculator</button>
-      <button className='circle-btn' onClick={profitLever}>
+      <button className='circle-btn' onClick={()=>setStart(1)}>
         Profit Lever Calculator</button>
-      <button className='circle-btn' onClick={priceSetting}>
+      <button className='circle-btn' onClick={()=>setStart(3)}>
         Price Setting Calculator</button>
-      <button className='circle-btn' onClick={() => logout()}>
+      <button className='circle-btn' onClick={logout}>
         Log <br /> Out</button>
     </div>
   );

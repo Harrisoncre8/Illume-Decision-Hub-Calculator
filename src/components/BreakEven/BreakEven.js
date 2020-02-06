@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './BreakEven.css';
+import Nav from '../Nav/Nav';
 
 function BreakEven() {
   const [price, setPrice] = useState('');
@@ -26,6 +27,7 @@ function BreakEven() {
 
   return (
     <center>
+      <Nav />
       <div className="main-container">
       <h1 className="main-heading">Break Even Pricing</h1>
         <form>

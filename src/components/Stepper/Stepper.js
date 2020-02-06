@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Nav from '../Nav/Nav';
 
 export default function Stepper() {
   // Using hooks to access redux and saga
@@ -50,6 +51,7 @@ export default function Stepper() {
 
   return (
     <center>
+      <Nav />
       <div className='stepper-container'>
         <p>
           {questionData.question}<br/>

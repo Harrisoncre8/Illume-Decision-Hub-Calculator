@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Nav from '../Nav/Nav';
 
 export default function NewUser(){
 
@@ -16,6 +17,7 @@ export default function NewUser(){
 
   return(
     <center>
+      <Nav />
       <div className='main-container'>
         <h1 className='user-spacing'>Welcome, {}</h1>
         <h2 className='user-spacing'>What is the Illume Decision Hub Calculator?</h2>
