@@ -12,11 +12,28 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+// GET user information by user id
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  let userID = req.params.id
+  const sqlQuery = `SELECT "user_id", "name", "business_name", "industry"."industry", "users"."email", "phone_number" 
+                    FROM "contact_info"
+                    JOIN "users" ON "contact_info"."user_id" = "users"."id"
+                    JOIN "industry" ON "contact_info"."industry_id" = "industry"."id"
+                    WHERE "user_id" = ${userID};`;
+  pool.query(sqlQuery)
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch( error => {
+      console.log('Error with GET user info', error);
+      res.sendStatus(500);
+    });
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
-// is that the password gets encrypted before being inserted
+// is that the password gets encrypted before being inserted.
 router.post('/register', async (req, res, next) => {  
-  console.log('req body is:', req.body);
   const name = req.body.name;
   const company = req.body.company;
   const phone = req.body.phone;
@@ -27,12 +44,12 @@ router.post('/register', async (req, res, next) => {
 
   const queryTextUser = `INSERT INTO "users" (email, hashedpassword) 
                           VALUES ($1, $2) RETURNING id`;
-  const queryTextContact = `INSERT INTO "contact_info" (business_name, industry_id, phone_number, user_id)
-                            VALUES ($1, $2, $3, $4)`
+  const queryTextContact = `INSERT INTO "contact_info" (name, business_name, industry_id, phone_number, user_id)
+                            VALUES ($1, $2, $3, $4, $5)`
   try {
     await connection.query(`BEGIN`);
     const id = await connection.query(queryTextUser, [email, password]);
-    await connection.query(queryTextContact, [company, industry, phone, id.rows[0].id]);
+    await connection.query(queryTextContact, [name, company, industry, phone, id.rows[0].id]);
     await connection.query(`COMMIT`);
     res.sendStatus(201);
   }catch(error){

@@ -2,6 +2,42 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// GET route for admin question editing
+router.get('/questions/:id', (req, res) => {
+  let id = [req.params.id];
+  let sqlQuery = `SELECT q.id, q.question, q.help_text, q.sub_questions
+                  FROM calculators c
+                  JOIN question_calculator qc ON qc.calculator_id = c.id
+                  JOIN questions q ON q.id = qc.question_id
+                  WHERE c.id = $1 AND q.sub_questions IS NULL;`;
+  pool.query(sqlQuery, id)
+    .then(result => {
+    res.send(result.rows);
+  })
+  .catch( error => {
+    console.log('Error with GET admin questions', error);
+    res.sendStatus(500);
+  });
+});
+
+// GET route for admin sub-question editing
+router.get('/subquestions/:id', (req, res) => {
+  let id = [req.params.id];
+  let sqlQuery = `SELECT DISTINCT q.id, q.question, q.help_text, q.sub_questions
+                  FROM calculators c
+                  JOIN question_calculator qc ON qc.calculator_id = c.id
+                  JOIN questions q ON q.id = qc.question_id
+                  WHERE q.sub_questions = $1;`;
+  pool.query(sqlQuery, id)
+    .then(result => {
+    res.send(result.rows);
+  })
+  .catch( error => {
+    console.log('Error with GET admin sub-questions', error);
+    res.sendStatus(500);
+  });
+});
+
 // GET route for admin user information
 router.get('/user-info', (req, res) => {
   const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, u.admin as usertype, i.industry, i.id as industryID
@@ -23,7 +59,7 @@ router.get('/user-info', (req, res) => {
 router.post('/industry-info', (req, res) => {
   const id = [req.body.industry, req.body.margin];
   const sqlQuery = `INSERT INTO industry (industry, margin)
-                  VALUES ($1, $2);`;
+                    VALUES ($1, $2);`;
   pool.query(sqlQuery, id)
     .then(result => {
     res.sendStatus(201);
@@ -38,11 +74,27 @@ router.post('/industry-info', (req, res) => {
 router.put('/industry-info', (req, res) => {
   const id = [req.body.id, req.body.industry, req.body.margin];
   const sqlQuery = `UPDATE industry 
-                  SET industry = $2, margin = $3
-                  WHERE id = $1;`;
+                    SET industry = $2, margin = $3
+                    WHERE id = $1;`;
   pool.query(sqlQuery, id)
-    .then(result => {
-    res.send(result.rows);
+  .then(result => {
+    res.sendStatus(200);
+  })
+  .catch( error => {
+    console.log('Error with PUT admin industry info', error);
+    res.sendStatus(500);
+  });
+});
+
+// PUT route for admin to update calculator questions
+router.put('/question', (req, res) => {
+  const id = [req.body[0], req.body[1], req.body[2]];
+  const sqlQuery = `UPDATE questions 
+                    SET question = $2, help_text = $3
+                    WHERE id = $1;`;
+  pool.query(sqlQuery, id)
+  .then(result => {
+    res.sendStatus(200);
   })
   .catch( error => {
     console.log('Error with PUT admin industry info', error);

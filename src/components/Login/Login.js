@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import './Login.css';
 // import { stat } from 'fs';
 
@@ -19,6 +20,7 @@ class Login extends Component{
           password: this.state.password,
         },
       });
+      this.props.history.push('/user');
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
@@ -34,12 +36,11 @@ class Login extends Component{
     });
     this.checkForValue(e);
   }
-  
-
-
   handleRegister = () => {
     this.props.history.push('/register');
   }
+
+  handleClick = () => this.props.history.push(`/admin`);
 
   render(){
     return(
@@ -84,6 +85,8 @@ class Login extends Component{
           <hr className="login-hr" />
 
           <button className="login-register-btn" onClick={this.handleRegister}>register</button>
+          <br />
+          <button onClick={this.handleClick}>admin</button>
           </form>
         </div>
       </center>
@@ -91,9 +94,8 @@ class Login extends Component{
   }
 }
 
-
 const mapStateToProps = state => ({
     errors: state.errors,
 });
 
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));
