@@ -109,7 +109,7 @@ class AdminEditIndustry extends Component{
         <div className="main-container">
           <button className="close-window-button" onClick={this.pushHistoryBack}>x</button>
           <h1 className="main-heading admin-industry-heading">Industry Information</h1>
-          <button onClick={this.openModal}>Add New Industry</button>
+          <button className="normal-btn admin-industry-add-btn" onClick={this.openModal}>Add New Industry</button>
           <table className="admin-industry-table">
             <thead>
               <tr>
