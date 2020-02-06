@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET route for admin user information
 router.get('/user-info', (req, res) => {
-  const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, u.admin as userType, i.industry, i.id as industryID
+  const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, u.admin as usertype, i.industry, i.id as industryID
                     FROM contact_info c
                     JOIN users u ON u.id = c.user_id
                     JOIN industry i ON i.id = c.industry_id
@@ -66,7 +66,6 @@ router.put('/user-info', async (req, res) => {
                                 WHERE user_id = $5;`;
   let sqlQueryUsers = ``;
   const connection = await pool.connect();
-
 
   password ? sqlQueryUsers = `UPDATE users SET email = $1, hashedpassword = $2, admin = $3 WHERE id = $4;` 
             : sqlQueryUsers = `UPDATE users SET email = $1 WHERE id = $2;`

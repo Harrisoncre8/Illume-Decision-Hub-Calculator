@@ -43,12 +43,27 @@ class AdminEditUserInfo extends Component{
   }
 
   handleDropdownChange = (e, propName) => {
-    this.setState({
-      selectedUser: {
-        ...this.state.selectedUser,
-        [propName]: e.target.value
-      }
-    });
+    console.log('alskjdf;kl', e.target.value);
+    switch (propName){
+      case 'industryid':
+        this.setState({
+          selectedUser: {
+            ...this.state.selectedUser,
+            [propName]: e.target.value
+          }
+        })
+        break;
+      case 'usertype':
+        this.setState({
+          selectedUser: {
+            ...this.state.selectedUser,
+            usertype: !this.state.selectedUser.usertype
+          }
+        })
+        break;
+      default:
+        break;
+    }
   }
 
   handleSave = () => {
@@ -113,7 +128,7 @@ class AdminEditUserInfo extends Component{
             onClickAway={this.closeModal}
           >
             <div className="modal-container">
-              {JSON.stringify(this.state.selectedUser)}
+              {JSON.stringify(this.state.selectedUser.usertype)}
               <button className="close-window-button" onClick={this.closeModal}>x</button>
               <h1 className="main-heading modal-heading">{this.state.username}</h1>
               
@@ -187,8 +202,8 @@ class AdminEditUserInfo extends Component{
                 value={this.state.selectedUser.usertype || 'usertype'}
                 onChange={(event)=>this.handleDropdownChange(event, 'usertype')}
               >
-                  <option value='true'>Admin</option>
-                  <option value='false'>User</option>
+                  <option key={1} value={false}>User</option>
+                  <option key={2} value={true}>Admin</option>
               </select>
 
               <div className="modal-btn-container"> 
