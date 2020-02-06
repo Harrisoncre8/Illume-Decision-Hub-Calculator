@@ -6,6 +6,7 @@ export default function AdminCalcSubquestion(props) {
   const dispatch = useDispatch();
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
+  // const [show, setShow]
 
   const handleSave = () => {
     let id = [props.id, question, tooltip, props.calcID];
