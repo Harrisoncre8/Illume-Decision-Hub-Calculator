@@ -4,6 +4,7 @@ CREATE TABLE "users" (
   "email" TEXT,
   "hashedpassword" TEXT,
   "admin" BOOLEAN DEFAULT false
+  "super_admin" BOOLEAN DEFAULT false
 );
 
 CREATE TABLE "industry" (
@@ -387,3 +388,6 @@ VALUES(1,1,'Single Product',2),
 -- dummy industry data 
 INSERT INTO industry ("industry", "margin") 
 VALUES ('Attorney', 0.30), ('Cleaning', 0.20), ('Massage', 0.25);
+
+-- create super admin
+-- NEEDED LATER

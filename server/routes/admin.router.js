@@ -47,6 +47,7 @@ router.get('/user-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
                     FROM contact_info c
                     JOIN users u ON u.id = c.user_id
                     JOIN industry i ON i.id = c.industry_id
+                    WHERE super_admin != true
                     ORDER BY c.business_name;`;
   pool.query(sqlQuery)
     .then(result => {
