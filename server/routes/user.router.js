@@ -15,7 +15,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // GET user information by user id
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   let userID = req.params.id
-  const sqlQuery = `SELECT "user_id", "name", "business_name", "industry"."industry", "users"."email", "phone_number" 
+  const sqlQuery = `SELECT "user_id", "name", "business_name", "industry_id", "industry"."industry", "users"."email", "phone_number" 
                     FROM "contact_info"
                     JOIN "users" ON "contact_info"."user_id" = "users"."id"
                     JOIN "industry" ON "contact_info"."industry_id" = "industry"."id"
@@ -29,6 +29,25 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     });
 });
+
+// PUT route to edit user information
+router.put('/info', rejectUnauthenticated, async (req, res) => {
+  const id = req.body.id;
+  const name = req.body.name;
+  const company = req.body.company;
+  const phone = req.body.phone;
+  const email = req.body.email;
+  const industry = req.body.industry;
+
+  const sqlQueryContactInfo = `UPDATE "contact_info"
+                               SET "name" = $2, "business_name" = $3, 
+                               "industry_id" = $4, "phone_number" = $5
+                               WHERE "user_id" = $1`
+
+  const sqlQueryUsers = `UPDATE "users"
+                         SET "email" = $2,
+                         WHERE "id" = $1`
+})
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen

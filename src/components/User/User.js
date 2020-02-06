@@ -19,6 +19,7 @@ const [company, setCompany] = useState('');
 const [email, setEmail] = useState('');
 const [id, setId] = useState('');
 const [industry, setIndustry] = useState('');
+const [industryID, setIndustryID] = useState('');
 const [name, setName] = useState('');
 const [phone, setPhone] = useState('');
 
@@ -33,12 +34,13 @@ useEffect(() => {
 
 // change state to open user info modal and set default info to the modal
 const openModal = () => {
-    setModal(true);
-    userData.map((item, i) => setIndustry(item.industry));
-    userData.map((item, i) => setName(item.name));
-    userData.map((item, i) => setCompany(item.business_name));
-    userData.map((item, i) => setPhone(item.phone_number));
-    userData.map((item, i) => setEmail(item.email));
+  setModal(true);
+  setIndustry(userData[0].industry);
+  setName(userData[0].name);
+  setCompany(userData[0].business_name);
+  setPhone(userData[0].phone_number);
+  setEmail(userData[0].email);
+  setIndustryID(userData[0].industry_id);
 }
 // change state to close user info modal
 const closeModal = () => {
@@ -47,8 +49,7 @@ const closeModal = () => {
 
 // save user info changes and sends to DB
 const saveChanges = () => {
-  let userInfo = {id, name, company, phone, email, industry};
-  console.log('what is this', userInfo)
+  let userInfo = {id, name, company, phone, email, industryID};
   dispatch({type: `PUT_USER_INFO`, payload: userInfo});
   setModal(false);
 }
@@ -61,6 +62,14 @@ const openPassModal = () => {
 const closePassModal = () => {
   setPasswordModal(false);
 }
+
+// handle change for industry drop down
+const handleUserIndustry = (event) => {
+  setIndustry(event.target.value);
+  setIndustryID(industryData[industryData.findIndex(el => el.industry === event.target.value)] &&
+  industryData[industryData.findIndex(el => el.industry === event.target.value)].id);  
+}
+
   return(
     <center>
       <div className='main-container'>
@@ -97,7 +106,7 @@ const closePassModal = () => {
               </div>
             )}
             <select className="modal-input"  value={industry} 
-             onChange={(event) => setIndustry(event.target.value)}>
+             onChange={(event) => handleUserIndustry(event)}>
               {industryData.map((item, i) => 
                     <option>{item.industry}</option>
               )}
