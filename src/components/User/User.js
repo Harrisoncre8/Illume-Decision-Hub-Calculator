@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
-import './User.css'
+import './User.css';
 
 export default function User(){
 // hooks for redux and sagas
@@ -10,24 +10,28 @@ let industryData = useSelector(state => state.industry.industry);
 let userData = useSelector(state => state.userInfo);
 let userID = useSelector(state => state.user.id);
 
-// setting state
+// setting state for modal
 const [modal, setModal] = useState(false);
 const [passwordModal, setPasswordModal] = useState(false);
-const [name, setName] = useState('');
-const [company, setCompany] = useState('');
-const [phone, setPhone] = useState('');
-const [email, setEmail] = useState('');
-const [industry, setIndustry] = useState('');
 
-// on page load, get user and industry info
+// setting state for user information
+const [company, setCompany] = useState('');
+const [email, setEmail] = useState('');
+const [id, setId] = useState('');
+const [industry, setIndustry] = useState('');
+const [name, setName] = useState('');
+const [phone, setPhone] = useState('');
+
+// on page load, get user and industry info and set state to userID
 useEffect(() => {
   if(userID){
+    setId(userID);
     dispatch({type: `GET_USER_INFO`, payload: userID});
     dispatch({type: `GET_INDUSTRY`});
   }
-}, [userID]);
+}, [userID, dispatch]);
 
-// change state to open user info modal
+// change state to open user info modal and set default info to the modal
 const openModal = () => {
     setModal(true);
     userData.map((item, i) => setIndustry(item.industry));
@@ -41,8 +45,9 @@ const closeModal = () => {
     setModal(false);
 }
 
+// save user info changes and sends to DB
 const saveChanges = () => {
-  let userInfo = {name, company, phone, email, industry};
+  let userInfo = {id, name, company, phone, email, industry};
   console.log('what is this', userInfo)
   dispatch({type: `PUT_USER_INFO`, payload: userInfo});
   setModal(false);
