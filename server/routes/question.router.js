@@ -39,7 +39,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get questions for results page
+// GET questions for results page
 router.get('/all/:id', (req,res)=>{
   pool.query(`
       SELECT 
@@ -62,22 +62,26 @@ router.get('/all/:id', (req,res)=>{
       WHERE "qc"."calculator_id" = $1
       ORDER BY "qc"."id";
     `,
-    [req.params.id]
-  ).then(results=>{
+    [req.params.id])
+  .then(results=>{
     res.send(results.rows);
-  }).catch(err=>{
+  })
+  .catch(err=>{
     res.sendStatus(500);
     console.log(err);
-  })
-})
+  });
+});
 
-// Get splits for results page
+// GET splits for results page
 router.get('/splits/:id', (req,res)=>{
-  pool.query(`SELECT * FROM "split" WHERE "calculator_id" = $1`,[req.params.id]).then(results=>{
+  pool.query(`SELECT * FROM "split" WHERE "calculator_id" = $1`,[req.params.id])
+  .then(results=>{
     res.send(results.rows);
-  }).catch(err=>{
+  })
+  .catch(err=>{
     console.log(err);
     res.sendStatus(500);
-  })
-})
+  });
+});
+
 module.exports = router;
