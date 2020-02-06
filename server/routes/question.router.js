@@ -39,4 +39,45 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get questions for results page
+router.get('/all/:id', (req,res)=>{
+  pool.query(`
+      SELECT 
+        "qc"."id", 
+        "qc"."question_id", 
+        "qc"."next_id",
+        "qc"."calculator_id",
+        "q"."question",
+        "q"."response_type",
+        "q"."help_text",
+        "q"."sub_questions",
+        "q"."split",
+        "c"."calculator",
+        "s"."split_text",
+        "s"."next_id" as "split_next_id"
+      FROM question_calculator qc
+      JOIN "questions" q ON "qc"."question_id" = "q"."id"
+      JOIN "calculators" c ON "qc"."calculator_id" = "c"."id"
+      LEFT JOIN "split" s ON "qc"."question_id" = "s"."question_id" AND "qc"."calculator_id" = "s"."calculator_id"
+      WHERE "qc"."calculator_id" = $1
+      ORDER BY "qc"."id";
+    `,
+    [req.params.id]
+  ).then(results=>{
+    res.send(results.rows);
+  }).catch(err=>{
+    res.sendStatus(500);
+    console.log(err);
+  })
+})
+
+// Get splits for results page
+router.get('/splits/:id', (req,res)=>{
+  pool.query(`SELECT * FROM "split" WHERE "calculator_id" = $1`,[req.params.id]).then(results=>{
+    res.send(results.rows);
+  }).catch(err=>{
+    console.log(err);
+    res.sendStatus(500);
+  })
+})
 module.exports = router;

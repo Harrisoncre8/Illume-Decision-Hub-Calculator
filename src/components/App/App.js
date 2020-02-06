@@ -29,7 +29,7 @@ class App extends Component {
         <Switch>
           <div className="App">
             <Route exact path='/' component={Login} />
-            <ProtectedRoute exact path='/admin' component={Admin} />
+            <Route exact path='/admin' component={Admin} />
             <ProtectedRoute exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
             <ProtectedRoute exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
             <ProtectedRoute exact path='/admin/edit-user-info' component={AdminEditUserInfo} />

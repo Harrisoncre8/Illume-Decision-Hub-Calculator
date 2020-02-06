@@ -40,6 +40,8 @@ class Login extends Component{
     this.props.history.push('/register');
   }
 
+  handleClick = () => this.props.history.push(`/admin`);
+
   render(){
     return(
       <center>
@@ -83,6 +85,8 @@ class Login extends Component{
           <hr className="login-hr" />
 
           <button className="login-register-btn" onClick={this.handleRegister}>register</button>
+          <br />
+          <button onClick={this.handleClick}>admin</button>
           </form>
         </div>
       </center>
