@@ -36,7 +36,7 @@ export default function AdminCalcQuestion(props) {
       />
       <button onClick={handleSave}>SAVE</button>
       <div>
-      {/* {props.id === 3 || props.id === 4 ?
+      {props.id === 3 || props.id === 4 ?
         subQuestion.map(q=>
           <div key={q.id}>
             <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
@@ -44,7 +44,7 @@ export default function AdminCalcQuestion(props) {
         )
         :
         ''
-      } */}
+      }
       </div>
     </>
   );
