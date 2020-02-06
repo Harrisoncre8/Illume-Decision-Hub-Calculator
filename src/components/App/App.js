@@ -29,16 +29,16 @@ class App extends Component {
         <Switch>
           <div className="App">
             <Route exact path='/' component={Login} />
-            <Route exact path='/admin' component={Admin} />
-            <Route exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
-            <Route exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
-            <Route exact path='/admin/edit-user-info' component={AdminEditUserInfo} />
+            <ProtectedRoute exact path='/admin' component={Admin} />
+            <ProtectedRoute exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
+            <ProtectedRoute exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
+            <ProtectedRoute exact path='/admin/edit-user-info' component={AdminEditUserInfo} />
             <ProtectedRoute exact path='/break-even-pricing' component={BreakEven} /> 
             <ProtectedRoute exact path='/price-setting' component={PriceSetting} />
             <ProtectedRoute exact path='/define-your-profit-lever' component={ProfitLever} />
             <ProtectedRoute exact path='/questionnaire' component={Stepper} />
             <Route exact path='/register' component={Register} />
-            <Route exact path='/new-user' component={NewUser} />
+            <ProtectedRoute exact path='/new-user' component={NewUser} />
             <ProtectedRoute exact path ='/user' component={User} />
           </div>
         </Switch>
