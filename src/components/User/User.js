@@ -1,65 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
-import './User.css'
+import './User.css';
 
 export default function User(){
-// hooks for redux and sagas
-let dispatch = useDispatch();
-let industryData = useSelector(state => state.industry.industry);
-let userData = useSelector(state => state.userInfo);
-let userID = useSelector(state => state.user.id);
+  // hooks for redux and sagas
+  let dispatch = useDispatch();
+  let industryData = useSelector(state => state.industry.industry);
+  let userData = useSelector(state => state.userInfo);
+  let userID = useSelector(state => state.user.id);
 
-// setting state
-const [modal, setModal] = useState(false);
-const [passwordModal, setPasswordModal] = useState(false);
-const [name, setName] = useState('');
-const [company, setCompany] = useState('');
-const [phone, setPhone] = useState('');
-const [email, setEmail] = useState('');
-const [industry, setIndustry] = useState('');
+  // setting state
+  const [modal, setModal] = useState(false);
+  const [passwordModal, setPasswordModal] = useState(false);
+  const [name, setName] = useState('');
+  const [company, setCompany] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [industry, setIndustry] = useState('');
 
-// on page load, get user and industry info
-useEffect(() => {
-  if(userID){
-    dispatch({type: `GET_USER_INFO`, payload: userID});
-    dispatch({type: `GET_INDUSTRY`});
+  // on page load, get user and industry info
+  useEffect(() => {
+    if(userID){
+      dispatch({type: `GET_USER_INFO`, payload: userID});
+      dispatch({type: `GET_INDUSTRY`});
+    }
+  }, [userID]);
+
+  // change state to open user info modal
+  const openModal = () => {
+      setModal(true);
+      userData.map((item, i) => setIndustry(item.industry));
+      userData.map((item, i) => setName(item.name));
+      userData.map((item, i) => setCompany(item.business_name));
+      userData.map((item, i) => setPhone(item.phone_number));
+      userData.map((item, i) => setEmail(item.email));
   }
-}, [userID]);
 
-// change state to open user info modal
-const openModal = () => {
-    setModal(true);
-    userData.map((item, i) => setIndustry(item.industry));
-    userData.map((item, i) => setName(item.name));
-    userData.map((item, i) => setCompany(item.business_name));
-    userData.map((item, i) => setPhone(item.phone_number));
-    userData.map((item, i) => setEmail(item.email));
-}
-// change state to close user info modal
-const closeModal = () => {
+  // change state to close user info modal
+  const closeModal = () => {
+      setModal(false);
+  }
+
+  // Dispatch updates to saga
+  const saveChanges = () => {
+    let userInfo = {name, company, phone, email, industry};
+    dispatch({type: `PUT_USER_INFO`, payload: userInfo});
     setModal(false);
-}
+  }
 
-const saveChanges = () => {
-  let userInfo = {name, company, phone, email, industry};
-  console.log('what is this', userInfo)
-  dispatch({type: `PUT_USER_INFO`, payload: userInfo});
-  setModal(false);
-}
+  // opens modal to change password
+  const openPassModal = () => {
+    setPasswordModal(true);
+  }
 
-// opens modal to change password
-const openPassModal = () => {
-  setPasswordModal(true);
-}
-// close modal to change password
-const closePassModal = () => {
-  setPasswordModal(false);
-}
+  // close modal to change password
+  const closePassModal = () => {
+    setPasswordModal(false);
+  }
+
   return(
     <center>
       <div className='main-container'>
-          {userData.map((user, i) => 
+        {userData.map((user, i) => 
           <ul className='user-info' key={i}>
             <h1 className='user-spacing'>Welcome back, {user.name}</h1>
             <h2 className='user-spacing'>Profile Information</h2>
@@ -69,7 +72,7 @@ const closePassModal = () => {
             <li>Email: {user.email}</li>
             <li className='user-spacing'>Industry: {user.industry}</li>
           </ul>
-          )}
+        )}
         <input type="button" value="Edit Profile" onClick={() => openModal()} />
         <Modal
           visible={modal}
@@ -97,29 +100,29 @@ const closePassModal = () => {
                     <option>{item.industry}</option>
               )}
             </select>
-              <input type="button" value="Change Password?" onClick={() => openPassModal()}></input>
-              <div className="modal-btn-container">
-                <button className="normal-btn" href="javascript:void(0);" 
-                  onClick={() => saveChanges()}>Save</button>
-                <button className="normal-btn" href="javascript:void(0);" 
-                onClick={() => closeModal()}>Cancel</button>
-              </div>
-          </Modal>
+            <input type="button" value="Change Password?" onClick={openPassModal}></input>
+            <div className="modal-btn-container">
+              <button className="normal-btn" href="javascript:void(0);" 
+                onClick={saveChanges}>Save</button>
+              <button className="normal-btn" href="javascript:void(0);" 
+              onClick={closeModal}>Cancel</button>
+            </div>
+        </Modal>
 
           <Modal
           visible={passwordModal}
           width="400"
           height="300"
           effect="fadeInUp"
-          onClickAway={() => closePassModal()}
+          onClickAway={closePassModal}
         >
           <h1 className="main-heading admin-user-heading">Please Confirm New Password</h1>
-              <div className="modal-btn-container">
-                <button className="normal-btn" href="javascript:void(0);" 
-                onClick={() => closePassModal()}>Close</button>
-              </div>
-          </Modal>
-        </div>
-      </center>
-  )
+            <div className="modal-btn-container">
+              <button className="normal-btn" href="javascript:void(0);" 
+              onClick={closePassModal}>Close</button>
+            </div>
+        </Modal>
+      </div>
+    </center>
+  );
 }

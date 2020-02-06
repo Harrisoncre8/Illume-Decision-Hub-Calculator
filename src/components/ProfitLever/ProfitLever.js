@@ -12,7 +12,6 @@ function ProfitLever() {
   const inputData = useSelector(state => state.input);
   const dispatch = useDispatch();
 
-
   const [price, setPrice] = useState(0);
   const [growth, setGrowth] = useState(0);
   const [directCostChange, setDirectCostChange] = useState(0);
@@ -75,9 +74,9 @@ function ProfitLever() {
           acum[id] = { ...arr }
         }
         return acum;
-      }, {})
+      }, {});
       setPaths(temp);
-    })
+    });
 
     Axios.get('/api/question/splits/' + 1).then(response => {
       let temp = response.data.reduce((acum, arr) => {
@@ -88,7 +87,7 @@ function ProfitLever() {
     }).catch(err => {
       console.log(err);
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (Object.values(splits).length > 0) {
@@ -100,17 +99,16 @@ function ProfitLever() {
     }
   }, [splits])
 
+  // Handle radio button change
   function radioChange(e, question) {
     let temp = { ...splitPath };
-    console.log(temp);
     temp[question] = Number(e.target.value);
-    console.log(temp);
     setSplitPath(temp);
   }
 
+  // Determine which question is next, render inputs and questions
   function stepper(start) {
     function splitter(split) {
-      console.log(splitPath[split.toString()]);
       return (
         <>
           {
@@ -139,11 +137,12 @@ function ProfitLever() {
               null
           }
         </>
-      )
+      );
     }
     let next = paths[start] && paths[start].next_id
     let doesSplit = paths[start] && paths[start].split
     let questionId = paths[start] && paths[start].question_id
+    
     return (
       <div>
         <p>{paths[start] && paths[start].question}</p>
@@ -173,8 +172,9 @@ function ProfitLever() {
             null // for next?
         }
       </div>
-    )
+    );
   }
+
   return (
     <center>
       <div className="main-container">
@@ -196,7 +196,7 @@ function ProfitLever() {
         </div>
       </div>
     </center>
-  )
+  );
 }
 
 export default ProfitLever;

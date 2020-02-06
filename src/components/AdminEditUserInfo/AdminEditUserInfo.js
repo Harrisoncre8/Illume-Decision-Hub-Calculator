@@ -19,6 +19,7 @@ class AdminEditUserInfo extends Component{
     }
   }
 
+  // Dispatch to GET user data from the database
   componentDidMount(){
     this.props.dispatch({type: `GET_ADMIN_USER_INFO`});
     this.props.dispatch({type: `GET_INDUSTRY`});
@@ -27,10 +28,10 @@ class AdminEditUserInfo extends Component{
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
-  closeModal = () => {
-    this.setState({visible : false});
-  }
+  // Close modal popup
+  closeModal = () => this.setState({visible:false});
 
+  // Set local state to current input value
   handleChange = (e, propName) => {
     this.setState({
       selectedUser: {
@@ -41,6 +42,7 @@ class AdminEditUserInfo extends Component{
     this.checkForValue(e);
   }
 
+  // Set input value to current dropdown menu selection
   handleDropdownChange = e => {
     this.setState({
       selectedUser: {
@@ -50,13 +52,13 @@ class AdminEditUserInfo extends Component{
     });
   }
 
+  // Dispatch to saga to handle admin edits, close modal
   handleSave = () => {
     this.props.dispatch({type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser});
-    this.setState({
-      visible: false
-    });
+    this.closeModal();
   }
 
+  // Open modal popup, populate input fields from local state
   openModal = user => {
     this.setState({
       visible: true,
@@ -68,9 +70,8 @@ class AdminEditUserInfo extends Component{
     });
   }
 
-  pushHistoryBack = () => {
-    this.props.history.push('/admin');
-  }
+  // Return to admin home page
+  pushHistoryBack = () => this.props.history.push('/admin');
 
   render(){
     let editUser = this.state.selectedUser;
@@ -110,7 +111,6 @@ class AdminEditUserInfo extends Component{
             onClickAway={this.closeModal}
           >
             <div className="modal-container">
-              {JSON.stringify(this.state.selectedUser)}
               <button className="close-window-button" onClick={this.closeModal}>x</button>
               <h1 className="main-heading modal-heading">{this.state.username}</h1>
               
