@@ -5,32 +5,24 @@ import Axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 
 function PriceSetting() {
-  const [paths, setPaths] = useState([]);
-  const [splits, setSplits] = useState({});
-  const [splitPath, setSplitPath] = useState({});
-
-  const inputData = useSelector(state => state.input);
-  const dispatch = useDispatch();
-  const industryData = useSelector(state => state.industry)
-  let userID = useSelector(state => state.user.id);
-  let userData = useSelector(state => state.userInfo);
-
+  // States
   const [margin, setMargin] = useState('');
   const [userMargin, setUserMargin] = useState(0);
   const [productMargin, setProductMargin] = useState(0);
   const [industryNorm, setIndustryNorm] = useState(0);
   const [difference, setDifference] = useState(0);
+  const [paths, setPaths] = useState([]);
+  const [splits, setSplits] = useState({});
+  const [splitPath, setSplitPath] = useState({});
 
-  useEffect(() => {
-    if (userData.length > 0 && industryData) {
-      setMargin(
-        industryData[industryData.findIndex(el => el.industry === userData[0].industry)] &&
-        industryData[industryData.findIndex(el => el.industry === userData[0].industry)].margin
-      )
-    }
+  // Connects to Redux
+  const inputData = useSelector(state => state.input);
+  const industryData = useSelector(state => state.industry)
+  let userID = useSelector(state => state.user.id);
+  let userData = useSelector(state => state.userInfo);
+  const dispatch = useDispatch();
 
-  }, [userData, industryData])
-
+  // Ensures that userInfo and industry data is in the reducer
   useEffect(() => {
     if (userID) {
       dispatch({ type: `GET_USER_INFO`, payload: userID });
@@ -38,17 +30,28 @@ function PriceSetting() {
     }
   }, [userID, dispatch]);
 
-  // MATH
+  // Finds the users industry and sets it as the default choice
+  useEffect(() => {
+    if (userData.length > 0 && industryData) {
+      setMargin(
+        industryData[industryData.findIndex(el => el.industry === userData[0].industry)] &&
+        industryData[industryData.findIndex(el => el.industry === userData[0].industry)].margin
+      )
+    }
+  }, [userData, industryData])
+  
+
+  // Dynamically calculates the price setting depending on settings
   useEffect(() => {
     let directCosts = +splitPath[7] === 10 ?
       +inputData[3] :
-      ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10]||0) + (+inputData[11]||0);
+      ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
     let indirectCosts = +splitPath[24] === 11 ?
       + inputData[4] :
-      (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) + 
-      (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) + 
-      (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) + 
+      (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
+      (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
+      (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
       (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
 
     let cost = directCosts + indirectCosts || 0;
@@ -60,7 +63,7 @@ function PriceSetting() {
     setIndustryNorm(+iNorm);
     setProductMargin(+pm.toFixed(2));
     setUserMargin(+um.toFixed(2));
-    setDifference(+Math.abs(Math.ceil(totalSales * ((pm/um) - 1))) || 0);
+    setDifference(+Math.abs(Math.ceil(totalSales * ((pm / um) - 1))) || 0);
   }, [margin, productMargin, userMargin, inputData, splitPath])
 
   // Gets the questions and splits for the given results page
@@ -98,6 +101,7 @@ function PriceSetting() {
     });
   }, [])
 
+  // Rearranges the response from the server to a JSON styled object
   useEffect(() => {
     if (Object.values(splits).length > 0) {
       const temp = {}
@@ -108,12 +112,15 @@ function PriceSetting() {
     }
   }, [splits])
 
+  // Handles the change of the radio button
   function radioChange(e, question) {
     let temp = { ...splitPath };
     temp[question] = Number(e.target.value);
     setSplitPath(temp);
   }
 
+  // Dynamically renders the questions associated with the calculator in the order
+  // they would appear in the stepper component
   function stepper(start) {
     function splitter(split) {
       return (
@@ -215,20 +222,19 @@ function PriceSetting() {
               productMargin > userMargin ?
                 ' lower than ' :
                 productMargin < userMargin ?
-                  ' higher than ':
+                  ' higher than ' :
                   ' equal to '
             }
             industry norms
-            <br /> 
-            You will need to sell 
-            {' ' + difference +' '}  
+            <br />
+            You will need to sell
+            {' ' + difference + ' '}
             {
               productMargin >= userMargin ?
                 ' more ' :
                 ' less '
             }
             units to make the same revenue as the industry norm price would.</p>
-            {margin}
         </div>
       </div>
     </center>

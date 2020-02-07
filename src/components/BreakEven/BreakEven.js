@@ -4,25 +4,27 @@ import Axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 
 function BreakEven() {
+  // States
   const [price, setPrice] = useState('');
   const [paths, setPaths] = useState([]);
   const [splits, setSplits] = useState({});
   const [splitPath, setSplitPath] = useState({});
 
+  // Connects to redux
   const inputData = useSelector(state => state.input);
   const dispatch = useDispatch();
 
-  // MATH
+  // Dynamically calculates the break even point depending on settings
   useEffect(() => {
     let directCosts = +splitPath[7] === 7 ?
       +inputData[3] :
-      ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10]||0) + (+inputData[11]||0);
+      ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
     let indirectCosts = +splitPath[24] === 8 ?
       + inputData[4] :
-      (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) + 
-      (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) + 
-      (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) + 
+      (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
+      (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
+      (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
       (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
 
     let divisor = +splitPath[1] === 14 ? 1 : +inputData[5] || 1
@@ -35,10 +37,10 @@ function BreakEven() {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
           let id = arr.id
-          let text = acum[id] && acum[id]['split_text'] ? 
-              [...acum[id]['split_text'], arr.split_text] : [arr.split_text]
-          let next = acum[id] && acum[id]['split_next_id'] ? 
-              [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id]
+          let text = acum[id] && acum[id]['split_text'] ?
+            [...acum[id]['split_text'], arr.split_text] : [arr.split_text]
+          let next = acum[id] && acum[id]['split_next_id'] ?
+            [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id]
           delete arr.id
           delete arr.split_text;
           delete arr.split_next_id;
@@ -66,6 +68,7 @@ function BreakEven() {
     });
   }, [])
 
+  // Rearranges the response from the server to a JSON styled object
   useEffect(() => {
     if (Object.values(splits).length > 0) {
       const temp = {}
@@ -76,12 +79,15 @@ function BreakEven() {
     }
   }, [splits])
 
+  // Handles the change of the radio button
   function radioChange(e, question) {
     let temp = { ...splitPath };
     temp[question] = Number(e.target.value);
     setSplitPath(temp);
   }
 
+  // Dynamically renders the questions associated with the calculator in the order
+  // they would appear in the stepper component
   function stepper(start) {
     function splitter(split) {
       return (
