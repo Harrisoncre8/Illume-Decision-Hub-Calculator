@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './Register.css';
-import PasswordInput from '../PasswordInput/PasswordInput';
 
 class Register extends Component{
 
