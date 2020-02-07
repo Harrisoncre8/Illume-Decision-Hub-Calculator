@@ -17,6 +17,7 @@ function ProfitLever() {
 
   // Connects to redux
   const inputData = useSelector(state => state.input);
+  const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const dispatch = useCallback(useDispatch(), []);
 
 
@@ -169,21 +170,24 @@ function ProfitLever() {
         {
           doesSplit ?
             null :
-            <input
-              type={paths[start] && paths[start].response_type}
-              value={inputData[questionId]}
-              onChange={
-                (e) => {
-                  dispatch({
-                    type: 'ADD_INPUT_VALUE',
-                    payload: {
-                      key: questionId,
-                      value: e.target.value
-                    }
-                  })
+            userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1?
+              <input
+                type={paths[start] && paths[start].response_type}
+                value={inputData[questionId]}
+                onChange={
+                  (e) => {
+                    dispatch({
+                      type: 'ADD_INPUT_VALUE',
+                      payload: {
+                        key: questionId,
+                        value: e.target.value
+                      }
+                    })
+                  }
                 }
-              }
-            />}
+              />:
+              null
+        }
         {
           next ?
             doesSplit ?

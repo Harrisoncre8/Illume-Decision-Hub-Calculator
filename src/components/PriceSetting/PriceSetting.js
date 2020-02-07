@@ -21,6 +21,7 @@ function PriceSetting() {
   const industryData = useSelector(state => state.industry)
   let userID = useSelector(state => state.user.id);
   let userData = useSelector(state => state.userInfo);
+  const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const dispatch = useCallback(useDispatch(), []);
 
   // Ensures that userInfo and industry data is in the reducer
@@ -163,21 +164,24 @@ function PriceSetting() {
         {
           doesSplit ?
             null :
-            <input
-              type={paths[start] && paths[start].response_type}
-              value={inputData[questionId]}
-              onChange={
-                (e) => {
-                  dispatch({
-                    type: 'ADD_INPUT_VALUE',
-                    payload: {
-                      key: questionId,
-                      value: e.target.value
-                    }
-                  })
+            userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1?
+              <input
+                type={paths[start] && paths[start].response_type}
+                value={inputData[questionId]}
+                onChange={
+                  (e) => {
+                    dispatch({
+                      type: 'ADD_INPUT_VALUE',
+                      payload: {
+                        key: questionId,
+                        value: e.target.value
+                      }
+                    })
+                  }
                 }
-              }
-            />}
+              />:
+              null
+        }
         {
           next ?
             doesSplit ?
