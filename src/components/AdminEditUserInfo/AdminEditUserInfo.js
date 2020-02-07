@@ -193,7 +193,7 @@ class AdminEditUserInfo extends Component {
                 onChange={(event) => this.handleDropdownChange(event, 'industryid')}
               >
                 {this.props.industry.map(industry =>
-                  <option key={industry.id} value={industry.id}>{industry}</option>
+                  <option key={industry.id} value={industry.id}>{industry.industry}</option>
                 )}
               </select>
 
