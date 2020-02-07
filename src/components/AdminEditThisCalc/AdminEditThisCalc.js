@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import './AdminEditThisCalc.css';
 import AdminCalcQuestion from '../AdminCalcQuestion/AdminCalcQuestion';
@@ -12,17 +12,25 @@ export default function AdminEditThisCalc(props) {
     dispatch({type: `GET_ADMIN_QUESTION`, payload: props.calcID});
   }, []);
 
+  const mainMap = () => {
+    let count = 1;
+    return (
+      question.map(q =>
+        <div className="admin-question-card" key={q.id}>
+          <h3 className="main-heading">Main Question {count++}</h3>
+          <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} />
+        </div>
+      )
+    );
+  }
+
   return(
     <>
     <div className="main-container">
       <h1 className="main-heading">Edit {props.name} Calculator</h1>
     </div>
     <div>
-      {question.map(q =>
-        <div className="admin-question-card" key={q.id}>
-          <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} />
-        </div>
-      )}
+      {mainMap()}
     </div>
     </>
   );

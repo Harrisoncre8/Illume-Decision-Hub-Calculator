@@ -42,6 +42,7 @@ export default function AdminCalcQuestion(props) {
       {props.id === 3 || props.id === 4 ?
         subQuestion.map(q=>
           <div key={q.id}>
+            <h3 className="main-heading">Sub-Question</h3>
             <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
           </div>
         )
