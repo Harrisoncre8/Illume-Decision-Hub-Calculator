@@ -9,26 +9,37 @@ export default function Nav() {
   const dispatch = useDispatch();
   const questionData = useSelector(state=>state.question.calculator_id);
   const [breakEven, setBreakEven] = useState('circle-btn');
+  const [home, setHome] = useState('circle-btn');
   const [lever, setLever] = useState('circle-btn');
   const [price, setPrice] = useState('circle-btn');
   const [profile, setProfile] = useState('circle-btn');
 
   // Run on component mount
   useEffect(()=>{
-    if(history.location.pathname === '/user'){
+    if(history.location.pathname === '/'){
+      setHome('circle-btn-active');
+      setBreakEven('circle-btn');
+      setLever('circle-btn');
+      setPrice('circle-btn');
+      setProfile('circle-btn');
+    }
+    else if(history.location.pathname === '/user'){
       setProfile('circle-btn-active');
       setBreakEven('circle-btn');
+      setHome('circle-btn');
       setLever('circle-btn');
       setPrice('circle-btn');
     }
     else if(questionData === 1){
       setLever('circle-btn-active');
       setBreakEven('circle-btn');
+      setHome('circle-btn');
       setPrice('circle-btn');
       setProfile('circle-btn');
     }
     else if(questionData === 2){
       setBreakEven('circle-btn-active');
+      setHome('circle-btn');
       setLever('circle-btn');
       setPrice('circle-btn');
       setProfile('circle-btn');
@@ -36,6 +47,7 @@ export default function Nav() {
     else if(questionData === 3){
       setPrice('circle-btn-active');
       setBreakEven('circle-btn');
+      setHome('circle-btn');
       setLever('circle-btn');
       setProfile('circle-btn');
     }
@@ -46,6 +58,9 @@ export default function Nav() {
     dispatch({type: 'LOGOUT'});
     history.push('/');
   }
+
+  // Push history to user profile
+  const pushHistoryToHome = () => history.push('/');
 
   // Push history to user profile
   const pushHistoryToProfile = () => history.push('/user');
@@ -59,6 +74,9 @@ export default function Nav() {
 
   return (
     <center>
+      <button className={`nav-btn ${home}`} onClick={pushHistoryToHome}>
+        Home
+      </button>
       <button className={`nav-btn ${breakEven}`} onClick={()=>setStart(2)}>
         Break Even Calculator
       </button>
