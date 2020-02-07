@@ -86,6 +86,7 @@ export default function Stepper() {
                   value={input} 
                   onChange={(e)=>setInput(e.target.value)} 
                   type={questionData.response_type} 
+                  autoFocus
                 />
                 <label className="text-field-label">enter value</label>
                 <div className="text-field-mask stepper-mask"></div>
