@@ -58,11 +58,17 @@ export default function Stepper() {
     }
   }
 
+  // Handles pressing enter
+  function submit(e){
+    e.preventDefault();
+    nextPage();
+  }
+
   return (
     <center>
       <Nav />
       <div className='main-container'>
-        <p>
+        <form onSubmit={e=>{submit(e)}}>
           <p className="question-text">
             {questionData.question}
           </p>
@@ -103,7 +109,7 @@ export default function Stepper() {
           <p className="question-text">
             {questionData.help_text}
           </p>
-        </p>
+        </form>
         <div onClick={lastPage} className='arrow-left' />
         <div onClick={nextPage} className='arrow-right' />
       </div>
