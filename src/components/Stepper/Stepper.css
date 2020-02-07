@@ -43,6 +43,10 @@
   background-color: #f0aa42;
 }
 
+.radio-container:hover input[type="radio"] ~ .radio-btn {
+  background-color: #f7d149;
+}
+
 .radio-container .radio-btn:after {
   top: 6px;
  left: 6px;
