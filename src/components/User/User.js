@@ -67,8 +67,8 @@ export default function User(){
   // checks and saves the user's new password
   const changePassword = () => {
     if(newPassword === checkPassword){
-      let bothPasswords = {oldPassword, newPassword};
-      dispatch({type: `NEW_PASSWORD`, payload: bothPasswords});
+      let passwordInfo = {oldPassword, newPassword, id};
+      dispatch({type: `NEW_PASSWORD`, payload: passwordInfo});
       setPasswordModal(false);
     } else {
       setWrongPassword(true);

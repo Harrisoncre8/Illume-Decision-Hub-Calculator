@@ -3,6 +3,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -59,11 +60,18 @@ router.put('/info', rejectUnauthenticated, async (req, res) => {
   }
 })
 
+// put route to check user password and update it in DB
 router.put('/new-password', rejectUnauthenticated, (req, res) => {
-  const oldPassword = encryptLib.encryptPassword(req.body.oldPassword);
-  if(req.user.hashedpassword !== oldPassword){
+  const userID = req.body.id;
+  const oldPassword = req.body.oldPassword;
+  const storedPassword = req.user.hashedpassword;
+
+  if(encryptLib.comparePassword(oldPassword, storedPassword)){
+    console.log('WE MADE IT THROUGH');
+  } else {
     res.sendStatus(401);
   }
+  // const sqlQuery = `UPDATE "users" SET "hashpassword" = $2 WHERE "id" = $1`
 })
 
 // Handles POST request with new user data
