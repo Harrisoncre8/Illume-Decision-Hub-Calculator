@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './Nav.css';
 
 export default function Nav() {
-
   // Set react router hook
   const history = useHistory();
   const dispatch = useDispatch();

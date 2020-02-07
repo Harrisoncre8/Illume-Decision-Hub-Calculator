@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import '../AdminEditCalc/AdminEditCalc.css';
 import AdminCalcSubquestion from '../AdminCalcSubquestion/AdminCalcSubquestion';
@@ -6,7 +6,7 @@ import AdminCalcSubquestion from '../AdminCalcSubquestion/AdminCalcSubquestion';
 export default function AdminCalcQuestion(props) {
 
   const subQuestion = useSelector((state)=>state.admin.adminSubquestion);
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
 
