@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
-import './User.css';
+import './User.css'
+import Nav from '../Nav/Nav';
 
 export default function User(){
 // hooks for redux and sagas
@@ -72,13 +73,14 @@ const handleUserIndustry = (event) => {
 
   return(
     <center>
+      <Nav />
       <div className='main-container'>
         {userData.map((user, i) => 
           <ul className='user-info' key={i}>
             <h1 className='user-spacing'>Welcome back, {user.name}</h1>
             <h2 className='user-spacing'>Profile Information</h2>
             <li>Name: {user.name}</li>
-            <li>Comapny: {user.business_name}</li>
+            <li>Company: {user.business_name}</li>
             <li>Phone: {user.phone_number}</li>
             <li>Email: {user.email}</li>
             <li className='user-spacing'>Industry: {user.industry}</li>

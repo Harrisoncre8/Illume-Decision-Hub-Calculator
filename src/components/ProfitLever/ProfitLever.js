@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import './ProfitLever.css';
 import Axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
+import Nav from '../Nav/Nav';
 
 function ProfitLever() {
   // States
@@ -196,6 +197,7 @@ function ProfitLever() {
 
   return (
     <center>
+      <Nav />
       <div className="main-container">
         <h1 className="main-heading">Define Profit Levers</h1>
         {stepper(1)}
