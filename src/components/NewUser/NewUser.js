@@ -11,7 +11,6 @@ export default function NewUser(){
   // Run on component mount
   useEffect(() => {
     dispatch({type: `GET_ADMIN_USER_INFO`});
-    console.log('------------->user info', userData);
   }, [dispatch]);
 
   return(
