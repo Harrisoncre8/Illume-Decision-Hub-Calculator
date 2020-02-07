@@ -60,7 +60,6 @@ export default function Nav() {
 
   return (
     <center>
-      {JSON.stringify(questionData)}
       <button className={`nav-btn ${breakEven}`} onClick={()=>setStart(2)}>
         Break Even Calculator
       </button>
