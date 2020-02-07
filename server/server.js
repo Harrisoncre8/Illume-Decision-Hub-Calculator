@@ -11,6 +11,7 @@ const adminRouter = require('./routes/admin.router');
 const industryRouter = require('./routes/industry.router');
 const questionRouter = require('./routes/question.router');
 const splitRouter = require('./routes/split.router');
+const checkboxRouter = require('./routes/checkbox.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,6 +30,7 @@ app.use(`/api/admin`, adminRouter);
 app.use(`/api/industry`, industryRouter);
 app.use(`/api/question`, questionRouter);
 app.use(`/api/split`, splitRouter);
+app.use('/api/checkbox', checkboxRouter);
 
 // Serve static files
 app.use(express.static('build'));

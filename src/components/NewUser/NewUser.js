@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Nav from '../Nav/Nav';
+import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
 
 export default function NewUser(){
 
@@ -30,6 +31,7 @@ export default function NewUser(){
           <br/>
           Click on a Calculator above to begin!
         </h3>
+        <QuestionCheckboxes />
       </div>
     </center>
   );

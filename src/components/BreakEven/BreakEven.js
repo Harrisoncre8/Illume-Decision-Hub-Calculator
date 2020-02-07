@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './BreakEven.css';
 import Nav from '../Nav/Nav';
 import Axios from 'axios'
@@ -13,7 +13,7 @@ function BreakEven() {
 
   // Connects to redux
   const inputData = useSelector(state => state.input);
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch(), []);
 
   // Dynamically calculates the break even point depending on settings
   useEffect(() => {
@@ -34,7 +34,7 @@ function BreakEven() {
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
-    Axios.get('/api/question/all/' + 2).then(response => {
+    Axios.get('/api/question/results/' + 2).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
           let id = arr.id
