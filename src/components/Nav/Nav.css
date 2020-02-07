@@ -1,21 +1,18 @@
-/* .nav-ul {
-  list-style: none;
-}
-
-.nav-li {
-  display: inline-block;
-}
-
-.nav-li:hover {
-  background-color: white;
-} */
-
 .nav-btn {
   margin: 10px;
 }
 
 .circle-btn-active {
- background-color: #f0aa42;
+  font-size: 1.4em;
+  text-transform: uppercase;
+  background-color: #f0aa42;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 1px 3px grey;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .circle-btn-active:hover {

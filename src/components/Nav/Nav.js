@@ -9,30 +9,36 @@ export default function Nav() {
   const history = useHistory();
   const dispatch = useDispatch();
   const questionData = useSelector(state=>state.question.calculator_id);
-  const [breakEven, setBreakEven] = useState('');
-  const [lever, setLever] = useState('');
-  const [price, setPrice] = useState('');
-  const [profile, setProfile] = useState('');
+  const [breakEven, setBreakEven] = useState('circle-btn');
+  const [lever, setLever] = useState('circle-btn');
+  const [price, setPrice] = useState('circle-btn');
+  const [profile, setProfile] = useState('circle-btn');
 
   // Run on component mount
   useEffect(()=>{
     if(history.location.pathname === '/user'){
       setProfile('circle-btn-active');
+      setBreakEven('circle-btn');
+      setLever('circle-btn');
+      setPrice('circle-btn');
     }
     else if(questionData === 1){
       setLever('circle-btn-active');
-      setBreakEven('');
-      setPrice('');
+      setBreakEven('circle-btn');
+      setPrice('circle-btn');
+      setProfile('circle-btn');
     }
     else if(questionData === 2){
       setBreakEven('circle-btn-active');
-      setLever('');
-      setPrice('');
+      setLever('circle-btn');
+      setPrice('circle-btn');
+      setProfile('circle-btn');
     }
     else if(questionData === 3){
       setPrice('circle-btn-active');
-      setBreakEven('');
-      setLever('');
+      setBreakEven('circle-btn');
+      setLever('circle-btn');
+      setProfile('circle-btn');
     }
   }, [questionData]);
 
@@ -54,26 +60,17 @@ export default function Nav() {
 
   return (
     <center>
-      {/* <ul className="nav-ul">
-        <li className="nav-li">Break Even</li>
-        <li className="nav-li">Price Setting</li>
-        <li className="nav-li">Profit Lever</li>
-        <li className="nav-li">Profile</li>
-        <li className="nav-li">Log Out</li>
-      </ul> */}
-
-
-
-      <button className={`circle-btn nav-btn ${breakEven}`} onClick={()=>setStart(2)}>
+      {JSON.stringify(questionData)}
+      <button className={`nav-btn ${breakEven}`} onClick={()=>setStart(2)}>
         Break Even Calculator
       </button>
-      <button className={`circle-btn nav-btn ${lever}`} onClick={()=>setStart(1)}>
+      <button className={`nav-btn ${lever}`} onClick={()=>setStart(1)}>
         Profit Lever Calculator
       </button>
-      <button className={`circle-btn nav-btn ${price}`} onClick={()=>setStart(3)}>
+      <button className={`nav-btn ${price}`} onClick={()=>setStart(3)}>
         Price Setting Calculator
       </button>
-      <button className={`circle-btn nav-btn ${profile}`} onClick={pushHistoryToProfile}>
+      <button className={`nav-btn ${profile}`} onClick={pushHistoryToProfile}>
         Profile <br /> Page
       </button>
       <button className='circle-btn nav-btn' onClick={logout}>
