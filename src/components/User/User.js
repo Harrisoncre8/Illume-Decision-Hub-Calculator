@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
-<<<<<<< HEAD
 import './User.css'
 import Nav from '../Nav/Nav';
-=======
-import './User.css';
->>>>>>> 30cc653bc610a07d9c7d70e7f49dab41926379ea
 
 export default function User(){
   // hooks for redux and sagas
