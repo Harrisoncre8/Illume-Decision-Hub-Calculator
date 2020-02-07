@@ -83,23 +83,23 @@ class Login extends Component{
           </div>
           <form onSubmit={this.login}>
 
-          <div className="login-text-field-container">
+          <div className="text-field-container login-text-field-container">
             <input 
-              className="text-field login-text-field-email" 
+              className="text-field" 
               type="text" 
               onChange={(event)=>this.handleChange(event, 'email')}
             />
-            <label className="text-field-label login-label-email">email</label>
+            <label className="text-field-label">email</label>
             <div className="text-field-mask login-email-mask"></div>
           </div>
 
-          <div className="login-text-field-container">
+          <div className="text-field-container login-text-field-container">
             <input 
-              className="text-field login-text-field-password" 
+              className="text-field" 
               type={this.state.showPassword} 
               onChange={(event)=>this.handleChange(event, 'password')}
             />
-            <label className="text-field-label login-label-password">password</label>
+            <label className="text-field-label">password</label>
             <div className="text-field-mask login-password-mask"></div>
             <span>
               <input type="checkbox" onClick={this.togglePasswordView} />

@@ -117,26 +117,6 @@ p, span, div, h1, h2, h3, label, button {
   width: 80%;
 }
 
-.stepper-container {
-  background-color: white;
-  box-shadow: 5px 5px 10px #272727;
-  padding: 20px;
-  border-radius: 25px;
-  height: 100%;
-  width: 80%;
-  text-align: center;
-  font-size: 35px;
-  position: relative;
-}
-
-.stepper-input {
-  margin: 5px;
-  height: 30px;
-  width: 125px;
-  text-align: right;
-  font-size: 25px;
-}
-
 .main-heading {
   text-decoration: underline;
   margin-bottom: 20px;
@@ -185,6 +165,10 @@ p, span, div, h1, h2, h3, label, button {
   transition: 0.3s;
 }
 
+.question-text {
+  font-size: 2.3em;
+}
+
 .text-field {
   position: relative;
   height: 30px;
@@ -207,6 +191,7 @@ p, span, div, h1, h2, h3, label, button {
 .text-field:focus + .text-field-label {
   color: #f0aa42;
   font-size: 0.8em;
+  transform: translate(5px, 6px);
 }
 
 .text-field-active {
@@ -220,6 +205,14 @@ p, span, div, h1, h2, h3, label, button {
 .text-field-active + .text-field-label {
   color: black;
   font-size: 0.8em;
+  transform: translate(5px, 6px);
+}
+
+.text-field-container {
+  width: 166px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .text-field-label {
@@ -229,13 +222,14 @@ p, span, div, h1, h2, h3, label, button {
   padding-left: 5px;
   transition: all 0.3s ease-in;
   pointer-events: none;
+  transform: translate(3px, 23px);
   z-index: 1;
 }
 
 .text-field-mask {
   position: relative;
   top: -36px;
-  left: 128px;
+  left: 7px;
   height: 4px;
   background-color: #FFF;
 }
