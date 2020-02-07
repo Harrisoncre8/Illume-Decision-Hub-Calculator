@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Nav from '../Nav/Nav';
 
 export default function Stepper() {
   // Using hooks to access redux and saga
@@ -24,6 +25,7 @@ export default function Stepper() {
   }, [questionData.split, inputData, questionData.question_id, splitData])
 
 
+  // Push to next question
   function nextPage() {
     dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
     dispatch({type: 'ADD_INPUT_VALUE', payload:{key: questionData.question_id, value: input}})
@@ -38,6 +40,7 @@ export default function Stepper() {
     }
   }
 
+  // Push to previous question
   function lastPage() {
     if (lastPageID.length === 0) {
       history.push('/');
@@ -50,6 +53,7 @@ export default function Stepper() {
 
   return (
     <center>
+      <Nav />
       <div className='stepper-container'>
         <p>
           {questionData.question}<br/>
@@ -66,7 +70,7 @@ export default function Stepper() {
                   />
                   {split.split_text}
                 </span>
-              )
+              );
             })
             :
             <input 
@@ -74,11 +78,12 @@ export default function Stepper() {
               value={input} 
               onChange={(e)=>setInput(e.target.value)} 
               type={questionData.response_type} 
-            />}
+            />
+          }
           <br/>{questionData.help_text}
         </p>
-        <div onClick={()=>lastPage()} className='arrow-left' />
-        <div onClick={()=>nextPage()} className='arrow-right' />
+        <div onClick={lastPage} className='arrow-left' />
+        <div onClick={nextPage} className='arrow-right' />
       </div>
     </center>
   );
