@@ -18,7 +18,6 @@ import User from '../User/User';
 export default function App() {
   return (
     <Router>
-      <Nav />
       <div className="App">
         <Route exact path='/' component={Login} />
         <ProtectedRoute exact path='/admin' component={Admin} />

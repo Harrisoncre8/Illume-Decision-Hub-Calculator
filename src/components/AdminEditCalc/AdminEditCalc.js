@@ -14,7 +14,7 @@ export default function AdminEditCalc() {
   const handlePriceClick = () => price ? setPrice(false) : closeOthers('price');
   const pushHistoryBack = () => history.push('/admin');
 
-  const closeOthers = (state) => {
+  const closeOthers = state => {
     switch (state){
       case 'break':
         setBreakEven(true); 

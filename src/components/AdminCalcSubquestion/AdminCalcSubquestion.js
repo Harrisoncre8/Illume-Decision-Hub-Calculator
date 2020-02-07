@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import '../AdminEditCalc/AdminEditCalc.css';
 
 export default function AdminCalcSubquestion(props) {
 
@@ -28,7 +29,7 @@ export default function AdminCalcSubquestion(props) {
         value={tooltip} 
         onChange={(event)=>setTooltip(event.target.value)}
       />
-      <button onClick={handleSave}>SAVE</button>
+      <button className="normal-btn admin-edit-calc-btn" onClick={handleSave}>SAVE</button>
     </>
   );
 }
