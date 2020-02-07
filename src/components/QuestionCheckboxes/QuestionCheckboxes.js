@@ -69,8 +69,6 @@ const QuestionCheckboxes = () => {
         })}
         <button>Save</button>
       </form>
-      {JSON.stringify(checked)}
-      {JSON.stringify(userCheckboxes)}
     </center>
   )
 };
