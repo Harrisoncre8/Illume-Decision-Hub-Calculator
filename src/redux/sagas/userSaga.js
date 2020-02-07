@@ -52,6 +52,7 @@ function* putNewPassword(action) {
     // yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
   } catch (error) {
     console.log('User put new password request failed', error);
+    yield put({type: 'MATCH_PASSWORD', payload: error.response.status});
   }
 }
 

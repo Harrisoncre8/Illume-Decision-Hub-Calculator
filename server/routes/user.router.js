@@ -68,6 +68,7 @@ router.put('/new-password', rejectUnauthenticated, (req, res) => {
   const sqlQuery = `UPDATE "users" SET "hashedpassword" = $2 WHERE "id" = $1;`;
   if(encryptLib.comparePassword(oldPassword, storedPassword)){
     pool.query(sqlQuery, [userID, newPassword]);
+    res.sendStatus(200);
   } else {
     res.sendStatus(401);
   }
