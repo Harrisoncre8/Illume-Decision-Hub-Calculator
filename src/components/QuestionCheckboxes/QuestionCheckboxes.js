@@ -8,7 +8,6 @@ const QuestionCheckboxes = () => {
 
   useEffect(()=>{
     dispatch({type: 'GET_ALL_QUESTIONS'})
-    dispatch({type: 'GET_USER_CHECKBOXES'})
   }, [dispatch])
 
   const [checked, setChecked] = useState({})
