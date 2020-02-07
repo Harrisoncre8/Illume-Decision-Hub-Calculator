@@ -1,30 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import './Login.css';
-// import { stat } from 'fs';
 
 class Login extends Component{
+
+  // Store local state
   state = {
     email: '',
     password: '',
   };
 
-  login = (event) => {
-    event.preventDefault();
-    if (this.state.email && this.state.password) {
-      this.props.dispatch({
-        type: 'LOGIN',
-        payload: {
-          username: this.state.email,
-          password: this.state.password,
-        },
-      });
-      this.props.history.push('/user');
-    } else {
-      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-    }
-  }
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
@@ -36,9 +21,31 @@ class Login extends Component{
     });
     this.checkForValue(e);
   }
+
+  // Push history to registration page
   handleRegister = () => {
     this.props.history.push('/register');
   }
+
+  // Handle user log-in and push history to main user page, otherwise return an error message
+  login = e => {
+    e.preventDefault();
+    if (this.state.email && this.state.password) {
+      this.props.dispatch({
+        type: 'LOGIN',
+        payload: {
+          username: this.state.email,
+          password: this.state.password,
+        },
+      });
+      this.pushHistoryToUser();
+    } else {
+      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+    }
+  }
+
+  // Push history to main user page
+  pushHistoryToUser = () => this.props.history.push('/user');
 
   render(){
     return(
@@ -58,23 +65,23 @@ class Login extends Component{
           </div>
           <form onSubmit={this.login}>
 
-          <div className="login-text-field-container">
+          <div className="text-field-container login-text-field-container">
             <input 
-              className="text-field login-text-field-email" 
+              className="text-field" 
               type="text" 
               onChange={(event)=>this.handleChange(event, 'email')}
             />
-            <label className="text-field-label login-label-email">email</label>
+            <label className="text-field-label">email</label>
             <div className="text-field-mask login-email-mask"></div>
           </div>
 
-          <div className="login-text-field-container">
+          <div className="text-field-container login-text-field-container">
             <input 
-              className="text-field login-text-field-password" 
+              className="text-field" 
               type="password" 
               onChange={(event)=>this.handleChange(event, 'password')}
             />
-            <label className="text-field-label login-label-password">password</label>
+            <label className="text-field-label">password</label>
             <div className="text-field-mask login-password-mask"></div>
           </div>
 
@@ -94,4 +101,4 @@ const mapStateToProps = state => ({
     errors: state.errors,
 });
 
-export default withRouter(connect(mapStateToProps)(Login));
+export default connect(mapStateToProps)(Login);

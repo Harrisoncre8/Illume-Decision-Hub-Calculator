@@ -207,6 +207,7 @@ p, span, div, h1, h2, h3, label, button {
 .text-field:focus + .text-field-label {
   color: #f0aa42;
   font-size: 0.8em;
+  transform: translate(5px, 6px);
 }
 
 .text-field-active {
@@ -220,6 +221,14 @@ p, span, div, h1, h2, h3, label, button {
 .text-field-active + .text-field-label {
   color: black;
   font-size: 0.8em;
+  transform: translate(5px, 6px);
+}
+
+.text-field-container {
+  width: 166px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .text-field-label {
@@ -229,13 +238,14 @@ p, span, div, h1, h2, h3, label, button {
   padding-left: 5px;
   transition: all 0.3s ease-in;
   pointer-events: none;
+  transform: translate(3px, 23px);
   z-index: 1;
 }
 
 .text-field-mask {
   position: relative;
   top: -36px;
-  left: 128px;
+  left: 7px;
   height: 4px;
   background-color: #FFF;
 }

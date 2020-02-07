@@ -21,14 +21,6 @@
   width: 80%;
 }
 
-.login-label-email {
-  transform: translate(-60px, 23px);
-}
-
-.login-label-password {
-  transform: translate(-50px, 23px);
-}
-
 .login-login-btn {
   margin-top: 100px;
   margin-bottom: 30px;
@@ -40,7 +32,7 @@
 }
 
 .login-password-mask {
-  width: 45px;
+  width: 46px;
 }
 
 .login-register-btn {
@@ -54,22 +46,4 @@
 
 .login-text-field-container {
   padding-top: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.login-text-field-email:focus + .login-label-email {
-  transform: translate(-60px, 6px);
-}
-
-.login-text-field-password:focus + .login-label-password {
-  transform: translate(-52px, 6px);
-}
-
-.text-field-active + .login-label-email {
-  transform: translate(-60px, 6px);
-}
-
-.text-field-active + .login-label-password {
-  transform: translate(-52px, 6px);
 }
