@@ -1,30 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import './Login.css';
-// import { stat } from 'fs';
 
 class Login extends Component{
+
+  // Store local state
   state = {
     email: '',
     password: '',
+    showPassword: 'password'
   };
 
-  login = (event) => {
-    event.preventDefault();
-    if (this.state.email && this.state.password) {
-      this.props.dispatch({
-        type: 'LOGIN',
-        payload: {
-          username: this.state.email,
-          password: this.state.password,
-        },
-      });
-      this.props.history.push('/user');
-    } else {
-      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-    }
-  }
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
@@ -36,11 +22,48 @@ class Login extends Component{
     });
     this.checkForValue(e);
   }
+
+  // Push history to registration page
   handleRegister = () => {
     this.props.history.push('/register');
   }
 
-  handleClick = () => this.props.history.push(`/admin`);
+  // Handle user log-in and push history to main user page, otherwise return an error message
+  login = e => {
+    e.preventDefault();
+    if (this.state.email && this.state.password) {
+      this.props.dispatch({
+        type: 'LOGIN',
+        payload: {
+          username: this.state.email,
+          password: this.state.password,
+        },
+      });
+    } else {
+      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+    }
+  }
+
+  // using previous props to check user type for route
+  componentDidUpdate(prevProps){
+    if(this.props.user !== prevProps.user){
+      this.pushHistoryToUser();
+    }
+  }
+
+  // Push user to admin or user based on admin boolean
+  pushHistoryToUser = () => {
+    if (this.props.user && this.props.user.admin){
+      this.props.history.push('/admin');
+    }else if (this.props.user && this.props.user.id){
+      this.props.history.push('/user');
+    }else{
+      this.props.history.push('/');
+    }
+  }
+
+  // Show or hide password
+  togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
 
   render(){
     return(
@@ -73,11 +96,15 @@ class Login extends Component{
           <div className="login-text-field-container">
             <input 
               className="text-field login-text-field-password" 
-              type="password" 
+              type={this.state.showPassword} 
               onChange={(event)=>this.handleChange(event, 'password')}
             />
             <label className="text-field-label login-label-password">password</label>
             <div className="text-field-mask login-password-mask"></div>
+            <span>
+              <input type="checkbox" onClick={this.togglePasswordView} />
+                <label> Show Password</label>
+            </span>
           </div>
 
           <button className="normal-btn login-login-btn" onClick={this.login}>Log In</button>
@@ -85,8 +112,6 @@ class Login extends Component{
           <hr className="login-hr" />
 
           <button className="login-register-btn" onClick={this.handleRegister}>register</button>
-          <br />
-          <button onClick={this.handleClick}>admin</button>
           </form>
         </div>
       </center>
@@ -96,6 +121,7 @@ class Login extends Component{
 
 const mapStateToProps = state => ({
     errors: state.errors,
+    user: state.user,
 });
 
-export default withRouter(connect(mapStateToProps)(Login));
+export default connect(mapStateToProps)(Login);

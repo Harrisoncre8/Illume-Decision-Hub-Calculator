@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './AdminEditIndustry.css';
 import Modal from 'react-awesome-modal';
+import Nav from '../Nav/Nav';
 
 class AdminEditIndustry extends Component{
 
@@ -84,7 +85,7 @@ class AdminEditIndustry extends Component{
     if(!industry.target){
       this.setState({
         visible: true,
-        industry: industry.industry,
+        industry: industry,
         selectedIndustry: {
           ...industry,
           margin: industry.margin*100
@@ -107,6 +108,7 @@ class AdminEditIndustry extends Component{
 
     return(
       <center>
+        <Nav />
         <div className="main-container">
           <button className="close-window-button" onClick={this.pushHistoryBack}>x</button>
           <h1 className="main-heading admin-industry-heading">Industry Information</h1>
@@ -122,7 +124,7 @@ class AdminEditIndustry extends Component{
             <tbody>
               {this.props.industry.map(industry => 
                 <tr key={industry.id}>
-                  <td>{industry.industry}</td>
+                  <td>{industry}</td>
                   <td>{industry.margin * 100}%</td>
                   <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
                 </tr>
@@ -210,7 +212,7 @@ class AdminEditIndustry extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  industry: reduxState.industry.industry, ////////////////////////////////////////////////////////////////
+  industry: reduxState.industry,
 });
 
 export default connect(putReduxStateOnProps)(AdminEditIndustry);
