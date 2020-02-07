@@ -35,7 +35,7 @@
 }
 
 .register-mask-company {
-  width: 45px;
+  width: 59px;
 }
 
 .register-mask-confirm-password {
@@ -43,19 +43,19 @@
 }
 
 .register-mask-email {
-  width: 30px;
+  width: 38px;
 }
 
 .register-mask-name {
-  width: 32px;
+  width: 38px;
 }
 
 .register-mask-password {
-  width: 45px;
+  width: 61px;
 }
 
 .register-mask-phone {
-  width: 43px;
+  width: 54px;
 }
 
 .register-register-btn {
