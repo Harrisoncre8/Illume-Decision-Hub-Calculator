@@ -16,7 +16,7 @@ CREATE TABLE "industry" (
 CREATE TABLE "contact_info" (
   "user_id" INT PRIMARY KEY,
   "name" TEXT,
-  "buisiness_name" TEXT,
+  "business_name" TEXT,
   "industry_id" INT,
   "phone_number" TEXT
 );
@@ -76,9 +76,9 @@ CREATE TABLE "checkboxes" (
 );
 
 CREATE TABLE "user_checks" (
-  "id" SERIAL PRIMARY KEY,
   "user_id" INT,
-  "question_id" INT
+  "question_id" INT,
+  PRIMARY KEY ("user_id", "question_id")
 );
 --#endregion
 
@@ -202,13 +202,13 @@ VALUES (
   'Benefits'
 ),
 (
-  'What is your rent/buisiness morgage payment?',
+  'What is your rent/business morgage payment?',
   'number',
   'Remember to include escrow payments and insurance here.',
   4,
   FALSE,
   FALSE,
-  'Rent/Buisiness'
+  'Rent/business'
 ),
 (
   'How much do you spend on supplies?',
@@ -229,7 +229,7 @@ VALUES (
   'Travel'
 ),
 (
-  'How much do you spend on buisiness meetings?',
+  'How much do you spend on business meetings?',
   'number',
   'This does not include travel but would include lunch costs.',
   4,
@@ -408,5 +408,5 @@ VALUES ('Attorney', 0.30), ('Cleaning', 0.20), ('Massage', 0.25);
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
 VALUES ('test@test.co', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
 
-INSERT INTO "contact_info" ("user_id", "name", "buisiness_name", "industry_id", "phone_number")
+INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "phone_number")
 VALUES (1,'test', 'test co', 1, '1234567890');
