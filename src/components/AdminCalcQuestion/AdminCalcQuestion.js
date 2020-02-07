@@ -23,6 +23,22 @@ export default function AdminCalcQuestion(props) {
     }
   }, [props.id]);
 
+  // Map through sub-questions, increment question number for each question
+  const subMap = () => {
+    let count = 1;
+    return (
+      props.id === 3 || props.id === 4 ?
+        subQuestion.map(q=>
+          <div key={q.id}>
+            <h3 className="main-heading">Sub-Question {count++}</h3>
+            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
+          </div>
+        )
+        :
+        ''
+    );
+  }
+
   return(
     <>
       <textarea 
@@ -39,16 +55,7 @@ export default function AdminCalcQuestion(props) {
       />
       <button className="normal-btn admin-edit-calc-btn" onClick={handleSave}>SAVE</button>
       <div>
-      {props.id === 3 || props.id === 4 ?
-        subQuestion.map(q=>
-          <div key={q.id}>
-            <h3 className="main-heading">Sub-Question</h3>
-            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
-          </div>
-        )
-        :
-        ''
-      }
+        {subMap()}
       </div>
     </>
   );

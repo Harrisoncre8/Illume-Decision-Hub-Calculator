@@ -12,6 +12,7 @@ export default function AdminEditThisCalc(props) {
     dispatch({type: `GET_ADMIN_QUESTION`, payload: props.calcID});
   }, []);
 
+  // Map through questions, increment question number for each question
   const mainMap = () => {
     let count = 1;
     return (
