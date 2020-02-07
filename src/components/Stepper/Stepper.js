@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './Stepper.css';
 
 export default function Stepper() {
   // Using hooks to access redux and saga
@@ -52,9 +53,12 @@ export default function Stepper() {
 
   return (
     <center>
-      <div className='stepper-container'>
+      <div className='main-container'>
         <p>
-          {questionData.question}<br/>
+          <p className="question-text">
+            {questionData.question}
+          </p>
+          <br />
           {questionData.split ?
             splitData.map(split => {
               return (
@@ -79,12 +83,15 @@ export default function Stepper() {
                   onChange={(e)=>setInput(e.target.value)} 
                   type={questionData.response_type} 
                 />
-                <label className="text-field-label">password</label>
-                <div className="text-field-mask register-mask-password"></div>
+                <label className="text-field-label">enter value</label>
+                <div className="text-field-mask stepper-mask"></div>
               </div>
             </center>
           }
-          <br/>{questionData.help_text}
+          <br />
+          <p className="question-text">
+            {questionData.help_text}
+          </p>
         </p>
         <div onClick={lastPage} className='arrow-left' />
         <div onClick={nextPage} className='arrow-right' />
