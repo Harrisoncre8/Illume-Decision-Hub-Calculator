@@ -1,4 +1,20 @@
-.nav-div{
-  margin: auto;
-  width: fit-content;
+.nav-btn {
+  margin: 10px;
+}
+
+.circle-btn-active {
+  font-size: 1.4em;
+  text-transform: uppercase;
+  background-color: #f0aa42;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 1px 3px grey;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.circle-btn-active:hover {
+  background-color: #f0aa42;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import './PriceSetting.css';
+import Nav from '../Nav/Nav';
 import Axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -190,6 +191,7 @@ function PriceSetting() {
 
   return (
     <center>
+      <Nav />
       <div className="main-container">
         <h1 className="main-heading">Price Setting</h1>
         <div className="inputs">

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './AdminEditUserInfo.css';
 import Modal from 'react-awesome-modal';
+import Nav from '../Nav/Nav';
 
 class AdminEditUserInfo extends Component {
 
@@ -94,6 +95,7 @@ class AdminEditUserInfo extends Component {
 
     return (
       <center>
+        <Nav />
         <div className="main-container">
           <button className="close-window-button" onClick={this.pushHistoryBack}>x</button>
           <h1 className="main-heading admin-user-heading">User Information</h1>
