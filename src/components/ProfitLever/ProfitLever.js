@@ -207,16 +207,16 @@ function ProfitLever() {
         {stepper(1)}
         <div className="data-result">
           <h3 className="data-result-heading">Result</h3>
-          <p>A 1% improvement in price will deliver {price.toFixed(1)}% improvement in profit.</p>
+          <p>A 1% improvement in price will deliver {isNaN(price.toFixed(1))? 0 : price.toFixed(1)}% improvement in profit.</p>
           {/* <p>This translates to $x more profit in your pocket per year</p> */}
           <br />
-          <p>A 1% increase in sales will deliver {growth.toFixed(1)}% improvement in profit.</p>
+          <p>A 1% increase in sales will deliver {isNaN(growth.toFixed(1))? 0 : growth.toFixed(1)}% improvement in profit.</p>
           {/* <p>This translate into $x more profit in your pocket per year</p> */}
           <br />
-          <p>A 1% reduction in direct cost will deliver {directCostChange.toFixed(1)}% improvement in profit.</p>
+          <p>A 1% reduction in direct cost will deliver {isNaN(directCostChange.toFixed(1))? 0 : directCostChange.toFixed(1)}% improvement in profit.</p>
           {/* <p>This translates into $x more profit in your pocket per year</p> */}
           <br />
-          <p>A 1% reduction in indirect costs will deliver {indirectCostChange.toFixed(1)}% improvement in profit.</p>
+          <p>A 1% reduction in indirect costs will deliver {isNaN(indirectCostChange.toFixed(1))? 0 : indirectCostChange.toFixed(1)}% improvement in profit.</p>
           {/* <p>This translates into $x more profit in your pocket each year</p> */}
         </div>
       </div>
