@@ -11,9 +11,20 @@ export default function Stepper() {
   const questionData = useSelector(state => state.question);
   const splitData = useSelector(state => state.split);
   const lastPageID = useSelector(state => state.previousQuestion)
+  const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const history = useHistory();
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
+
+  useEffect(()=>{
+    if(
+      questionData.question_id && 
+      questionData.id !== lastPageID[lastPageID.length-1] && 
+      userCheckboxes.findIndex(el => el.question_id === questionData.question_id) === -1
+    ){
+      nextPage();
+    }
+  },[questionData, userCheckboxes])
 
   useEffect(()=>{
     setInput(inputData[questionData.question_id] || '');
@@ -58,11 +69,17 @@ export default function Stepper() {
     }
   }
 
+  // Handles pressing enter
+  function submit(e){
+    e.preventDefault();
+    nextPage();
+  }
+
   return (
     <center>
       <Nav />
       <div className='main-container'>
-        <p>
+        <form onSubmit={e=>{submit(e)}}>
           <p className="question-text">
             {questionData.question}
           </p>
@@ -103,7 +120,7 @@ export default function Stepper() {
           <p className="question-text">
             {questionData.help_text}
           </p>
-        </p>
+        </form>
         <div onClick={lastPage} className='arrow-left' />
         <div onClick={nextPage} className='arrow-right' />
       </div>
