@@ -3,7 +3,7 @@ Group Project for Prime Digital Academy
 
 Client: Illume Pricing
 
-Group: Harrison Nguyen, Phillip Berg, Courtney Olesee, and Awren Nuit
+Group: Phillip Berg, Harrison Nguyen, Awren Nuit, and Courtney Olesee
 
 
 _Duration: 2 week sprint_
@@ -13,23 +13,23 @@ The application is designed to help small business owners generate more profits.
 
 ## Screen Shots
 
-## Installation 
+## Installation
 > npm install 
 
 > npm run client
 
->npm run server
+> npm run server
 
-## Usagages 
+## Usage 
 - User:
     - Must register for login
     - Able to edit their information
-    - 3 Calculator Stepper (converstaional questionaires) options (Break Even, Profit Lever, Price Setting)
-        - each calculator keeps user inputted data in state to output in 'results' page where user can continue to edit inputted numbers to dynamically view results 
+    - 3 Calculator Stepper (conversational questionnaires) options (Break Even, Price Setting, Profit Lever)
+        - Each calculator keeps user inputted data in state to output in 'results' page where user can continue to edit inputted numbers to dynamically view results 
         - Results suggest changes in user financial decisions to positively impact business
 - Admin:
     - Must be created by another Admin
-    - Able to edit each calculator's question, subquestion, and tool tip text
+    - Able to edit each calculator's question, sub-question, and tool tip text
     - Able to edit all user information, toggle users between Admin/User, change users' passwords for reset
     - Able to edit industry margins and add new industries
     - Can use all tool functionality of regular user
