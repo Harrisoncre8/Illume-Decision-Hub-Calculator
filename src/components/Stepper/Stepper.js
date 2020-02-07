@@ -63,14 +63,16 @@ export default function Stepper() {
             splitData.map(split => {
               return (
                 <span key={split.id}>
-                  <input
-                    type="radio"
-                    name="next"
-                    value={split.next_id}
-                    checked={+splitNext === split.next_id}
-                    onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
-                  />
-                  {split.split_text}
+                  <label className="radio-container">{split.split_text}
+                    <input
+                      type="radio"
+                      name="next"
+                      value={split.next_id}
+                      checked={+splitNext === split.next_id}
+                      onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
+                    />
+                    <span className="radio-btn"></span>
+                  </label>
                 </span>
               );
             })
