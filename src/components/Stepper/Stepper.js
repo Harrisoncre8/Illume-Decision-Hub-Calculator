@@ -25,7 +25,13 @@ export default function Stepper() {
     }
   }, [questionData.split, inputData, questionData.question_id, splitData])
 
+  // Adds class if input has a value, removes the class if input has no value
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
+  const handleChange = e => {
+    setInput(e.target.value);
+    checkForValue(e);
+  }
   // Push to next question
   function nextPage() {
     dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
@@ -84,7 +90,7 @@ export default function Stepper() {
                 <input 
                   className="text-field"
                   value={input} 
-                  onChange={(e)=>setInput(e.target.value)} 
+                  onChange={(e)=>handleChange(e)} 
                   type={questionData.response_type} 
                   autoFocus
                 />
