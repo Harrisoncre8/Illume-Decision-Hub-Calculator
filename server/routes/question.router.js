@@ -40,8 +40,17 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
   }
 });
 
+router.get('/all/', (req,res)=>{
+  pool.query(`SELECT * FROM "questions" ORDER BY "id";`).then(results=>{
+    res.send(results.rows);
+  }).catch(err=>{
+    console.log(err);
+    res.send(500);
+  })
+})
+
 // GET questions for results page
-router.get('/all/:id', (req,res)=>{
+router.get('/results/:id', (req,res)=>{
   pool.query(`
       SELECT 
         "qc"."id", 

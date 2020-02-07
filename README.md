@@ -1,4 +1,4 @@
-# Illume Decison Hub Calculator
+# Illume Decision Hub Calculator
 Group Project for Prime Digital Academy 
 Client: Illume Pricing
 Group: Harrison Nguyen, Phillip Berg, Courtney Olesee, and Awren Nuit
