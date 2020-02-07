@@ -11,7 +11,7 @@ body {
 }
 
 p, span, div, h1, h2, h3, label, button {
-  font-family: "Open Sans Condensed", sans-serif;
+  font-family:'Century Gothic','Futura',san-serif;
 }
 
 .arrow-left {
@@ -55,7 +55,7 @@ p, span, div, h1, h2, h3, label, button {
 }
 
 .circle-btn {
-  font-size: 1.4em;
+  font-size: 1.2em;
   text-transform: uppercase;
   background-color: #f7d149;
   height: 150px;
@@ -167,6 +167,64 @@ p, span, div, h1, h2, h3, label, button {
 
 .question-text {
   font-size: 2.3em;
+}
+
+.radio-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.radio-btn:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radio-container {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 30px 0;
+  cursor: pointer;
+  font-size: 1.3em;
+}
+
+.radio-container input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-container input[type="radio"]:checked ~ .radio-btn {
+  background-color: #f7d149;
+}
+
+.radio-container input[type="radio"]:checked ~ .radio-btn:after {
+  display: inline-block;
+}
+
+.radio-container:hover input[type="radio"] ~ .radio-btn {
+  background-color: #f0aa42;
+}
+
+.radio-container:hover input[type="radio"] ~ .radio-btn {
+  background-color: #f7d149;
+}
+
+.radio-container .radio-btn:after {
+  top: 6px;
+ left: 6px;
+ width: 8px;
+ height: 8px;
+ border-radius: 50%;
+ background: #f0aa42;
 }
 
 .text-field {
