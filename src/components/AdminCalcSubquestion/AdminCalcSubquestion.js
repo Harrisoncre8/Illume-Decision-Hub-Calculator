@@ -8,6 +8,7 @@ export default function AdminCalcSubquestion(props) {
   const [tooltip, setTooltip] = useState(props.tooltip);
   // const [show, setShow]
 
+  // Dispatch to saga to update question and tooltip in database
   const handleSave = () => {
     let id = [props.id, question, tooltip, props.calcID];
     dispatch({type: `PUT_ADMIN_SUB_QUESTION`, payload: id});

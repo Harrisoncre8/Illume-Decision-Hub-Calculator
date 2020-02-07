@@ -4,6 +4,7 @@ import './Register.css';
 
 class Register extends Component{
 
+  //Store local state
   state = {
     name: '',
     company: '',
@@ -11,8 +12,9 @@ class Register extends Component{
     industry: '',
     email: '',
     password: '',
-    confirmPassword: ''
-  }
+    showPassword: 'password'
+  } 
+
 
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
@@ -26,12 +28,19 @@ class Register extends Component{
     this.checkForValue(e);
   }
   
+  // Return to login page
   handleCancel = () => {
     this.props.history.push('/');
   }
 
-  registerUser = (event) => {
-    event.preventDefault();
+  // Push history to new user page
+  pushHistoryToUser = () => {
+    this.props.history.push('/new-user');
+  }
+
+  // Log new user information into database, push history to new user page
+  registerUser = e => {
+    e.preventDefault();
     if (this.state.name && this.state.company && this.state.phone && this.state.industry && this.state.email && this.state.password){
         this.props.dispatch({
             type: 'REGISTER',
@@ -44,12 +53,13 @@ class Register extends Component{
               password: this.state.password,
             },
         });           
-    this.props.history.push('/new-user');
+    this.pushHistoryToUser();
     } else {
-        this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
-}
-
+  }
+    // Show or hide password
+    togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
 
   render(){
     return(
@@ -61,43 +71,43 @@ class Register extends Component{
             <span className="register-brand-name">illume decision hub</span>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-name" 
+              className="text-field" 
               type="text" 
               name="name"
               value={this.state.name}
               onChange={(event)=>this.handleChange(event, 'name')}
             />
-            <label className="text-field-label register-label-name">name</label>
+            <label className="text-field-label">name</label>
             <div className="text-field-mask register-mask-name"></div>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-company" 
+              className="text-field" 
                 type="text" 
                 name="company"
                 value={this.state.company}
                 onChange={(event)=>this.handleChange(event, 'company')}
             />
-            <label className="text-field-label register-label-company">company</label>
+            <label className="text-field-label">company</label>
             <div className="text-field-mask register-mask-company"></div>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-phone" 
+              className="text-field" 
               type="text" 
               name="phone"
               value={this.state.phone}
               onChange={(event)=>this.handleChange(event, 'phone')}
             />
-            <label className="text-field-label register-label-phone">phone #</label>
+            <label className="text-field-label">phone #</label>
             <div className="text-field-mask register-mask-phone"></div>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <select 
               className="dropdown register-dropdown"
               defaultValue="Select Industry"
@@ -112,41 +122,31 @@ class Register extends Component{
             </select>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-email" 
+              className="text-field" 
               type="text" 
               name="email"
               value={this.state.email}
               onChange={(event)=>this.handleChange(event, 'email')}
             />
-            <label className="text-field-label register-label-email">email</label>
+            <label className="text-field-label">email</label>
             <div className="text-field-mask register-mask-email"></div>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-password" 
-              type="password" 
-              name="password"
-              value={this.state.password}
+              className="text-field" 
+              type={this.state.showPassword} 
               onChange={(event)=>this.handleChange(event, 'password')}
             />
-            <label className="text-field-label register-label-password">password</label>
+            <label className="text-field-label">password</label>
             <div className="text-field-mask register-mask-password"></div>
+            <span>
+              <input type="checkbox" onClick={this.togglePasswordView} />
+                <label> Show Password</label>
+            </span>
           </div>
-
-{/* confirm not set up yet with state payload */}
-          <div className="register-text-field-container">
-            <input 
-              className="text-field register-text-field-confirm-password" 
-              type="password" 
-              onChange={(event)=>this.handleChange(event, 'confirmPassword')}
-            />
-            <label className="text-field-label register-label-confirm-password">confirm password</label>
-            <div className="text-field-mask register-mask-confirm-password"></div>
-          </div>
-
           <button className="normal-btn register-register-btn" onClick={this.registerUser}>Confirm</button>
           <hr className="register-hr" />
 

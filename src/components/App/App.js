@@ -8,7 +8,6 @@ import AdminEditIndustry from '../AdminEditIndustry/AdminEditIndustry';
 import AdminEditUserInfo from '../AdminEditUserInfo/AdminEditUserInfo';
 import BreakEven from '../BreakEven/BreakEven';
 import Login from '../Login/Login';
-import Nav from '../Nav/Nav';
 import NewUser from '../NewUser/NewUser';
 import PriceSetting from '../PriceSetting/PriceSetting';
 import ProfitLever from '../ProfitLever/ProfitLever';

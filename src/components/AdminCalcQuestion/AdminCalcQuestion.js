@@ -9,11 +9,13 @@ export default function AdminCalcQuestion(props) {
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
 
+  // Dispatch to saga to update question and tooltip in database
   const handleSave = () => {
     let id = [props.id, question, tooltip, props.calcID];
     dispatch({type: `PUT_ADMIN_QUESTION`, payload: id});
   }
 
+  // Runs when component mounts
   useEffect(()=>{
     if(props.id === 3 || props.id === 4){
       dispatch({type: `GET_ADMIN_SUB_QUESTION`, payload: props.id});
