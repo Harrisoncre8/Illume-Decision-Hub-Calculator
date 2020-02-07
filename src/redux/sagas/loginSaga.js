@@ -4,6 +4,8 @@ import axios from 'axios';
 // worker Saga: will be fired on "LOGIN" actions
 function* loginUser(action) {
   try {
+    console.log('in login user saga****************************', action.payload);
+    
     // clear any existing error on the login page
     yield put({ type: 'CLEAR_LOGIN_ERROR' });    
     const config = {
@@ -13,7 +15,9 @@ function* loginUser(action) {
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
-    yield axios.post('/api/user/login', action.payload, config);    
+    yield axios.post('/api/user/login', action.payload, config);  
+    console.log('**--------**------------------**--->getting to loginUser saga????????');
+  
     // after the user has logged in
     // get the user information from the server
     yield put({type: 'FETCH_USER'});
@@ -23,7 +27,7 @@ function* loginUser(action) {
       // The 401 is the error status sent from passport
       // if user isn't in the database or
       // if the email and password don't match in the database
-      yield put({ type: 'LOGIN_FAILED' });
+      yield put({ type: '_FAILED' });
     } else {
       // Got an error that wasn't a 401
       // Could be anything, but most common cause is the server is not started

@@ -13,7 +13,7 @@ function* registerUser(action) {
     console.log('POST ERROR------------------', action.payload);
 
     // automatically log a user in after registration
-    yield put({ type: 'LOGIN', payload: action.payload });
+    yield put({ type: 'LOGIN', payload: {username: action.payload.email, password: action.payload.password} });
     console.log('AUTO LOGIN FAIL ERROR------------------');
 
     // set to 'login' mode so they see the login screen
