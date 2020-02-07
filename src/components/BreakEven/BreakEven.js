@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './BreakEven.css';
+import Nav from '../Nav/Nav';
 import Axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -157,6 +158,7 @@ function BreakEven() {
 
   return (
     <center>
+      <Nav />
       <div className="main-container">
         <h1 className="main-heading">Break Even Pricing</h1>
         {stepper(6)}
