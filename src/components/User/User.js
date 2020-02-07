@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
-import './User.css';
+import './User.css'
+import Nav from '../Nav/Nav';
 
 export default function User(){
 // hooks for redux and sagas
@@ -37,7 +38,7 @@ const openModal = () => {
   setModal(true);
   setIndustry(userData[0].industry);
   setName(userData[0].name);
-  setCompany(userData[0].buisiness_name);
+  setCompany(userData[0].business_name);
   setPhone(userData[0].phone_number);
   setEmail(userData[0].email);
   setIndustryID(userData[0].industry_id);
@@ -72,13 +73,14 @@ const handleUserIndustry = (event) => {
 
   return(
     <center>
+      <Nav />
       <div className='main-container'>
         {userData.map((user, i) => 
           <ul className='user-info' key={i}>
             <h1 className='user-spacing'>Welcome back, {user.name}</h1>
             <h2 className='user-spacing'>Profile Information</h2>
             <li>Name: {user.name}</li>
-            <li>Comapny: {user.buisiness_name}</li>
+            <li>Company: {user.business_name}</li>
             <li>Phone: {user.phone_number}</li>
             <li>Email: {user.email}</li>
             <li className='user-spacing'>Industry: {user.industry}</li>
@@ -97,7 +99,7 @@ const handleUserIndustry = (event) => {
               <div key={i}>
                 <input value={name} placeholder={user.name}
                  onChange={(event) => setName(event.target.value)}></input>
-                <input value={company} placeholder={user.buisiness_name} 
+                <input value={company} placeholder={user.business_name} 
                  onChange={(event) => setCompany(event.target.value)}></input>
                 <input value={phone} placeholder={user.phone_number}
                  onChange={(event) => setPhone(event.target.value)}></input>

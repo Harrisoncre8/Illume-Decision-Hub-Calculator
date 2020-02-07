@@ -8,6 +8,7 @@ class Login extends Component{
   state = {
     email: '',
     password: '',
+    showPassword: 'password'
   };
 
   // Adds class if input has a value, removes the class if input has no value
@@ -38,14 +39,31 @@ class Login extends Component{
           password: this.state.password,
         },
       });
-      this.pushHistoryToUser();
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
   }
 
-  // Push history to main user page
-  pushHistoryToUser = () => this.props.history.push('/user');
+  // using previous props to check user type for route
+  componentDidUpdate(prevProps){
+    if(this.props.user !== prevProps.user){
+      this.pushHistoryToUser();
+    }
+  }
+
+  // Push user to admin or user based on admin boolean
+  pushHistoryToUser = () => {
+    if (this.props.user && this.props.user.admin){
+      this.props.history.push('/admin');
+    }else if (this.props.user && this.props.user.id){
+      this.props.history.push('/user');
+    }else{
+      this.props.history.push('/');
+    }
+  }
+
+  // Show or hide password
+  togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
 
   render(){
     return(
@@ -78,11 +96,15 @@ class Login extends Component{
           <div className="login-text-field-container">
             <input 
               className="text-field login-text-field-password" 
-              type="password" 
+              type={this.state.showPassword} 
               onChange={(event)=>this.handleChange(event, 'password')}
             />
             <label className="text-field-label login-label-password">password</label>
             <div className="text-field-mask login-password-mask"></div>
+            <span>
+              <input type="checkbox" onClick={this.togglePasswordView} />
+                <label> Show Password</label>
+            </span>
           </div>
 
           <button className="normal-btn login-login-btn" onClick={this.login}>Log In</button>
@@ -99,6 +121,7 @@ class Login extends Component{
 
 const mapStateToProps = state => ({
     errors: state.errors,
+    user: state.user,
 });
 
 export default connect(mapStateToProps)(Login);
