@@ -42,7 +42,7 @@ const QuestionCheckboxes = () => {
     <center style={{backgroundColor: 'white'}}>
       <h1>Please select costs that are relevent to you</h1>
       <form onSubmit={(e)=>submit(e)}>
-        {questions.map(question=>{
+        {Array.isArray(questions)? questions.map(question=>{
           if(!question.sub_questions && !question.split && question.header !== 'Product/Service Price' && question.header !== 'Revenue' && question.header !== 'Number of Sales'){
             return(
               <div key={question.id}>
@@ -66,7 +66,7 @@ const QuestionCheckboxes = () => {
             )} else {
               return(null);
             };
-        })}
+        }):null}
         <button>Save</button>
       </form>
     </center>
