@@ -8,6 +8,7 @@ class Login extends Component{
   state = {
     email: '',
     password: '',
+    showPassword: 'password'
   };
 
   // Adds class if input has a value, removes the class if input has no value
@@ -47,6 +48,9 @@ class Login extends Component{
   // Push history to main user page
   pushHistoryToUser = () => this.props.history.push('/user');
 
+  // Show or hide password
+  togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
+
   render(){
     return(
       <center>
@@ -78,11 +82,15 @@ class Login extends Component{
           <div className="text-field-container login-text-field-container">
             <input 
               className="text-field" 
-              type="password" 
+              type={this.state.showPassword} 
               onChange={(event)=>this.handleChange(event, 'password')}
             />
             <label className="text-field-label">password</label>
             <div className="text-field-mask login-password-mask"></div>
+            <span>
+              <input type="checkbox" onClick={this.togglePasswordView} />
+                <label> Show Password</label>
+            </span>
           </div>
 
           <button className="normal-btn login-login-btn" onClick={this.login}>Log In</button>

@@ -3,7 +3,8 @@ CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
   "email" TEXT,
   "hashedpassword" TEXT,
-  "admin" BOOLEAN DEFAULT false
+  "admin" BOOLEAN DEFAULT false,
+  "super_admin" BOOLEAN DEFAULT false
 );
 
 CREATE TABLE "industry" (
@@ -302,8 +303,8 @@ VALUES (1,1,2),
 (1,2,13),
 (1,3,28),
 (1,4,NULL),
-(1,5,6),
-(2,2,14),
+(1,5,2),
+(2,1,14),
 (2,3,29),
 (2,4,NULL),
 (3,5,15),
@@ -316,15 +317,15 @@ VALUES (1,1,2),
 (1,8,17),
 (1,9,18),
 (1,10,19),
-(1,11,4),
+(1,11,28),
 (2,8,21),
 (2,9,22),
 (2,10,23),
-(2,11,8),
+(2,11,29),
 (3,8,25),
 (3,9,26),
 (3,10,27),
-(3,11,11),
+(3,11,30),
 (1,24,4),
 (2,24,8),
 (3,24,11),
@@ -363,7 +364,8 @@ VALUES (1,1,2),
 (3,20,64),
 (3,21,65),
 (3,22,66),
-(3,23,12);
+(3,23,12),
+(2,5,14);
 --#endregion
 
 --#region Set up Splits
@@ -381,7 +383,9 @@ VALUES(1,1,'Single Product',2),
 (2,24,'Single',8),
 (2,24,'Walkthrough',43),
 (3,24,'Single',11),
-(3,24,'Walkthrough',55);
+(3,24,'Walkthrough',55),
+(2,1,'Single Product',2),
+(2,1,'Total Product',5);
 --#endregion
 
 -- dummy industry data 

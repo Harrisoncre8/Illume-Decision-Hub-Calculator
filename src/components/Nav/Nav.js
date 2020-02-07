@@ -8,6 +8,7 @@ export default function Nav() {
   let history = useHistory();
   const dispatch = useDispatch();
 
+  //Functions that move user to question stepper with relevant starting state
   function profitLever() {
     dispatch({ type: 'CLEAR_PREVIOUS_QUESTION' });
     dispatch({
@@ -44,6 +45,11 @@ export default function Nav() {
     history.push('/questionnaire');
   }
 
+  function logout() {
+    dispatch({type: 'LOGOUT'});
+    history.push('/');
+  }
+
   return (
     <div className='nav-div'>
       <button className='circle-btn' onClick={breakEven}>
@@ -52,7 +58,7 @@ export default function Nav() {
         Profit Lever Calculator</button>
       <button className='circle-btn' onClick={priceSetting}>
         Price Setting Calculator</button>
-      <button className='circle-btn' onClick={() => dispatch({ type: 'LOGOUT' })}>
+      <button className='circle-btn' onClick={() => logout()}>
         Log <br /> Out</button>
     </div>
   );
