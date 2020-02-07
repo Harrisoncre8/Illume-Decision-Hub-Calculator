@@ -54,7 +54,7 @@ function PriceSetting() {
       (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
       (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
       (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
-      (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
+      (+inputData[21] || 0) + (+inputData[22] || 0);
 
     let cost = directCosts + indirectCosts || 0;
     let price = +inputData[6] || 0;

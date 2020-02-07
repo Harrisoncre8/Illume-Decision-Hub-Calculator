@@ -32,7 +32,7 @@ function ProfitLever() {
       (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
       (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
       (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
-      (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
+      (+inputData[21] || 0) + (+inputData[22] || 0);
 
     let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
     console.log(directCosts, indirectCosts, divisor)
