@@ -54,6 +54,7 @@ export default function Stepper() {
 
   return (
     <center>
+      <Nav />
       <div className='main-container'>
         <p>
           <p className="question-text">
