@@ -23,6 +23,11 @@ export default function User(){
   const [industryID, setIndustryID] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  // setting state to be deployed on password change
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
+  const [wrongPassword, setWrongPassword] = useState(null);
 
   // on page load, get user and industry info and set state to userID
   useEffect(() => {
@@ -58,6 +63,14 @@ export default function User(){
   // opens modal to change password
   const openPassModal = () => {
     setPasswordModal(true);
+  }
+  // checks and saves the user's new password
+  const changePassword = () => {
+    if(newPassword === checkPassword){
+      setPasswordModal(false);
+    } else {
+      setWrongPassword(true);
+    }
   }
   // close modal to change password
   const closePassModal = () => {
@@ -129,11 +142,30 @@ export default function User(){
           effect="fadeInUp"
           onClickAway={closePassModal}
         >
-          <h1 className="main-heading admin-user-heading">Confirm New Password</h1>
-            <input></input>
+          <h1 className="main-heading admin-user-heading">Change Password</h1>
+          {wrongPassword ? <p>Please re-confirm your new password.</p> : null}
+            <div>
+              <input value={oldPassword} onChange={(event) => setOldPassword(event.target.value)} />
+              <label >Current Password</label>
+              <div></div>
+            </div>
+
+            <div>
+              <input value={newPassword} onChange={(event) => setNewPassword(event.target.value)} />
+              <label >New Password</label>
+              <div></div>
+            </div>
+
+            <div>
+              <input value={checkPassword} onChange={(event) => setCheckPassword(event.target.value)} />
+              <label >Confirm New Password</label>
+              <div></div>
+            </div>
             <div className="modal-btn-container">
               <button className="normal-btn" href="javascript:void(0);" 
-              onClick={closePassModal}>Close</button>
+              onClick={changePassword}>Confirm</button>
+              <button className="normal-btn" href="javascript:void(0);" 
+              onClick={closePassModal}>Cancel</button>
             </div>
         </Modal>
       </div>
