@@ -54,6 +54,7 @@ export default function AdminCalcQuestion(props) {
         onChange={(event)=>setTooltip(event.target.value)} 
       />
       <button className="normal-btn admin-edit-calc-btn" onClick={handleSave}>SAVE</button>
+      <hr />
       <div>
         {subMap()}
       </div>

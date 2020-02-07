@@ -30,6 +30,7 @@ export default function AdminCalcSubquestion(props) {
         onChange={(event)=>setTooltip(event.target.value)}
       />
       <button className="normal-btn admin-edit-calc-btn" onClick={handleSave}>SAVE</button>
+      <hr />
     </>
   );
 }
