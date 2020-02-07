@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './Register.css';
-import PasswordInput from '../PasswordInput/PasswordInput';
 
 class Register extends Component{
 
@@ -13,6 +12,7 @@ class Register extends Component{
     industry: '',
     email: '',
     password: '',
+    showPassword: 'password'
   } 
 
 
@@ -58,6 +58,8 @@ class Register extends Component{
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
   }
+    // Show or hide password
+    togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
 
   render(){
     return(
@@ -133,14 +135,17 @@ class Register extends Component{
           </div>
 
           <div className="register-text-field-container">
-            <PasswordInput 
+            <input 
               className="text-field register-text-field-password" 
-              name="password"
-              value={this.state.password}
+              type={this.state.showPassword} 
               onChange={(event)=>this.handleChange(event, 'password')}
             />
             <label className="text-field-label register-label-password">password</label>
             <div className="text-field-mask register-mask-password"></div>
+            <span>
+              <input type="checkbox" onClick={this.togglePasswordView} />
+                <label> Show Password</label>
+            </span>
           </div>
           <button className="normal-btn register-register-btn" onClick={this.registerUser}>Confirm</button>
           <hr className="register-hr" />

@@ -8,6 +8,7 @@ export default function Nav() {
   let history = useHistory();
   const dispatch = useDispatch();
 
+  //Functions that move user to question stepper with relevant starting state
   function profitLever() {
     dispatch({ type: 'CLEAR_PREVIOUS_QUESTION' });
     dispatch({
