@@ -304,7 +304,7 @@ VALUES (1,1,2),
 (1,3,28),
 (1,4,NULL),
 (1,5,2),
-(2,2,14),
+(2,1,14),
 (2,3,29),
 (2,4,NULL),
 (3,5,15),
@@ -364,7 +364,8 @@ VALUES (1,1,2),
 (3,20,64),
 (3,21,65),
 (3,22,66),
-(3,23,12);
+(3,23,12),
+(2,5,14);
 --#endregion
 
 --#region Set up Splits
@@ -382,7 +383,9 @@ VALUES(1,1,'Single Product',2),
 (2,24,'Single',8),
 (2,24,'Walkthrough',43),
 (3,24,'Single',11),
-(3,24,'Walkthrough',55);
+(3,24,'Walkthrough',55),
+(2,1,'Single Product',2),
+(2,1,'Total Product',5);
 --#endregion
 
 -- dummy industry data 

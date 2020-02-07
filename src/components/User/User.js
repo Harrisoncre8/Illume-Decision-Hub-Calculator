@@ -6,69 +6,69 @@ import './User.css';
 export default function User(){
   // getting data from redux
   let dispatch = useDispatch();
-  let industryData = useSelector(state => state.industry.industry);
+  let industryData = useSelector(state => state.industry);
   let userData = useSelector(state => state.userInfo);
   let userID = useSelector(state => state.user.id);
 
-// setting state for modal
-const [modal, setModal] = useState(false);
-const [passwordModal, setPasswordModal] = useState(false);
+  // setting state for modal
+  const [modal, setModal] = useState(false);
+  const [passwordModal, setPasswordModal] = useState(false);
 
-// setting state for user information
-const [company, setCompany] = useState('');
-const [email, setEmail] = useState('');
-const [id, setId] = useState('');
-const [industry, setIndustry] = useState('');
-const [industryID, setIndustryID] = useState('');
-const [name, setName] = useState('');
-const [phone, setPhone] = useState('');
+  // setting state for user information
+  const [company, setCompany] = useState('');
+  const [email, setEmail] = useState('');
+  const [id, setId] = useState('');
+  const [industry, setIndustry] = useState('');
+  const [industryID, setIndustryID] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
 
-// on page load, get user and industry info and set state to userID
-useEffect(() => {
-  if(userID){
-    setId(userID);
-    dispatch({type: `GET_USER_INFO`, payload: userID});
-    dispatch({type: `GET_INDUSTRY`});
+  // on page load, get user and industry info and set state to userID
+  useEffect(() => {
+    if(userID){
+      setId(userID);
+      dispatch({type: `GET_USER_INFO`, payload: userID});
+      dispatch({type: `GET_INDUSTRY`});
+    }
+  }, [userID, dispatch]);
+
+  // change state to open user info modal and set default info to the modal
+  const openModal = () => {
+    setModal(true);
+    setIndustry(userData[0].industry);
+    setName(userData[0].name);
+    setCompany(userData[0].business_name);
+    setPhone(userData[0].phone_number);
+    setEmail(userData[0].email);
+    setIndustryID(userData[0].industry_id);
   }
-}, [userID, dispatch]);
+  // change state to close user info modal
+  const closeModal = () => {
+      setModal(false);
+    }
 
-// change state to open user info modal and set default info to the modal
-const openModal = () => {
-  setModal(true);
-  setIndustry(userData[0].industry);
-  setName(userData[0].name);
-  setCompany(userData[0].business_name);
-  setPhone(userData[0].phone_number);
-  setEmail(userData[0].email);
-  setIndustryID(userData[0].industry_id);
-}
-// change state to close user info modal
-const closeModal = () => {
+  // save user info changes and sends to DB
+  const saveChanges = () => {
+    let userInfo = {id, name, company, phone, email, industryID};
+    dispatch({type: `PUT_USER_INFO`, payload: userInfo});
     setModal(false);
   }
 
-// save user info changes and sends to DB
-const saveChanges = () => {
-  let userInfo = {id, name, company, phone, email, industryID};
-  dispatch({type: `PUT_USER_INFO`, payload: userInfo});
-  setModal(false);
-}
+  // opens modal to change password
+  const openPassModal = () => {
+    setPasswordModal(true);
+  }
+  // close modal to change password
+  const closePassModal = () => {
+    setPasswordModal(false);
+  }
 
-// opens modal to change password
-const openPassModal = () => {
-  setPasswordModal(true);
-}
-// close modal to change password
-const closePassModal = () => {
-  setPasswordModal(false);
-}
-
-// handle change for industry drop down
-const handleUserIndustry = (event) => {
-  setIndustry(event.target.value);
-  setIndustryID(industryData[industryData.findIndex(el => el.industry === event.target.value)] &&
-  industryData[industryData.findIndex(el => el.industry === event.target.value)].id);  
-}
+  // handle change for industry drop down
+  const handleUserIndustry = (event) => {
+    setIndustry(event.target.value);
+    setIndustryID(industryData[industryData.findIndex(el => el.industry === event.target.value)] &&
+    industryData[industryData.findIndex(el => el.industry === event.target.value)].id);  
+  }
 
   return(
     <center>
