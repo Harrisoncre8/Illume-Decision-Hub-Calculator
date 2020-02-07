@@ -71,12 +71,18 @@ export default function Stepper() {
               );
             })
             :
-            <input 
-              className="stepper-input"
-              value={input} 
-              onChange={(e)=>setInput(e.target.value)} 
-              type={questionData.response_type} 
-            />
+            <center>
+              <div className="text-field-container">
+                <input 
+                  className="text-field"
+                  value={input} 
+                  onChange={(e)=>setInput(e.target.value)} 
+                  type={questionData.response_type} 
+                />
+                <label className="text-field-label">password</label>
+                <div className="text-field-mask register-mask-password"></div>
+              </div>
+            </center>
           }
           <br/>{questionData.help_text}
         </p>
