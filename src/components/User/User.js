@@ -127,7 +127,8 @@ export default function User(){
           effect="fadeInUp"
           onClickAway={closePassModal}
         >
-          <h1 className="main-heading admin-user-heading">Please Confirm New Password</h1>
+          <h1 className="main-heading admin-user-heading">Confirm New Password</h1>
+            <input></input>
             <div className="modal-btn-container">
               <button className="normal-btn" href="javascript:void(0);" 
               onClick={closePassModal}>Close</button>
