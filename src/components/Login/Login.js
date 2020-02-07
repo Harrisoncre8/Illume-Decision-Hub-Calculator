@@ -79,6 +79,17 @@ class Login extends Component{
             <div className="text-field-mask login-email-mask"></div>
           </div>
 
+          
+          <label className="radio-container">One
+            <input type="radio" checked="checked" name="radio" />
+            <span className="radio-btn"></span>
+          </label>
+
+          <label className="radio-container">Two
+            <input type="radio" name="radio" />
+            <span className="radio-btn"></span>
+          </label>
+
           <div className="text-field-container login-text-field-container">
             <input 
               className="text-field" 
