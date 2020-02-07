@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useEffect } from 'react';
 import './ProfitLever.css';
 import Axios from 'axios'
@@ -16,7 +16,7 @@ function ProfitLever() {
 
   // Connects to redux
   const inputData = useSelector(state => state.input);
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch(), []);
 
 
   // Dynamically calculates the profit lever depending on settings
@@ -71,7 +71,7 @@ function ProfitLever() {
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
-    Axios.get('/api/question/all/' + 1).then(response => {
+    Axios.get('/api/question/results/' + 1).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
           let id = arr.id

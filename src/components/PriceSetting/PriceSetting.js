@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useEffect } from 'react';
 import './PriceSetting.css';
 import Axios from 'axios'
@@ -20,7 +20,7 @@ function PriceSetting() {
   const industryData = useSelector(state => state.industry)
   let userID = useSelector(state => state.user.id);
   let userData = useSelector(state => state.userInfo);
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch(), []);
 
   // Ensures that userInfo and industry data is in the reducer
   useEffect(() => {
@@ -68,7 +68,7 @@ function PriceSetting() {
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
-    Axios.get('/api/question/all/' + 3).then(response => {
+    Axios.get('/api/question/results/' + 3).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
           let id = arr.id

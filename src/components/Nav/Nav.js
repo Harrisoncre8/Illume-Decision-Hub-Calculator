@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Nav.css';
 import { useDispatch } from 'react-redux';
@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 export default function Nav() {
   // react router hook
   let history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch(), []);
 
   //Functions that move user to question stepper with relevant starting state
   function profitLever() {

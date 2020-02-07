@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 
 export default function AdminCalcSubquestion(props) {
 
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
 
