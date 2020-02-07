@@ -4,7 +4,7 @@ import Modal from 'react-awesome-modal';
 import './User.css';
 
 export default function User(){
-  // hooks for redux and sagas
+  // getting data from redux
   let dispatch = useDispatch();
   let industryData = useSelector(state => state.industry.industry);
   let userData = useSelector(state => state.userInfo);
