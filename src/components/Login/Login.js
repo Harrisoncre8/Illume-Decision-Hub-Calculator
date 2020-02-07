@@ -39,14 +39,28 @@ class Login extends Component{
           password: this.state.password,
         },
       });
-      this.pushHistoryToUser();
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
   }
 
-  // Push history to main user page
-  pushHistoryToUser = () => this.props.history.push('/user');
+  // using previous props to check user type for route
+  componentDidUpdate(prevProps){
+    if(this.props.user !== prevProps.user){
+      this.pushHistoryToUser();
+    }
+  }
+
+  // Push user to admin or user based on admin boolean
+  pushHistoryToUser = () => {
+    if (this.props.user && this.props.user.admin){
+      this.props.history.push('/admin');
+    }else if (this.props.user && this.props.user.id){
+      this.props.history.push('/user');
+    }else{
+      this.props.history.push('/');
+    }
+  }
 
   // Show or hide password
   togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
@@ -107,6 +121,7 @@ class Login extends Component{
 
 const mapStateToProps = state => ({
     errors: state.errors,
+    user: state.user,
 });
 
 export default connect(mapStateToProps)(Login);
