@@ -34,9 +34,9 @@ app.use('/api/checkbox', checkboxRouter);
 
 // Serve static files
 app.use(express.static('build'));
-app.get('*', function(req, res) {
-  res.sendFile('index.html', {root: 'build'});
-});
+// app.get('*', function(req, res) {
+//   res.sendFile('index.html', {root: 'build'});
+// });
 
 // App Set
 const PORT = process.env.PORT || 5000;

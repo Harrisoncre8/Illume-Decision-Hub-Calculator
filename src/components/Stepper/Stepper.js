@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './Stepper.css';
 import Nav from '../Nav/Nav';
 
 export default function Stepper() {
@@ -24,7 +25,13 @@ export default function Stepper() {
     }
   }, [questionData.split, inputData, questionData.question_id, splitData])
 
+  // Adds class if input has a value, removes the class if input has no value
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
+  const handleChange = e => {
+    setInput(e.target.value);
+    checkForValue(e);
+  }
   // Push to next question
   function nextPage() {
     dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
@@ -54,33 +61,48 @@ export default function Stepper() {
   return (
     <center>
       <Nav />
-      <div className='stepper-container'>
+      <div className='main-container'>
         <p>
-          {questionData.question}<br/>
+          <p className="question-text">
+            {questionData.question}
+          </p>
+          <br />
           {questionData.split ?
             splitData.map(split => {
               return (
                 <span key={split.id}>
-                  <input
-                    type="radio"
-                    name="next"
-                    value={split.next_id}
-                    checked={+splitNext === split.next_id}
-                    onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
-                  />
-                  {split.split_text}
+                  <label className="radio-container">{split.split_text}
+                    <input
+                      type="radio"
+                      name="next"
+                      value={split.next_id}
+                      checked={+splitNext === split.next_id}
+                      onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
+                    />
+                    <span className="radio-btn"></span>
+                  </label>
                 </span>
               );
             })
             :
-            <input 
-              className="stepper-input"
-              value={input} 
-              onChange={(e)=>setInput(e.target.value)} 
-              type={questionData.response_type} 
-            />
+            <center>
+              <div className="text-field-container">
+                <input 
+                  className="text-field"
+                  value={input} 
+                  onChange={(e)=>handleChange(e)} 
+                  type={questionData.response_type} 
+                  autoFocus
+                />
+                <label className="text-field-label">enter value</label>
+                <div className="text-field-mask stepper-mask"></div>
+              </div>
+            </center>
           }
-          <br/>{questionData.help_text}
+          <br />
+          <p className="question-text">
+            {questionData.help_text}
+          </p>
         </p>
         <div onClick={lastPage} className='arrow-left' />
         <div onClick={nextPage} className='arrow-right' />
