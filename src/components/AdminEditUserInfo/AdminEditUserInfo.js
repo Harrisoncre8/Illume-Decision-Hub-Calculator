@@ -132,58 +132,58 @@ class AdminEditUserInfo extends Component {
               <button className="close-window-button" onClick={this.closeModal}>x</button>
               <h1 className="main-heading modal-heading">{this.state.username}</h1>
 
-              <div className="admin-user-text-field-container">
+              <div className="text-field-container">
                 <input
-                  className="text-field admin-user-text-field-name text-field-active"
+                  className="text-field text-field-active"
                   type="text"
                   value={editUser.name}
                   onChange={(event) => this.handleChange(event, 'name')}
                 />
-                <label className="text-field-label admin-user-label-name">user's name</label>
+                <label className="text-field-label">user's name</label>
                 <div className="text-field-mask admin-user-mask-name"></div>
               </div>
 
-              <div className="admin-user-text-field-container">
+              <div className="text-field-container">
                 <input
-                  className="text-field admin-user-text-field-company text-field-active"
+                  className="text-field text-field-active"
                   type="text"
                   value={editUser.company}
                   onChange={(event) => this.handleChange(event, 'company')}
                 />
-                <label className="text-field-label admin-user-label-company">company</label>
+                <label className="text-field-label">company</label>
                 <div className="text-field-mask admin-user-mask-company"></div>
               </div>
 
-              <div className="admin-user-text-field-container">
+              <div className="text-field-container">
                 <input
-                  className="text-field admin-user-text-field-phone text-field-active"
+                  className="text-field text-field-active"
                   type="text"
                   value={editUser.phone}
                   onChange={(event) => this.handleChange(event, 'phone')}
                 />
-                <label className="text-field-label admin-user-label-phone">phone #</label>
+                <label className="text-field-label">phone #</label>
                 <div className="text-field-mask admin-user-mask-phone"></div>
               </div>
 
-              <div className="admin-user-text-field-container">
+              <div className="text-field-container">
                 <input
-                  className="text-field admin-user-text-field-email text-field-active"
+                  className="text-field text-field-active"
                   type="text"
                   value={editUser.email}
                   onChange={(event) => this.handleChange(event, 'email')}
                 />
-                <label className="text-field-label admin-user-label-email">email</label>
+                <label className="text-field-label">email</label>
                 <div className="text-field-mask admin-user-mask-email"></div>
               </div>
 
-              <div className="admin-user-text-field-container">
+              <div className="text-field-container">
                 <input
-                  className="text-field admin-user-text-field-password text-field-active"
+                  className="text-field text-field-active"
                   type="text"
                   value={editUser.password}
                   onChange={(event) => this.handleChange(event, 'password')}
                 />
-                <label className="text-field-label admin-user-label-password">password</label>
+                <label className="text-field-label">password</label>
                 <div className="text-field-mask admin-user-mask-password"></div>
               </div>
 
@@ -193,7 +193,7 @@ class AdminEditUserInfo extends Component {
                 onChange={(event) => this.handleDropdownChange(event, 'industryid')}
               >
                 {this.props.industry.map(industry =>
-                  <option key={industry.id} value={industry.id}>{industry}</option>
+                  <option key={industry.id} value={industry.id}>{industry.industry}</option>
                 )}
               </select>
 
