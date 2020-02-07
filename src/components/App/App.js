@@ -19,6 +19,8 @@ import Stepper from '../Stepper/Stepper';
 import User from '../User/User';
 
 class App extends Component {
+
+  // Checks to see if user is logged in
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' })
   }
