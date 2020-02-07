@@ -11,7 +11,7 @@ body {
 }
 
 p, span, div, h1, h2, h3, label, button {
-  font-family: "Open Sans Condensed", sans-serif;
+  font-family:'Century Gothic','Futura',san-serif;
 }
 
 .arrow-left {
@@ -55,7 +55,7 @@ p, span, div, h1, h2, h3, label, button {
 }
 
 .circle-btn {
-  font-size: 1.4em;
+  font-size: 1.2em;
   text-transform: uppercase;
   background-color: #f7d149;
   height: 150px;
