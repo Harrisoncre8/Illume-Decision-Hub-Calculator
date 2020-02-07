@@ -15,7 +15,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // GET user information by user id
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   let userID = req.params.id
-  const sqlQuery = `SELECT "user_id", "name", "business_name", "industry_id", "industry"."industry", "users"."email", "phone_number" 
+  const sqlQuery = `SELECT "user_id", "name", "buisiness_name", "industry_id", "industry"."industry", "users"."email", "phone_number" 
                     FROM "contact_info"
                     JOIN "users" ON "contact_info"."user_id" = "users"."id"
                     JOIN "industry" ON "contact_info"."industry_id" = "industry"."id"
@@ -39,7 +39,7 @@ router.put('/info', rejectUnauthenticated, async (req, res) => {
   const email = req.body.email;
   const industry = req.body.industryID;
   const sqlQueryContactInfo = `UPDATE "contact_info"
-                               SET "name" = $2, "business_name" = $3, 
+                               SET "name" = $2, "buisiness_name" = $3, 
                                "industry_id" = $4, "phone_number" = $5
                                WHERE "user_id" = $1;`;
   const sqlQueryUsers = `UPDATE "users" SET "email" = $2 WHERE "id" = $1;`;
@@ -73,7 +73,7 @@ router.post('/register', async (req, res, next) => {
 
   const queryTextUser = `INSERT INTO "users" (email, hashedpassword) 
                           VALUES ($1, $2) RETURNING id;`;
-  const queryTextContact = `INSERT INTO "contact_info" (name, business_name, industry_id, phone_number, user_id)
+  const queryTextContact = `INSERT INTO "contact_info" (name, buisiness_name, industry_id, phone_number, user_id)
                             VALUES ($1, $2, $3, $4, $5);`;
   try {
     await connection.query(`BEGIN`);

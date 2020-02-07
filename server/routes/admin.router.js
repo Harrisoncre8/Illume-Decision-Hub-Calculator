@@ -43,12 +43,12 @@ router.get('/subquestions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res
 
 // GET route for admin user information
 router.get('/user-info',rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, u.admin as usertype, i.industry, i.id as industryID
+  const sqlQuery = `SELECT c.user_id as id, c.name, c.buisiness_name as company, c.phone_number as phone, u.email, u.admin as usertype, i.industry, i.id as industryID
                     FROM contact_info c
                     JOIN users u ON u.id = c.user_id
                     JOIN industry i ON i.id = c.industry_id
                     WHERE super_admin != true
-                    ORDER BY c.business_name;`;
+                    ORDER BY c.buisiness_name;`;
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
@@ -117,7 +117,7 @@ router.put('/user-info', rejectUnauthenticated, rejectNonAdmin, async (req, res)
   const password = req.body.password;
   const usertype = req.body.usertype;
   const sqlQueryContactInfo = ` UPDATE contact_info
-                                SET "name" = $1, "business_name" = $2, phone_number = $3, industry_id = $4
+                                SET "name" = $1, "buisiness_name" = $2, phone_number = $3, industry_id = $4
                                 WHERE user_id = $5;`;
   let sqlQueryUsers = ``;
   const connection = await pool.connect();
