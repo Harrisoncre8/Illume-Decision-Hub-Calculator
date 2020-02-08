@@ -130,7 +130,7 @@ function BreakEven() {
 
     return (
       <div>
-        <p>{paths[start] && paths[start].question}</p>
+        <p className="results-text">{paths[start] && paths[start].question}</p>
         {doesSplit ?
           null :
           <input
