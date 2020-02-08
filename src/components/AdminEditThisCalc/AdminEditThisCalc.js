@@ -26,13 +26,11 @@ export default function AdminEditThisCalc(props) {
   }
 
   return(
-    <>
-    <div className="main-container">
-      <h1 className="main-heading">Edit {props.name} Calculator</h1>
+    <div className="main-container admin-calc-heading">
+        <h1 className="main-heading">Edit {props.name} Calculator</h1>
+      <div>
+        {mainMap()}
+      </div>
     </div>
-    <div>
-      {mainMap()}
-    </div>
-    </>
   );
 }
