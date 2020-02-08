@@ -132,14 +132,16 @@ function PriceSetting() {
                 {splits[split].map(radio => {
                   return (
                     <span key={radio.id}>
-                      <input
-                        type='radio'
-                        name="next"
-                        value={radio.next_id}
-                        checked={+splitPath[split] === +radio.next_id}
-                        onChange={(e) => { radioChange(e, split) }}
-                      />
-                      {radio.split_text}
+                      <label className="radio-container">{radio.split_text}
+                        <input
+                          type='radio'
+                          name="next"
+                          value={radio.next_id}
+                          checked={+splitPath[split] === +radio.next_id}
+                          onChange={(e) => { radioChange(e, split) }}
+                        />
+                        <span className="radio-btn"></span>
+                      </label>
                     </span>
                   )
                 })}
