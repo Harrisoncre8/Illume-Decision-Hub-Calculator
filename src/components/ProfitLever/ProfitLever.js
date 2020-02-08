@@ -170,21 +170,26 @@ function ProfitLever() {
         {doesSplit ?
           null 
           :
-          <input
-            type={paths[start] && paths[start].response_type}
-            value={inputData[questionId]}
-            onChange={
-              (e) => {
-                dispatch({
-                  type: 'ADD_INPUT_VALUE',
-                  payload: {
-                    key: questionId,
-                    value: e.target.value
-                  }
-                });
+          <div className="text-field-container">
+            <input
+              className="text-field"
+              type={paths[start] && paths[start].response_type}
+              value={inputData[questionId]}
+              onChange={
+                (e) => {
+                  dispatch({
+                    type: 'ADD_INPUT_VALUE',
+                    payload: {
+                      key: questionId,
+                      value: e.target.value
+                    }
+                  });
+                }
               }
-            }
-          />
+            />
+            <label className="text-field-label">enter value</label>
+            <div className="text-field-mask stepper-mask"></div>
+          </div>
         }
         {
           next ?
