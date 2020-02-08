@@ -34,7 +34,6 @@ function ProfitLever() {
       (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
 
     let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
-    console.log(directCosts, indirectCosts, divisor)
     setPrice(
       (
         (
@@ -100,7 +99,7 @@ function ProfitLever() {
       let temp = response.data.reduce((acum, arr) => {
         acum[arr.question_id] ? acum[arr.question_id].push(arr) : acum[arr.question_id] = [arr]
         return acum;
-      }, {})
+      }, {});
       setSplits(temp);
     }).catch(err => {
       console.log(err);
@@ -113,10 +112,10 @@ function ProfitLever() {
       const temp = {}
       Object.values(splits).forEach(arr => {
         temp[arr[0].question_id] = arr[0].next_id
-      })
+      });
       setSplitPath(temp);
     }
-  }, [splits])
+  }, [splits]);
 
   // Handles the change of the radio button
   function radioChange(e, question) {
@@ -137,16 +136,18 @@ function ProfitLever() {
                 {splits[split].map(radio => {
                   return (
                     <span key={radio.id}>
-                      <input
-                        type='radio'
-                        name="next"
-                        value={radio.next_id}
-                        checked={+splitPath[split] === +radio.next_id}
-                        onChange={(e) => { radioChange(e, split) }}
-                      />
-                      {radio.split_text}
+                      <label className="radio-container">{radio.split_text}
+                        <input
+                          type='radio'
+                          name="next"
+                          value={radio.next_id}
+                          checked={+splitPath[split] === +radio.next_id}
+                          onChange={(e) => { radioChange(e, split) }}
+                        />
+                        <span className="radio-btn"></span>
+                      </label>
                     </span>
-                  )
+                  );
                 })}
               </form> :
               null
@@ -166,24 +167,25 @@ function ProfitLever() {
     return (
       <div>
         <p>{paths[start] && paths[start].question}</p>
-        {
-          doesSplit ?
-            null :
-            <input
-              type={paths[start] && paths[start].response_type}
-              value={inputData[questionId]}
-              onChange={
-                (e) => {
-                  dispatch({
-                    type: 'ADD_INPUT_VALUE',
-                    payload: {
-                      key: questionId,
-                      value: e.target.value
-                    }
-                  })
-                }
+        {doesSplit ?
+          null 
+          :
+          <input
+            type={paths[start] && paths[start].response_type}
+            value={inputData[questionId]}
+            onChange={
+              (e) => {
+                dispatch({
+                  type: 'ADD_INPUT_VALUE',
+                  payload: {
+                    key: questionId,
+                    value: e.target.value
+                  }
+                });
               }
-            />}
+            }
+          />
+        }
         {
           next ?
             doesSplit ?
