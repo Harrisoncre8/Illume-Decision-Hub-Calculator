@@ -42,16 +42,19 @@ export default function AdminCalcQuestion(props) {
   return(
     <>
       <textarea 
+        className="admin-calc-question-textfield"
         rows="6" 
         cols="30" 
         value={question} 
         onChange={(event)=>setQuestion(event.target.value)} 
+        placeholder="enter question"
       />
       <textarea 
         rows="6" 
         cols="30" 
         value={tooltip} 
         onChange={(event)=>setTooltip(event.target.value)} 
+        placeholder="enter tooltip"
       />
       <div>
         <button className="normal-btn admin-edit-calc-btn" onClick={handleSave}>SAVE</button>

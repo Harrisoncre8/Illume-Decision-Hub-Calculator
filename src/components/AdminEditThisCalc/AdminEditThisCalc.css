@@ -2,6 +2,10 @@
   background-color: #f0aa42;
 }
 
+.admin-calc-question-textfield {
+  margin-right: 10px;
+}
+
 .admin-question-card {
   background-color: #fff;
   box-shadow: 5px 5px 10px #272727;
