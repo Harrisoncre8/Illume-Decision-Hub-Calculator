@@ -46,6 +46,14 @@ class AdminEditIndustry extends Component{
     });
   }
 
+  // Ask for confirmation, then dispatch DELETE request to saga
+  handleDelete = id => {
+    let popup = window.confirm(`Are you sure you want to delete ${id.industry}?`);
+    if(popup){
+      this.props.dispatch({type: `DELETE_INDUSTRY`, payload: id.id});
+    }
+  }
+
   // Update local state on input value change in edit modal
   handleEditChange = (e, propName) => {
     this.setState({
@@ -119,6 +127,7 @@ class AdminEditIndustry extends Component{
                 <th>Industry</th>
                 <th>Margin</th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -127,6 +136,7 @@ class AdminEditIndustry extends Component{
                   <td>{industry.industry}</td>
                   <td>{industry.margin * 100}%</td>
                   <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
+                  <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DELETE</td>
                 </tr>
               )}
             </tbody>

@@ -1,3 +1,14 @@
+.admin-delete-industry-cell {
+  cursor: pointer;
+  text-decoration: underline;
+  background-color: #ff8080;
+  transition: 0.3s;
+}
+
+.admin-delete-industry-cell:hover {
+  background-color: #e44f4f;
+}
+
 .admin-edit-industry-cell {
   cursor: pointer;
   text-decoration: underline;
