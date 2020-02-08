@@ -12,7 +12,8 @@ router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) =
                   FROM calculators c
                   JOIN question_calculator qc ON qc.calculator_id = c.id
                   JOIN questions q ON q.id = qc.question_id
-                  WHERE c.id = $1 AND q.sub_questions IS NULL;`;
+                  WHERE c.id = $1 AND q.sub_questions IS NULL
+                  ORDER BY q.id;`;
   pool.query(sqlQuery, id)
     .then(result => {
     res.send(result.rows);
@@ -30,7 +31,8 @@ router.get('/subquestions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res
                   FROM calculators c
                   JOIN question_calculator qc ON qc.calculator_id = c.id
                   JOIN questions q ON q.id = qc.question_id
-                  WHERE q.sub_questions = $1;`;
+                  WHERE q.sub_questions = $1
+                  ORDER BY q.id;`;
   pool.query(sqlQuery, id)
     .then(result => {
     res.send(result.rows);
