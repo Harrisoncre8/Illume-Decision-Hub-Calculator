@@ -164,7 +164,7 @@ function PriceSetting() {
     let questionId = paths[start] && paths[start].question_id
     return (
       <div>
-        <p>{paths[start] && paths[start].question}</p>
+        <p className="results-text">{paths[start] && paths[start].question}</p>
         {doesSplit ?
           null 
           :
@@ -198,7 +198,7 @@ function PriceSetting() {
             null // for next?
         }
       </div>
-    )
+    );
   }
 
   return (
@@ -213,7 +213,7 @@ function PriceSetting() {
               {industryData.map(industry => {
                 return (
                   <option key={industry.id} value={industry.margin}>{industry.industry}</option>
-                )
+                );
               })}
             </select>
           </form>
