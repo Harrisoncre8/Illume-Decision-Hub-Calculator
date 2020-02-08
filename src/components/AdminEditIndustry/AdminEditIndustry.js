@@ -50,7 +50,7 @@ class AdminEditIndustry extends Component{
   handleDelete = id => {
     let popup = window.confirm(`Are you sure you want to delete ${id.industry}?`);
     if(popup){
-      this.props.dispatch({type: `DELETE_INDUSTRY`, payload: id.id});
+      this.props.dispatch({type: `DELETE_ADMIN_INDUSTRY_INFO`, payload: id.id});
     }
   }
 
