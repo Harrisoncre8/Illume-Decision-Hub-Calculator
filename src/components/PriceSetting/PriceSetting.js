@@ -146,7 +146,7 @@ function PriceSetting() {
                         <span className="radio-btn"></span>
                       </label>
                     </span>
-                  )
+                  );
                 })}
               </form> :
               null
@@ -157,11 +157,13 @@ function PriceSetting() {
               null
           }
         </>
-      )
+      );
     }
+
     let next = paths[start] && paths[start].next_id
     let doesSplit = paths[start] && paths[start].split
     let questionId = paths[start] && paths[start].question_id
+
     return (
       <div>
         <p className="results-text">{paths[start] && paths[start].question}</p>

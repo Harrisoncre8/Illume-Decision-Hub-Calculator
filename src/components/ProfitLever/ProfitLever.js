@@ -163,6 +163,7 @@ function ProfitLever() {
         </>
       );
     }
+    
     let next = paths[start] && paths[start].next_id
     let doesSplit = paths[start] && paths[start].split
     let questionId = paths[start] && paths[start].question_id
