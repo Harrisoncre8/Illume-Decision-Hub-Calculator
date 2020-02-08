@@ -29,8 +29,8 @@ function BreakEven() {
       (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
 
     let divisor = +splitPath[1] === 14 ? 1 : +inputData[5] || 1
-    setPrice(((+directCosts || 0) + (+indirectCosts || 0)) / (divisor))
-  }, [inputData, splitPath])
+    setPrice(((+directCosts || 0) + (+indirectCosts || 0)) / (divisor));
+  }, [inputData, splitPath]);
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
@@ -54,20 +54,20 @@ function BreakEven() {
           acum[id] = { ...arr }
         }
         return acum;
-      }, {})
+      }, {});
       setPaths(temp);
-    })
+    });
 
     Axios.get('/api/question/splits/' + 2).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         acum[arr.question_id] ? acum[arr.question_id].push(arr) : acum[arr.question_id] = [arr]
         return acum;
-      }, {})
+      }, {});
       setSplits(temp);
     }).catch(err => {
       console.log(err);
     });
-  }, [])
+  }, []);
 
   // Rearranges the response from the server to a JSON styled object
   useEffect(() => {
@@ -75,10 +75,10 @@ function BreakEven() {
       const temp = {}
       Object.values(splits).forEach(arr => {
         temp[arr[0].question_id] = arr[0].next_id
-      })
+      });
       setSplitPath(temp);
     }
-  }, [splits])
+  }, [splits]);
 
   // Handles the change of the radio button
   function radioChange(e, question) {
@@ -99,16 +99,18 @@ function BreakEven() {
                 {splits[split].map(radio => {
                   return (
                     <span key={radio.id}>
-                      <input
-                        type='radio'
-                        name="next"
-                        value={radio.next_id}
-                        checked={+splitPath[split] === +radio.next_id}
-                        onChange={(e) => { radioChange(e, split) }}
-                      />
-                      {radio.split_text}
+                      <label className="radio-container">{radio.split_text}
+                        <input
+                          type='radio'
+                          name="next"
+                          value={radio.next_id}
+                          checked={+splitPath[split] === +radio.next_id}
+                          onChange={(e) => { radioChange(e, split) }}
+                        />
+                        <span className="radio-btn"></span>
+                      </label>
                     </span>
-                  )
+                  );
                 })}
               </form> :
               null
@@ -119,32 +121,34 @@ function BreakEven() {
               null
           }
         </>
-      )
+      );
     }
-    let next = paths[start] && paths[start].next_id
-    let doesSplit = paths[start] && paths[start].split
-    let questionId = paths[start] && paths[start].question_id
+
+    let next = paths[start] && paths[start].next_id;
+    let doesSplit = paths[start] && paths[start].split;
+    let questionId = paths[start] && paths[start].question_id;
+
     return (
       <div>
         <p>{paths[start] && paths[start].question}</p>
-        {
-          doesSplit ?
-            null :
-            <input
-              type={paths[start] && paths[start].response_type}
-              value={inputData[questionId]}
-              onChange={
-                (e) => {
-                  dispatch({
-                    type: 'ADD_INPUT_VALUE',
-                    payload: {
-                      key: questionId,
-                      value: e.target.value
-                    }
-                  })
-                }
+        {doesSplit ?
+          null :
+          <input
+            type={paths[start] && paths[start].response_type}
+            value={inputData[questionId]}
+            onChange={
+              (e) => {
+                dispatch({
+                  type: 'ADD_INPUT_VALUE',
+                  payload: {
+                    key: questionId,
+                    value: e.target.value
+                  }
+                });
               }
-            />}
+            }
+          />
+        }
         {
           next ?
             doesSplit ?
@@ -153,7 +157,7 @@ function BreakEven() {
             null // for next?
         }
       </div>
-    )
+    );
   }
 
   return (
