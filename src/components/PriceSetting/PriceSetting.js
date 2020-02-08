@@ -37,9 +37,9 @@ function PriceSetting() {
       setMargin(
         industryData[industryData.findIndex(el => el.industry === userData[0].industry)] &&
         industryData[industryData.findIndex(el => el.industry === userData[0].industry)].margin
-      )
+      );
     }
-  }, [userData, industryData])
+  }, [userData, industryData]);
   
 
   // Dynamically calculates the price setting depending on settings
@@ -65,7 +65,7 @@ function PriceSetting() {
     setProductMargin(+pm.toFixed(2));
     setUserMargin(+um.toFixed(2));
     setDifference(+Math.abs(Math.ceil(totalSales * ((pm / um) - 1))) || 0);
-  }, [margin, productMargin, userMargin, inputData, splitPath])
+  }, [margin, productMargin, userMargin, inputData, splitPath]);
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
@@ -87,9 +87,9 @@ function PriceSetting() {
           acum[id] = { ...arr }
         }
         return acum;
-      }, {})
+      }, {});
       setPaths(temp);
-    })
+    });
 
     Axios.get('/api/question/splits/' + 3).then(response => {
       let temp = response.data.reduce((acum, arr) => {
@@ -100,7 +100,7 @@ function PriceSetting() {
     }).catch(err => {
       console.log(err);
     });
-  }, [])
+  }, []);
 
   // Rearranges the response from the server to a JSON styled object
   useEffect(() => {
@@ -108,10 +108,13 @@ function PriceSetting() {
       const temp = {}
       Object.values(splits).forEach(arr => {
         temp[arr[0].question_id] = arr[0].next_id
-      })
+      });
       setSplitPath(temp);
     }
-  }, [splits])
+  }, [splits]);
+
+  // Adds class if input has a value, removes the class if input has no value
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
   // Handles the change of the radio button
   function radioChange(e, question) {
@@ -162,10 +165,12 @@ function PriceSetting() {
     return (
       <div>
         <p>{paths[start] && paths[start].question}</p>
-        {
-          doesSplit ?
-            null :
+        {doesSplit ?
+          null 
+          :
+          <div className="text-field-container">
             <input
+              className="text-field"
               type={paths[start] && paths[start].response_type}
               value={inputData[questionId]}
               onChange={
@@ -176,10 +181,15 @@ function PriceSetting() {
                       key: questionId,
                       value: e.target.value
                     }
-                  })
+                  });
+                  checkForValue(e);
                 }
               }
-            />}
+            />
+            <label className="text-field-label">enter value</label>
+            <div className="text-field-mask stepper-mask"></div>
+          </div>
+        }
         {
           next ?
             doesSplit ?
