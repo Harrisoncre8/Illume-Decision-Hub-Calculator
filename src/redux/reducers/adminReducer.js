@@ -4,8 +4,19 @@ import { combineReducers } from 'redux';
 const adminQuestion = (state = [], action) => action.type === `SET_ADMIN_QUESTION` ? action.payload : state;
 
 // Store calculator sub-questions for admin to edit
-const adminSubquestion = (state = [], action) => {
-  if(action.type === `SET_ADMIN_SUB_QUESTION`){
+const adminSubquestionFour = (state = [], action) => {
+  if(action.type === `SET_ADMIN_SUB_QUESTION_4`){
+    return action.payload;
+  }
+  else if(action.type === `CLEAR_ADMIN_SUB_QUESTION`){
+    return '';
+  }
+  return state;
+}
+
+// Store calculator sub-questions for admin to edit
+const adminSubquestionThree = (state = [], action) => {
+  if(action.type === `SET_ADMIN_SUB_QUESTION_3`){
     return action.payload;
   }
   else if(action.type === `CLEAR_ADMIN_SUB_QUESTION`){
@@ -19,6 +30,7 @@ const adminUserInfo = (state = [], action) => action.type === `SET_ADMIN_USER_IN
   
 export default combineReducers({
   adminQuestion,
-  adminSubquestion,
+  adminSubquestionFour,
+  adminSubquestionThree,
   adminUserInfo,
 });

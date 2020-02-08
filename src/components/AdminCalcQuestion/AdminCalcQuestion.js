@@ -5,7 +5,8 @@ import AdminCalcSubquestion from '../AdminCalcSubquestion/AdminCalcSubquestion';
 
 export default function AdminCalcQuestion(props) {
 
-  const subQuestion = useSelector((state)=>state.admin.adminSubquestion);
+  const subQuestionFour = useSelector((state)=>state.admin.adminSubquestionFour);
+  const subQuestionThree = useSelector((state)=>state.admin.adminSubquestionThree);
   const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
@@ -28,14 +29,26 @@ export default function AdminCalcQuestion(props) {
   // Map through sub-questions, increment question number for each question
   const showSubQuestions = () => {
     let count = 1;
-    return (
-      subQuestion.map(q=>
-        <div key={q.id}>
-          <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
-          <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
-        </div>
-      )
-    );
+    if(props.id === 3){
+      return (
+        subQuestionThree.map(q=>
+          <div key={q.id}>
+            <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
+            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
+          </div>
+        )
+      );
+    }
+    else if(props.id ===4){ 
+      return (
+        subQuestionFour.map(q=>
+          <div key={q.id}>
+            <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
+            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
+          </div>
+        )
+      );
+    }
   }
 
   return(

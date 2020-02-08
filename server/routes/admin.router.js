@@ -7,8 +7,8 @@ const { rejectNonAdmin } = require('../modules/admin-auth-middleware');
 
 // GET route for admin question editing
 router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  let id = [req.params.id];
-  let sqlQuery = `SELECT q.id, q.question, q.help_text, q.sub_questions
+  const id = [req.params.id];
+  const sqlQuery = `SELECT q.id, q.question, q.help_text, q.sub_questions
                   FROM calculators c
                   JOIN question_calculator qc ON qc.calculator_id = c.id
                   JOIN questions q ON q.id = qc.question_id
@@ -26,8 +26,9 @@ router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) =
 
 // GET route for admin sub-question editing
 router.get('/subquestions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  let id = [req.params.id];
-  let sqlQuery = `SELECT DISTINCT q.id, q.question, q.help_text, q.sub_questions
+  const id = [req.params.id];
+  console.log('id---------------------', id);
+  const sqlQuery = `SELECT DISTINCT q.id, q.question, q.help_text, q.sub_questions
                   FROM calculators c
                   JOIN question_calculator qc ON qc.calculator_id = c.id
                   JOIN questions q ON q.id = qc.question_id
@@ -35,6 +36,7 @@ router.get('/subquestions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res
                   ORDER BY q.id;`;
   pool.query(sqlQuery, id)
     .then(result => {
+      console.log('id, result--------------------------', id, result.rows);
     res.send(result.rows);
   })
   .catch( error => {

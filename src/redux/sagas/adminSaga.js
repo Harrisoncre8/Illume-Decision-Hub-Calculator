@@ -12,8 +12,18 @@ function* getAdminQuestion(action){
 
 function* getAdminSubquestion(action){
   try{
+    console.log('saga payload:', action.payload);
     const response = yield axios.get(`/api/admin/subquestions/${action.payload}`);
-    yield put({type: `SET_ADMIN_SUB_QUESTION`, payload: response.data});
+    console.log('saga payload after GET:', action.payload);
+    if(action.payload === 3){
+      console.log('in there');
+      yield put({type: `SET_ADMIN_SUB_QUESTION_3`, payload: response.data});
+    }
+    else if(action.payload === 4){
+      console.log('in else');
+      yield put({type: `SET_ADMIN_SUB_QUESTION_4`, payload: response.data});
+
+    }
   } catch(error){
     console.log('Error in admin sub-questions GET', error);
   }
