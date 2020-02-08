@@ -30,7 +30,7 @@ export default function AdminCalcQuestion(props) {
       props.id === 3 || props.id === 4 ?
         subQuestion.map(q=>
           <div key={q.id}>
-            <h3 className="main-heading">Sub-Question {count++}</h3>
+            <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
             <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
           </div>
         )
@@ -41,6 +41,7 @@ export default function AdminCalcQuestion(props) {
 
   return(
     <>
+      <div className="admin-calc-question-label">Question:</div>
       <textarea 
         className="admin-calc-question-textfield"
         rows="6" 
@@ -49,6 +50,7 @@ export default function AdminCalcQuestion(props) {
         onChange={(event)=>setQuestion(event.target.value)} 
         placeholder="enter question"
       />
+      <div  className="admin-calc-tooltip-label">Tooltip:</div>
       <textarea 
         rows="6" 
         cols="30" 

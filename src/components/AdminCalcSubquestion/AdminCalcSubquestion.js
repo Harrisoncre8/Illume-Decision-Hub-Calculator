@@ -17,6 +17,7 @@ export default function AdminCalcSubquestion(props) {
 
   return(
     <>
+      <div className="admin-calc-question-label">Sub-question:</div>
       <textarea 
         className="admin-calc-question-textfield"
         rows="6" 
@@ -25,6 +26,7 @@ export default function AdminCalcSubquestion(props) {
         onChange={(event)=>setQuestion(event.target.value)} 
         placeholder="enter sub-question"
       />
+      <div className="admin-calc-tooltip-label">Tooltip:</div>
       <textarea 
         rows="6" 
         cols="30" 

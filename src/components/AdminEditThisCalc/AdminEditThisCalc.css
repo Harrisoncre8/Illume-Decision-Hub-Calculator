@@ -2,8 +2,21 @@
   background-color: #f0aa42;
 }
 
+.admin-calc-question-label {
+  padding-bottom: 5px;
+}
+
 .admin-calc-question-textfield {
   margin-right: 10px;
+}
+
+.admin-calc-sub-heading {
+  margin-top: 10px;
+}
+
+.admin-calc-tooltip-label {
+  padding-bottom: 5px;
+  padding-top: 15px;
 }
 
 .admin-question-card {
