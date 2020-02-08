@@ -5,7 +5,8 @@ import Axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 import Nav from '../Nav/Nav';
 
-function ProfitLever() {
+export default function ProfitLever() {
+
   // States
   const [paths, setPaths] = useState([]);
   const [splits, setSplits] = useState({});
@@ -34,6 +35,7 @@ function ProfitLever() {
       (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
 
     let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
+
     setPrice(
       (
         (
@@ -74,21 +76,21 @@ function ProfitLever() {
     Axios.get('/api/question/all/' + 1).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
-          let id = arr.id
+          let id = arr.id;
           let text = acum[id] && acum[id]['split_text'] ?
-            [...acum[id]['split_text'], arr.split_text] : [arr.split_text]
+            [...acum[id]['split_text'], arr.split_text] : [arr.split_text];
           let next = acum[id] && acum[id]['split_next_id'] ?
-            [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id]
-          delete arr.id
+            [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id];
+          delete arr.id;
           delete arr.split_text;
           delete arr.split_next_id;
           acum[id] = { ...arr };
           acum[id]['split_text'] = text;
           acum[id]['split_next_id'] = next;
         } else {
-          let id = arr.id
-          delete arr.id
-          acum[id] = { ...arr }
+          let id = arr.id;
+          delete arr.id;
+          acum[id] = { ...arr };
         }
         return acum;
       }, {});
@@ -97,7 +99,7 @@ function ProfitLever() {
 
     Axios.get('/api/question/splits/' + 1).then(response => {
       let temp = response.data.reduce((acum, arr) => {
-        acum[arr.question_id] ? acum[arr.question_id].push(arr) : acum[arr.question_id] = [arr]
+        acum[arr.question_id] ? acum[arr.question_id].push(arr) : acum[arr.question_id] = [arr];
         return acum;
       }, {});
       setSplits(temp);
@@ -109,7 +111,7 @@ function ProfitLever() {
   // Rearranges the response from the server to a JSON styled object
   useEffect(() => {
     if (Object.values(splits).length > 0) {
-      const temp = {}
+      const temp = {};
       Object.values(splits).forEach(arr => {
         temp[arr[0].question_id] = arr[0].next_id
       });
@@ -164,9 +166,9 @@ function ProfitLever() {
       );
     }
     
-    let next = paths[start] && paths[start].next_id
-    let doesSplit = paths[start] && paths[start].split
-    let questionId = paths[start] && paths[start].question_id
+    let next = paths[start] && paths[start].next_id;
+    let doesSplit = paths[start] && paths[start].split;
+    let questionId = paths[start] && paths[start].question_id;
 
     return (
       <div>
@@ -231,5 +233,3 @@ function ProfitLever() {
     </center>
   );
 }
-
-export default ProfitLever;

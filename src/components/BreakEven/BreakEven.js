@@ -4,7 +4,8 @@ import Nav from '../Nav/Nav';
 import Axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 
-function BreakEven() {
+export default function BreakEven() {
+
   // States
   const [price, setPrice] = useState('');
   const [paths, setPaths] = useState([]);
@@ -28,7 +29,8 @@ function BreakEven() {
       (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
       (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
 
-    let divisor = +splitPath[1] === 14 ? 1 : +inputData[5] || 1
+    let divisor = +splitPath[1] === 14 ? 1 : +inputData[5] || 1;
+
     setPrice(((+directCosts || 0) + (+indirectCosts || 0)) / (divisor));
   }, [inputData, splitPath]);
 
@@ -37,21 +39,21 @@ function BreakEven() {
     Axios.get('/api/question/all/' + 2).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
-          let id = arr.id
+          let id = arr.id;
           let text = acum[id] && acum[id]['split_text'] ?
-            [...acum[id]['split_text'], arr.split_text] : [arr.split_text]
+            [...acum[id]['split_text'], arr.split_text] : [arr.split_text];
           let next = acum[id] && acum[id]['split_next_id'] ?
-            [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id]
-          delete arr.id
+            [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id];
+          delete arr.id;
           delete arr.split_text;
           delete arr.split_next_id;
           acum[id] = { ...arr };
           acum[id]['split_text'] = text;
           acum[id]['split_next_id'] = next;
         } else {
-          let id = arr.id
-          delete arr.id
-          acum[id] = { ...arr }
+          let id = arr.id;
+          delete arr.id;
+          acum[id] = { ...arr };
         }
         return acum;
       }, {});
@@ -60,7 +62,7 @@ function BreakEven() {
 
     Axios.get('/api/question/splits/' + 2).then(response => {
       let temp = response.data.reduce((acum, arr) => {
-        acum[arr.question_id] ? acum[arr.question_id].push(arr) : acum[arr.question_id] = [arr]
+        acum[arr.question_id] ? acum[arr.question_id].push(arr) : acum[arr.question_id] = [arr];
         return acum;
       }, {});
       setSplits(temp);
@@ -72,7 +74,7 @@ function BreakEven() {
   // Rearranges the response from the server to a JSON styled object
   useEffect(() => {
     if (Object.values(splits).length > 0) {
-      const temp = {}
+      const temp = {};
       Object.values(splits).forEach(arr => {
         temp[arr[0].question_id] = arr[0].next_id
       });
@@ -185,5 +187,3 @@ function BreakEven() {
     </center>
   );
 }
-
-export default BreakEven;
