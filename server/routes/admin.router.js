@@ -25,18 +25,14 @@ router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) =
 });
 
 // GET route for admin sub-question editing
-router.get('/subquestions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const id = [req.params.id];
-  console.log('id---------------------', id);
+router.get('/subquestions', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const sqlQuery = `SELECT DISTINCT q.id, q.question, q.help_text, q.sub_questions
                   FROM calculators c
                   JOIN question_calculator qc ON qc.calculator_id = c.id
                   JOIN questions q ON q.id = qc.question_id
-                  WHERE q.sub_questions = $1
                   ORDER BY q.id;`;
-  pool.query(sqlQuery, id)
+  pool.query(sqlQuery)
     .then(result => {
-      console.log('id, result--------------------------', id, result.rows);
     res.send(result.rows);
   })
   .catch( error => {

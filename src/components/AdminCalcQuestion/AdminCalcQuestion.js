@@ -5,8 +5,7 @@ import AdminCalcSubquestion from '../AdminCalcSubquestion/AdminCalcSubquestion';
 
 export default function AdminCalcQuestion(props) {
 
-  const subQuestionFour = useSelector((state)=>state.admin.adminSubquestionFour);
-  const subQuestionThree = useSelector((state)=>state.admin.adminSubquestionThree);
+  const subQuestion = useSelector((state)=>state.admin.adminSubquestion);
   const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
@@ -15,7 +14,7 @@ export default function AdminCalcQuestion(props) {
   // Runs when component mounts
   useEffect(()=>{
     if(props.id === 3 || props.id === 4){
-      dispatch({type: `GET_ADMIN_SUB_QUESTION`, payload: props.id});
+      dispatch({type: `GET_ADMIN_SUB_QUESTION`});
     }
   }, [props.id]);
 
@@ -29,26 +28,25 @@ export default function AdminCalcQuestion(props) {
   // Map through sub-questions, increment question number for each question
   const showSubQuestions = () => {
     let count = 1;
-    if(props.id === 3){
-      return (
-        subQuestionThree.map(q=>
-          <div key={q.id}>
-            <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
-            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
-          </div>
-        )
-      );
-    }
-    else if(props.id ===4){ 
-      return (
-        subQuestionFour.map(q=>
-          <div key={q.id}>
-            <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
-            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
-          </div>
-        )
-      );
-    }
+    return (
+      subQuestion.map(q =>
+        <div key={q.id}>
+          {props.id === q.sub_questions ?
+            <>
+              <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
+              <AdminCalcSubquestion 
+                id={q.id} 
+                question={q.question} 
+                tooltip={q.help_text} 
+                calcID={props.calcID} 
+              />
+            </>
+          :
+          ''
+          }
+        </div>
+      )
+    );
   }
 
   return(
