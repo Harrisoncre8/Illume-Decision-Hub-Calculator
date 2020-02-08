@@ -10,8 +10,12 @@
   margin-right: 10px;
 }
 
-.admin-calc-show-sub {
+.admin-calc-show-hide-btn {
   cursor: pointer;
+  font-size: 0.8em;
+  margin-top: 15px;
+  padding: 5px;
+  border-radius: 4px;
 }
 
 .admin-calc-sub-heading {

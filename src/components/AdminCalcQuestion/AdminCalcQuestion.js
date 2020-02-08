@@ -41,7 +41,6 @@ export default function AdminCalcQuestion(props) {
   return(
     <>
       <form onSubmit={handleSubmit}>
-        {JSON.stringify(showSub)}
         <div className="admin-calc-question-label">Question:</div>
         <textarea 
           className="admin-calc-question-textfield"
@@ -65,7 +64,13 @@ export default function AdminCalcQuestion(props) {
       </form>
       <hr />
       {props.id === 3 || props.id === 4 ?
-        <span className="admin-calc-show-sub" onClick={()=>setShowSub(!showSub)}>V</span>
+        <button className="admin-calc-show-hide-btn" onClick={()=>setShowSub(!showSub)}>
+          {showSub ?
+            <p>Hide Sub-Questions</p>
+            :
+            <p>Show Sub-Questions</p>
+          }
+        </button>
         :
         ''
       }
