@@ -80,6 +80,9 @@ function BreakEven() {
     }
   }, [splits]);
 
+  // Adds class if input has a value, removes the class if input has no value
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
+
   // Handles the change of the radio button
   function radioChange(e, question) {
     let temp = { ...splitPath };
@@ -147,6 +150,7 @@ function BreakEven() {
                       value: e.target.value
                     }
                   });
+                  checkForValue(e);
                 }
               }
             />
