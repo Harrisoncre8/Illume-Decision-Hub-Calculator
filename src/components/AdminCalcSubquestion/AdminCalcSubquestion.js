@@ -7,7 +7,6 @@ export default function AdminCalcSubquestion(props) {
   const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
-  // const [show, setShow]
 
   // Dispatch to saga to update question and tooltip in database
   const handleSubmit = e => {

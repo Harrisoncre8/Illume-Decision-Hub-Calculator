@@ -10,6 +10,10 @@
   margin-right: 10px;
 }
 
+.admin-calc-show-sub {
+  cursor: pointer;
+}
+
 .admin-calc-sub-heading {
   margin-top: 10px;
 }

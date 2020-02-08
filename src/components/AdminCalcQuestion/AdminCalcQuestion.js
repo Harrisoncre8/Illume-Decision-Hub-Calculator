@@ -9,6 +9,7 @@ export default function AdminCalcQuestion(props) {
   const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
+  const [showSub, setShowSub] = useState(false);
 
   // Runs when component mounts
   useEffect(()=>{
@@ -25,24 +26,22 @@ export default function AdminCalcQuestion(props) {
   }
 
   // Map through sub-questions, increment question number for each question
-  const subMap = () => {
+  const showSubQuestions = () => {
     let count = 1;
     return (
-      props.id === 3 || props.id === 4 ?
-        subQuestion.map(q=>
-          <div key={q.id}>
-            <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
-            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
-          </div>
-        )
-        :
-        ''
+      subQuestion.map(q=>
+        <div key={q.id}>
+          <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
+          <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
+        </div>
+      )
     );
   }
 
   return(
     <>
       <form onSubmit={handleSubmit}>
+        {JSON.stringify(showSub)}
         <div className="admin-calc-question-label">Question:</div>
         <textarea 
           className="admin-calc-question-textfield"
@@ -65,9 +64,12 @@ export default function AdminCalcQuestion(props) {
         </div>
       </form>
       <hr />
-      <div>
-        {subMap()}
-      </div>
+      {props.id === 3 || props.id === 4 ?
+        <span className="admin-calc-show-sub" onClick={()=>setShowSub(!showSub)}>V</span>
+        :
+        ''
+      }
+      {showSub ? showSubQuestions() : ''}
     </>
   );
 }
