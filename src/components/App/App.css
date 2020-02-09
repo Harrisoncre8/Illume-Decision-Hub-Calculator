@@ -312,7 +312,7 @@ p, span, div, h1, h2, h3, label, button {
   background-color: #f7d149;
   border-radius: 50%;
   cursor: help;
-  transform: translate(175px, -35px);
+  transform: translate(178px, -37px);
 }
 
 .tooltip-icon {

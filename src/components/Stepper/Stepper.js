@@ -5,25 +5,26 @@ import './Stepper.css';
 import Nav from '../Nav/Nav';
 
 export default function Stepper() {
+
   // Using hooks to access redux and saga
   const dispatch = useDispatch();
   const inputData = useSelector(state => state.input);
   const questionData = useSelector(state => state.question);
   const splitData = useSelector(state => state.split);
-  const lastPageID = useSelector(state => state.previousQuestion)
+  const lastPageID = useSelector(state => state.previousQuestion);
   const history = useHistory();
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
 
   useEffect(()=>{
     setInput(inputData[questionData.question_id] || '');
-  }, [inputData, questionData.question_id])
+  }, [inputData, questionData.question_id]);
   
   useEffect(()=>{
     if(questionData.split){
-      setSplitNext(splitData[0] && splitData[0].next_id || '')
+      setSplitNext(splitData[0] && splitData[0].next_id || '');
     }
-  }, [questionData.split, inputData, questionData.question_id, splitData])
+  }, [questionData.split, inputData, questionData.question_id, splitData]);
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
@@ -34,8 +35,8 @@ export default function Stepper() {
   }
   // Push to next question
   function nextPage() {
-    dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
-    dispatch({type: 'ADD_INPUT_VALUE', payload:{key: questionData.question_id, value: input}})
+    dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id });
+    dispatch({type: 'ADD_INPUT_VALUE', payload:{key: questionData.question_id, value: input}});
     setInput('');
     if (questionData.next_id == null) {
       const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
@@ -96,6 +97,9 @@ export default function Stepper() {
                 />
                 <label className="text-field-label">enter value</label>
                 <div className="text-field-mask stepper-mask"></div>
+                <div className="tooltip-background">
+                  <span className="tooltip-icon">?</span>
+                </div>
               </div>
             </center>
           }
