@@ -69,26 +69,28 @@ export default function Stepper() {
           </p>
           <br />
           {questionData.split ?
-            splitData.map(split => {
-              return (
-                <span key={split.id}>
-                  <label className="radio-container">{split.split_text}
-                    <input
-                      type="radio"
-                      name="next"
-                      value={split.next_id}
-                      checked={+splitNext === split.next_id}
-                      onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
-                    />
-                    <span className="radio-btn"></span>
-                    {/* <span className="tooltip-background">
-                      <span className="tooltip-icon">?</span>
-                      <span className="tooltip-bubble-text">{questionData.help_text}</span>
-                    </span> */}
-                  </label>
-                </span>
-              );
-            })
+            <div>
+              {splitData.map(split => {
+                return (
+                  <span key={split.id}>
+                    <label className="radio-container">{split.split_text}
+                      <input
+                        type="radio"
+                        name="next"
+                        value={split.next_id}
+                        checked={+splitNext === split.next_id}
+                        onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
+                      />
+                      <span className="radio-btn"></span>
+                    </label>
+                  </span>
+                );
+              })}
+              {/* <span className="tooltip-background tooltip-background-radio">
+                <span className="tooltip-icon">?</span>
+                <span className="tooltip-text">{questionData.help_text}</span>
+              </span> */}
+            </div>
             :
             <center>
               <div className="text-field-container">
@@ -101,9 +103,9 @@ export default function Stepper() {
                 />
                 <label className="text-field-label">enter value</label>
                 <div className="text-field-mask stepper-mask"></div>
-                <span className="tooltip-background-textfield">
-                  <span className="tooltip-icon-textfield">?</span>
-                  <span className="tooltip-text-textfield">{questionData.help_text}</span>
+                <span className="tooltip-background">
+                  <span className="tooltip-icon">?</span>
+                  <span className="tooltip-text">{questionData.help_text}</span>
                 </span>
               </div>
             </center>
