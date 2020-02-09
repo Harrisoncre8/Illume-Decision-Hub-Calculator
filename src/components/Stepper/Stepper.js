@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './Stepper.css';
@@ -7,14 +7,25 @@ import Nav from '../Nav/Nav';
 export default function Stepper() {
 
   // Using hooks to access redux and saga
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch(), []);
   const inputData = useSelector(state => state.input);
   const questionData = useSelector(state => state.question);
   const splitData = useSelector(state => state.split);
   const lastPageID = useSelector(state => state.previousQuestion);
+  const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const history = useHistory();
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
+
+  useEffect(()=>{
+    if(
+      questionData.question_id && 
+      questionData.id !== lastPageID[lastPageID.length-1] && 
+      userCheckboxes.findIndex(el => el.question_id === questionData.question_id) === -1
+    ){
+      nextPage();
+    }
+  },[questionData, userCheckboxes])
 
   useEffect(()=>{
     setInput(inputData[questionData.question_id] || '');
@@ -59,60 +70,68 @@ export default function Stepper() {
     }
   }
 
+  // Handles pressing enter
+  function submit(e) {
+    e.preventDefault();
+    nextPage();
+  }
+
   return (
     <center>
       <Nav />
       <div className='main-container'>
-        <div>
-          <p className="question-text">
-            {questionData.question}
-          </p>
-          <br />
-          {questionData.split ?
-            <div>
-              <div className="stepper-radio-container">
-                {splitData.map(split => {
-                  return (
-                    <span key={split.id}>
-                      <label className="radio-container">{split.split_text}
-                        <input
-                          type="radio"
-                          name="next"
-                          value={split.next_id}
-                          checked={+splitNext === split.next_id}
-                          onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
-                        />
-                        <span className="radio-btn"></span>
-                      </label>
-                    </span>
-                  );
-                })}
-              </div>
-              <span className="tooltip-background tooltip-background-radio">
-                <span className="tooltip-icon">?</span>
-                <span className="tooltip-text">{questionData.help_text}</span>
-              </span>
-            </div>
-            :
-            <center>
-              <div className="text-field-container">
-                <input 
-                  className="text-field"
-                  value={input} 
-                  onChange={(e)=>handleChange(e)} 
-                  type={questionData.response_type} 
-                  autoFocus
-                />
-                <label className="text-field-label">enter value</label>
-                <div className="text-field-mask stepper-mask"></div>
-                <span className="tooltip-background tooltip-background-textfield">
+        <form onSubmit={e=>{submit(e)}}>
+          <div>
+            <p className="question-text">
+              {questionData.question}
+            </p>
+            <br />
+            {questionData.split ?
+              <div>
+                <div className="stepper-radio-container">
+                  {splitData.map(split => {
+                    return (
+                      <span key={split.id}>
+                        <label className="radio-container">{split.split_text}
+                          <input
+                            type="radio"
+                            name="next"
+                            value={split.next_id}
+                            checked={+splitNext === split.next_id}
+                            onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value); }}
+                          />
+                          <span className="radio-btn"></span>
+                        </label>
+                      </span>
+                    );
+                  })}
+                </div>
+                <span className="tooltip-background tooltip-background-radio">
                   <span className="tooltip-icon">?</span>
                   <span className="tooltip-text">{questionData.help_text}</span>
                 </span>
               </div>
-            </center>
-          }
-        </div>
+              :
+              <center>
+                <div className="text-field-container">
+                  <input 
+                    className="text-field"
+                    value={input} 
+                    onChange={(e)=>handleChange(e)} 
+                    type={questionData.response_type} 
+                    autoFocus
+                  />
+                  <label className="text-field-label">enter value</label>
+                  <div className="text-field-mask stepper-mask"></div>
+                  <span className="tooltip-background tooltip-background-textfield">
+                    <span className="tooltip-icon">?</span>
+                    <span className="tooltip-text">{questionData.help_text}</span>
+                  </span>
+                </div>
+              </center>
+            }
+          </div>
+        </form>
         <div onClick={lastPage} className='arrow-left' />
         <div onClick={nextPage} className='arrow-right' />
       </div>

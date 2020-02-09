@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './BreakEven.css';
 import Nav from '../Nav/Nav';
 import Axios from 'axios'
@@ -14,7 +14,8 @@ export default function BreakEven() {
 
   // Connects to redux
   const inputData = useSelector(state => state.input);
-  const dispatch = useDispatch();
+  const userCheckboxes = useSelector(state=>state.userCheckboxes);
+  const dispatch = useCallback(useDispatch(), []);
 
   // Dynamically calculates the break even point depending on settings
   useEffect(() => {
@@ -22,12 +23,12 @@ export default function BreakEven() {
       +inputData[3] :
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
-    let indirectCosts = +splitPath[24] === 8 ?
+    let indirectCosts = +splitPath[23] === 8 ?
       + inputData[4] :
       (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
       (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
       (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
-      (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
+      (+inputData[21] || 0) + (+inputData[22] || 0);
 
     let divisor = +splitPath[1] === 14 ? 1 : +inputData[5] || 1;
 
@@ -36,7 +37,7 @@ export default function BreakEven() {
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
-    Axios.get('/api/question/all/' + 2).then(response => {
+    Axios.get('/api/question/results/' + 2).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
           let id = arr.id;
@@ -137,28 +138,32 @@ export default function BreakEven() {
       <div>
         <p className="results-text">{paths[start] && paths[start].question}</p>
         {doesSplit ?
-          null :
-          <div className="text-field-container">
-            <input
-              className="text-field text-field-active"
-              type={paths[start] && paths[start].response_type}
-              value={inputData[questionId]}
-              onChange={
-                (e) => {
-                  dispatch({
-                    type: 'ADD_INPUT_VALUE',
-                    payload: {
-                      key: questionId,
-                      value: e.target.value
-                    }
-                  });
-                  checkForValue(e);
+          null 
+          :
+          userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
+            <div className="text-field-container">
+              <input
+                className="text-field text-field-active"
+                type={paths[start] && paths[start].response_type}
+                value={inputData[questionId]}
+                onChange={
+                  (e) => {
+                    dispatch({
+                      type: 'ADD_INPUT_VALUE',
+                      payload: {
+                        key: questionId,
+                        value: e.target.value
+                      }
+                    });
+                    checkForValue(e);
+                  }
                 }
-              }
-            />
-            <label className="text-field-label">enter value</label>
-            <div className="text-field-mask stepper-mask"></div>
-          </div>
+              />
+              <label className="text-field-label">enter value</label>
+              <div className="text-field-mask stepper-mask"></div>
+            </div>
+            :
+            null
         }
         {
           next ?

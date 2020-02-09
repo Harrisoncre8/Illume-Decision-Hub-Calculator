@@ -1,0 +1,8 @@
+.admin-question-card {
+  background-color: #fff;
+  box-shadow: 5px 5px 10px #272727;
+  padding: 20px;
+  border-radius: 25px;
+  width: 500px;
+  margin: 20px;
+}

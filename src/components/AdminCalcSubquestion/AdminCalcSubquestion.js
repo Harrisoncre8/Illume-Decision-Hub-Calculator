@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {useDispatch} from 'react-redux';
+import '../AdminEditCalc/AdminEditCalc.css';
 
 export default function AdminCalcSubquestion(props) {
 
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
+  // const [show, setShow]
 
   // Dispatch to saga to update question and tooltip in database
   const handleSave = () => {
@@ -27,7 +29,10 @@ export default function AdminCalcSubquestion(props) {
         value={tooltip} 
         onChange={(event)=>setTooltip(event.target.value)}
       />
-      <button onClick={handleSave}>SAVE</button>
+      <div>
+        <button className="normal-btn admin-edit-calc-btn" onClick={handleSave}>SAVE</button>
+      </div>
+      <hr />
     </>
   );
 }
