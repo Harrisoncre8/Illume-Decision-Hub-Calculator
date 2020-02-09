@@ -313,12 +313,7 @@ p, span, div, h1, h2, h3, label, button {
   background-color: #f7d149;
   border-radius: 50%;
   cursor: help;
-  transform: translate(178px, -37px);
   z-index: 0;
-}
-
-.tooltip-background-radio {
-  transform: translate(100px, -70px);
 }
 
 .tooltip-background .tooltip-text {
@@ -350,6 +345,15 @@ p, span, div, h1, h2, h3, label, button {
   visibility: visible;
   opacity: 1;
   transition: 0.2s;
+}
+
+.tooltip-background-radio {
+  text-align: left;
+  transform: translate(230px, -47px);
+}
+
+.tooltip-background-textfield {
+  transform: translate(178px, -37px);
 }
 
 .tooltip-icon {

@@ -105,7 +105,7 @@ export default function Stepper() {
                 />
                 <label className="text-field-label">enter value</label>
                 <div className="text-field-mask stepper-mask"></div>
-                <span className="tooltip-background">
+                <span className="tooltip-background tooltip-background-textfield">
                   <span className="tooltip-icon">?</span>
                   <span className="tooltip-text">{questionData.help_text}</span>
                 </span>
