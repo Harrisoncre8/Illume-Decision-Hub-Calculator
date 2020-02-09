@@ -63,7 +63,7 @@ export default function Stepper() {
     <center>
       <Nav />
       <div className='main-container'>
-        <p>
+        <div>
           <p className="question-text">
             {questionData.question}
           </p>
@@ -81,6 +81,10 @@ export default function Stepper() {
                       onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
                     />
                     <span className="radio-btn"></span>
+                    {/* <span className="tooltip-background">
+                      <span className="tooltip-icon">?</span>
+                      <span className="tooltip-bubble-text">{questionData.help_text}</span>
+                    </span> */}
                   </label>
                 </span>
               );
@@ -97,17 +101,14 @@ export default function Stepper() {
                 />
                 <label className="text-field-label">enter value</label>
                 <div className="text-field-mask stepper-mask"></div>
-                <div className="tooltip-background">
+                <span className="tooltip-background">
                   <span className="tooltip-icon">?</span>
-                </div>
+                  <span className="tooltip-bubble-text">{questionData.help_text}</span>
+                </span>
               </div>
             </center>
           }
-          <br />
-          <p className="question-text">
-            {questionData.help_text}
-          </p>
-        </p>
+        </div>
         <div onClick={lastPage} className='arrow-left' />
         <div onClick={nextPage} className='arrow-right' />
       </div>
