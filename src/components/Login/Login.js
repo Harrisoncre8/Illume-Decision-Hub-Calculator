@@ -91,6 +91,9 @@ class Login extends Component{
             />
             <label className="text-field-label">email</label>
             <div className="text-field-mask login-email-mask"></div>
+            <div className="tooltip-background">
+              <span className="tooltip-icon">?</span>
+            </div>
           </div>
 
           <div className="text-field-container login-text-field-container">
@@ -107,12 +110,11 @@ class Login extends Component{
             </span>
           </div>
 
-          <button className="normal-btn login-login-btn" onClick={this.login}>Log In</button>
-          
+          <button className="normal-btn login-login-btn" type="submit" onClick={this.login}>Log In</button>
+          </form>
           <hr className="login-hr" />
 
           <button className="login-register-btn" onClick={this.handleRegister}>register</button>
-          </form>
         </div>
       </center>
     );
