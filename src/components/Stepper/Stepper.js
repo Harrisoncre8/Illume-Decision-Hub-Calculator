@@ -70,26 +70,28 @@ export default function Stepper() {
           <br />
           {questionData.split ?
             <div>
-              {splitData.map(split => {
-                return (
-                  <span key={split.id}>
-                    <label className="radio-container">{split.split_text}
-                      <input
-                        type="radio"
-                        name="next"
-                        value={split.next_id}
-                        checked={+splitNext === split.next_id}
-                        onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
-                      />
-                      <span className="radio-btn"></span>
-                    </label>
-                  </span>
-                );
-              })}
-              {/* <span className="tooltip-background tooltip-background-radio">
+              <div className="stepper-radio-container">
+                {splitData.map(split => {
+                  return (
+                    <span key={split.id}>
+                      <label className="radio-container">{split.split_text}
+                        <input
+                          type="radio"
+                          name="next"
+                          value={split.next_id}
+                          checked={+splitNext === split.next_id}
+                          onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
+                        />
+                        <span className="radio-btn"></span>
+                      </label>
+                    </span>
+                  );
+                })}
+              </div>
+              <span className="tooltip-background tooltip-background-radio">
                 <span className="tooltip-icon">?</span>
                 <span className="tooltip-text">{questionData.help_text}</span>
-              </span> */}
+              </span>
             </div>
             :
             <center>
