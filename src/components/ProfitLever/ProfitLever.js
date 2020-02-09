@@ -178,7 +178,7 @@ export default function ProfitLever() {
           :
           <div className="text-field-container">
             <input
-              className="text-field"
+              className="text-field text-field-active"
               type={paths[start] && paths[start].response_type}
               value={inputData[questionId]}
               onChange={
