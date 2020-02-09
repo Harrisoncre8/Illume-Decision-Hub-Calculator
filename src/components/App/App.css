@@ -305,7 +305,7 @@ p, span, div, h1, h2, h3, label, button {
   background-color: #FFF;
 }
 
-.tooltip-background {
+.tooltip-background-textfield {
   position: relative;
   display: inline-block;
   height: 30px;
@@ -317,8 +317,9 @@ p, span, div, h1, h2, h3, label, button {
   z-index: 0;
 }
 
-.tooltip-background .tooltip-bubble-text {
+.tooltip-background-textfield .tooltip-text-textfield {
   visibility: hidden;
+  opacity: 0;
   position: absolute;
   left: -8px;
   bottom: 40px;
@@ -327,9 +328,11 @@ p, span, div, h1, h2, h3, label, button {
   background-color: #f7d149;
   border-radius: 10px;
   z-index: 2;
+  cursor: default;
+  transition: 0.2s;
 }
 
-.tooltip-background .tooltip-bubble-text::after {
+.tooltip-background-textfield .tooltip-text-textfield::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -339,11 +342,13 @@ p, span, div, h1, h2, h3, label, button {
   border-top: 5px solid #f7d149;
 }
 
-.tooltip-background:hover .tooltip-bubble-text {
+.tooltip-background-textfield:hover .tooltip-text-textfield {
   visibility: visible;
+  opacity: 1;
+  transition: 0.2s;
 }
 
-.tooltip-icon {
+.tooltip-icon-textfield {
   position: relative;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: bold;
