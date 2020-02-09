@@ -305,6 +305,25 @@ p, span, div, h1, h2, h3, label, button {
   background-color: #FFF;
 }
 
+.tooltip-background {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background-color: #f7d149;
+  border-radius: 50%;
+  cursor: help;
+  transform: translate(175px, -35px);
+}
+
+.tooltip-icon {
+  position: relative;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  top: 5px;
+  left: 10px;
+}
+
 
 
 
@@ -361,38 +380,4 @@ p, span, div, h1, h2, h3, label, button {
 }
 .progressbar li.active + li:after {
   background-color: #55b776;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.tooltip-background {
-  position: relative;
-  height: 30px;
-  width: 30px;
-  background-color: #f7d149;
-  border-radius: 50%;
-  cursor: help;
-  transform: translate(175px, -35px);
-}
-
-.tooltip-icon {
-  position: relative;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-weight: bold;
-  font-size: 1.2em;
-  top: 5px;
-  left: 10px;
 }
