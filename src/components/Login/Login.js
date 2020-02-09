@@ -94,6 +94,9 @@ class Login extends Component{
             <div className="tooltip-background">
               <span className="tooltip-icon">?</span>
             </div>
+            <div className="tooltip-bubble">TOOLTIP TEXT.
+              <div className="tooltip-bubble-bottom"></div>
+            </div>
           </div>
 
           <div className="text-field-container login-text-field-container">

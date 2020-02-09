@@ -381,3 +381,30 @@ p, span, div, h1, h2, h3, label, button {
 .progressbar li.active + li:after {
   background-color: #55b776;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.tooltip-bubble {
+  height: 60px;
+  width: 250px;
+  background-color: black;
+}
+
+.tooltip-bubble-bottom {
+  position: relative;
+  top: 44px;
+  height: 0;
+  width: 0;
+  border-right: 30px solid transparent;
+  border-left: 10px solid transparent;
+  border-top: 20px solid black;
+}
