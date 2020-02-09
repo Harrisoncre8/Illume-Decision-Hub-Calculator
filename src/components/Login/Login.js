@@ -93,10 +93,7 @@ class Login extends Component{
             <div className="text-field-mask login-email-mask"></div>
             <div className="tooltip-background">
               <span className="tooltip-icon">?</span>
-            </div>
-            <div className="tooltip-bubble">
               <span className="tooltip-bubble-text">Tooltip text.</span>
-              <div className="tooltip-bubble-bottom"></div>
             </div>
           </div>
 

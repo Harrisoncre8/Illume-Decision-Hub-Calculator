@@ -307,12 +307,40 @@ p, span, div, h1, h2, h3, label, button {
 
 .tooltip-background {
   position: relative;
+  display: inline-block;
   height: 30px;
   width: 30px;
   background-color: #f7d149;
   border-radius: 50%;
   cursor: help;
   transform: translate(178px, -37px);
+  z-index: 0;
+}
+
+.tooltip-background .tooltip-bubble-text {
+  visibility: hidden;
+  position: absolute;
+  left: -8px;
+  bottom: 40px;
+  width: 200px;
+  padding: 7px;
+  background-color: #f7d149;
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.tooltip-background .tooltip-bubble-text::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 30px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #f7d149;
+}
+
+.tooltip-background:hover .tooltip-bubble-text {
+  visibility: visible;
 }
 
 .tooltip-icon {
@@ -322,7 +350,9 @@ p, span, div, h1, h2, h3, label, button {
   font-size: 1.2em;
   top: 5px;
   left: 10px;
+  z-index: -1;
 }
+
 
 
 
@@ -380,40 +410,4 @@ p, span, div, h1, h2, h3, label, button {
 }
 .progressbar li.active + li:after {
   background-color: #55b776;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.tooltip-bubble {
-  position: relative;
-  height: 60px;
-  width: 250px;
-  padding: 7px;
-  border-radius: 10px;
-  background-color: black;
-  transform: translate(180px, -160px);
-}
-
-.tooltip-bubble-bottom {
-  position: relative;
-  top: 51px;
-  left: 13px;
-  height: 0;
-  width: 0;
-  border-right: 15px solid transparent;
-  border-left: 10px solid transparent;
-  border-top: 10px solid black;
-}
-
-.tooltip-bubble-text {
-  color: white;
 }
