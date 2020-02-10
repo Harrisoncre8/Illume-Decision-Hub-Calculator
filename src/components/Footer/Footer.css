@@ -19,7 +19,7 @@
 }
 
 .footer-main-container {
-  position: relative;
+  position: static;
   bottom: 0;
   background-color: #000;
   margin: 0;
@@ -38,5 +38,5 @@
 }
 
 .whitespace {
-  height: 450px;
+  height: 100px;
 }
