@@ -5,7 +5,8 @@ import Nav from '../Nav/Nav';
 import Axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 
-function PriceSetting() {
+export default function PriceSetting() {
+
   // States
   const [margin, setMargin] = useState('');
   const [userMargin, setUserMargin] = useState(0);
@@ -18,7 +19,7 @@ function PriceSetting() {
 
   // Connects to Redux
   const inputData = useSelector(state => state.input);
-  const industryData = useSelector(state => state.industry)
+  const industryData = useSelector(state => state.industry);
   let userID = useSelector(state => state.user.id);
   let userData = useSelector(state => state.userInfo);
   const userCheckboxes = useSelector(state=>state.userCheckboxes);
@@ -38,9 +39,9 @@ function PriceSetting() {
       setMargin(
         industryData[industryData.findIndex(el => el.industry === userData[0].industry)] &&
         industryData[industryData.findIndex(el => el.industry === userData[0].industry)].margin
-      )
+      );
     }
-  }, [userData, industryData])
+  }, [userData, industryData]);
   
 
   // Dynamically calculates the price setting depending on settings
@@ -59,60 +60,63 @@ function PriceSetting() {
     let cost = directCosts + indirectCosts || 0;
     let price = +inputData[6] || 0;
     let totalSales = inputData[5] || 0;
-    let iNorm = (cost / (1 - margin)).toFixed(2) || 0
+    let iNorm = (cost / (1 - margin)).toFixed(2) || 0;
     let pm = +iNorm - cost || 0;
     let um = price - cost || 0;
     setIndustryNorm(+iNorm);
     setProductMargin(+pm.toFixed(2));
     setUserMargin(+um.toFixed(2));
     setDifference(+Math.abs(Math.ceil(totalSales * ((pm / um) - 1))) || 0);
-  }, [margin, productMargin, userMargin, inputData, splitPath])
+  }, [margin, productMargin, userMargin, inputData, splitPath]);
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
     Axios.get('/api/question/results/' + 3).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
-          let id = arr.id
-          let text = acum[id] && acum[id]['split_text'] ? [...acum[id]['split_text'], arr.split_text] : [arr.split_text]
-          let next = acum[id] && acum[id]['split_next_id'] ? [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id]
-          delete arr.id
+          let id = arr.id;
+          let text = acum[id] && acum[id]['split_text'] ? [...acum[id]['split_text'], arr.split_text] : [arr.split_text];
+          let next = acum[id] && acum[id]['split_next_id'] ? [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id];
+          delete arr.id;
           delete arr.split_text;
           delete arr.split_next_id;
           acum[id] = { ...arr };
           acum[id]['split_text'] = text;
           acum[id]['split_next_id'] = next;
         } else {
-          let id = arr.id
-          delete arr.id
-          acum[id] = { ...arr }
+          let id = arr.id;
+          delete arr.id;
+          acum[id] = { ...arr };
         }
         return acum;
-      }, {})
+      }, {});
       setPaths(temp);
-    })
+    });
 
     Axios.get('/api/question/splits/' + 3).then(response => {
       let temp = response.data.reduce((acum, arr) => {
-        acum[arr.question_id] ? acum[arr.question_id].push(arr) : acum[arr.question_id] = [arr]
+        acum[arr.question_id] ? acum[arr.question_id].push(arr) : acum[arr.question_id] = [arr];
         return acum;
-      }, {})
+      }, {});
       setSplits(temp);
     }).catch(err => {
       console.log(err);
     });
-  }, [])
+  }, []);
 
   // Rearranges the response from the server to a JSON styled object
   useEffect(() => {
     if (Object.values(splits).length > 0) {
-      const temp = {}
+      const temp = {};
       Object.values(splits).forEach(arr => {
-        temp[arr[0].question_id] = arr[0].next_id
+        temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
       })
       setSplitPath(temp);
     }
-  }, [splits])
+  }, [splits]);
+
+  // Adds class if input has a value, removes the class if input has no value
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
   // Handles the change of the radio button
   function radioChange(e, question) {
@@ -133,16 +137,18 @@ function PriceSetting() {
                 {splits[split].map(radio => {
                   return (
                     <span key={radio.id}>
-                      <input
-                        type='radio'
-                        name="next"
-                        value={radio.next_id}
-                        checked={+splitPath[split] === +radio.next_id}
-                        onChange={(e) => { radioChange(e, split) }}
-                      />
-                      {radio.split_text}
+                      <label className="radio-container">{radio.split_text}
+                        <input
+                          type='radio'
+                          name="next"
+                          value={radio.next_id}
+                          checked={+splitPath[split] === +radio.next_id}
+                          onChange={(e) => { radioChange(e, split) }}
+                        />
+                        <span className="radio-btn"></span>
+                      </label>
                     </span>
-                  )
+                  );
                 })}
               </form> :
               null
@@ -153,19 +159,23 @@ function PriceSetting() {
               null
           }
         </>
-      )
+      );
     }
-    let next = paths[start] && paths[start].next_id
-    let doesSplit = paths[start] && paths[start].split
-    let questionId = paths[start] && paths[start].question_id
+
+    let next = paths[start] && paths[start].next_id;
+    let doesSplit = paths[start] && paths[start].split;
+    let questionId = paths[start] && paths[start].question_id;
+
     return (
       <div>
-        <p>{paths[start] && paths[start].question}</p>
-        {
-          doesSplit ?
-            null :
-            userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1?
+        <p className="results-text">{paths[start] && paths[start].question}</p>
+        {doesSplit ?
+          null 
+          :
+          userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
+            <div className="text-field-container">
               <input
+                className="text-field text-field-active"
                 type={paths[start] && paths[start].response_type}
                 value={inputData[questionId]}
                 onChange={
@@ -176,11 +186,16 @@ function PriceSetting() {
                         key: questionId,
                         value: e.target.value
                       }
-                    })
+                    });
+                    checkForValue(e);
                   }
                 }
-              />:
-              null
+              />
+              <label className="text-field-label">enter value</label>
+              <div className="text-field-mask stepper-mask"></div>
+            </div>
+            :
+            null
         }
         {
           next ?
@@ -190,7 +205,7 @@ function PriceSetting() {
             null // for next?
         }
       </div>
-    )
+    );
   }
 
   return (
@@ -205,7 +220,7 @@ function PriceSetting() {
               {industryData.map(industry => {
                 return (
                   <option key={industry.id} value={industry.margin}>{industry.industry}</option>
-                )
+                );
               })}
             </select>
           </form>
@@ -246,5 +261,3 @@ function PriceSetting() {
     </center>
   );
 }
-
-export default PriceSetting;

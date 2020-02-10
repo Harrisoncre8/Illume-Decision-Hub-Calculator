@@ -68,27 +68,27 @@ export default function AdminEditCalc() {
           </div>
         </div>
       </div>
-        {breakEven ?
-          <div className="admin-edit-calc-render-container">
-            <AdminEditThisCalc calcID={2} name={`Break Even`} />
-          </div>
-          :
-          ''
-        }
-        {lever ?
-          <div className="admin-edit-calc-render-container">
-            <AdminEditThisCalc calcID={1} name={`Profit Lever`} />
-          </div>
-          :
-          ''
-        }
-        {price ?
-          <div className="admin-edit-calc-render-container">
-            <AdminEditThisCalc calcID={3} name={`Price Setting`} />
-          </div>
-          :
-          ''
-        }
+      {breakEven ?
+        <div className="admin-edit-calc-render-container">
+          <AdminEditThisCalc calcID={2} name={`Break Even`} />
+        </div>
+        :
+        ''
+      }
+      {lever ?
+        <div className="admin-edit-calc-render-container">
+          <AdminEditThisCalc calcID={1} name={`Profit Lever`} />
+        </div>
+        :
+        ''
+      }
+      {price ?
+        <div className="admin-edit-calc-render-container">
+          <AdminEditThisCalc calcID={3} name={`Price Setting`} />
+        </div>
+        :
+        ''
+      }
     </center>
   );
 }

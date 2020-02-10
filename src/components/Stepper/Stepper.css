@@ -1,3 +1,14 @@
+.stepper-container {
+  padding: 100px 0;
+}
+
 .stepper-mask {
   width: 71px;
+}
+
+.stepper-radio-container {
+  width: 380px;
+  padding-left: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
