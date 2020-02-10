@@ -4,6 +4,7 @@ import Modal from 'react-awesome-modal';
 import './User.css'
 import Nav from '../Nav/Nav';
 import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
+import UserCalcToggle from '../UserCalcToggle/UserCalcToggle';
 
 export default function User(){
   // getting data from redux
@@ -186,7 +187,8 @@ export default function User(){
               onClick={closePassModal}>Cancel</button>
             </div>
         </Modal>
-        <QuestionCheckboxes/>
+        <QuestionCheckboxes />
+        <UserCalcToggle />
       </div>
     </center>
   );
