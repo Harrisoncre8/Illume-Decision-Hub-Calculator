@@ -19,11 +19,12 @@
 }
 
 .footer-main-container {
-  position: static;
+  position: absolute;
   bottom: 0;
   background-color: #000;
   margin: 0;
   padding: 30px;
+  width: 96%;
 }
 
 .footer-logo {
