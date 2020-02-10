@@ -17,23 +17,24 @@ export default function Stepper() {
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
 
-  useEffect(()=>{
-    if(
-      questionData.question_id && 
-      questionData.id !== lastPageID[lastPageID.length-1] && 
+  useEffect(() => {
+    if (
+      questionData.question_id &&
+      questionData.id !== lastPageID[lastPageID.length - 1] &&
       userCheckboxes.findIndex(el => el.question_id === questionData.question_id) === -1
-    ){
+    ) {
       nextPage();
     }
-  },[questionData, userCheckboxes])
+  }, [questionData, userCheckboxes])
 
-  useEffect(()=>{
+  useEffect(() => {
     setInput(inputData[questionData.question_id] || '');
-  }, [inputData, questionData.question_id]);
-  
-  useEffect(()=>{
-    if(questionData.split){
-      setSplitNext(splitData[0] && splitData[0].next_id || '');
+  }, [inputData, questionData.question_id])
+
+  useEffect(() => {
+    if (questionData.split) {
+      setSplitNext(splitData[0] && splitData[0].next_id || '')
+      setInput(splitData[0] && splitData[0].next_id || '')
     }
   }, [questionData.split, inputData, questionData.question_id, splitData]);
 
@@ -46,8 +47,8 @@ export default function Stepper() {
   }
   // Push to next question
   function nextPage() {
-    dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id });
-    dispatch({type: 'ADD_INPUT_VALUE', payload:{key: questionData.question_id, value: input}});
+    dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
+    dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: questionData.question_id, value: input } })
     setInput('');
     if (questionData.next_id == null) {
       const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
