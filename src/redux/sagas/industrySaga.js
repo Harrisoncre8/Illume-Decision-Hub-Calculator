@@ -4,7 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* getAdminIndustry(action){
   try{
     const response = yield axios.get(`/api/admin/industry`);
-    yield put({type: `SET_INDUSTRY`, payload: response.data})
+    yield put({type: `SET_ADMIN_INDUSTRY`, payload: response.data})
   } catch(error){
     console.log('Error in admin industry GET', error);
   }
