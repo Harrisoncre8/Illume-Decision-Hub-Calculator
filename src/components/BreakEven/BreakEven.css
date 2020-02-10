@@ -1,27 +1,3 @@
-.break-label-hours {
-  transform: translate(-46px, 23px);
-}
-
-.break-label-indirect-cost {
-  transform: translate(-42px, 23px);
-}
-
-.break-label-part {
-  transform: translate(-51px, 23px);
-}
-
-.break-label-rate {
-  transform: translate(-51px, 23px);
-}
-
-.break-label-raw-material {
-  transform: translate(-28px, 23px);
-}
-
-.break-label-sales {
-  transform: translate(-33px, 23px);
-}
-
 .break-mask-hours {
   width: 55px;
 }
@@ -48,59 +24,4 @@
 
 .break-radio {
   cursor: pointer;
-}
-
-.break-text-field-container {
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.break-text-field-hours:focus + .break-label-hours {
-  transform: translate(-47px, 7px);
-}
-
-.break-text-field-indirect-cost:focus + .break-label-indirect-cost {
-  transform: translate(-43px, 7px);
-}
-
-.break-text-field-part:focus + .break-label-part {
-  transform: translate(-50px, 7px);
-}
-
-.break-text-field-rate:focus + .break-label-rate {
-  transform: translate(-52px, 7px);
-}
-
-.break-text-field-raw-material:focus + .break-label-raw-material {
-  transform: translate(-32px, 7px);
-}
-
-.break-text-field-sales:focus + .break-label-sales {
-  transform: translate(-35px, 7px);
-}
-
-.text-field-active + .break-label-hours {
-  transform: translate(-47px, 7px);
-}
-
-.text-field-active + .break-label-indirect-cost {
-  transform: translate(-43px, 7px);
-}
-
-.text-field-active + .break-label-part {
-  transform: translate(-50px, 7px);
-}
-
-.text-field-active + .break-label-rate {
-  transform: translate(-52px, 7px);
-}
-
-.text-field-active + .break-label-raw-material {
-  transform: translate(-32px, 7px);
-}
-
-.text-field-active + .break-label-sales {
-  transform: translate(-35px, 7px);
 }

@@ -81,7 +81,7 @@ export default function Stepper() {
     <center>
       <Nav />
       <div className='main-container stepper-container'>
-        <div className="max-width-container">
+        <div className="stepper-max-width-container">
           <form onSubmit={e=>{submit(e)}}>
             <div>
               <p className="question-text">

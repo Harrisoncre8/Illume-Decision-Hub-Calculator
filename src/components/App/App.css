@@ -14,6 +14,10 @@ p, span, div, h1, h2, h3, label, button {
   font-family:'Century Gothic','Futura',san-serif;
 }
 
+.align-left {
+  text-align: left;
+}
+
 .arrow-left {
   position: absolute;
   top: 350px;
@@ -139,7 +143,7 @@ p, span, div, h1, h2, h3, label, button {
 }
 
 .max-width-container {
-  max-width: 800px;
+  max-width: 400px;
 }
 
 .modal-btn-container {
