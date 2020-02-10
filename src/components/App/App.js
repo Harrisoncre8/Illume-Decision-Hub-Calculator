@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
@@ -14,8 +14,13 @@ import ProfitLever from '../ProfitLever/ProfitLever';
 import Register from '../Register/Register';
 import Stepper from '../Stepper/Stepper';
 import User from '../User/User';
+import { useDispatch } from 'react-redux';
 
 export default function App() {
+  const dispatch = useCallback(useDispatch());
+  useEffect(()=>{
+    dispatch({type: 'FETCH_USER'})
+  })
   return (
     <Router>
       <div className="App">
