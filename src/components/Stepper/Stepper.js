@@ -11,28 +11,29 @@ export default function Stepper() {
   const questionData = useSelector(state => state.question);
   const splitData = useSelector(state => state.split);
   const lastPageID = useSelector(state => state.previousQuestion)
-  const userCheckboxes = useSelector(state=>state.userCheckboxes);
+  const userCheckboxes = useSelector(state => state.userCheckboxes);
   const history = useHistory();
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
 
-  useEffect(()=>{
-    if(
-      questionData.question_id && 
-      questionData.id !== lastPageID[lastPageID.length-1] && 
+  useEffect(() => {
+    if (
+      questionData.question_id &&
+      questionData.id !== lastPageID[lastPageID.length - 1] &&
       userCheckboxes.findIndex(el => el.question_id === questionData.question_id) === -1
-    ){
+    ) {
       nextPage();
     }
-  },[questionData, userCheckboxes])
+  }, [questionData, userCheckboxes])
 
-  useEffect(()=>{
+  useEffect(() => {
     setInput(inputData[questionData.question_id] || '');
   }, [inputData, questionData.question_id])
-  
-  useEffect(()=>{
-    if(questionData.split){
+
+  useEffect(() => {
+    if (questionData.split) {
       setSplitNext(splitData[0] && splitData[0].next_id || '')
+      setInput(splitData[0] && splitData[0].next_id || '')
     }
   }, [questionData.split, inputData, questionData.question_id, splitData])
 
@@ -46,7 +47,7 @@ export default function Stepper() {
   // Push to next question
   function nextPage() {
     dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
-    dispatch({type: 'ADD_INPUT_VALUE', payload:{key: questionData.question_id, value: input}})
+    dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: questionData.question_id, value: input } })
     setInput('');
     if (questionData.next_id == null) {
       const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
@@ -70,7 +71,7 @@ export default function Stepper() {
   }
 
   // Handles pressing enter
-  function submit(e){
+  function submit(e) {
     e.preventDefault();
     nextPage();
   }
@@ -79,7 +80,7 @@ export default function Stepper() {
     <center>
       <Nav />
       <div className='main-container'>
-        <form onSubmit={e=>{submit(e)}}>
+        <form onSubmit={e => { submit(e) }}>
           <p className="question-text">
             {questionData.question}
           </p>
@@ -104,11 +105,11 @@ export default function Stepper() {
             :
             <center>
               <div className="text-field-container">
-                <input 
+                <input
                   className="text-field"
-                  value={input} 
-                  onChange={(e)=>handleChange(e)} 
-                  type={questionData.response_type} 
+                  value={input}
+                  onChange={(e) => handleChange(e)}
+                  type={questionData.response_type}
                   autoFocus
                 />
                 <label className="text-field-label">enter value</label>
