@@ -12,25 +12,16 @@ export default function Stepper() {
   const questionData = useSelector(state => state.question);
   const splitData = useSelector(state => state.split);
   const lastPageID = useSelector(state => state.previousQuestion);
-  const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const history = useHistory();
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
 
-  useEffect(() => {
-    if (
-      questionData.question_id &&
-      questionData.id !== lastPageID[lastPageID.length - 1] &&
-      userCheckboxes.findIndex(el => el.question_id === questionData.question_id) === -1
-    ) {
-      nextPage();
-    }
-  }, [questionData, userCheckboxes])
-
+  // imports previous user inpus
   useEffect(() => {
     setInput(inputData[questionData.question_id] || '');
   }, [inputData, questionData.question_id])
 
+  // Gives radio button selection a default value
   useEffect(() => {
     if (questionData.split) {
       setSplitNext(splitData[0] && splitData[0].next_id || '')
