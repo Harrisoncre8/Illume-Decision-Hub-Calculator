@@ -4,7 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* deleteAdminIndustryInfo(action){
   try{
     yield axios.delete(`/api/admin/industry-info/${action.payload}`);
-    yield put({type: `GET_INDUSTRY`});
+    yield put({type: `GET_ADMIN_INDUSTRY`});
   } catch(error){
     console.log('Error in admin industry info DELETE', error);
   }
