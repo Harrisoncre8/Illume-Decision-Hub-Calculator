@@ -32,7 +32,7 @@ export default function Footer() {
         <div className="footer-span-container">
           <span className="footer-a-span">
             &copy; {date} &nbsp;
-            <a className="footer-a" href="https://illume-pricing.com/">Illume Pricing</a>
+            <a className="footer-a" href="https://illume-pricing.com/" target="_blank">Illume Pricing</a>
           </span>
         </div>
       </footer>
