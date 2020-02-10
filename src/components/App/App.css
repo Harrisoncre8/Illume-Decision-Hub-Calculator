@@ -138,6 +138,10 @@ p, span, div, h1, h2, h3, label, button {
   margin-bottom: 20px;
 }
 
+.max-width-container {
+  max-width: 800px;
+}
+
 .modal-btn-container {
   margin: 20px;
 }
