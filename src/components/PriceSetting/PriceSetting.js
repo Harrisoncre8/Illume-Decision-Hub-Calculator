@@ -108,7 +108,7 @@ function PriceSetting() {
     if (Object.values(splits).length > 0) {
       const temp = {}
       Object.values(splits).forEach(arr => {
-        temp[arr[0].question_id] = arr[0].next_id
+        temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
       })
       setSplitPath(temp);
     }
