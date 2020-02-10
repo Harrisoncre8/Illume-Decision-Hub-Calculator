@@ -19,6 +19,8 @@
 }
 
 .footer-main-container {
+  position: relative;
+  bottom: 0;
   background-color: #000;
   margin: 0;
   padding: 30px;
@@ -36,5 +38,5 @@
 }
 
 .whitespace {
-  height: 150px;
+  height: 450px;
 }
