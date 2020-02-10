@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useEffect } from 'react';
 import './PriceSetting.css';
 import Nav from '../Nav/Nav';
@@ -21,7 +21,8 @@ function PriceSetting() {
   const industryData = useSelector(state => state.industry)
   let userID = useSelector(state => state.user.id);
   let userData = useSelector(state => state.userInfo);
-  const dispatch = useDispatch();
+  const userCheckboxes = useSelector(state=>state.userCheckboxes);
+  const dispatch = useCallback(useDispatch(), []);
 
   // Ensures that userInfo and industry data is in the reducer
   useEffect(() => {
@@ -48,12 +49,12 @@ function PriceSetting() {
       +inputData[3] :
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
-    let indirectCosts = +splitPath[24] === 11 ?
+    let indirectCosts = +splitPath[23] === 11 ?
       + inputData[4] :
       (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
       (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
       (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
-      (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
+      (+inputData[21] || 0) + (+inputData[22] || 0);
 
     let cost = directCosts + indirectCosts || 0;
     let price = +inputData[6] || 0;
@@ -69,7 +70,7 @@ function PriceSetting() {
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
-    Axios.get('/api/question/all/' + 3).then(response => {
+    Axios.get('/api/question/results/' + 3).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
           let id = arr.id
@@ -163,21 +164,24 @@ function PriceSetting() {
         {
           doesSplit ?
             null :
-            <input
-              type={paths[start] && paths[start].response_type}
-              value={inputData[questionId]}
-              onChange={
-                (e) => {
-                  dispatch({
-                    type: 'ADD_INPUT_VALUE',
-                    payload: {
-                      key: questionId,
-                      value: e.target.value
-                    }
-                  })
+            userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1?
+              <input
+                type={paths[start] && paths[start].response_type}
+                value={inputData[questionId]}
+                onChange={
+                  (e) => {
+                    dispatch({
+                      type: 'ADD_INPUT_VALUE',
+                      payload: {
+                        key: questionId,
+                        value: e.target.value
+                      }
+                    })
+                  }
                 }
-              }
-            />}
+              />:
+              null
+        }
         {
           next ?
             doesSplit ?

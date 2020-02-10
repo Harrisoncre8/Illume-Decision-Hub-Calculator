@@ -1,0 +1,37 @@
+.admin-calc-heading {
+  background-color: #f0aa42;
+}
+
+.admin-calc-question-label {
+  padding-bottom: 5px;
+}
+
+.admin-calc-question-textfield {
+  margin-right: 10px;
+}
+
+.admin-calc-show-hide-btn {
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-top: 15px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.admin-calc-sub-heading {
+  margin-top: 10px;
+}
+
+.admin-calc-tooltip-label {
+  padding-bottom: 5px;
+  padding-top: 15px;
+}
+
+.admin-question-card {
+  background-color: #fff;
+  box-shadow: 5px 5px 10px #272727;
+  padding: 20px;
+  border-radius: 25px;
+  width: 500px;
+  margin: 20px;
+}

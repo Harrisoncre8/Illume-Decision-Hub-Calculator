@@ -9,6 +9,7 @@ import previousQuestion from './previousQuestionReducer';
 import input from './inputReducer';
 import userInfo from './userInfoReducer';
 import passwordStatus from './passwordStatusReducer';
+import userCheckboxes from './userCheckboxesReducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and login Message
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   previousQuestion, // stores id of previous question for stepper
   input, // stores values from inputs from stepper
   userInfo, // stores necessary information for user edit page
+  userCheckboxes, // holds the users checkboxes
 });
 
 export default rootReducer;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useEffect } from 'react';
 import './ProfitLever.css';
 import Axios from 'axios'
@@ -17,7 +17,8 @@ function ProfitLever() {
 
   // Connects to redux
   const inputData = useSelector(state => state.input);
-  const dispatch = useDispatch();
+  const userCheckboxes = useSelector(state=>state.userCheckboxes);
+  const dispatch = useCallback(useDispatch(), []);
 
 
   // Dynamically calculates the profit lever depending on settings
@@ -26,12 +27,12 @@ function ProfitLever() {
       +inputData[3] :
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
-    let indirectCosts = +splitPath[24] === 4 ?
+    let indirectCosts = +splitPath[23] === 4 ?
       + inputData[4] :
       (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
       (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
       (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
-      (+inputData[21] || 0) + (+inputData[22] || 0) + (+inputData[23] || 0);
+      (+inputData[21] || 0) + (+inputData[22] || 0);
 
     let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
     console.log(directCosts, indirectCosts, divisor)
@@ -72,7 +73,7 @@ function ProfitLever() {
 
   // Gets the questions and splits for the given results page
   useEffect(() => {
-    Axios.get('/api/question/all/' + 1).then(response => {
+    Axios.get('/api/question/results/' + 1).then(response => {
       let temp = response.data.reduce((acum, arr) => {
         if (arr.split) {
           let id = arr.id
@@ -169,21 +170,24 @@ function ProfitLever() {
         {
           doesSplit ?
             null :
-            <input
-              type={paths[start] && paths[start].response_type}
-              value={inputData[questionId]}
-              onChange={
-                (e) => {
-                  dispatch({
-                    type: 'ADD_INPUT_VALUE',
-                    payload: {
-                      key: questionId,
-                      value: e.target.value
-                    }
-                  })
+            userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1?
+              <input
+                type={paths[start] && paths[start].response_type}
+                value={inputData[questionId]}
+                onChange={
+                  (e) => {
+                    dispatch({
+                      type: 'ADD_INPUT_VALUE',
+                      payload: {
+                        key: questionId,
+                        value: e.target.value
+                      }
+                    })
+                  }
                 }
-              }
-            />}
+              />:
+              null
+        }
         {
           next ?
             doesSplit ?
@@ -203,16 +207,16 @@ function ProfitLever() {
         {stepper(1)}
         <div className="data-result">
           <h3 className="data-result-heading">Result</h3>
-          <p>A 1% improvement in price will deliver {price.toFixed(1)}% improvement in profit.</p>
+          <p>A 1% improvement in price will deliver {isNaN(price.toFixed(1))? 0 : price.toFixed(1)}% improvement in profit.</p>
           {/* <p>This translates to $x more profit in your pocket per year</p> */}
           <br />
-          <p>A 1% increase in sales will deliver {growth.toFixed(1)}% improvement in profit.</p>
+          <p>A 1% increase in sales will deliver {isNaN(growth.toFixed(1))? 0 : growth.toFixed(1)}% improvement in profit.</p>
           {/* <p>This translate into $x more profit in your pocket per year</p> */}
           <br />
-          <p>A 1% reduction in direct cost will deliver {directCostChange.toFixed(1)}% improvement in profit.</p>
+          <p>A 1% reduction in direct cost will deliver {isNaN(directCostChange.toFixed(1))? 0 : directCostChange.toFixed(1)}% improvement in profit.</p>
           {/* <p>This translates into $x more profit in your pocket per year</p> */}
           <br />
-          <p>A 1% reduction in indirect costs will deliver {indirectCostChange.toFixed(1)}% improvement in profit.</p>
+          <p>A 1% reduction in indirect costs will deliver {isNaN(indirectCostChange.toFixed(1))? 0 : indirectCostChange.toFixed(1)}% improvement in profit.</p>
           {/* <p>This translates into $x more profit in your pocket each year</p> */}
         </div>
       </div>

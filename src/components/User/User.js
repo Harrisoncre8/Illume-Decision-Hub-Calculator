@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
 import './User.css'
 import Nav from '../Nav/Nav';
+import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
 
 export default function User(){
   // getting data from redux
@@ -147,7 +148,7 @@ export default function User(){
             </div>
         </Modal>
 
-          <Modal
+        <Modal
           visible={passwordModal}
           width="400"
           height="300"
@@ -182,6 +183,7 @@ export default function User(){
               onClick={closePassModal}>Cancel</button>
             </div>
         </Modal>
+        <QuestionCheckboxes/>
       </div>
     </center>
   );
