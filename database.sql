@@ -166,7 +166,7 @@ VALUES (
   'Labor Hours'
 ),
 (
-  'What are your parts/raw material costs?',
+  'What are your parts or raw material costs?',
   'number',
   'These are things that go into the making of the product or delivering of the service.',
   3,
@@ -175,7 +175,7 @@ VALUES (
   'Parts/Raw Materials'
 ),
 (
-  'What are some other direct costs?',
+  'What are some other direct costs you have?',
   'number',
   'Other costs may be things like rental space that is unique to each transaction',
   3,
@@ -184,7 +184,7 @@ VALUES (
   'Other Direct Costs'
 ),
 (
-  'What are salary costs?',
+  'What are your salary costs?',
   'number',
   'Remember to include yourself if you pay yourself a salary.',
   4,
@@ -193,7 +193,7 @@ VALUES (
   'Salary'
 ),
 (
-  'What are benefit costs?',
+  'What are your benefit costs?',
   'number',
   'Benefits include things like health, dental, disability, life, etc.',
   4,
@@ -204,7 +204,7 @@ VALUES (
 (
   'What is your rent/business morgage payment?',
   'number',
-  'Remember to include escrow payments and insurance here.',
+  'Remember to include escrow payments and insurance.',
   4,
   FALSE,
   FALSE,
