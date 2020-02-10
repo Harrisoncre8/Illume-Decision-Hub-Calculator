@@ -130,6 +130,7 @@ p, span, div, h1, h2, h3, label, button {
   border-radius: 25px;
   height: 100%;
   width: 80%;
+  max-width: 900px;
 }
 
 .main-heading {
