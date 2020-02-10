@@ -23,7 +23,7 @@ class AdminEditIndustry extends Component{
 
   // GET data from industry table on load
   componentDidMount(){
-    this.props.dispatch({type: `GET_INDUSTRY`});
+    this.props.dispatch({type: `GET_ADMIN_INDUSTRY`});
   }
 
   // Adds class if input has a value, removes the class if input has no value
@@ -223,7 +223,7 @@ class AdminEditIndustry extends Component{
   }
 }
 
-const putReduxStateOnProps = (reduxState)=>({
+const putReduxStateOnProps = reduxState => ({
   industry: reduxState.industry,
 });
 
