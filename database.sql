@@ -405,8 +405,11 @@ VALUES(1,1,'Single Product',2),
 INSERT INTO industry ("industry", "margin") 
 VALUES ('Attorney', 0.30), ('Cleaning', 0.20), ('Massage', 0.25);
 
+-- Dummy super admin
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
 VALUES ('test@test.co', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
 
 INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "phone_number")
 VALUES (1,'test', 'test co', 1, '1234567890');
+
+INSERT INTO "user_checks" SELECT 1, * FROM generate_series(1, (SELECT COUNT(*) FROM questions));
