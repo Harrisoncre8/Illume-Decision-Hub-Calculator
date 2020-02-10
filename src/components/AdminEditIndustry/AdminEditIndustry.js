@@ -48,7 +48,7 @@ class AdminEditIndustry extends Component{
 
   // Ask for confirmation, then dispatch DELETE request to saga
   handleDelete = id => {
-    let popup = window.confirm(`Are you sure you want to delete ${id.industry}?`);
+    let popup = window.confirm(`Are you sure you want to disable ${id.industry}?`);
     if(popup){
       this.props.dispatch({type: `DELETE_ADMIN_INDUSTRY_INFO`, payload: id.id});
     }
@@ -126,6 +126,7 @@ class AdminEditIndustry extends Component{
               <tr>
                 <th>Industry</th>
                 <th>Margin</th>
+                <th>Enabled?</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -135,8 +136,9 @@ class AdminEditIndustry extends Component{
                 <tr key={industry.id}>
                   <td>{industry.industry}</td>
                   <td>{industry.margin * 100}%</td>
+                  <td>{industry.enabled}</td>
                   <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
-                  <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DELETE</td>
+                  <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DISABLE</td>
                 </tr>
               )}
             </tbody>
