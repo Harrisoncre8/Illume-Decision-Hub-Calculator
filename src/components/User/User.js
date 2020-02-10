@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
 import './User.css'
 import Nav from '../Nav/Nav';
+import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
 
 export default function User(){
 // hooks for redux and sagas
@@ -122,7 +123,7 @@ const handleUserIndustry = (event) => {
             </div>
         </Modal>
 
-          <Modal
+        <Modal
           visible={passwordModal}
           width="400"
           height="300"
@@ -135,6 +136,7 @@ const handleUserIndustry = (event) => {
               onClick={closePassModal}>Close</button>
             </div>
         </Modal>
+        <QuestionCheckboxes/>
       </div>
     </center>
   );

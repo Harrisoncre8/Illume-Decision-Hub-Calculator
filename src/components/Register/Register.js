@@ -71,43 +71,43 @@ class Register extends Component{
             <span className="register-brand-name">illume decision hub</span>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-name" 
+              className="text-field" 
               type="text" 
               name="name"
               value={this.state.name}
               onChange={(event)=>this.handleChange(event, 'name')}
             />
-            <label className="text-field-label register-label-name">name</label>
+            <label className="text-field-label">name</label>
             <div className="text-field-mask register-mask-name"></div>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-company" 
+              className="text-field" 
                 type="text" 
                 name="company"
                 value={this.state.company}
                 onChange={(event)=>this.handleChange(event, 'company')}
             />
-            <label className="text-field-label register-label-company">company</label>
+            <label className="text-field-label">company</label>
             <div className="text-field-mask register-mask-company"></div>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-phone" 
+              className="text-field" 
               type="text" 
               name="phone"
               value={this.state.phone}
               onChange={(event)=>this.handleChange(event, 'phone')}
             />
-            <label className="text-field-label register-label-phone">phone #</label>
+            <label className="text-field-label">phone #</label>
             <div className="text-field-mask register-mask-phone"></div>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <select 
               className="dropdown register-dropdown"
               defaultValue="Select Industry"
@@ -122,25 +122,25 @@ class Register extends Component{
             </select>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-email" 
+              className="text-field" 
               type="text" 
               name="email"
               value={this.state.email}
               onChange={(event)=>this.handleChange(event, 'email')}
             />
-            <label className="text-field-label register-label-email">email</label>
+            <label className="text-field-label">email</label>
             <div className="text-field-mask register-mask-email"></div>
           </div>
 
-          <div className="register-text-field-container">
+          <div className="text-field-container">
             <input 
-              className="text-field register-text-field-password" 
+              className="text-field" 
               type={this.state.showPassword} 
               onChange={(event)=>this.handleChange(event, 'password')}
             />
-            <label className="text-field-label register-label-password">password</label>
+            <label className="text-field-label">password</label>
             <div className="text-field-mask register-mask-password"></div>
             <span>
               <input type="checkbox" onClick={this.togglePasswordView} />

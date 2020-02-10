@@ -7,6 +7,7 @@ import admin from './adminSaga';
 import industry from './industrySaga';
 import question from './questionSaga';
 import splitSaga from './splitSaga';
+import checkboxSaga from './checkedSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     industry(),
     question(),
     splitSaga(),
+    checkboxSaga(),
   ]);
 }

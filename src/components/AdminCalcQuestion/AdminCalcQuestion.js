@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import '../AdminEditCalc/AdminEditCalc.css';
 import AdminCalcSubquestion from '../AdminCalcSubquestion/AdminCalcSubquestion';
 
 export default function AdminCalcQuestion(props) {
 
   const subQuestion = useSelector((state)=>state.admin.adminSubquestion);
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
 
@@ -22,6 +23,22 @@ export default function AdminCalcQuestion(props) {
     }
   }, [props.id]);
 
+  // Map through sub-questions, increment question number for each question
+  const subMap = () => {
+    let count = 1;
+    return (
+      props.id === 3 || props.id === 4 ?
+        subQuestion.map(q=>
+          <div key={q.id}>
+            <h3 className="main-heading">Sub-Question {count++}</h3>
+            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
+          </div>
+        )
+        :
+        ''
+    );
+  }
+
   return(
     <>
       <textarea 
@@ -36,17 +53,12 @@ export default function AdminCalcQuestion(props) {
         value={tooltip} 
         onChange={(event)=>setTooltip(event.target.value)} 
       />
-      <button onClick={handleSave}>SAVE</button>
       <div>
-      {props.id === 3 || props.id === 4 ?
-        subQuestion.map(q=>
-          <span key={q.id}>
-            <AdminCalcSubquestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
-          </span>
-        )
-        :
-        ''
-      }
+        <button className="normal-btn admin-edit-calc-btn" onClick={handleSave}>SAVE</button>
+      </div>
+      <hr />
+      <div>
+        {subMap()}
       </div>
     </>
   );
