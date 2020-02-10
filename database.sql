@@ -193,7 +193,7 @@ VALUES (
   'Salary'
 ),
 (
-  'What are your benefit costs?',
+  'What are your employee benefit costs?',
   'number',
   'Benefits include things like health, dental, disability, life, etc.',
   4,
@@ -202,7 +202,7 @@ VALUES (
   'Benefits'
 ),
 (
-  'What is your rent/business morgage payment?',
+  'What is your rent or morgage payment?',
   'number',
   'Remember to include escrow payments and insurance.',
   4,
@@ -247,7 +247,7 @@ VALUES (
   'Vehicle'
 ),
 (
-  'How much do you spend subscriptions?',
+  'How much do you spend on subscriptions?',
   'number',
   'This includes subscriptions like Office 365, adobe, and other regular payments.',
   4,
