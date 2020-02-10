@@ -224,7 +224,7 @@ class AdminEditIndustry extends Component{
 }
 
 const putReduxStateOnProps = reduxState => ({
-  industry: reduxState.industry,
+  industry: reduxState.admin.adminIndustry,
 });
 
 export default connect(putReduxStateOnProps)(AdminEditIndustry);
