@@ -1,3 +1,15 @@
+.footer-a {
+  color: #f7d149;
+}
+
+.footer-a:hover {
+  color: #f0aa42;
+}
+
+.footer-a-span {
+  color: white;
+}
+
 .footer-brand-name {
   position: relative;
   bottom: 17px;
@@ -16,6 +28,7 @@
   height: 50px;
   border-radius: 50%;
   box-shadow: 0 0 30px #f0aa42;
+  cursor: pointer;
 }
 
 .whitespace {

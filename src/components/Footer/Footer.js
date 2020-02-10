@@ -9,8 +9,9 @@ export default function Footer() {
       <footer className="footer-main-container">
         <img className="footer-logo" src="illume-logo180.png" alt="illume logo" />
         <span className="footer-brand-name">illume decision hub</span>
-        <span>
-          <a href="https://illume-pricing.com/" />
+        <span className="footer-a-span">
+          View our main site &nbsp;
+          <a className="footer-a" href="https://illume-pricing.com/">HERE</a>
         </span>
       </footer>
     </>
