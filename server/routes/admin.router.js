@@ -1,3 +1,4 @@
+const encryptLib = require('../modules/encryption');
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
@@ -143,7 +144,7 @@ router.put('/user-info', rejectUnauthenticated, rejectNonAdmin, async (req, res)
   const phone = req.body.phone;
   const industry = req.body.industryid;
   const email = req.body.email;
-  const password = req.body.password;
+  const password = encryptLib.encryptPassword(req.body.password);
   const usertype = req.body.usertype;
   const sqlQueryContactInfo = ` UPDATE contact_info
                                 SET "name" = $1, "business_name" = $2, phone_number = $3, industry_id = $4
