@@ -8,7 +8,7 @@ export default function Footer() {
   const history = useHistory();
 
   // Return to homepage when logo is clicked
-  const pushToHome = () => history.push(`/`)
+  const pushToHome = () => history.push(`/`);
 
   return(
     <>
