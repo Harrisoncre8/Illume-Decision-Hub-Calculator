@@ -234,20 +234,20 @@ export default function PriceSetting() {
           <br />
           <p>Industry Norm: ${industryNorm} per unit</p>
           <br />
-          <p>Industry Margin: ${productMargin} per unit</p>
+          <p>
+            You are selling for
+            {
+              productMargin>userMargin? 
+                ` $${productMargin-userMargin.toFixed(2)} less than `:
+                productMargin === userMargin?
+                  ` the same price as `:
+                  ` $${userMargin-productMargin.toFixed(2)} more than `
+            }
+            industry norms.
+          </p>
           <br />
 
           <p>
-            Your price is
-            {
-              productMargin > userMargin ?
-                ' lower than ' :
-                productMargin < userMargin ?
-                  ' higher than ' :
-                  ' equal to '
-            }
-            industry norms
-            <br />
             You will need to sell
             {' ' + difference + ' '}
             {

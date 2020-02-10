@@ -27,13 +27,12 @@ export default function AdminCalcQuestion(props) {
 
   // Map through sub-questions, increment question number for each question
   const showSubQuestions = () => {
-    let count = 1;
     return (
       subQuestion.map(q =>
         <div key={q.id}>
           {props.id === q.sub_questions ?
             <>
-              <h3 className="main-heading admin-calc-sub-heading">Sub-Question {count++}</h3>
+              <h3 className="main-heading admin-calc-sub-heading">{q.header}</h3>
               <AdminCalcSubquestion 
                 id={q.id} 
                 question={q.question} 
