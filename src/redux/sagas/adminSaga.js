@@ -64,6 +64,7 @@ function* putAdminSubquestion(action){
   }
 }
 
+// changes user-information and password
 function* putAdminUserInfo(action){
   try{
     yield axios.put(`/api/admin/user-info`, action.payload);
