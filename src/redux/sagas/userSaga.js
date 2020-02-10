@@ -48,7 +48,8 @@ function* putUserInfo(action) {
 // worker Saga: will be fired on "NEW_PASSWORD" actions
 function* putNewPassword(action) {
   try {
-    yield axios.put(`/api/user/new-password`, action.payload);
+    const response = yield axios.put(`/api/user/new-password`, action.payload);
+    yield put({type: 'MATCH_PASSWORD', payload: response.status});
     // yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
   } catch (error) {
     console.log('User put new password request failed', error);

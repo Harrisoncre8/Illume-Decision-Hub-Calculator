@@ -10,6 +10,7 @@ export default function User(){
   let industryData = useSelector(state => state.industry);
   let userData = useSelector(state => state.userInfo);
   let userID = useSelector(state => state.user.id);
+  let passwordStatusData = useSelector(state => state.passwordStatus);
 
   // setting state for modal
   const [modal, setModal] = useState(false);
@@ -29,14 +30,19 @@ export default function User(){
   const [checkPassword, setCheckPassword] = useState('');
   const [wrongPassword, setWrongPassword] = useState(null);
 
-  // on page load, get user and industry info and set state to userID
+  // on page load, get user and industry info and set state to userID,
+  // if current password match, close the modal
   useEffect(() => {
     if(userID){
       setId(userID);
       dispatch({type: `GET_USER_INFO`, payload: userID});
       dispatch({type: `GET_INDUSTRY`});
+      if(passwordStatusData === 200) {
+        setPasswordModal(false);
+        dispatch({type: `MATCH_PASSWORD`, payload: null});
+      }
     }
-  }, [userID, dispatch]);
+  }, [userID, dispatch, passwordStatusData]);
 
   // change state to open user info modal and set default info to the modal
   const openModal = () => {
@@ -65,12 +71,16 @@ export default function User(){
     setPasswordModal(true);
   }
   // checks and saves the user's new password
+  // and closes modal
   const changePassword = () => {
     if(newPassword === checkPassword){
       let passwordInfo = {oldPassword, newPassword, id};
       dispatch({type: `NEW_PASSWORD`, payload: passwordInfo});
-      setPasswordModal(false);
-    } else {
+      if(passwordStatusData === 401){
+        setPasswordModal(true);
+      } 
+    }
+    else if (newPassword !== checkPassword){
       setWrongPassword(true);
     }
   }
@@ -145,7 +155,9 @@ export default function User(){
           onClickAway={closePassModal}
         >
           <h1 className="main-heading admin-user-heading">Change Password</h1>
-          {wrongPassword ? <p>Please re-confirm your new password.</p> : null}
+          {wrongPassword ? <p>Opps, your new password does not match.</p> : null}
+          {passwordStatusData === 401 ? 
+          <p>Opps, your current password is incorrect, please try again</p>: null}
             <div>
               <input value={oldPassword} onChange={(event) => setOldPassword(event.target.value)} />
               <label >Current Password</label>
