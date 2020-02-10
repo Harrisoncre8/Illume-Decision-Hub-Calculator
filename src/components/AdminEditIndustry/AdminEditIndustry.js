@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './AdminEditIndustry.css';
 import Modal from 'react-awesome-modal';
+import Nav from '../Nav/Nav';
 
 class AdminEditIndustry extends Component{
 
@@ -107,6 +108,7 @@ class AdminEditIndustry extends Component{
 
     return(
       <center>
+        <Nav />
         <div className="main-container">
           <button className="close-window-button" onClick={this.pushHistoryBack}>x</button>
           <h1 className="main-heading admin-industry-heading">Industry Information</h1>
@@ -141,25 +143,25 @@ class AdminEditIndustry extends Component{
                 <button className="close-window-button" onClick={this.closeModal}>x</button>
                 <h1 className="main-heading modal-heading">{this.state.industry}</h1>
                 
-                <div className="admin-industry-text-field-container">
+                <div className="text-field-container">
                   <input 
-                    className="text-field admin-industry-text-field-industry text-field-active" 
+                    className="text-field text-field-active" 
                     type="text" 
                     value={editIndustry.industry}
                     onChange={(event)=>this.handleEditChange(event, 'industry')}
                   />
-                  <label className="text-field-label admin-industry-label-industry">industry</label>
+                  <label className="text-field-label">industry</label>
                   <div className="text-field-mask admin-industry-mask-industry"></div>
                 </div>
 
-                <div className="admin-industry-text-field-container">
+                <div className="text-field-container">
                   <input 
-                    className="text-field admin-industry-text-field-margin text-field-active" 
+                    className="text-field text-field-active" 
                     type="text" 
                     value={editIndustry.margin} 
                     onChange={(event)=>this.handleEditChange(event, 'margin')}
                   />
-                  <label className="text-field-label admin-industry-label-margin">margin (%)</label>
+                  <label className="text-field-label">margin (%)</label>
                   <div className="text-field-mask admin-industry-mask-margin"></div>
                 </div>
 
@@ -174,25 +176,25 @@ class AdminEditIndustry extends Component{
                 <button className="close-window-button" onClick={this.closeModal}>x</button>
                 <h1 className="main-heading modal-heading">Add New Industry</h1>
                 
-                <div className="admin-industry-text-field-container">
+                <div className="text-field-container">
                   <input 
-                    className="text-field admin-industry-text-field-industry" 
+                    className="text-field" 
                     type="text" 
                     value={newIndustry.industry}
                     onChange={(event)=>this.handleNewChange(event, 'industry')}
                   />
-                  <label className="text-field-label admin-industry-label-industry">industry</label>
+                  <label className="text-field-label">industry</label>
                   <div className="text-field-mask admin-industry-mask-industry"></div>
                 </div>
 
-                <div className="admin-industry-text-field-container">
+                <div className="text-field-container">
                   <input 
-                    className="text-field admin-industry-text-field-margin" 
+                    className="text-field" 
                     type="text" 
                     value={newIndustry.margin} 
                     onChange={(event)=>this.handleNewChange(event, 'margin')}
                   />
-                  <label className="text-field-label admin-industry-label-margin">margin (%)</label>
+                  <label className="text-field-label">margin (%)</label>
                   <div className="text-field-mask admin-industry-mask-margin"></div>
                 </div>
 
@@ -210,7 +212,7 @@ class AdminEditIndustry extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  industry: reduxState.industry.industry, ////////////////////////////////////////////////////////////////
+  industry: reduxState.industry,
 });
 
 export default connect(putReduxStateOnProps)(AdminEditIndustry);

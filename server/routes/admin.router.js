@@ -1,15 +1,19 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectNonAdmin } = require('../modules/admin-auth-middleware');
+
 
 // GET route for admin question editing
-router.get('/questions/:id', (req, res) => {
-  let id = [req.params.id];
-  let sqlQuery = `SELECT q.id, q.question, q.help_text, q.sub_questions
+router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
+  const id = [req.params.id];
+  const sqlQuery = `SELECT q.id, q.question, q.help_text, q.sub_questions
                   FROM calculators c
                   JOIN question_calculator qc ON qc.calculator_id = c.id
                   JOIN questions q ON q.id = qc.question_id
-                  WHERE c.id = $1 AND q.sub_questions IS NULL;`;
+                  WHERE c.id = $1 AND q.sub_questions IS NULL
+                  ORDER BY q.id;`;
   pool.query(sqlQuery, id)
     .then(result => {
     res.send(result.rows);
@@ -21,14 +25,13 @@ router.get('/questions/:id', (req, res) => {
 });
 
 // GET route for admin sub-question editing
-router.get('/subquestions/:id', (req, res) => {
-  let id = [req.params.id];
-  let sqlQuery = `SELECT DISTINCT q.id, q.question, q.help_text, q.sub_questions
+router.get('/subquestions', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
+  const sqlQuery = `SELECT DISTINCT q.id, q.question, q.help_text, q.sub_questions
                   FROM calculators c
                   JOIN question_calculator qc ON qc.calculator_id = c.id
                   JOIN questions q ON q.id = qc.question_id
-                  WHERE q.sub_questions = $1;`;
-  pool.query(sqlQuery, id)
+                  ORDER BY q.id;`;
+  pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
   })
@@ -39,11 +42,12 @@ router.get('/subquestions/:id', (req, res) => {
 });
 
 // GET route for admin user information
-router.get('/user-info', (req, res) => {
+router.get('/user-info',rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const sqlQuery = `SELECT c.user_id as id, c.name, c.business_name as company, c.phone_number as phone, u.email, u.admin as usertype, i.industry, i.id as industryID
                     FROM contact_info c
                     JOIN users u ON u.id = c.user_id
                     JOIN industry i ON i.id = c.industry_id
+                    WHERE super_admin != true
                     ORDER BY c.business_name;`;
   pool.query(sqlQuery)
     .then(result => {
@@ -56,7 +60,7 @@ router.get('/user-info', (req, res) => {
 });
 
 // POST route for admin to add new industry information
-router.post('/industry-info', (req, res) => {
+router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const id = [req.body.industry, req.body.margin/100];
   const sqlQuery = `INSERT INTO industry (industry, margin)
                     VALUES ($1, $2);`;
@@ -71,7 +75,7 @@ router.post('/industry-info', (req, res) => {
 });
 
 // PUT route for admin to update industry information
-router.put('/industry-info', (req, res) => {
+router.put('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const id = [req.body.id, req.body.industry, req.body.margin/100];
   const sqlQuery = `UPDATE industry 
                     SET industry = $2, margin = $3
@@ -87,7 +91,7 @@ router.put('/industry-info', (req, res) => {
 });
 
 // PUT route for admin to update calculator questions
-router.put('/question', (req, res) => {
+router.put('/question', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const id = [req.body[0], req.body[1], req.body[2]];
   const sqlQuery = `UPDATE questions 
                     SET question = $2, help_text = $3
@@ -103,8 +107,7 @@ router.put('/question', (req, res) => {
 });
 
 // PUT route for admin to update user information
-router.put('/user-info', async (req, res) => {
-  console.log('REQ BODY IN USER INFO PUT IS', req.body);
+router.put('/user-info', rejectUnauthenticated, rejectNonAdmin, async (req, res) => {
   const id = req.body.id;
   const name = req.body.name;
   const company = req.body.company;

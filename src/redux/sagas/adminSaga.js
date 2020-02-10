@@ -3,7 +3,6 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* getAdminQuestion(action){
   try{
-    console.log('action.payload', action.payload);
     const response = yield axios.get(`/api/admin/questions/${action.payload}`);
     yield put({type: `SET_ADMIN_QUESTION`, payload: response.data});
   } catch(error){
@@ -13,8 +12,7 @@ function* getAdminQuestion(action){
 
 function* getAdminSubquestion(action){
   try{
-    console.log('action.payload', action.payload);
-    const response = yield axios.get(`/api/admin/subquestions/${action.payload}`);
+    const response = yield axios.get(`/api/admin/subquestions`);
     yield put({type: `SET_ADMIN_SUB_QUESTION`, payload: response.data});
   } catch(error){
     console.log('Error in admin sub-questions GET', error);

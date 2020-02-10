@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Nav from '../Nav/Nav';
+import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
 
 export default function NewUser(){
 
@@ -7,15 +9,14 @@ export default function NewUser(){
   let dispatch = useDispatch();
   let userData = useSelector(state => state.admin.adminUserInfo);
 
-
+  // Run on component mount
   useEffect(() => {
     dispatch({type: `GET_ADMIN_USER_INFO`});
-    console.log('------------->user info', userData);
   }, [dispatch]);
-
 
   return(
     <center>
+      <Nav />
       <div className='main-container'>
         <h1 className='user-spacing'>Welcome, {}</h1>
         <h2 className='user-spacing'>What is the Illume Decision Hub Calculator?</h2>
@@ -30,7 +31,8 @@ export default function NewUser(){
           <br/>
           Click on a Calculator above to begin!
         </h3>
+        <QuestionCheckboxes />
       </div>
     </center>
-  )
+  );
 }
