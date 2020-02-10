@@ -85,7 +85,7 @@ export default function Nav() {
   return (
     <center>
       <button className={`nav-btn ${home}`} onClick={pushHistoryToHome}>
-        Home
+        Home <br /> Page
       </button>
       <button className={`nav-btn ${breakEven}`} onClick={()=>setStart(2)}>
         Break Even Calculator
