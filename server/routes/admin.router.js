@@ -20,6 +20,20 @@ router.delete('/industry-info/:id', rejectUnauthenticated, rejectNonAdmin, (req,
   });
 });
 
+// GET route for industry information
+router.get('/industry', rejectUnauthenticated, (req, res) => {
+  let sqlQuery = `SELECT * FROM industry 
+                  ORDER BY industry;`;
+  pool.query(sqlQuery)
+    .then(result => {
+    res.send(result.rows);
+  })
+  .catch( error => {
+    console.log('Error with GET industry', error);
+    res.sendStatus(500);
+  });
+});
+
 // GET route for admin question editing
 router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const id = [req.params.id];
