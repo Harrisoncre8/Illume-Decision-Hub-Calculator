@@ -36,6 +36,7 @@ const QuestionCheckboxes = () => {
   function submit(e){
     e.preventDefault();
     dispatch({type: 'SET_CHECKBOXES', payload: checked})
+    alert('Your preferences were successfully saved!')
   }
   return(
     <center style={{backgroundColor: 'white'}}>
