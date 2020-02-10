@@ -35,8 +35,13 @@ const QuestionCheckboxes = () => {
   }
   function submit(e){
     e.preventDefault();
-    dispatch({type: 'SET_CHECKBOXES', payload: checked})
+    let popup = window.confirm('Save your preferences?')
+    if(popup){
+      dispatch({type: 'SET_CHECKBOXES', payload: checked})
+    }
+
   }
+
   return(
     <center style={{backgroundColor: 'white'}}>
       <h1>Please select costs that are relevent to you</h1>
