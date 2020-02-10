@@ -106,9 +106,7 @@ class AdminEditIndustry extends Component{
   }
 
   // Return to admin page
-  pushHistoryBack = () => {
-    this.props.history.push('/admin');
-  }
+  pushHistoryBack = () => this.props.history.push('/admin');
 
   render(){
     let editIndustry = this.state.selectedIndustry;
