@@ -1,6 +1,15 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+function* deleteAdminIndustryInfo(action){
+  try{
+    yield axios.delete(`/api/admin/industry-info/${action.payload}`);
+    yield put({type: `GET_ADMIN_INDUSTRY`});
+  } catch(error){
+    console.log('Error in admin industry info DELETE', error);
+  }
+}
+
 function* getAdminQuestion(action){
   try{
     const response = yield axios.get(`/api/admin/questions/${action.payload}`);
@@ -60,7 +69,7 @@ function* putAdminSubquestion(action){
     yield axios.put(`/api/admin/question`, action.payload);
     yield put({type: `GET_ADMIN_SUB_QUESTION`, payload: action.payload[3]});
   } catch(error){
-    console.log('Error in admin question PUT', error);
+    console.log('Error in admin sub-question PUT', error);
   }
 }
 
@@ -74,6 +83,7 @@ function* putAdminUserInfo(action){
 }
 
 function* adminSaga() {
+  yield takeLatest(`DELETE_ADMIN_INDUSTRY_INFO`, deleteAdminIndustryInfo);
   yield takeLatest(`GET_ADMIN_QUESTION`, getAdminQuestion);
   yield takeLatest(`GET_ADMIN_SUB_QUESTION`, getAdminSubquestion);
   yield takeLatest(`GET_ADMIN_USER_INFO`, getAdminUserInfo);

@@ -4,6 +4,35 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const { rejectNonAdmin } = require('../modules/admin-auth-middleware');
 
+// DELETE route for admin to update industry information
+router.delete('/industry-info/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
+  const id = [req.params.id];
+  const sqlQuery = `UPDATE industry 
+                    SET enabled = NOT enabled
+                    WHERE id = $1;`;
+  pool.query(sqlQuery, id)
+  .then(result => {
+    res.sendStatus(200);
+  })
+  .catch( error => {
+    console.log('Error with DELETE admin industry info', error);
+    res.sendStatus(500);
+  });
+});
+
+// GET route for industry information
+router.get('/industry', rejectUnauthenticated, (req, res) => {
+  let sqlQuery = `SELECT * FROM industry 
+                  ORDER BY industry;`;
+  pool.query(sqlQuery)
+    .then(result => {
+    res.send(result.rows);
+  })
+  .catch( error => {
+    console.log('Error with GET industry', error);
+    res.sendStatus(500);
+  });
+});
 
 // GET route for admin question editing
 router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
@@ -101,7 +130,7 @@ router.put('/question', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     res.sendStatus(200);
   })
   .catch( error => {
-    console.log('Error with PUT admin industry info', error);
+    console.log('Error with PUT admin calculator question', error);
     res.sendStatus(500);
   });
 });

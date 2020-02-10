@@ -10,7 +10,8 @@ CREATE TABLE "users" (
 CREATE TABLE "industry" (
   "id" SERIAL PRIMARY KEY,
   "industry" TEXT,
-  "margin" DECIMAL(4,2)
+  "margin" DECIMAL(4,2),
+  "enabled" BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE "contact_info" (
