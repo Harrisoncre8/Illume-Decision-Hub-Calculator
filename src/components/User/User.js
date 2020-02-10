@@ -32,7 +32,7 @@ export default function User(){
   const [wrongPassword, setWrongPassword] = useState(null);
 
   // on page load, get user and industry info and set state to userID,
-  // if current password match, close the modal
+  // if current password match, reset inputs, close the modal
   useEffect(() => {
     if(userID){
       setId(userID);
@@ -41,6 +41,9 @@ export default function User(){
       if(passwordStatusData === 200) {
         setPasswordModal(false);
         dispatch({type: `MATCH_PASSWORD`, payload: null});
+        setOldPassword('');
+        setNewPassword('');
+        setCheckPassword('');
       }
     }
   }, [userID, dispatch, passwordStatusData]);
