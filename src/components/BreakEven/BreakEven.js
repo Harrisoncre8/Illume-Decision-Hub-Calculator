@@ -101,29 +101,33 @@ export default function BreakEven() {
         <>
           {
             splits[split] ?
-              <form>
-                {splits[split].map(radio => {
-                  return (
-                    <span key={radio.id}>
-                      <label className="radio-container">{radio.split_text}
-                        <input
-                          type='radio'
-                          name="next"
-                          value={radio.next_id}
-                          checked={+splitPath[split] === +radio.next_id}
-                          onChange={(e) => { radioChange(e, split) }}
-                        />
-                        <span className="radio-btn"></span>
-                      </label>
-                    </span>
-                  );
-                })}
-              </form> :
+              <div className="max-width-container">
+                <form>
+                  {splits[split].map(radio => {
+                    return (
+                      <span key={radio.id}>
+                        <label className="radio-container">{radio.split_text}
+                          <input
+                            type='radio'
+                            name="next"
+                            value={radio.next_id}
+                            checked={+splitPath[split] === +radio.next_id}
+                            onChange={(e) => { radioChange(e, split) }}
+                          />
+                          <span className="radio-btn"></span>
+                        </label>
+                      </span>
+                    );
+                  })}
+                </form>
+              </div>
+              :
               null
           }
           {
             splitPath[split.toString()] ?
-              stepper(splitPath[split.toString()]) :
+              stepper(splitPath[split.toString()]) 
+              :
               null
           }
         </>
@@ -135,7 +139,7 @@ export default function BreakEven() {
     let questionId = paths[start] && paths[start].question_id;
 
     return (
-      <div>
+      <div className="max-width-container">
         <p className="results-text">{paths[start] && paths[start].question}</p>
         {doesSplit ?
           null 
