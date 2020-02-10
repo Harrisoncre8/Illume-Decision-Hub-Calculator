@@ -135,8 +135,12 @@ class AdminEditIndustry extends Component{
                   <td>{industry.industry}</td>
                   <td>{industry.margin * 100}%</td>
                   <td>{industry.enabled ? 'Yes' : 'No'}</td>
+                  {industry.enabled ?
+                    <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DISABLE</td>
+                    :
+                    <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>ENABLE</td>
+                  }
                   <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
-                  <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DISABLE</td>
                 </tr>
               )}
             </tbody>
