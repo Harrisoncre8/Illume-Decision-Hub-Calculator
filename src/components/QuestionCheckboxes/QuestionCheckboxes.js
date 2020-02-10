@@ -19,14 +19,8 @@ const QuestionCheckboxes = () => {
         holder[el.question_id] = true;
       });
       setChecked(holder)
-    } else if (Array.isArray(questions)) {
-      const state = questions.reduce((acum,arr)=>{
-        acum[arr.id] = true;
-        return acum;
-      },{})
-      setChecked(state)
     }
-  },[questions,userCheckboxes])
+  },[userCheckboxes])
 
   function toggleChecked(id){
     let holder = {...checked};
