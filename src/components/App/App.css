@@ -80,6 +80,19 @@ p, span, div, h1, h2, h3, label, button {
   transition: 0.3s;
 }
 
+.circle-btn-inactive {
+  font-size: 1.4em;
+  text-transform: uppercase;
+  background-color: #b1a57c;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 1px 3px grey;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 .close-window-button {
   background-color: transparent;
   border: none;
