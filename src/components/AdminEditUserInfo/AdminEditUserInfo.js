@@ -8,6 +8,7 @@ class AdminEditUserInfo extends Component {
 
   state = {
     visible: false,
+    showPassword: 'password',
     selectedUser: {
       id: '',
       name: '',
@@ -32,6 +33,10 @@ class AdminEditUserInfo extends Component {
 
   // Close modal popup
   closeModal = () => this.setState({ visible: false });
+
+  // Show or hide password
+  togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
+
 
   // Set local state to current input value
   handleChange = (e, propName) => {
@@ -175,16 +180,18 @@ class AdminEditUserInfo extends Component {
                 <label className="text-field-label">email</label>
                 <div className="text-field-mask admin-user-mask-email"></div>
               </div>
-
               <div className="text-field-container">
                 <input
                   className="text-field text-field-active"
-                  type="text"
+                  type={this.state.showPassword} 
                   value={editUser.password}
                   onChange={(event) => this.handleChange(event, 'password')}
                 />
                 <label className="text-field-label">password</label>
                 <div className="text-field-mask admin-user-mask-password"></div>
+                <input type="checkbox" onChange={this.togglePasswordView} />
+                <label> Show Password</label>
+
               </div>
 
               <select
