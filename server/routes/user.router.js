@@ -59,6 +59,21 @@ router.put('/info', rejectUnauthenticated, async (req, res) => {
   }
 })
 
+// put route to check user password and update it in DB
+router.put('/new-password', rejectUnauthenticated, (req, res) => {
+  const userID = req.body.id;
+  const oldPassword = req.body.oldPassword;
+  const newPassword = encryptLib.encryptPassword(req.body.newPassword);
+  const storedPassword = req.user.hashedpassword;
+  const sqlQuery = `UPDATE "users" SET "hashedpassword" = $2 WHERE "id" = $1;`;
+  if(encryptLib.comparePassword(oldPassword, storedPassword)){
+    pool.query(sqlQuery, [userID, newPassword]);
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(401);
+  }
+})
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted.
