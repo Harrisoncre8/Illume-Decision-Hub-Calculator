@@ -7,10 +7,20 @@ export default function Footer() {
 
   const date = new Date().getFullYear();
   const history = useHistory();
-  const userData = useSelector(state => state.user.admin);
+  const userData = useSelector(state => state.user && state.user.admin);
 
   // Push history to user profile
-  const pushToHome = () => userData ? history.push(`/admin`) : history.push(`/new-user`);
+  const pushToHome = () => {
+    if(userData === true){
+      history.push('/admin');
+    }
+    else if(userData === false){
+      history.push('/new-user');
+    }
+    else {
+      history.push('/');
+    }
+  }
 
   return(
     <>
