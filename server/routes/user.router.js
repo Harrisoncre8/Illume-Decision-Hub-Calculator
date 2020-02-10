@@ -79,6 +79,7 @@ router.post('/register', async (req, res, next) => {
     await connection.query(`BEGIN`);
     const id = await connection.query(queryTextUser, [email, password]);
     await connection.query(queryTextContact, [name, company, industry, phone, id.rows[0].id]);
+    await connection.query(`INSERT INTO "user_checks" SELECT $1,* FROM generate_series(1, (SELECT COUNT(*) FROM questions));`, id.rows[0].id);
     await connection.query(`COMMIT`);
     res.sendStatus(201);
   }catch(error){
