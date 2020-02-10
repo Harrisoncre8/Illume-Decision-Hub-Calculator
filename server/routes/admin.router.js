@@ -9,11 +9,11 @@ const { rejectNonAdmin } = require('../modules/admin-auth-middleware');
 router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const id = [req.params.id];
   const sqlQuery = `SELECT q.id, q.header, q.question, q.help_text, q.sub_questions
-                  FROM calculators c
-                  JOIN question_calculator qc ON qc.calculator_id = c.id
-                  JOIN questions q ON q.id = qc.question_id
-                  WHERE c.id = $1 AND q.sub_questions IS NULL
-                  ORDER BY q.id;`;
+                    FROM calculators c
+                    JOIN question_calculator qc ON qc.calculator_id = c.id
+                    JOIN questions q ON q.id = qc.question_id
+                    WHERE c.id = $1 AND q.sub_questions IS NULL
+                    ORDER BY q.id;`;
   pool.query(sqlQuery, id)
     .then(result => {
     res.send(result.rows);
@@ -27,10 +27,10 @@ router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) =
 // GET route for admin sub-question editing
 router.get('/subquestions', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const sqlQuery = `SELECT DISTINCT q.id, q.header, q.question, q.help_text, q.sub_questions
-                  FROM calculators c
-                  JOIN question_calculator qc ON qc.calculator_id = c.id
-                  JOIN questions q ON q.id = qc.question_id
-                  ORDER BY q.id;`;
+                    FROM calculators c
+                    JOIN question_calculator qc ON qc.calculator_id = c.id
+                    JOIN questions q ON q.id = qc.question_id
+                    ORDER BY q.id;`;
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
