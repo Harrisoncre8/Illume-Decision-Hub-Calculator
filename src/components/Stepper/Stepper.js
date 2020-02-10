@@ -79,7 +79,7 @@ export default function Stepper() {
   return (
     <center>
       <Nav />
-      <div className='main-container'>
+      <div className='main-container stepper-container'>
         <form onSubmit={e=>{submit(e)}}>
           <div>
             <p className="question-text">

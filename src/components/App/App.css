@@ -16,7 +16,7 @@ p, span, div, h1, h2, h3, label, button {
 
 .arrow-left {
   position: absolute;
-  top: 300px;
+  top: 350px;
   left: 20px;
   width: 0; 
   height: 0; 
@@ -28,7 +28,7 @@ p, span, div, h1, h2, h3, label, button {
 }
 
 .arrow-left:hover {
-  top: 290px;
+  top: 340px;
   border-top: 40px solid transparent;
   border-bottom: 40px solid transparent;
   border-right: 40px solid #f0aa42;
@@ -36,7 +36,7 @@ p, span, div, h1, h2, h3, label, button {
 
 .arrow-right {
   position: absolute;
-  top: 300px;
+  top: 350px;
   right: 20px;
   width: 0; 
   height: 0; 
@@ -48,7 +48,7 @@ p, span, div, h1, h2, h3, label, button {
 }
 
 .arrow-right:hover {
-  top: 290px;
+  top: 340px;
   border-top: 40px solid transparent;
   border-bottom: 40px solid transparent;
   border-left: 40px solid #f0aa42;
