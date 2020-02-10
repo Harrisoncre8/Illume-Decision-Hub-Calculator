@@ -12,25 +12,29 @@
 
 .footer-brand-name {
   position: relative;
-  bottom: 17px;
+  bottom: 20px;
   left: 20px;
   font-size: 1.3em;
   color: white;
 }
 
 .footer-main-container {
-  background-color: rgb(0, 0, 0);
+  background-color: #000;
   margin: 0;
   padding: 30px;
 }
 
 .footer-logo {
-  height: 50px;
+  height: 60px;
   border-radius: 50%;
   box-shadow: 0 0 30px #f0aa42;
   cursor: pointer;
 }
 
+.footer-span-container {
+  text-align: right;
+}
+
 .whitespace {
-  height: 100px;
+  height: 150px;
 }
