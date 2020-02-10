@@ -19,20 +19,18 @@ export default function AdminEditThisCalc(props) {
       question.map(q =>
         <div className="admin-question-card" key={q.id}>
           <h3 className="main-heading">Main Question {count++}</h3>
-          <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} />
+          <AdminCalcQuestion id={q.id} question={q.question} tooltip={q.help_text} calcID={props.calcID} />
         </div>
       )
     );
   }
 
   return(
-    <>
-    <div className="main-container">
+    <div className="main-container admin-calc-heading">
       <h1 className="main-heading">Edit {props.name} Calculator</h1>
+      <div>
+        {mainMap()}
+      </div>
     </div>
-    <div>
-      {mainMap()}
-    </div>
-    </>
   );
 }

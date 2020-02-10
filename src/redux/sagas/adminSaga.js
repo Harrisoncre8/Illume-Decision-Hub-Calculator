@@ -21,7 +21,7 @@ function* getAdminQuestion(action){
 
 function* getAdminSubquestion(action){
   try{
-    const response = yield axios.get(`/api/admin/subquestions/${action.payload}`);
+    const response = yield axios.get(`/api/admin/subquestions`);
     yield put({type: `SET_ADMIN_SUB_QUESTION`, payload: response.data});
   } catch(error){
     console.log('Error in admin sub-questions GET', error);
