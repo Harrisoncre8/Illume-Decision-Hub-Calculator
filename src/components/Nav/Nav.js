@@ -5,6 +5,7 @@ import './Nav.css';
 
 export default function Nav() {
   // Set react router hook
+  const userData = useSelector(state => state.user.admin);
   const history = useHistory();
   const dispatch = useDispatch();
   const questionData = useSelector(state=>state.question.calculator_id);
@@ -16,6 +17,7 @@ export default function Nav() {
 
   // Run on component mount
   useEffect(()=>{
+    console.log('----------------------------->', userData);
     if(history.location.pathname === '/'){
       setHome('circle-btn-active');
       setBreakEven('circle-btn');
@@ -51,7 +53,7 @@ export default function Nav() {
       setLever('circle-btn');
       setProfile('circle-btn');
     }
-  }, [questionData]);
+  }, [questionData, userData]);
 
   // Log user out, push history to login page
   const logout = () => {
@@ -60,7 +62,15 @@ export default function Nav() {
   }
 
   // Push history to user profile
-  const pushHistoryToHome = () => history.push('/');
+  const pushHistoryToHome = () => {
+    if(userData === true){
+      history.push('/admin');
+    }
+    else{
+      history.push('/new-user');
+    }
+  }
+
 
   // Push history to user profile
   const pushHistoryToProfile = () => history.push('/user');

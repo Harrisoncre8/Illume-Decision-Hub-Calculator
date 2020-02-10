@@ -17,10 +17,12 @@ import User from '../User/User';
 import { useDispatch } from 'react-redux';
 
 export default function App() {
+  // gets user info on all pages DO NOT REMOVE
   const dispatch = useCallback(useDispatch());
   useEffect(()=>{
     dispatch({type: 'FETCH_USER'})
   })
+  
   return (
     <Router>
       <div className="App">
