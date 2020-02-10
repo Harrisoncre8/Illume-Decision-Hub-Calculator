@@ -23,6 +23,10 @@
   margin-bottom: 20px;
 }
 
+#admin-industry-disabled {
+  background-color: #6d6d6d;
+}
+
 .admin-industry-heading {
   margin-top: 20px;
 }

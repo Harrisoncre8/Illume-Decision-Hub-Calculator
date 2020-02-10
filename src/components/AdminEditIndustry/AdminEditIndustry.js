@@ -131,17 +131,33 @@ class AdminEditIndustry extends Component{
             </thead>
             <tbody>
               {this.props.industry.map(industry => 
-                <tr key={industry.id}>
-                  <td>{industry.industry}</td>
-                  <td>{industry.margin * 100}%</td>
-                  <td>{industry.enabled ? 'Yes' : 'No'}</td>
+                <>
                   {industry.enabled ?
-                    <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DISABLE</td>
+                    <tr key={industry.id}>
+                      <td>{industry.industry}</td>
+                      <td>{industry.margin * 100}%</td>
+                      <td>Yes</td>
+                      {industry.enabled ?
+                        <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DISABLE</td>
+                        :
+                        <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>ENABLE</td>
+                      }
+                      <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
+                    </tr>
                     :
-                    <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>ENABLE</td>
+                    <tr id="admin-industry-disabled" key={industry.id}>
+                      <td>{industry.industry}</td>
+                      <td>{industry.margin * 100}%</td>
+                      <td>No</td>
+                      {industry.enabled ?
+                        <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DISABLE</td>
+                        :
+                        <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>ENABLE</td>
+                      }
+                      <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
+                    </tr>
                   }
-                  <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
-                </tr>
+                </>
               )}
             </tbody>
           </table>
