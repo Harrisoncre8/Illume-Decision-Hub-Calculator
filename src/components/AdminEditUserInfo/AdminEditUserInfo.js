@@ -217,7 +217,7 @@ class AdminEditUserInfo extends Component {
   }
 }
 
-const putReduxStateOnProps = (reduxState)=>({
+const putReduxStateOnProps = reduxState=>({
   industry: reduxState.industry,
   user: reduxState.admin.adminUserInfo
 });

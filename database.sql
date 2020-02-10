@@ -10,7 +10,8 @@ CREATE TABLE "users" (
 CREATE TABLE "industry" (
   "id" SERIAL PRIMARY KEY,
   "industry" TEXT,
-  "margin" DECIMAL(4,2)
+  "margin" DECIMAL(4,2),
+  "enabled" BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE "contact_info" (
@@ -87,7 +88,7 @@ INSERT INTO "questions" ("question", "response_type", "help_text", "sub_question
 VALUES (
   'Is this for a single sale or total product sales?',
   'radio',
-  'Single sales are for when you are only considering a single transaction where total product sales considers multiple transactions.',
+  'Single sales are for when you are only considering a single transaction where total product sales considers multiple transactions',
   NULL,
   TRUE,
   FALSE,
@@ -132,7 +133,7 @@ VALUES (
 (
   'What do you plan on pricing this for?',
   'number',
-  'Consider your costs and the value you bring with this product.',
+  'Consider your costs and the value you bring with this product',
   NULL,
   FALSE,
   FALSE,
@@ -141,41 +142,41 @@ VALUES (
 (
   'Would you like to input your direct costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field where the walkthrough will bring you through possible direct cost categories.',
+  'A total will just be one input field where the walkthrough will bring you through possible direct cost categories',
   NULL,
   TRUE,
   FALSE,
   'Direct Costs Walkthrough'
 ),
 (
-  'What is the rate per of this labor?',
+  'What is the rate per hour of this labor?',
   'number',
-  'Consider just one labor rate for this field.',
+  'Consider just one labor rate for this field',
   3,
   FALSE,
   FALSE,
   'Labor Rate'
 ),
 (
-  'How many hours of labor is done at this rate?',
+  'How many hours of labor are done at this rate?',
   'number',
-  'Consider just one labor rate for this field.',
+  'Consider just one labor rate for this field',
   3,
   FALSE,
   FALSE,
   'Labor Hours'
 ),
 (
-  'What are your parts/raw material costs?',
+  'What are your parts or raw material costs?',
   'number',
-  'These are things that go into the making of the product or delivering of the service.',
+  'These are things that go into the making of the product or delivering of the service',
   3,
   FALSE,
   FALSE,
   'Parts/Raw Materials'
 ),
 (
-  'What are some other direct costs?',
+  'What are some other direct costs you have?',
   'number',
   'Other costs may be things like rental space that is unique to each transaction',
   3,
@@ -184,27 +185,27 @@ VALUES (
   'Other Direct Costs'
 ),
 (
-  'What are salary costs?',
+  'What are your salary costs?',
   'number',
-  'Remember to include yourself if you pay yourself a salary.',
+  'Remember to include yourself if you pay yourself a salary',
   4,
   FALSE,
   FALSE,
   'Salary'
 ),
 (
-  'What are benefit costs?',
+  'What are your employee benefit costs?',
   'number',
-  'Benefits include things like health, dental, disability, life, etc.',
+  'Benefits include things like health, dental, disability, life, etc',
   4,
   FALSE,
   FALSE,
   'Benefits'
 ),
 (
-  'What is your rent/business morgage payment?',
+  'What is your rent or morgage payment?',
   'number',
-  'Remember to include escrow payments and insurance here.',
+  'Remember to include escrow payments and insurance',
   4,
   FALSE,
   FALSE,
@@ -213,7 +214,7 @@ VALUES (
 (
   'How much do you spend on supplies?',
   'number',
-  'These are supplies such as office supplies.',
+  'These are supplies such as office supplies',
   4,
   FALSE,
   FALSE,
@@ -222,7 +223,7 @@ VALUES (
 (
   'How much do you spend on travel?',
   'number',
-  'This includes travel by land, sea, and air.',
+  'This includes travel by land, sea, and air',
   4,
   FALSE,
   FALSE,
@@ -231,7 +232,7 @@ VALUES (
 (
   'How much do you spend on business meetings?',
   'number',
-  'This does not include travel but would include lunch costs.',
+  'This does not include travel but would include lunch costs',
   4,
   FALSE,
   FALSE,
@@ -240,16 +241,16 @@ VALUES (
 (
   'How much do you spend on your vehicles?',
   'number',
-  'This includes any loan payments, gas, insurance, and periferals like a phone charger.',
+  'This includes any loan payments, gas, insurance, and periferals like a phone charger',
   4,
   FALSE,
   FALSE,
   'Vehicle'
 ),
 (
-  'How much do you spend subscriptions?',
+  'How much do you spend on subscriptions?',
   'number',
-  'This includes subscriptions like Office 365, adobe, and other regular payments.',
+  'This includes subscriptions like Office 365, adobe, and other regular payments',
   4,
   FALSE,
   FALSE,
@@ -258,7 +259,7 @@ VALUES (
 (
   'How much do you spend on dues and fees?',
   'number',
-  'I am not sure what to include here. Any ideas?.',
+  'I am not sure what to include here. Any ideas?',
   4,
   FALSE,
   FALSE,
@@ -267,7 +268,7 @@ VALUES (
 (
   'How much do you spend on outside services?',
   'number',
-  'I am not sure what to include here. Any ideas?.',
+  'I am not sure what to include here. Any ideas?',
   4,
   FALSE,
   FALSE,
@@ -276,7 +277,7 @@ VALUES (
 (
   'What other expenses do you have across your business?',
   'number',
-  'I am not sure what to include here. Any ideas?.',
+  'I am not sure what to include here. Any ideas?',
   4,
   FALSE,
   FALSE,
@@ -285,7 +286,7 @@ VALUES (
 (
   'Would you like to input your indirect costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field where the walkthrough will bring you through possible indirect cost categories.',
+  'A total will just be one input field where the walkthrough will bring you through possible indirect cost categories',
   NULL,
   TRUE,
   FALSE,

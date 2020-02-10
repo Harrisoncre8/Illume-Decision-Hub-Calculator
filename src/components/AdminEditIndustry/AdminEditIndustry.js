@@ -23,7 +23,7 @@ class AdminEditIndustry extends Component{
 
   // GET data from industry table on load
   componentDidMount(){
-    this.props.dispatch({type: `GET_INDUSTRY`});
+    this.props.dispatch({type: `GET_ADMIN_INDUSTRY`});
   }
 
   // Adds class if input has a value, removes the class if input has no value
@@ -44,6 +44,14 @@ class AdminEditIndustry extends Component{
         margin: ''
       }
     });
+  }
+
+  // Ask for confirmation, then dispatch DELETE request to saga
+  handleDelete = id => {
+    let popup = window.confirm(`Are you sure you want to disable ${id.industry}?`);
+    if(popup){
+      this.props.dispatch({type: `DELETE_ADMIN_INDUSTRY_INFO`, payload: id.id});
+    }
   }
 
   // Update local state on input value change in edit modal
@@ -116,16 +124,40 @@ class AdminEditIndustry extends Component{
               <tr>
                 <th>Industry</th>
                 <th>Margin</th>
+                <th>Enabled?</th>
+                <th></th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {this.props.industry.map(industry => 
-                <tr key={industry.id}>
-                  <td>{industry.industry}</td>
-                  <td>{industry.margin * 100}%</td>
-                  <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
-                </tr>
+                <>
+                  {industry.enabled ?
+                    <tr key={industry.id}>
+                      <td>{industry.industry}</td>
+                      <td>{industry.margin * 100}%</td>
+                      <td>Yes</td>
+                      {industry.enabled ?
+                        <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DISABLE</td>
+                        :
+                        <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>ENABLE</td>
+                      }
+                      <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
+                    </tr>
+                    :
+                    <tr id="admin-industry-disabled" key={industry.id}>
+                      <td>{industry.industry}</td>
+                      <td>{industry.margin * 100}%</td>
+                      <td>No</td>
+                      {industry.enabled ?
+                        <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>DISABLE</td>
+                        :
+                        <td className="admin-delete-industry-cell" onClick={()=>this.handleDelete(industry)}>ENABLE</td>
+                      }
+                      <td className="admin-edit-industry-cell" onClick={()=>this.openModal(industry)}>Edit Info</td>
+                    </tr>
+                  }
+                </>
               )}
             </tbody>
           </table>
@@ -209,8 +241,8 @@ class AdminEditIndustry extends Component{
   }
 }
 
-const putReduxStateOnProps = (reduxState)=>({
-  industry: reduxState.industry,
+const putReduxStateOnProps = reduxState => ({
+  industry: reduxState.admin.adminIndustry,
 });
 
 export default connect(putReduxStateOnProps)(AdminEditIndustry);
