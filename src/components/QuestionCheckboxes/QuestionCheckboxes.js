@@ -39,9 +39,9 @@ const QuestionCheckboxes = () => {
     if(popup){
       dispatch({type: 'SET_CHECKBOXES', payload: checked})
     }
-    else{alert('Preferenes not saved')};
+
   }
-  
+
   return(
     <center style={{backgroundColor: 'white'}}>
       <h1>Please select costs that are relevent to you</h1>
