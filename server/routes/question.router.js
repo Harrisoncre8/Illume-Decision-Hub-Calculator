@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 // GET route for questions
 router.get('/', rejectUnauthenticated, async (req, res) => {
   const sqlQuery = `
-      SELECT 
+        SELECT 
         "qc"."id", 
         "qc"."question_id", 
         "qc"."next_id",
@@ -16,10 +16,12 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
         "q"."help_text",
         "q"."sub_questions",
         "q"."split",
-        "c"."calculator"
+        "c"."calculator",
+        "uc"."user_id"
       FROM question_calculator qc
       JOIN "questions" q ON "qc"."question_id" = "q"."id"
       JOIN "calculators" c ON "qc"."calculator_id" = "c"."id"
+      LEFT JOIN "user_checks" uc ON "qc"."question_id" = "uc"."question_id"
       WHERE "qc"."id" = $1;
     `;
   const client = await pool.connect();
@@ -29,7 +31,14 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
       const results = await client.query(sqlQuery,[startId.rows[0].start_id]);
       res.send(results.rows);
     } else {
-      const results = await client.query(sqlQuery,[req.query.id]);
+      let results = await client.query(sqlQuery,[req.query.id]);
+      let next_id = results.rows[0].next_id;
+      let user_id = results.rows[0].user_id;
+      while(user_id === null){
+        results = await client.query(sqlQuery,[next_id]);
+        next_id = results.rows[0].next_id;
+        user_id = results.rows[0].user_id;
+      }
       res.send(results.rows);
     }
   } catch (error) {
