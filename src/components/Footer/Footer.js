@@ -1,14 +1,23 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './Footer.css';
 
 export default function Footer() {
 
   const date = new Date().getFullYear();
   const history = useHistory();
+  const userData = useSelector(state => state.user.admin);
 
-  // Return to homepage when logo is clicked
-  const pushToHome = () => history.push(`/`)
+  // Push history to user profile
+  const pushToHome = () => {
+    if(userData === true){
+      history.push('/admin');
+    }
+    else{
+      history.push('/new-user');
+    }
+  }
 
   return(
     <>
