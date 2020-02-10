@@ -12,7 +12,7 @@ export default function Stepper() {
   const questionData = useSelector(state => state.question);
   const splitData = useSelector(state => state.split);
   const lastPageID = useSelector(state => state.previousQuestion);
-  const userCheckboxes = useSelector(state => state.userCheckboxes);
+  const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const history = useHistory();
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
@@ -80,50 +80,46 @@ export default function Stepper() {
   return (
     <center>
       <Nav />
-      <div className='main-container'>
-        <form onSubmit={e => { submit(e) }}>
-          <p className="question-text">
-            {questionData.question}
-          </p>
-          <br />
-          {questionData.split ?
-            splitData.map(split => {
-              return (
-                <span key={split.id}>
-                  <label className="radio-container">{split.split_text}
-                    <input
-                      type="radio"
-                      name="next"
-                      value={split.next_id}
-                      checked={+splitNext === split.next_id}
-                      onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value) }}
-                    />
-                    <span className="radio-btn"></span>
-                  </label>
+      <div className='main-container stepper-container'>
+        <form onSubmit={e=>{submit(e)}}>
+          <div>
+            <p className="question-text">
+              {questionData.question}
+            </p>
+            <br />
+            {questionData.split ?
+              <div>
+                <div className="stepper-radio-container">
+                  {splitData.map(split => {
+                    return (
+                      <span key={split.id}>
+                        <label className="radio-container">{split.split_text}
+                          <input
+                            type="radio"
+                            name="next"
+                            value={split.next_id}
+                            checked={+splitNext === split.next_id}
+                            onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value); }}
+                          />
+                          <span className="radio-btn"></span>
+                        </label>
+                      </span>
+                    );
+                  })}
+                </div>
+                <span className="tooltip-background tooltip-background-radio">
+                  <span className="tooltip-icon">?</span>
+                  <span className="tooltip-text">{questionData.help_text}</span>
                 </span>
-              );
-            })
-            :
-            <center>
-              <div className="text-field-container">
-                <input
-                  className="text-field"
-                  value={input}
-                  onChange={(e) => handleChange(e)}
-                  type={questionData.response_type}
-                  autoFocus
-                />
-                <label className="text-field-label">enter value</label>
-                <div className="text-field-mask stepper-mask"></div>
               </div>
               :
               <center>
                 <div className="text-field-container">
-                  <input
+                  <input 
                     className="text-field"
-                    value={input}
-                    onChange={(e) => handleChange(e)}
-                    type={questionData.response_type}
+                    value={input} 
+                    onChange={(e)=>handleChange(e)} 
+                    type={questionData.response_type} 
                     autoFocus
                   />
                   <label className="text-field-label">enter value</label>
@@ -134,7 +130,7 @@ export default function Stepper() {
                   </span>
                 </div>
               </center>
-              }
+            }
           </div>
         </form>
         <div onClick={lastPage} className='arrow-left' />
