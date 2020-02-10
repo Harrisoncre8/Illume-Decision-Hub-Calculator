@@ -238,10 +238,10 @@ export default function PriceSetting() {
             You are selling for
             {
               productMargin>userMargin? 
-                ` $${productMargin-userMargin} less than `:
+                ` $${productMargin-userMargin.toFixed(2)} less than `:
                 productMargin === userMargin?
                   ` the same price as `:
-                  ` $${userMargin-productMargin} more than `
+                  ` $${userMargin-productMargin.toFixed(2)} more than `
             }
             industry norms.
           </p>
