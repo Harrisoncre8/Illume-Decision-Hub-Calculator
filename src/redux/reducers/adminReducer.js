@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 // Store admin industry information
-const adminIndustry = (state = [], action) => action.type === `SET_INDUSTRY` ? action.payload : state;
+const adminIndustry = (state = [], action) => action.type === `SET_ADMIN_INDUSTRY` ? action.payload : state;
   
 // Store calculator questions for admin to edit
 const adminQuestion = (state = [], action) => action.type === `SET_ADMIN_QUESTION` ? action.payload : state;
