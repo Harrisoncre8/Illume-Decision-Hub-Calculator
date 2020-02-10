@@ -10,14 +10,7 @@ export default function Footer() {
   const userData = useSelector(state => state.user.admin);
 
   // Push history to user profile
-  const pushToHome = () => {
-    if(userData === true){
-      history.push('/admin');
-    }
-    else{
-      history.push('/new-user');
-    }
-  }
+  const pushToHome = () => userData ? history.push(`/admin`) : history.push(`/new-user`);
 
   return(
     <>
