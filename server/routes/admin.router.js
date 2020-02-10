@@ -7,7 +7,8 @@ const { rejectNonAdmin } = require('../modules/admin-auth-middleware');
 // DELETE route for admin to update industry information
 router.delete('/industry-info/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const id = [req.params.id];
-  const sqlQuery = `DELETE FROM industry 
+  const sqlQuery = `UPDATE industry 
+                    SET enabled = NOT enabled
                     WHERE id = $1;`;
   pool.query(sqlQuery, id)
   .then(result => {
