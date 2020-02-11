@@ -140,7 +140,9 @@ export default function BreakEven() {
 
     return (
       <div className="max-width-container">
-        <p className="results-text">{paths[start] && paths[start].question}</p>
+        <div className="align-left">
+          <p className="results-text">{paths[start] && paths[start].question}</p>
+        </div>
         {doesSplit ?
           null 
           :

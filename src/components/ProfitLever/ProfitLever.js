@@ -172,8 +172,10 @@ export default function ProfitLever() {
     let questionId = paths[start] && paths[start].question_id;
 
     return (
-      <div>
-        <p className="results-text">{paths[start] && paths[start].question}</p>
+      <div className="max-width-container">
+        <div className="align-left">
+          <p className="results-text">{paths[start] && paths[start].question}</p>
+        </div>
         {doesSplit ?
           null 
           :
