@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './Footer.css';
+import logo from './illume-logo180.png';
 
 export default function Footer() {
 
@@ -26,12 +27,12 @@ export default function Footer() {
     <>
       <div className="whitespace"></div>
       <footer className="footer-main-container">
-        <img className="footer-logo" src="illume-logo180.png" alt="illume logo" onClick={pushToHome} />
+        <img className="footer-logo" src={logo} alt="illume logo" onClick={pushToHome} />
         <span className="footer-brand-name">illume decision hub</span>
         <div className="footer-span-container">
           <span className="footer-a-span">
             &copy; {date} &nbsp;
-            <a className="footer-a" href="https://illume-pricing.com/">Illume Pricing</a>
+            <a className="footer-a" href="https://illume-pricing.com/" target="_blank">Illume Pricing</a>
           </span>
         </div>
       </footer>
