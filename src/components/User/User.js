@@ -107,7 +107,7 @@ export default function User() {
   return(
     <center>
       <Nav />
-      <div className='main-container'>
+      <div className="main-container">
         <div className="profile-personal-details-container">
           {userData.map(user => 
             <div key={user.id}>

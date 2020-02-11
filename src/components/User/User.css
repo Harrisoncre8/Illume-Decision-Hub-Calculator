@@ -5,6 +5,7 @@
 .profile-list-container {
   max-width: 325px;
   text-align: left;
+  margin-bottom: 20px;
 }
 
 .profile-personal-details-container {
