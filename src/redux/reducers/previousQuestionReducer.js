@@ -6,6 +6,8 @@ const previousQuestionReducer = (state = [], action) => {
       return action.payload;
     case 'CLEAR_PREVIOUS_QUESTION':
       return [];
+    case 'CLEAR_ALL':
+      return [];
     default:
       return state;
   }

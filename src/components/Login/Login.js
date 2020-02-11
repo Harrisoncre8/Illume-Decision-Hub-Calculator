@@ -70,13 +70,13 @@ class Login extends Component{
       <center>
         <div className="login-container">
         {this.props.errors.loginMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
-            {this.props.errors.loginMessage}
-          </h2>
-        )}
+              <h2
+                className="alert"
+                role="alert"
+              >
+                {this.props.errors.loginMessage}
+              </h2>
+          )}
           <div>
             <img className="login-logo" src="illume-logo180.png" alt="illume logo" />
             <span className="login-brand-name">illume decision hub</span>
