@@ -269,6 +269,7 @@ export default function User() {
               </div>
           </Modal>
           <QuestionCheckboxes />
+          <UserCalcToggle />
         </div>
       </div>
     </center>
