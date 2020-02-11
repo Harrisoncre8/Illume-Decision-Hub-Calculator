@@ -17,7 +17,7 @@ export default function NewUser(){
     <center>
       <Nav />
       <div className='main-container'>
-        <h1 className='user-spacing'>Welcome, {user.map(name=><span key={name.id}>{name.name}</span>)}!</h1>
+        <h1 className='user-spacing'>Welcome, {user[0] && user[0].name}!</h1>
         <h3 className='user-spacing'>What is the Illume Decision Hub Calculator?</h3>
         <h3 className='user-spacing'>
           This application is designed to help you generate more profits. 
