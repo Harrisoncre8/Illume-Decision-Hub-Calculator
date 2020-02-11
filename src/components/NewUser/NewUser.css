@@ -1,0 +1,10 @@
+.new-user-cta-text {
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
+
+.new-user-text-container {
+  max-width: 500px;
+  margin-bottom: 30px;
+  text-align: left;
+}

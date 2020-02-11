@@ -1,3 +1,61 @@
+.profile-center {
+  padding-left: 10px;
+}
+
+.profile-list-container {
+  max-width: 325px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.profile-mask-company {
+  width: 58px;
+}
+
+.profile-mask-confirm-new-password {
+  width: 50px;
+}
+
+.profile-mask-email {
+  width: 37px;
+}
+
+.profile-mask-name {
+  width: 38px;
+}
+
+.profile-mask-new-password {
+  width: 90px;
+}
+
+.profile-mask-old-password {
+  width: 107px;
+}
+
+.profile-mask-phone {
+  width: 55px;
+}
+
+.profile-modal-btns {
+  margin-top: 20px;
+  margin-right: 40px;
+}
+
+.profile-password-font-size {
+  font-size: 0.7em;
+  margin-top: 20px;
+  display: block;
+}
+
+.profile-personal-details-container {
+  margin-bottom: 40px;
+}
+
+.profile-text {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
 .user-info {
   list-style-type: none;
 }

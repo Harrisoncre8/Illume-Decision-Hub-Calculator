@@ -64,6 +64,63 @@ p, span, div, h1, h2, h3, label, button {
   border-left: 40px solid #f0aa42;
 }
 
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-container input[type="checkbox"]:checked ~ .checkbox-check {
+  background-color: #f7d149;
+  transition: 0.2s;
+
+}
+
+.checkbox-container input[type="checkbox"]:checked ~ .checkbox-check:after {
+  display: block;
+}
+
+.checkbox-container:hover input[type="checkbox"] ~ .checkbox-check {
+  background-color: #f0aa42;
+  transition: 0.2s;
+}
+
+.checkbox-container .checkbox-check:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid #000;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-check {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.checkbox-check:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
 .circle-btn {
   font-size: 1.2em;
   text-transform: uppercase;
@@ -134,9 +191,9 @@ p, span, div, h1, h2, h3, label, button {
 }
 
 .main-container {
-  background-color: white;
+  background-color: #f0aa42;
   box-shadow: 5px 5px 10px #272727;
-  padding: 20px;
+  padding: 50px;
   border-radius: 25px;
   height: 100%;
   width: 80%;
@@ -279,6 +336,31 @@ p, span, div, h1, h2, h3, label, button {
   transition: 0.3s;
 }
 
+.secondary-btn {
+  font-size: 0.9em;
+  text-transform: uppercase;
+  background-color: #d6d6d6;
+  border-radius: 4px;
+  border: 2px outset black;
+  box-shadow: 0 1px 3px grey;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.secondary-btn:hover {
+  box-shadow: 1px 5px 6px grey;
+  background: #d6d6d6 radial-gradient(circle, transparent 1%, #a3a3a3 1%) center/15000%;
+  transition: background 0s, box-shadow 0.3s;
+}
+
+.secondary-btn:active {
+  box-shadow: 0 8px 10px grey;
+  background-color: #a3a3a3;
+  background-size: 100%;
+  transition: 0.3s;
+}
+
 .text-field:hover {
   border: 1px solid #f0aa42;
 }
@@ -392,4 +474,12 @@ p, span, div, h1, h2, h3, label, button {
   top: 5px;
   left: 10px;
   z-index: -1;
+}
+
+.top-card-container {
+  background-color: white;
+  padding: 20px 11px;
+  margin: 30px 40px;
+  box-shadow: 5px 5px 10px #272727;
+  border-radius: 25px;
 }

@@ -102,122 +102,124 @@ class AdminEditUserInfo extends Component {
       <center>
         <Nav />
         <div className="main-container">
-          <button className="close-window-button" onClick={this.pushHistoryBack}>x</button>
-          <h1 className="main-heading admin-user-heading">User Information</h1>
-          <table className="admin-user-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Company</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.user.map(user =>
-                <tr key={user.id}>
-                  <td>{user.name}</td>
-                  <td>{user.company}</td>
-                  <td>{user.phone}</td>
-                  <td>{user.email}</td>
-                  <td className="admin-edit-user-cell" onClick={() => this.openModal(user)}>Edit Info</td>
+          <div className="top-card-container">
+            <button className="close-window-button" onClick={this.pushHistoryBack}>x</button>
+            <h1 className="main-heading admin-user-heading">User Information</h1>
+            <table className="admin-user-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Company</th>
+                  <th>Phone Number</th>
+                  <th>Email</th>
+                  <th>Actions</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
-          <Modal
-            visible={this.state.visible}
-            width="440"
-            height="500"
-            effect="fadeInUp"
-            onClickAway={this.closeModal}
-          >
-            <div className="modal-container">
-              <button className="close-window-button" onClick={this.closeModal}>x</button>
-              <h1 className="main-heading modal-heading">{this.state.username}</h1>
-
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type="text"
-                  value={editUser.name}
-                  onChange={(event) => this.handleChange(event, 'name')}
-                />
-                <label className="text-field-label">user's name</label>
-                <div className="text-field-mask admin-user-mask-name"></div>
-              </div>
-
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type="text"
-                  value={editUser.company}
-                  onChange={(event) => this.handleChange(event, 'company')}
-                />
-                <label className="text-field-label">company</label>
-                <div className="text-field-mask admin-user-mask-company"></div>
-              </div>
-
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type="text"
-                  value={editUser.phone}
-                  onChange={(event) => this.handleChange(event, 'phone')}
-                />
-                <label className="text-field-label">phone #</label>
-                <div className="text-field-mask admin-user-mask-phone"></div>
-              </div>
-
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type="text"
-                  value={editUser.email}
-                  onChange={(event) => this.handleChange(event, 'email')}
-                />
-                <label className="text-field-label">email</label>
-                <div className="text-field-mask admin-user-mask-email"></div>
-              </div>
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type={this.state.showPassword} 
-                  value={editUser.password}
-                  onChange={(event) => this.handleChange(event, 'password')}
-                />
-                <label className="text-field-label">password</label>
-                <div className="text-field-mask admin-user-mask-password"></div>
-                <input type="checkbox" onChange={this.togglePasswordView} />
-                <label> Show Password</label>
-
-              </div>
-
-              <select
-                className="modal-input"
-                value={this.state.selectedUser.industryid || 'industry'}
-                onChange={(event) => this.handleDropdownChange(event, 'industryid')}
-              >
-                {this.props.industry.map(industry =>
-                  <option key={industry.id} value={industry.id}>{industry.industry}</option>
+              </thead>
+              <tbody>
+                {this.props.user.map(user =>
+                  <tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td>{user.company}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.email}</td>
+                    <td className="admin-edit-user-cell" onClick={() => this.openModal(user)}>Edit Info</td>
+                  </tr>
                 )}
-              </select>
+              </tbody>
+            </table>
+            <Modal
+              visible={this.state.visible}
+              width="440"
+              height="500"
+              effect="fadeInUp"
+              onClickAway={this.closeModal}
+            >
+              <div className="modal-container">
+                <button className="close-window-button" onClick={this.closeModal}>x</button>
+                <h1 className="main-heading modal-heading">{this.state.username}</h1>
 
-              <select
-                className="modal-input"
-                value={this.state.selectedUser.usertype || 'usertype'}
-                onChange={(event) => this.handleDropdownChange(event, 'usertype')}
-              >
-                <option key={1} value={false}>User</option>
-                <option key={2} value={true}>Admin</option>
-              </select>
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type="text"
+                    value={editUser.name}
+                    onChange={(event) => this.handleChange(event, 'name')}
+                  />
+                  <label className="text-field-label">user's name</label>
+                  <div className="text-field-mask admin-user-mask-name"></div>
+                </div>
 
-              <div className="modal-btn-container">
-                <button className="normal-btn" onClick={this.handleSave}>Save</button>
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type="text"
+                    value={editUser.company}
+                    onChange={(event) => this.handleChange(event, 'company')}
+                  />
+                  <label className="text-field-label">company</label>
+                  <div className="text-field-mask admin-user-mask-company"></div>
+                </div>
+
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type="text"
+                    value={editUser.phone}
+                    onChange={(event) => this.handleChange(event, 'phone')}
+                  />
+                  <label className="text-field-label">phone #</label>
+                  <div className="text-field-mask admin-user-mask-phone"></div>
+                </div>
+
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type="text"
+                    value={editUser.email}
+                    onChange={(event) => this.handleChange(event, 'email')}
+                  />
+                  <label className="text-field-label">email</label>
+                  <div className="text-field-mask admin-user-mask-email"></div>
+                </div>
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type={this.state.showPassword} 
+                    value={editUser.password}
+                    onChange={(event) => this.handleChange(event, 'password')}
+                  />
+                  <label className="text-field-label">password</label>
+                  <div className="text-field-mask admin-user-mask-password"></div>
+                  <input type="checkbox" onChange={this.togglePasswordView} />
+                  <label> Show Password</label>
+
+                </div>
+
+                <select
+                  className="modal-input"
+                  value={this.state.selectedUser.industryid || 'industry'}
+                  onChange={(event) => this.handleDropdownChange(event, 'industryid')}
+                >
+                  {this.props.industry.map(industry =>
+                    <option key={industry.id} value={industry.id}>{industry.industry}</option>
+                  )}
+                </select>
+
+                <select
+                  className="modal-input"
+                  value={this.state.selectedUser.usertype || 'usertype'}
+                  onChange={(event) => this.handleDropdownChange(event, 'usertype')}
+                >
+                  <option key={1} value={false}>User</option>
+                  <option key={2} value={true}>Admin</option>
+                </select>
+
+                <div className="modal-btn-container">
+                  <button className="normal-btn" onClick={this.handleSave}>Save</button>
+                </div>
               </div>
-            </div>
-          </Modal>
+            </Modal>
+          </div>
         </div>
       </center>
     );
