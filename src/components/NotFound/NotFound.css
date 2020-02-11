@@ -1,3 +1,7 @@
+.nf-container {
+  margin-top: 40px;
+}
+
 .nf-heading {
   margin-top: 80px;
   color: black;
@@ -31,4 +35,31 @@
 
 .nf-logo-div:hover {
   box-shadow: 0 0 200px #f7d149;
+}
+
+.nf-moon {
+  position: relative;
+  float: left;
+  top: 100px;
+  height: 400px;
+  width: 400px;
+  border-radius: 50%;
+  background-color: #757070;
+  animation: eclipse 60s linear;
+  z-index: 1;
+}
+
+.nf-moon-text {
+  font-size: 8em;
+  position: relative;
+  top: 135px;
+}
+
+@keyframes eclipse {
+  from {
+    left: 0;
+  }
+  to {
+    left: 1500px;
+  }
 }
