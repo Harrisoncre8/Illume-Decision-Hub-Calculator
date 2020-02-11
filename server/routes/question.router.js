@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 // GET route for questions
 router.get('/', rejectUnauthenticated, async (req, res) => {
   const sqlQuery = `
-        SELECT 
+      SELECT 
         "qc"."id", 
         "qc"."question_id", 
         "qc"."next_id",
@@ -17,25 +17,37 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
         "q"."sub_questions",
         "q"."split",
         "c"."calculator",
-        "uc"."user_id"
+        (SELECT 
+          (SELECT 
+            "user_id" FROM "user_checks"
+            WHERE "user_id" = $2 
+            AND "question_id" = (SELECT
+              "question_id" FROM "question_calculator" 
+              WHERE "id" = $1)) AS "user_id")
       FROM question_calculator qc
       JOIN "questions" q ON "qc"."question_id" = "q"."id"
       JOIN "calculators" c ON "qc"."calculator_id" = "c"."id"
-      LEFT JOIN "user_checks" uc ON "qc"."question_id" = "uc"."question_id"
       WHERE "qc"."id" = $1;
     `;
   const client = await pool.connect();
   try {
     if(req.query.start){
-      const startId = await client.query(`SELECT "start_id" FROM "calculators" WHERE "id" = $1;`, [req.query.start]);
-      const results = await client.query(sqlQuery,[startId.rows[0].start_id]);
+      const startId = await client.query(
+        `SELECT "start_id" FROM "calculators" WHERE "id" = $1;`, 
+        [req.query.start]
+      );
+      const results = await client.query(sqlQuery,[startId.rows[0].start_id, req.user.id]);
       res.send(results.rows);
     } else {
-      let results = await client.query(sqlQuery,[req.query.id]);
+      let count = 0
+      let results = await client.query(sqlQuery,[Number(req.query.id), req.user.id]);
+      console.log(results.rows, [Number(req.query.id), req.user.id], count ++)
+      console.log('wtf');
       let next_id = results.rows[0].next_id;
       let user_id = results.rows[0].user_id;
       while(user_id === null){
-        results = await client.query(sqlQuery,[next_id]);
+        results = await client.query(sqlQuery,[next_id, req.user.id]);
+        console.log(results.rows, [next_id, req.user.id], count ++)
         next_id = results.rows[0].next_id;
         user_id = results.rows[0].user_id;
       }
