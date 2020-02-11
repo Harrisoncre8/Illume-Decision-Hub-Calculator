@@ -110,19 +110,30 @@ export default function User() {
       <div className='main-container'>
         <div className="profile-personal-details-container">
           {userData.map(user => 
-            <>
+            <div key={user.id}>
               <h1 className='user-spacing'>Welcome back, {user.name}!</h1>
               <h2 className='user-spacing'>Profile Information</h2>
               <div className="profile-list-container">
-                <ul className='user-info' key={user.id}>
-                  <li className="profile-text">Name: {user.name}</li>
-                  <li className="profile-text">Company: {user.business_name}</li>
-                  <li className="profile-text">Phone: {user.phone_number}</li>
-                  <li className="profile-text">Email: {user.email}</li>
-                  <li className="profile-text user-spacing">Industry: {user.industry}</li>
-                </ul>
+                <table className="profile-text user-info">
+                  <tr>
+                    <td>Name:</td>
+                    <td className="profile-center">{user.name}</td>
+                  </tr>
+                  <tr>
+                    <td>Company:</td>
+                    <td className="profile-center">{user.business_name}</td>
+                  </tr>
+                  <tr>
+                    <td>Phone:</td>
+                    <td className="profile-center">{user.phone_number}</td>
+                  </tr>
+                  <tr>
+                    <td>Email:</td>
+                    <td className="profile-center">{user.email}</td>
+                  </tr>
+                </table>
               </div>
-            </>
+            </div>
           )}
           <button className="normal-btn" onClick={openModal}>Edit Profile</button>
         </div>
