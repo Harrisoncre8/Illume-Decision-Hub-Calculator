@@ -228,7 +228,7 @@ class AdminEditUserInfo extends Component {
 
 const putReduxStateOnProps = reduxState=>({
   industry: reduxState.industry,
-  user: reduxState.admin.adminUserInfo
+  user: reduxState.adminUserInfo
 });
 
 export default connect(putReduxStateOnProps)(AdminEditUserInfo);

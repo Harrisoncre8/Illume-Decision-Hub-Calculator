@@ -5,7 +5,7 @@ import AdminCalcSubquestion from '../AdminCalcSubquestion/AdminCalcSubquestion';
 
 export default function AdminCalcQuestion(props) {
 
-  const subQuestion = useSelector((state)=>state.admin.adminSubquestion);
+  const subQuestion = useSelector((state)=>state.adminSubquestion);
   const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);

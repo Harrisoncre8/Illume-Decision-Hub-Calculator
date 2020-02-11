@@ -57,6 +57,7 @@ export default function Nav() {
   // Log user out, push history to login page
   const logout = () => {
     dispatch({type: 'LOGOUT'});
+    dispatch({type: 'CLEAR_ALL'});
     history.push('/');
   }
 

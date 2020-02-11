@@ -12,6 +12,8 @@ const loginMessage = (state = '', action) => {
       return 'Oops! The email and password didn\'t match. Try again!';
     case 'LOGIN_FAILED_NO_CODE':
       return 'Oops! Something went wrong! Is the server running?';
+    case 'CLEAR_ALL':
+        return [];
     default:
       return state;
   }
@@ -27,6 +29,8 @@ const registrationMessage = (state = '', action) => {
       return 'Choose a email and password!';
     case 'REGISTRATION_FAILED':
       return 'Oops! That didn\'t work. The email might already be taken. Try again!';
+    case 'CLEAR_ALL':
+      return [];
     default:
       return state;
   }
