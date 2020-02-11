@@ -92,6 +92,9 @@ export default function User() {
     }
   }
 
+  // Adds class if input has a value, removes the class if input has no value
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
+
   // close modal to change password
   const closePassModal = () => {
     setPasswordModal(false);
@@ -141,7 +144,7 @@ export default function User() {
         <Modal
           visible={modal}
           width="400"
-          height="300"
+          height="450"
           effect="fadeInUp"
           onClickAway={closeModal}
         >
@@ -152,7 +155,11 @@ export default function User() {
               className="text-field text-field-active"
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                            setName(e.target.value);
+                            checkForValue(e);
+                          }
+                        }
             />
             <label className="text-field-label">name</label>
             <div className="text-field-mask profile-mask-name"></div>
@@ -163,7 +170,11 @@ export default function User() {
               className="text-field text-field-active"
               type="text"
               value={company}
-              onChange={(e) => setCompany(e.target.value)}
+              onChange={(e) => {
+                            setCompany(e.target.value);
+                            checkForValue(e);
+                          }
+                        }
             />
             <label className="text-field-label">company</label>
             <div className="text-field-mask profile-mask-company"></div>
@@ -174,7 +185,11 @@ export default function User() {
               className="text-field text-field-active"
               type="text"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => {
+                            setPhone(e.target.value);
+                            checkForValue(e);
+                          }
+                        }
             />
             <label className="text-field-label">phone #</label>
             <div className="text-field-mask profile-mask-phone"></div>
@@ -185,7 +200,11 @@ export default function User() {
               className="text-field text-field-active"
               type="text"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                            setEmail(e.target.value);
+                            checkForValue(e);
+                          }
+                        }
             />
             <label className="text-field-label">email</label>
             <div className="text-field-mask profile-mask-email"></div>
