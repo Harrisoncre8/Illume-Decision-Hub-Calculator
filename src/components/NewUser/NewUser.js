@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './NewUser.css';
 import Nav from '../Nav/Nav';
@@ -6,7 +6,7 @@ import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
 
 export default function NewUser(){
 
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch());
   const user = useSelector(state => state.userInfo);
   const userID = useSelector(state => state.user.id);
 

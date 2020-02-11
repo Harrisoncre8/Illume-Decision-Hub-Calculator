@@ -12,25 +12,16 @@ export default function Stepper() {
   const questionData = useSelector(state => state.question);
   const splitData = useSelector(state => state.split);
   const lastPageID = useSelector(state => state.previousQuestion);
-  const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const history = useHistory();
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
 
-  useEffect(() => {
-    if (
-      questionData.question_id &&
-      questionData.id !== lastPageID[lastPageID.length - 1] &&
-      userCheckboxes.findIndex(el => el.question_id === questionData.question_id) === -1
-    ) {
-      nextPage();
-    }
-  }, [questionData, userCheckboxes])
-
+  // imports previous user inpus
   useEffect(() => {
     setInput(inputData[questionData.question_id] || '');
   }, [inputData, questionData.question_id])
 
+  // Gives radio button selection a default value
   useEffect(() => {
     if (questionData.split) {
       setSplitNext(splitData[0] && splitData[0].next_id || '')
@@ -38,6 +29,14 @@ export default function Stepper() {
     }
   }, [questionData.split, inputData, questionData.question_id, splitData]);
 
+  useEffect(()=>{
+    if(questionData && questionData.skipToResults){
+      const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
+      delete questionData.skipToResults;
+      dispatch({ type: `SET_QUESTION`, payload: questionData })
+      history.push(`/${url}`);
+    }
+  }, [questionData, history, dispatch])
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 

@@ -174,11 +174,14 @@ export default function ProfitLever() {
     return (
       <div className="max-width-container">
         <div className="align-left">
-          <p className="results-text">{paths[start] && paths[start].question}</p>
+          {
+            userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
+              <p className="results-text">{paths[start] && paths[start].question}</p>:
+              null
+          }
         </div>
         {doesSplit ?
-          null 
-          :
+          null :
           userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
             <div className="text-field-container">
               <input
@@ -200,8 +203,7 @@ export default function ProfitLever() {
               />
               <label className="text-field-label">enter value</label>
               <div className="text-field-mask stepper-mask"></div>
-            </div>
-            :
+            </div> :
             null
         }
         {
