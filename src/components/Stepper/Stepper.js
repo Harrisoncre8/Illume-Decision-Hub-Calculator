@@ -82,58 +82,60 @@ export default function Stepper() {
       <Nav />
       <div className='main-container stepper-container'>
         <div className="stepper-max-width-container">
-          <form onSubmit={e=>{submit(e)}}>
-            <div>
-              <p className="question-text">
-                {questionData.question}
-              </p>
-              <br />
-              {questionData.split ?
-                <div>
-                  <div className="stepper-radio-container">
-                    {splitData.map(split => {
-                      return (
-                        <span key={split.id}>
-                          <label className="radio-container">{split.split_text}
-                            <input
-                              type="radio"
-                              name="next"
-                              value={split.next_id}
-                              checked={+splitNext === split.next_id}
-                              onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value); }}
-                            />
-                            <span className="radio-btn"></span>
-                          </label>
-                        </span>
-                      );
-                    })}
-                  </div>
-                  <span className="tooltip-background tooltip-background-radio">
-                    <span className="tooltip-icon">?</span>
-                    <span className="tooltip-text">{questionData.help_text}</span>
-                  </span>
-                </div>
-                :
-                <center>
-                  <div className="text-field-container">
-                    <input 
-                      className="text-field"
-                      value={input} 
-                      onChange={(e)=>handleChange(e)} 
-                      type={questionData.response_type} 
-                      autoFocus
-                    />
-                    <label className="text-field-label">enter value</label>
-                    <div className="text-field-mask stepper-mask"></div>
-                    <span className="tooltip-background tooltip-background-textfield">
+          <div className="top-card-container">
+            <form onSubmit={e=>{submit(e)}}>
+              <div>
+                <p className="question-text">
+                  {questionData.question}
+                </p>
+                <br />
+                {questionData.split ?
+                  <div>
+                    <div className="stepper-radio-container">
+                      {splitData.map(split => {
+                        return (
+                          <span key={split.id}>
+                            <label className="radio-container">{split.split_text}
+                              <input
+                                type="radio"
+                                name="next"
+                                value={split.next_id}
+                                checked={+splitNext === split.next_id}
+                                onChange={(e) => { setSplitNext(split.next_id); setInput(e.target.value); }}
+                              />
+                              <span className="radio-btn"></span>
+                            </label>
+                          </span>
+                        );
+                      })}
+                    </div>
+                    <span className="tooltip-background tooltip-background-radio">
                       <span className="tooltip-icon">?</span>
                       <span className="tooltip-text">{questionData.help_text}</span>
                     </span>
                   </div>
-                </center>
-              }
-            </div>
-          </form>
+                  :
+                  <center>
+                    <div className="text-field-container">
+                      <input 
+                        className="text-field"
+                        value={input} 
+                        onChange={(e)=>handleChange(e)} 
+                        type={questionData.response_type} 
+                        autoFocus
+                      />
+                      <label className="text-field-label">enter value</label>
+                      <div className="text-field-mask stepper-mask"></div>
+                      <span className="tooltip-background tooltip-background-textfield">
+                        <span className="tooltip-icon">?</span>
+                        <span className="tooltip-text">{questionData.help_text}</span>
+                      </span>
+                    </div>
+                  </center>
+                }
+              </div>
+            </form>
+          </div>
         </div>
         <div onClick={lastPage} className='arrow-left' />
         <div onClick={nextPage} className='arrow-right' />

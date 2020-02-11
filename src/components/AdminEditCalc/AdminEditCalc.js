@@ -39,32 +39,34 @@ export default function AdminEditCalc() {
   return(
     <center>
       <div className="main-container admin-padding">
-      <button className="close-window-button" onClick={pushHistoryBack}>x</button>
-      <h1 className="main-heading">Select a Calculator to Edit</h1>
-        <div className="admin-button-flex-container">
-          <div className="admin-btn-flex-column">
-            <button 
-              className="circle-btn" 
-              onClick={handleBreakClick}
-            >
-              Edit Break Even
-            </button>
-          </div>
-          <div className="admin-btn-flex-column">
-            <button 
-              className="circle-btn" 
-              onClick={handlePriceClick}
-            >
-              Edit Price Setting
-            </button>
-          </div>
-          <div className="admin-btn-flex-column">
-            <button 
-              className="circle-btn" 
-              onClick={handleLeverClick}
-            >
-              Edit Profit Lever
-            </button>
+        <div className="top-card-container">
+        <button className="close-window-button" onClick={pushHistoryBack}>x</button>
+        <h1 className="main-heading">Select a Calculator to Edit</h1>
+          <div className="admin-button-flex-container">
+            <div className="admin-btn-flex-column">
+              <button 
+                className="circle-btn" 
+                onClick={handleBreakClick}
+              >
+                Edit Break Even
+              </button>
+            </div>
+            <div className="admin-btn-flex-column">
+              <button 
+                className="circle-btn" 
+                onClick={handlePriceClick}
+              >
+                Edit Price Setting
+              </button>
+            </div>
+            <div className="admin-btn-flex-column">
+              <button 
+                className="circle-btn" 
+                onClick={handleLeverClick}
+              >
+                Edit Profit Lever
+              </button>
+            </div>
           </div>
         </div>
       </div>

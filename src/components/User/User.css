@@ -1,3 +1,43 @@
+.profile-center {
+  padding-left: 10px;
+}
+
+.profile-list-container {
+  max-width: 325px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.profile-mask-company {
+  width: 58px;
+}
+
+.profile-mask-email {
+  width: 37px;
+}
+
+.profile-mask-name {
+  width: 38px;
+}
+
+.profile-mask-phone {
+  width: 55px;
+}
+
+.profile-password-font-size {
+  font-size: 0.7em;
+  display: block;
+}
+
+.profile-personal-details-container {
+  margin-bottom: 40px;
+}
+
+.profile-text {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
 .user-info {
   list-style-type: none;
 }
