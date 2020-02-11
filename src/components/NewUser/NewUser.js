@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Nav from '../Nav/Nav';
 import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
 
 export default function NewUser(){
 
-  // hooks for redux and sagas
-  let dispatch = useDispatch();
-  let userData = useSelector(state => state.admin.adminUserInfo);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.userInfo);
+  const userID = useSelector(state => state.user.id);
 
-  // Run on component mount
-  useEffect(() => {
-    dispatch({type: `GET_ADMIN_USER_INFO`});
-  }, [dispatch]);
+  useEffect(()=>{
+    dispatch({type: `GET_USER_INFO`, payload: userID});
+  }, [userID]);
 
   return(
     <center>
       <Nav />
       <div className='main-container'>
-        <h1 className='user-spacing'>Welcome, {}</h1>
-        <h2 className='user-spacing'>What is the Illume Decision Hub Calculator?</h2>
+        <h1 className='user-spacing'>Welcome, {user.map(name=><span key={name.id}>{name.name}</span>)}!</h1>
+        <h3 className='user-spacing'>What is the Illume Decision Hub Calculator?</h3>
         <h3 className='user-spacing'>
           This application is designed to help you generate more profits. 
           Using conversational language through a “choose your own adventure” format, you will 
