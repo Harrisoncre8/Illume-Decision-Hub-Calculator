@@ -44,7 +44,7 @@ const QuestionCheckboxes = () => {
   }
 
   return(
-    <center style={{backgroundColor: 'white'}}>
+    <center>
       <h1>Which costs are relevant to you?</h1>
       <form onSubmit={(e)=>submit(e)}>
         <div className="questions-checkbox-container">

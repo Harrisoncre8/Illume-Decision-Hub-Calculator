@@ -111,162 +111,164 @@ export default function User() {
     <center>
       <Nav />
       <div className="main-container">
-        <div className="profile-personal-details-container">
-          {userData.map(user => 
-            <div key={user.id}>
-              <h1 className='user-spacing'>Welcome back, {user.name}!</h1>
-              <h2 className='user-spacing'>Profile Information</h2>
-              <div className="profile-list-container">
-                <table className="profile-text user-info">
-                  <tr>
-                    <td>Name:</td>
-                    <td className="profile-center">{user.name}</td>
-                  </tr>
-                  <tr>
-                    <td>Company:</td>
-                    <td className="profile-center">{user.business_name}</td>
-                  </tr>
-                  <tr>
-                    <td>Phone:</td>
-                    <td className="profile-center">{user.phone_number}</td>
-                  </tr>
-                  <tr>
-                    <td>Email:</td>
-                    <td className="profile-center">{user.email}</td>
-                  </tr>
-                </table>
+        <div className="top-card-container">
+          <div className="profile-personal-details-container">
+            {userData.map(user => 
+              <div key={user.id}>
+                <h1 className='user-spacing'>Welcome back, {user.name}!</h1>
+                <h2 className='user-spacing'>Profile Information</h2>
+                <div className="profile-list-container">
+                  <table className="profile-text user-info">
+                    <tr>
+                      <td>Name:</td>
+                      <td className="profile-center">{user.name}</td>
+                    </tr>
+                    <tr>
+                      <td>Company:</td>
+                      <td className="profile-center">{user.business_name}</td>
+                    </tr>
+                    <tr>
+                      <td>Phone:</td>
+                      <td className="profile-center">{user.phone_number}</td>
+                    </tr>
+                    <tr>
+                      <td>Email:</td>
+                      <td className="profile-center">{user.email}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            )}
+            <button className="normal-btn" onClick={openModal}>Edit Profile</button>
+          </div>
+
+          <Modal
+            visible={modal}
+            width="400"
+            height="450"
+            effect="fadeInUp"
+            onClickAway={closeModal}
+          >
+            <div className="modal-container">
+              <button className="close-window-button" onClick={closeModal}>x</button>
+              <h1 className="main-heading modal-heading">Edit Info</h1>
+
+              <div className="text-field-container">
+                <input
+                  className="text-field text-field-active"
+                  type="text"
+                  value={name}
+                  onChange={(e) => {
+                                setName(e.target.value);
+                                checkForValue(e);
+                              }
+                            }
+                />
+                <label className="text-field-label">name</label>
+                <div className="text-field-mask profile-mask-name"></div>
+              </div>
+
+              <div className="text-field-container">
+                <input
+                  className="text-field text-field-active"
+                  type="text"
+                  value={company}
+                  onChange={(e) => {
+                                setCompany(e.target.value);
+                                checkForValue(e);
+                              }
+                            }
+                />
+                <label className="text-field-label">company</label>
+                <div className="text-field-mask profile-mask-company"></div>
+              </div>
+
+              <div className="text-field-container">
+                <input
+                  className="text-field text-field-active"
+                  type="text"
+                  value={phone}
+                  onChange={(e) => {
+                                setPhone(e.target.value);
+                                checkForValue(e);
+                              }
+                            }
+                />
+                <label className="text-field-label">phone #</label>
+                <div className="text-field-mask profile-mask-phone"></div>
+              </div>
+
+              <div className="text-field-container">
+                <input
+                  className="text-field text-field-active"
+                  type="text"
+                  value={email}
+                  onChange={(e) => {
+                                setEmail(e.target.value);
+                                checkForValue(e);
+                              }
+                            }
+                />
+                <label className="text-field-label">email</label>
+                <div className="text-field-mask profile-mask-email"></div>
+              </div>
+
+              <select 
+                className="modal-input"  
+                value={industry} 
+                onChange={handleUserIndustry}
+              > 
+                {industryData.map(item => 
+                  <option key={item.id}>{item.industry}</option>
+                )}
+              </select>
+              <button className="secondary-btn profile-password-font-size" onClick={openPassModal}>Change Password?</button>
+              <div className="modal-btn-container">
+                <button className="normal-btn" onClick={saveChanges}>
+                  Save
+                </button>
+                <button className="normal-btn" onClick={closeModal}>
+                  Cancel
+                </button>
               </div>
             </div>
-          )}
-          <button className="normal-btn" onClick={openModal}>Edit Profile</button>
+          </Modal>
+
+          <Modal
+            visible={passwordModal}
+            width="400"
+            height="300"
+            effect="fadeInUp"
+            onClickAway={closePassModal}
+          >
+            <h1 className="main-heading admin-user-heading">Change Password</h1>
+            {wrongPassword ? <p>Oops, your new password does not match.</p> : null}
+            {passwordStatusData === 401 ? <p>Oops, your current password is incorrect, please try again</p> : null}
+              <div>
+                <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+                <label>Current Password</label>
+              </div>
+
+              <div>
+                <input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                <label>New Password</label>
+              </div>
+
+              <div>
+                <input value={checkPassword} onChange={(e) => setCheckPassword(e.target.value)} />
+                <label>Confirm New Password</label>
+              </div>
+              <div className="modal-btn-container">
+                <button className="normal-btn" onClick={changePassword}>
+                  Confirm
+                </button>
+                <button className="normal-btn" onClick={closePassModal}>
+                  Cancel
+                </button>
+              </div>
+          </Modal>
+          <QuestionCheckboxes />
         </div>
-
-        <Modal
-          visible={modal}
-          width="400"
-          height="450"
-          effect="fadeInUp"
-          onClickAway={closeModal}
-        >
-          <div className="modal-container">
-            <button className="close-window-button" onClick={closeModal}>x</button>
-            <h1 className="main-heading modal-heading">Edit Info</h1>
-
-            <div className="text-field-container">
-              <input
-                className="text-field text-field-active"
-                type="text"
-                value={name}
-                onChange={(e) => {
-                              setName(e.target.value);
-                              checkForValue(e);
-                            }
-                          }
-              />
-              <label className="text-field-label">name</label>
-              <div className="text-field-mask profile-mask-name"></div>
-            </div>
-
-            <div className="text-field-container">
-              <input
-                className="text-field text-field-active"
-                type="text"
-                value={company}
-                onChange={(e) => {
-                              setCompany(e.target.value);
-                              checkForValue(e);
-                            }
-                          }
-              />
-              <label className="text-field-label">company</label>
-              <div className="text-field-mask profile-mask-company"></div>
-            </div>
-
-            <div className="text-field-container">
-              <input
-                className="text-field text-field-active"
-                type="text"
-                value={phone}
-                onChange={(e) => {
-                              setPhone(e.target.value);
-                              checkForValue(e);
-                            }
-                          }
-              />
-              <label className="text-field-label">phone #</label>
-              <div className="text-field-mask profile-mask-phone"></div>
-            </div>
-
-            <div className="text-field-container">
-              <input
-                className="text-field text-field-active"
-                type="text"
-                value={email}
-                onChange={(e) => {
-                              setEmail(e.target.value);
-                              checkForValue(e);
-                            }
-                          }
-              />
-              <label className="text-field-label">email</label>
-              <div className="text-field-mask profile-mask-email"></div>
-            </div>
-
-            <select 
-              className="modal-input"  
-              value={industry} 
-              onChange={handleUserIndustry}
-            > 
-              {industryData.map(item => 
-                <option key={item.id}>{item.industry}</option>
-              )}
-            </select>
-            <button className="secondary-btn profile-password-font-size" onClick={openPassModal}>Change Password?</button>
-            <div className="modal-btn-container">
-              <button className="normal-btn" onClick={saveChanges}>
-                Save
-              </button>
-              <button className="normal-btn" onClick={closeModal}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </Modal>
-
-        <Modal
-          visible={passwordModal}
-          width="400"
-          height="300"
-          effect="fadeInUp"
-          onClickAway={closePassModal}
-        >
-          <h1 className="main-heading admin-user-heading">Change Password</h1>
-          {wrongPassword ? <p>Oops, your new password does not match.</p> : null}
-          {passwordStatusData === 401 ? <p>Oops, your current password is incorrect, please try again</p> : null}
-            <div>
-              <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
-              <label>Current Password</label>
-            </div>
-
-            <div>
-              <input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-              <label>New Password</label>
-            </div>
-
-            <div>
-              <input value={checkPassword} onChange={(e) => setCheckPassword(e.target.value)} />
-              <label>Confirm New Password</label>
-            </div>
-            <div className="modal-btn-container">
-              <button className="normal-btn" onClick={changePassword}>
-                Confirm
-              </button>
-              <button className="normal-btn" onClick={closePassModal}>
-                Cancel
-              </button>
-            </div>
-        </Modal>
-        <QuestionCheckboxes />
       </div>
     </center>
   );

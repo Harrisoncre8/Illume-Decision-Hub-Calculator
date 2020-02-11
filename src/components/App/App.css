@@ -191,9 +191,9 @@ p, span, div, h1, h2, h3, label, button {
 }
 
 .main-container {
-  background-color: white;
+  background-color: #f0aa42;
   box-shadow: 5px 5px 10px #272727;
-  padding: 20px;
+  padding: 50px;
   border-radius: 25px;
   height: 100%;
   width: 80%;
@@ -474,4 +474,12 @@ p, span, div, h1, h2, h3, label, button {
   top: 5px;
   left: 10px;
   z-index: -1;
+}
+
+.top-card-container {
+  background-color: white;
+  padding: 20px 11px;
+  margin: 30px 40px;
+  box-shadow: 5px 5px 10px #272727;
+  border-radius: 25px;
 }

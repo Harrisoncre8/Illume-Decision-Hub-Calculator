@@ -212,50 +212,52 @@ export default function PriceSetting() {
     <center>
       <Nav />
       <div className="main-container">
-        <h1 className="main-heading">Price Setting</h1>
-        <div className="inputs">
-          <form>
-            <select onChange={(event) => setMargin(event.target.value)} value={margin}>
-              <option disabled>Select Industry</option>
-              {industryData.map(industry => {
-                return (
-                  <option key={industry.id} value={industry.margin}>{industry.industry}</option>
-                );
-              })}
-            </select>
-          </form>
-          {stepper(9)}
-        </div>
-        <div className="data-result">
-          <h3 className="data-result-heading">Result</h3>
+        <div className="top-card-container">
+          <h1 className="main-heading">Price Setting</h1>
+          <div className="inputs">
+            <form>
+              <select onChange={(event) => setMargin(event.target.value)} value={margin}>
+                <option disabled>Select Industry</option>
+                {industryData.map(industry => {
+                  return (
+                    <option key={industry.id} value={industry.margin}>{industry.industry}</option>
+                  );
+                })}
+              </select>
+            </form>
+            {stepper(9)}
+          </div>
+          <div className="data-result">
+            <h3 className="data-result-heading">Result</h3>
 
-          <br />
-          <p>Your Margin: ${userMargin} per unit</p>
-          <br />
-          <p>Industry Norm: ${industryNorm} per unit</p>
-          <br />
-          <p>
-            You are selling for
-            {
-              productMargin>userMargin? 
-                ` $${productMargin-userMargin.toFixed(2)} less than `:
-                productMargin === userMargin?
-                  ` the same price as `:
-                  ` $${userMargin-productMargin.toFixed(2)} more than `
-            }
-            industry norms.
-          </p>
-          <br />
+            <br />
+            <p>Your Margin: ${userMargin} per unit</p>
+            <br />
+            <p>Industry Norm: ${industryNorm} per unit</p>
+            <br />
+            <p>
+              You are selling for
+              {
+                productMargin>userMargin? 
+                  ` $${productMargin-userMargin.toFixed(2)} less than `:
+                  productMargin === userMargin?
+                    ` the same price as `:
+                    ` $${userMargin-productMargin.toFixed(2)} more than `
+              }
+              industry norms.
+            </p>
+            <br />
 
-          <p>
-            You will need to sell
-            {' ' + difference + ' '}
-            {
-              productMargin >= userMargin ?
-                ' more ' :
-                ' less '
-            }
-            units to make the same revenue as the industry norm price would.</p>
+            <p>
+              You will need to sell
+              {' ' + difference + ' '}
+              {
+                productMargin >= userMargin ?
+                  ' more ' :
+                  ' less '
+              }
+              units to make the same revenue as the industry norm price would.</p>
+          </div>
         </div>
       </div>
     </center>
