@@ -138,22 +138,22 @@ export default function User() {
               <div key={user.id}>
                 <input 
                   value={name} 
-                  placeholder={user.name}
+                  placeholder="username"
                   onChange={(e) => setName(e.target.value)}
                 />
                 <input 
                   value={company} 
-                  placeholder={user.business_name} 
+                  placeholder="company"
                   onChange={(e) => setCompany(e.target.value)}
                 />
                 <input 
                   value={phone} 
-                  placeholder={user.phone_number}
+                  placeholder="phone #"
                   onChange={(e) => setPhone(e.target.value)}
                 />
                 <input 
                   value={email} 
-                  placeholder={user.email}
+                  placeholder="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
