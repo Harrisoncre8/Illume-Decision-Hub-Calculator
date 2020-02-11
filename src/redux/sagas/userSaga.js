@@ -25,7 +25,7 @@ function* fetchUser() {
   }
 }
 
-// worker Saga: will be fired on "GET_USER_INFO" actions
+// worker Saga: will be fired on "SET_USER_INFO" actions
 function* getUserInfo(action) {
   let id = action.payload;
   try {
@@ -36,7 +36,16 @@ function* getUserInfo(action) {
   }
 }
 
-// worker Saga: will be fired on "PUT_USER_INFO" actions
+// worker Saga: will be fired on "TOGGLE_CALC" actions
+function* postCalcInfo(action) {
+  try {
+    yield axios.post(`/api/user/calc-info`, action.payload);
+  } catch (error) {
+    console.log('User toggle calculator request failed', error);
+  }
+}
+
+// worker Saga: will be fired on "GET_USER_INFO" actions
 function* putUserInfo(action) {
   try {
     yield axios.put(`/api/user/info`, action.payload);
@@ -46,12 +55,11 @@ function* putUserInfo(action) {
   }
 }
 
-// worker Saga: will be fired on "NEW_PASSWORD" actions
+// worker Saga: will be fired on "MATCH_PASSWORD" actions
 function* putNewPassword(action) {
   try {
     const response = yield axios.put(`/api/user/new-password`, action.payload);
     yield put({type: 'MATCH_PASSWORD', payload: response.status});
-    // yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
   } catch (error) {
     console.log('User put new password request failed', error);
     yield put({type: 'MATCH_PASSWORD', payload: error.response.status});
@@ -63,6 +71,7 @@ function* userSaga() {
   yield takeLatest('GET_USER_INFO', getUserInfo);
   yield takeLatest('PUT_USER_INFO', putUserInfo);
   yield takeLatest('NEW_PASSWORD', putNewPassword);
+  yield takeLatest('TOGGLE_CALC', postCalcInfo);
 }
 
 export default userSaga;
