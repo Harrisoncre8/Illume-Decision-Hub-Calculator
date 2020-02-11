@@ -5,7 +5,8 @@ import './User.css'
 import Nav from '../Nav/Nav';
 import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
 
-export default function User(){
+export default function User() {
+
   // getting data from redux
   let dispatch = useDispatch();
   let industryData = useSelector(state => state.industry);
@@ -58,10 +59,11 @@ export default function User(){
     setEmail(userData[0].email);
     setIndustryID(userData[0].industry_id);
   }
+
   // change state to close user info modal
   const closeModal = () => {
-      setModal(false);
-    }
+    setModal(false);
+  }
 
   // save user info changes and sends to DB
   const saveChanges = () => {
@@ -74,6 +76,7 @@ export default function User(){
   const openPassModal = () => {
     setPasswordModal(true);
   }
+
   // checks and saves the user's new password
   // and closes modal
   const changePassword = () => {
@@ -84,28 +87,29 @@ export default function User(){
         setPasswordModal(true);
       } 
     }
-    else if (newPassword !== checkPassword){
+    else if(newPassword !== checkPassword){
       setWrongPassword(true);
     }
   }
+
   // close modal to change password
   const closePassModal = () => {
     setPasswordModal(false);
   }
 
   // handle change for industry drop down
-  const handleUserIndustry = (event) => {
-    setIndustry(event.target.value);
-    setIndustryID(industryData[industryData.findIndex(el => el.industry === event.target.value)] &&
-    industryData[industryData.findIndex(el => el.industry === event.target.value)].id);  
+  const handleUserIndustry = e => {
+    setIndustry(e.target.value);
+    setIndustryID(industryData[industryData.findIndex(el => el.industry === e.target.value)] &&
+    industryData[industryData.findIndex(el => el.industry === e.target.value)].id);  
   }
 
   return(
     <center>
       <Nav />
       <div className='main-container'>
-        {userData.map((user, i) => 
-          <ul className='user-info' key={i}>
+        {userData.map(user => 
+          <ul className='user-info' key={user.id}>
             <h1 className='user-spacing'>Welcome back, {user.name}</h1>
             <h2 className='user-spacing'>Profile Information</h2>
             <li>Name: {user.name}</li>
@@ -115,39 +119,66 @@ export default function User(){
             <li className='user-spacing'>Industry: {user.industry}</li>
           </ul>
         )}
-        <input type="button" value="Edit Profile" onClick={() => openModal()} />
+        <button className="normal-btn" onClick={openModal}>Edit Profile</button>
         <Modal
           visible={modal}
           width="400"
           height="300"
           effect="fadeInUp"
-          onClickAway={() => closeModal()}
+          onClickAway={closeModal}
         >
           <h1 className="main-heading admin-user-heading">Edit User Information</h1>
-            {userData.map((user, i) => 
-              <div key={i}>
-                <input value={name} placeholder={user.name}
-                 onChange={(event) => setName(event.target.value)}></input>
-                <input value={company} placeholder={user.business_name} 
-                 onChange={(event) => setCompany(event.target.value)}></input>
-                <input value={phone} placeholder={user.phone_number}
-                 onChange={(event) => setPhone(event.target.value)}></input>
-                <input value={email} placeholder={user.email}
-                 onChange={(event) => setEmail(event.target.value)}></input>
+            {userData.map(user => 
+              <div key={user.id}>
+                <input 
+                  value={name} 
+                  placeholder={user.name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input 
+                  value={company} 
+                  placeholder={user.business_name} 
+                  onChange={(e) => setCompany(e.target.value)}
+                />
+                <input 
+                  value={phone} 
+                  placeholder={user.phone_number}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+                <input 
+                  value={email} 
+                  placeholder={user.email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
             )}
-            <select className="modal-input"  value={industry} 
-             onChange={(event) => handleUserIndustry(event)}>
-              {industryData.map((item, i) => 
-                    <option>{item.industry}</option>
+            <select 
+              className="modal-input"  
+              value={industry} 
+              onChange={handleUserIndustry}
+            > 
+              {industryData.map(item => 
+                <option key={item.id}>{item.industry}</option>
               )}
             </select>
-            <input type="button" value="Change Password?" onClick={openPassModal}></input>
+
+
+
+
+            {/* MAKE SECONDARY BUTTON */}
+            <button className="normal-btn" onClick={openPassModal}>Change Password?</button>
+
+
+
+
+
             <div className="modal-btn-container">
-              <button className="normal-btn" href="javascript:void(0);" 
-                onClick={saveChanges}>Save</button>
-              <button className="normal-btn" href="javascript:void(0);" 
-              onClick={closeModal}>Cancel</button>
+              <button className="normal-btn" onClick={saveChanges}>
+                Save
+              </button>
+              <button className="normal-btn" onClick={closeModal}>
+                Cancel
+              </button>
             </div>
         </Modal>
 
@@ -159,34 +190,32 @@ export default function User(){
           onClickAway={closePassModal}
         >
           <h1 className="main-heading admin-user-heading">Change Password</h1>
-          {wrongPassword ? <p>Opps, your new password does not match.</p> : null}
-          {passwordStatusData === 401 ? 
-          <p>Opps, your current password is incorrect, please try again</p>: null}
+          {wrongPassword ? <p>Oops, your new password does not match.</p> : null}
+          {passwordStatusData === 401 ? <p>Oops, your current password is incorrect, please try again</p> : null}
             <div>
-              <input value={oldPassword} onChange={(event) => setOldPassword(event.target.value)} />
-              <label >Current Password</label>
-              <div></div>
+              <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+              <label>Current Password</label>
             </div>
 
             <div>
-              <input value={newPassword} onChange={(event) => setNewPassword(event.target.value)} />
-              <label >New Password</label>
-              <div></div>
+              <input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+              <label>New Password</label>
             </div>
 
             <div>
-              <input value={checkPassword} onChange={(event) => setCheckPassword(event.target.value)} />
-              <label >Confirm New Password</label>
-              <div></div>
+              <input value={checkPassword} onChange={(e) => setCheckPassword(e.target.value)} />
+              <label>Confirm New Password</label>
             </div>
             <div className="modal-btn-container">
-              <button className="normal-btn" href="javascript:void(0);" 
-              onClick={changePassword}>Confirm</button>
-              <button className="normal-btn" href="javascript:void(0);" 
-              onClick={closePassModal}>Cancel</button>
+              <button className="normal-btn" onClick={changePassword}>
+                Confirm
+              </button>
+              <button className="normal-btn" onClick={closePassModal}>
+                Cancel
+              </button>
             </div>
         </Modal>
-        <QuestionCheckboxes/>
+        <QuestionCheckboxes />
       </div>
     </center>
   );
