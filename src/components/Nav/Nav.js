@@ -7,7 +7,7 @@ export default function Nav() {
   // Set react router hook
   const userData = useSelector(state => state.user.admin);
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch());
   const questionData = useSelector(state=>state.question.calculator_id);
   const [breakEven, setBreakEven] = useState('circle-btn');
   const [home, setHome] = useState('circle-btn');
