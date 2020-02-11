@@ -99,6 +99,7 @@ class Login extends Component{
               type={this.state.showPassword} 
               onChange={(event)=>this.handleChange(event, 'password')}
             />
+
             <label className="text-field-label">password</label>
             <div className="text-field-mask login-password-mask"></div>
             <span>

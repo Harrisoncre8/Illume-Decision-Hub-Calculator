@@ -17,7 +17,6 @@ export default function Nav() {
 
   // Run on component mount
   useEffect(()=>{
-    console.log('----------------------------->', userData);
     if(history.location.pathname === '/'){
       setHome('circle-btn-active');
       setBreakEven('circle-btn');
@@ -70,7 +69,6 @@ export default function Nav() {
       history.push('/new-user');
     }
   }
-
 
   // Push history to user profile
   const pushHistoryToProfile = () => history.push('/user');
