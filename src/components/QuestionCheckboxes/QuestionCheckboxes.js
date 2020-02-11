@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import './QuestionCheckboxes.css';
 
 const QuestionCheckboxes = () => {
   const dispatch = useCallback(useDispatch(), []);
@@ -44,7 +45,7 @@ const QuestionCheckboxes = () => {
 
   return(
     <center style={{backgroundColor: 'white'}}>
-      <h1>Please select costs that are relevant to you</h1>
+      <h1>Which costs that are relevant to you?</h1>
       <form onSubmit={(e)=>submit(e)}>
         {Array.isArray(questions)? 
           questions.map(question=>{
