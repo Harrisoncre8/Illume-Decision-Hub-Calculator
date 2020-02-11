@@ -81,6 +81,12 @@ CREATE TABLE "user_checks" (
   "question_id" INT,
   PRIMARY KEY ("user_id", "question_id")
 );
+
+CREATE TABLE "toggle_calculator" (
+  "user_id" INT,
+  "calculator_id" INT,
+  PRIMARY KEY ("user_id", "calculator_id")
+);
 --#endregion
 
 --#region Insert into questions
