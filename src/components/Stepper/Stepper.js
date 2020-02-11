@@ -29,6 +29,14 @@ export default function Stepper() {
     }
   }, [questionData.split, inputData, questionData.question_id, splitData]);
 
+  useEffect(()=>{
+    if(questionData && questionData.skipToResults){
+      const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
+      delete questionData.skipToResults;
+      dispatch({ type: `SET_QUESTION`, payload: questionData })
+      history.push(`/${url}`);
+    }
+  }, [questionData, history, dispatch])
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
