@@ -37,12 +37,13 @@
 }
 
 .profile-modal-btns {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-right: 40px;
 }
 
 .profile-password-font-size {
   font-size: 0.7em;
+  margin-top: 20px;
   display: block;
 }
 
