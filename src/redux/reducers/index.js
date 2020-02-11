@@ -25,11 +25,11 @@ const rootReducer = combineReducers({
   adminSubquestion: createReducer('SET_ADMIN_SUB_QUESTION'), // store calculator sub-questions for admin to edit
   industry: createReducer('SET_INDUSTRY'), // stores industry information
   split: createReducer('SET_SPLIT'), // stores split from the database
-  user: createReducer('SET_USER', {}),
+  user: createReducer('SET_USER', {}), // stores user info - basic table (not contact info table)
   passwordStatus: createReducer('MATCH_PASSWORD'), // contains password change status
   previousQuestion, // stores id of previous question for stepper - has a second clear in reducer listening for ALL
   input, // stores values from inputs from stepper - has a second clear in reducer listening for ALL
-  userInfo: createReducer('SET_USER_INFO'), // stores necessary information for user edit page
+  userInfo: createReducer('SET_USER_INFO'), // stores necessary information for user edit page - this is contact info
   userCheckboxes: createReducer('SET_USER_CHECKBOXES'), // holds the users checkboxes
 });
 
