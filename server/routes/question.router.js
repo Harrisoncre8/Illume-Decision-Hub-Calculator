@@ -39,19 +39,24 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
       const results = await client.query(sqlQuery,[startId.rows[0].start_id, req.user.id]);
       res.send(results.rows);
     } else {
-      let count = 0
       let results = await client.query(sqlQuery,[Number(req.query.id), req.user.id]);
-      console.log(results.rows, [Number(req.query.id), req.user.id], count ++)
-      console.log('wtf');
       let next_id = results.rows[0].next_id;
       let user_id = results.rows[0].user_id;
-      while(user_id === null){
+      while(user_id === null && next_id != null){
         results = await client.query(sqlQuery,[next_id, req.user.id]);
-        console.log(results.rows, [next_id, req.user.id], count ++)
         next_id = results.rows[0].next_id;
         user_id = results.rows[0].user_id;
       }
-      res.send(results.rows);
+      if(user_id === null && next_id === null){
+        res.send([{
+          calculator: results.rows[0].calculator,
+          calculator_id: results.rows[0].calculator_id,
+          next_id: null,
+          skipToResults: true
+        }]);
+      } else {
+        res.send(results.rows);
+      }
     }
   } catch (error) {
     console.log(error);
