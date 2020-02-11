@@ -108,18 +108,24 @@ export default function User() {
     <center>
       <Nav />
       <div className='main-container'>
-        {userData.map(user => 
-          <ul className='user-info' key={user.id}>
-            <h1 className='user-spacing'>Welcome back, {user.name}</h1>
-            <h2 className='user-spacing'>Profile Information</h2>
-            <li>Name: {user.name}</li>
-            <li>Company: {user.business_name}</li>
-            <li>Phone: {user.phone_number}</li>
-            <li>Email: {user.email}</li>
-            <li className='user-spacing'>Industry: {user.industry}</li>
-          </ul>
-        )}
-        <button className="normal-btn" onClick={openModal}>Edit Profile</button>
+        <div className="profile-personal-details-container">
+          {userData.map(user => 
+            <>
+              <h1 className='user-spacing'>Welcome back, {user.name}!</h1>
+              <h2 className='user-spacing'>Profile Information</h2>
+              <div className="profile-list-container">
+                <ul className='user-info' key={user.id}>
+                  <li className="profile-text">Name: {user.name}</li>
+                  <li className="profile-text">Company: {user.business_name}</li>
+                  <li className="profile-text">Phone: {user.phone_number}</li>
+                  <li className="profile-text">Email: {user.email}</li>
+                  <li className="profile-text user-spacing">Industry: {user.industry}</li>
+                </ul>
+              </div>
+            </>
+          )}
+          <button className="normal-btn" onClick={openModal}>Edit Profile</button>
+        </div>
         <Modal
           visible={modal}
           width="400"
