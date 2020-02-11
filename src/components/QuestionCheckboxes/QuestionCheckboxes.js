@@ -19,6 +19,14 @@ const QuestionCheckboxes = () => {
         holder[el.question_id] = true;
       });
       setChecked(holder)
+    } else {
+      const state = questions.reduce((acum,arr)=>{
+        if(arr.split){
+          acum[arr.id] = true;
+        }
+        return acum;
+      },{})
+      setChecked(state)
     }
   },[userCheckboxes])
 
