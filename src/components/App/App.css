@@ -336,6 +336,31 @@ p, span, div, h1, h2, h3, label, button {
   transition: 0.3s;
 }
 
+.secondary-btn {
+  font-size: 0.9em;
+  text-transform: uppercase;
+  background-color: #bdbdbd;
+  border-radius: 4px;
+  border: 2px outset black;
+  box-shadow: 0 1px 3px grey;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.secondary-btn:hover {
+  box-shadow: 1px 5px 6px grey;
+  background: #bdbdbd radial-gradient(circle, transparent 1%, #868686 1%) center/15000%;
+  transition: background 0s, box-shadow 0.3s;
+}
+
+.secondary-btn:active {
+  box-shadow: 0 8px 10px grey;
+  background-color: #868686;
+  background-size: 100%;
+  transition: 0.3s;
+}
+
 .text-field:hover {
   border: 1px solid #f0aa42;
 }
