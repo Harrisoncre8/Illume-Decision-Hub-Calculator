@@ -148,88 +148,80 @@ export default function User() {
           effect="fadeInUp"
           onClickAway={closeModal}
         >
-          <h1 className="main-heading admin-user-heading">Edit User Information</h1>
+          <div className="modal-container">
+            <button className="close-window-button" onClick={closeModal}>x</button>
+            <h1 className="main-heading modal-heading">Edit Info</h1>
 
-          <div className="text-field-container">
-            <input
-              className="text-field text-field-active"
-              type="text"
-              value={name}
-              onChange={(e) => {
-                            setName(e.target.value);
-                            checkForValue(e);
+            <div className="text-field-container">
+              <input
+                className="text-field text-field-active"
+                type="text"
+                value={name}
+                onChange={(e) => {
+                              setName(e.target.value);
+                              checkForValue(e);
+                            }
                           }
-                        }
-            />
-            <label className="text-field-label">name</label>
-            <div className="text-field-mask profile-mask-name"></div>
-          </div>
+              />
+              <label className="text-field-label">name</label>
+              <div className="text-field-mask profile-mask-name"></div>
+            </div>
 
-          <div className="text-field-container">
-            <input
-              className="text-field text-field-active"
-              type="text"
-              value={company}
-              onChange={(e) => {
-                            setCompany(e.target.value);
-                            checkForValue(e);
+            <div className="text-field-container">
+              <input
+                className="text-field text-field-active"
+                type="text"
+                value={company}
+                onChange={(e) => {
+                              setCompany(e.target.value);
+                              checkForValue(e);
+                            }
                           }
-                        }
-            />
-            <label className="text-field-label">company</label>
-            <div className="text-field-mask profile-mask-company"></div>
-          </div>
+              />
+              <label className="text-field-label">company</label>
+              <div className="text-field-mask profile-mask-company"></div>
+            </div>
 
-          <div className="text-field-container">
-            <input
-              className="text-field text-field-active"
-              type="text"
-              value={phone}
-              onChange={(e) => {
-                            setPhone(e.target.value);
-                            checkForValue(e);
+            <div className="text-field-container">
+              <input
+                className="text-field text-field-active"
+                type="text"
+                value={phone}
+                onChange={(e) => {
+                              setPhone(e.target.value);
+                              checkForValue(e);
+                            }
                           }
-                        }
-            />
-            <label className="text-field-label">phone #</label>
-            <div className="text-field-mask profile-mask-phone"></div>
-          </div>
+              />
+              <label className="text-field-label">phone #</label>
+              <div className="text-field-mask profile-mask-phone"></div>
+            </div>
 
-          <div className="text-field-container">
-            <input
-              className="text-field text-field-active"
-              type="text"
-              value={email}
-              onChange={(e) => {
-                            setEmail(e.target.value);
-                            checkForValue(e);
+            <div className="text-field-container">
+              <input
+                className="text-field text-field-active"
+                type="text"
+                value={email}
+                onChange={(e) => {
+                              setEmail(e.target.value);
+                              checkForValue(e);
+                            }
                           }
-                        }
-            />
-            <label className="text-field-label">email</label>
-            <div className="text-field-mask profile-mask-email"></div>
-          </div>
+              />
+              <label className="text-field-label">email</label>
+              <div className="text-field-mask profile-mask-email"></div>
+            </div>
 
-          <select 
-            className="modal-input"  
-            value={industry} 
-            onChange={handleUserIndustry}
-          > 
-            {industryData.map(item => 
-              <option key={item.id}>{item.industry}</option>
-            )}
-          </select>
-
-
-
-
-            {/* MAKE SECONDARY BUTTON */}
+            <select 
+              className="modal-input"  
+              value={industry} 
+              onChange={handleUserIndustry}
+            > 
+              {industryData.map(item => 
+                <option key={item.id}>{item.industry}</option>
+              )}
+            </select>
             <button className="secondary-btn profile-password-font-size" onClick={openPassModal}>Change Password?</button>
-
-
-
-
-
             <div className="modal-btn-container">
               <button className="normal-btn" onClick={saveChanges}>
                 Save
@@ -238,6 +230,7 @@ export default function User() {
                 Cancel
               </button>
             </div>
+          </div>
         </Modal>
 
         <Modal
