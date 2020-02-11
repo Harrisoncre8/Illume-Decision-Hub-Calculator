@@ -54,15 +54,19 @@ const QuestionCheckboxes = () => {
                 return(
                   <div key={question.id}>
                     <div>
-                      <input type='checkbox' checked={checked[question.id]} onChange={()=>toggleChecked(question.id)} />
-                      <span className="questions-checkbox-text">{question.header}</span>
+                      <label className="checkbox-container">{question.header}
+                        <input type='checkbox' checked={checked[question.id]} onChange={()=>toggleChecked(question.id)} />
+                        <span className="checkbox-check"></span>
+                      </label>
                     </div>
                     {questions.map(subQuestion=>{
                       if(subQuestion.sub_questions===question.id){
                         return(
                           <div key={subQuestion.id}>
-                            <input type='checkbox' checked={checked[subQuestion.id]} onChange={()=>toggleChecked(subQuestion.id)} />
-                            <span className="questions-checkbox-text">{subQuestion.header}</span>
+                            <label className="checkbox-container">{subQuestion.header}
+                              <input type='checkbox' checked={checked[subQuestion.id]} onChange={()=>toggleChecked(subQuestion.id)} />
+                              <span className="checkbox-check"></span>
+                            </label>
                           </div>
                         );
                       } 
