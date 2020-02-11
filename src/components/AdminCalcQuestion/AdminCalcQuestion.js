@@ -74,7 +74,7 @@ export default function AdminCalcQuestion(props) {
       </form>
       <hr />
       {props.id === 3 || props.id === 4 ?
-        <button className="admin-calc-show-hide-btn" onClick={()=>setShowSub(!showSub)}>
+        <button className="secondary-btn admin-calc-show-hide-btn" onClick={()=>setShowSub(!showSub)}>
           {showSub ?
             <p>Hide Sub-Questions</p>
             :
