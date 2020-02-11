@@ -145,7 +145,7 @@ export default function User() {
           <Modal
             visible={modal}
             width="400"
-            height="450"
+            height="480"
             effect="fadeInUp"
             onClickAway={closeModal}
           >
@@ -224,7 +224,7 @@ export default function User() {
               </select>
               <button className="secondary-btn profile-password-font-size" onClick={openPassModal}>Change Password?</button>
               <div className="modal-btn-container">
-                <button className="normal-btn" onClick={saveChanges}>
+                <button className="normal-btn profile-modal-btns" onClick={saveChanges}>
                   Save
                 </button>
                 <button className="normal-btn" onClick={closeModal}>

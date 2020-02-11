@@ -24,6 +24,11 @@
   width: 55px;
 }
 
+.profile-modal-btns {
+  margin-top: 30px;
+  margin-right: 40px;
+}
+
 .profile-password-font-size {
   font-size: 0.7em;
   display: block;
