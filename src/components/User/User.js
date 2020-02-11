@@ -238,13 +238,15 @@ export default function User() {
           <Modal
             visible={passwordModal}
             width="400"
-            height="300"
+            height="390"
             effect="fadeInUp"
             onClickAway={closePassModal}
           >
-            <h1 className="main-heading admin-user-heading">Change Password</h1>
-            {wrongPassword ? <p>Oops, your new password does not match.</p> : null}
-            {passwordStatusData === 401 ? <p>Oops, your current password is incorrect, please try again</p> : null}
+            <div className="modal-container">
+              <button className="close-window-button" onClick={closePassModal}>x</button>
+              <h1 className="main-heading modal-heading">Change Password</h1>
+              {wrongPassword ? <p>Oops, your new password does not match.</p> : null}
+              {passwordStatusData === 401 ? <p>Oops, your current password is incorrect, please try again</p> : null}
 
               <div className="text-field-container">
                 <input
@@ -293,13 +295,14 @@ export default function User() {
 
 
               <div className="modal-btn-container">
-                <button className="normal-btn" onClick={changePassword}>
+                <button className="normal-btn profile-modal-btns" onClick={changePassword}>
                   Confirm
                 </button>
                 <button className="normal-btn" onClick={closePassModal}>
                   Cancel
                 </button>
               </div>
+            </div>
           </Modal>
           <QuestionCheckboxes />
         </div>
