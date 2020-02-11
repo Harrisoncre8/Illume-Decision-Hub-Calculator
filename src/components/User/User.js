@@ -29,6 +29,7 @@ export default function User() {
   // setting state to be deployed on password change
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [showPassword, setShowPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
   const [wrongPassword, setWrongPassword] = useState(null);
 
@@ -94,6 +95,9 @@ export default function User() {
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
+
+  // Show or hide password
+  const togglePasswordView = () => showPassword === 'password' ? setShowPassword('text') : setShowPassword('password');
 
   // close modal to change password
   const closePassModal = () => {
@@ -248,10 +252,10 @@ export default function User() {
               {wrongPassword ? <p>Oops, your new password does not match.</p> : null}
               {passwordStatusData === 401 ? <p>Oops, your current password is incorrect, please try again</p> : null}
 
-              <div className="text-field-container">
+              <div className="text-field-container login-text-field-container">
                 <input
                   className="text-field"
-                  type="text"
+                  type={showPassword}
                   value={oldPassword}
                   onChange={(e) => {
                                 setOldPassword(e.target.value);
@@ -260,13 +264,19 @@ export default function User() {
                             }
                 />
                 <label className="text-field-label">current password</label>
+                <div className="text-field-mask login-password-mask"></div>
+                  <span>
+                    <input type="checkbox" onChange={togglePasswordView} />
+                      <label> Show Password</label>
+                  </span>
+                
                 <div className="text-field-mask profile-mask-old-password"></div>
               </div>
 
-              <div className="text-field-container">
+              <div className="text-field-container ">
                 <input
                   className="text-field"
-                  type="text"
+                  type={showPassword}
                   value={newPassword}
                   onChange={(e) => {
                                 setNewPassword(e.target.value);
@@ -275,6 +285,12 @@ export default function User() {
                             }
                 />
                 <label className="text-field-label">new password</label>
+                <div className="text-field-mask login-password-mask"></div>
+                  <span>
+                    <input type="checkbox" onChange={togglePasswordView} />
+                      <label> Show Password</label>
+                  </span>
+              
                 <div className="text-field-mask profile-mask-new-password"></div>
               </div>
 

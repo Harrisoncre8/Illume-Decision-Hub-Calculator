@@ -102,11 +102,11 @@ class Login extends Component{
 
             <label className="text-field-label">password</label>
             <div className="text-field-mask login-password-mask"></div>
-            <span>
-              <input type="checkbox" onChange={this.togglePasswordView} />
-                <label> Show Password</label>
-            </span>
-          </div>
+              <span>
+                <input type="checkbox" onChange={this.togglePasswordView} />
+                  <label> Show Password</label>
+              </span>
+            </div>
 
           <button className="normal-btn login-login-btn" type="submit" onClick={this.login}>Log In</button>
           </form>
