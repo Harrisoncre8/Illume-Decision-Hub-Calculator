@@ -4,6 +4,8 @@ const inputReducer = (state = {}, action) => {
       return {...state, [action.payload.key]: action.payload.value};
     case 'CLEAR_INPUTS':
       return {};
+    case 'CLEAR_ALL':
+      return {};
     default:
       return state;
   }
