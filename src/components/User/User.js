@@ -222,6 +222,7 @@ export default function User() {
                   <option key={item.id}>{item.industry}</option>
                 )}
               </select>
+
               <button className="secondary-btn profile-password-font-size" onClick={openPassModal}>Change Password?</button>
               <div className="modal-btn-container">
                 <button className="normal-btn profile-modal-btns" onClick={saveChanges}>
@@ -244,20 +245,53 @@ export default function User() {
             <h1 className="main-heading admin-user-heading">Change Password</h1>
             {wrongPassword ? <p>Oops, your new password does not match.</p> : null}
             {passwordStatusData === 401 ? <p>Oops, your current password is incorrect, please try again</p> : null}
-              <div>
-                <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
-                <label>Current Password</label>
+
+              <div className="text-field-container">
+                <input
+                  className="text-field"
+                  type="text"
+                  value={oldPassword}
+                  onChange={(e) => {
+                                setOldPassword(e.target.value);
+                                checkForValue(e);
+                              }
+                            }
+                />
+                <label className="text-field-label">current password</label>
+                <div className="text-field-mask profile-mask-old-password"></div>
               </div>
 
-              <div>
-                <input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-                <label>New Password</label>
+              <div className="text-field-container">
+                <input
+                  className="text-field"
+                  type="text"
+                  value={newPassword}
+                  onChange={(e) => {
+                                setNewPassword(e.target.value);
+                                checkForValue(e);
+                              }
+                            }
+                />
+                <label className="text-field-label">new password</label>
+                <div className="text-field-mask profile-mask-new-password"></div>
               </div>
 
-              <div>
-                <input value={checkPassword} onChange={(e) => setCheckPassword(e.target.value)} />
-                <label>Confirm New Password</label>
+              <div className="text-field-container">
+                <input
+                  className="text-field"
+                  type="text"
+                  value={checkPassword}
+                  onChange={(e) => {
+                                setCheckPassword(e.target.value);
+                                checkForValue(e);
+                              }
+                            }
+                />
+                <label className="text-field-label">confirm</label>
+                <div className="text-field-mask profile-mask-confirm-new-password"></div>
               </div>
+
+
               <div className="modal-btn-container">
                 <button className="normal-btn" onClick={changePassword}>
                   Confirm

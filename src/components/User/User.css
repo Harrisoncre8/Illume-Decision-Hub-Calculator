@@ -12,12 +12,24 @@
   width: 58px;
 }
 
+.profile-mask-confirm-new-password {
+  width: 50px;
+}
+
 .profile-mask-email {
   width: 37px;
 }
 
 .profile-mask-name {
   width: 38px;
+}
+
+.profile-mask-new-password {
+  width: 90px;
+}
+
+.profile-mask-old-password {
+  width: 107px;
 }
 
 .profile-mask-phone {
