@@ -1,26 +1,36 @@
 import { combineReducers } from 'redux';
 import errors from './errorsReducer';
-import admin from './adminReducer';
-import user from './userReducer';
 import previousQuestion from './previousQuestionReducer';
 import input from './inputReducer';
-import userCheckboxes from './userCheckboxesReducer';
 
-const createReducer = (string, type=[]) => (state=type, action) => action.type === string ? action.payload : state;
-
+const createReducer = (string, type=[]) => {
+  return (state=type, action) => {
+    switch(action.type){
+      case string: 
+        return action.payload;
+      case 'CLEAR_ALL':
+        return type;
+      default:
+        return state;
+    }
+  }
+}
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and login Message
   question: createReducer('SET_QUESTION'), // stores questions from the database
-  admin, // stores admin information
+  adminIndustry: createReducer('SET_ADMIN_INDUSTRY'), // stores admin industry information
+  adminQuestion: createReducer('SET_ADMIN_QUESTION'), // stores calculator questions for admin to edit
+  adminUserInfo: createReducer('SET_ADMIN_USER_INFO'), // stores user information for admin to edit
+  adminSubquestion: createReducer('SET_ADMIN_SUB_QUESTION'), // store calculator sub-questions for admin to edit
   industry: createReducer('SET_INDUSTRY'), // stores industry information
   split: createReducer('SET_SPLIT'), // stores split from the database
-  user,
+  user: createReducer('SET_USER', {}),
   passwordStatus: createReducer('MATCH_PASSWORD'), // contains password change status
-  previousQuestion, // stores id of previous question for stepper
-  input, // stores values from inputs from stepper
+  previousQuestion, // stores id of previous question for stepper - has a second clear in reducer listening for ALL
+  input, // stores values from inputs from stepper - has a second clear in reducer listening for ALL
   userInfo: createReducer('SET_USER_INFO'), // stores necessary information for user edit page
-  userCheckboxes, // holds the users checkboxes
+  userCheckboxes: createReducer('SET_USER_CHECKBOXES'), // holds the users checkboxes
 });
 
 export default rootReducer;

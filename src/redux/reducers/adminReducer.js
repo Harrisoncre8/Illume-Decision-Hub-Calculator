@@ -1,11 +1,5 @@
 import { combineReducers } from 'redux';
 
-// Store admin industry information
-const adminIndustry = (state = [], action) => action.type === `SET_ADMIN_INDUSTRY` ? action.payload : state;
-  
-// Store calculator questions for admin to edit
-const adminQuestion = (state = [], action) => action.type === `SET_ADMIN_QUESTION` ? action.payload : state;
-
 // Store calculator sub-questions for admin to edit
 const adminSubquestion = (state = [], action) => {
   if(action.type === `SET_ADMIN_SUB_QUESTION`){
@@ -14,15 +8,12 @@ const adminSubquestion = (state = [], action) => {
   else if(action.type === `CLEAR_ADMIN_SUB_QUESTION`){
     return '';
   }
+  else if(action.type === `CLEAR_ALL`){
+    return []
+  }
   return state;
 }
-
-// Store user information for admin to edit
-const adminUserInfo = (state = [], action) => action.type === `SET_ADMIN_USER_INFO` ? action.payload : state;
   
 export default combineReducers({
-  adminIndustry,
-  adminQuestion,
-  adminSubquestion,
-  adminUserInfo,
+  adminSubquestion
 });
