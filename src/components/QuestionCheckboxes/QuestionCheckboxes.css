@@ -1,3 +1,13 @@
+.questions-checkbox-btn {
+  margin-bottom: 30px;
+}
+
+.questions-checkbox-container {
+  max-width: 250px;
+  text-align: left;
+  margin: 20px 0;
+}
+
 .questions-checkbox-text {
   font-size: 1.3em;
   margin-bottom: 10px;
