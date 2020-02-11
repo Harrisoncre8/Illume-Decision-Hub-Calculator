@@ -8,6 +8,22 @@
   margin-bottom: 20px;
 }
 
+.profile-mask-company {
+  width: 58px;
+}
+
+.profile-mask-email {
+  width: 37px;
+}
+
+.profile-mask-name {
+  width: 38px;
+}
+
+.profile-mask-phone {
+  width: 55px;
+}
+
 .profile-personal-details-container {
   margin-bottom: 40px;
 }

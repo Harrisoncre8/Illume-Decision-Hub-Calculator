@@ -137,6 +137,7 @@ export default function User() {
           )}
           <button className="normal-btn" onClick={openModal}>Edit Profile</button>
         </div>
+
         <Modal
           visible={modal}
           width="400"
@@ -145,39 +146,60 @@ export default function User() {
           onClickAway={closeModal}
         >
           <h1 className="main-heading admin-user-heading">Edit User Information</h1>
-            {userData.map(user => 
-              <div key={user.id}>
-                <input 
-                  value={name} 
-                  placeholder="username"
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <input 
-                  value={company} 
-                  placeholder="company"
-                  onChange={(e) => setCompany(e.target.value)}
-                />
-                <input 
-                  value={phone} 
-                  placeholder="phone #"
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-                <input 
-                  value={email} 
-                  placeholder="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+
+          <div className="text-field-container">
+            <input
+              className="text-field text-field-active"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <label className="text-field-label">name</label>
+            <div className="text-field-mask profile-mask-name"></div>
+          </div>
+
+          <div className="text-field-container">
+            <input
+              className="text-field text-field-active"
+              type="text"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
+            <label className="text-field-label">company</label>
+            <div className="text-field-mask profile-mask-company"></div>
+          </div>
+
+          <div className="text-field-container">
+            <input
+              className="text-field text-field-active"
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <label className="text-field-label">phone #</label>
+            <div className="text-field-mask profile-mask-phone"></div>
+          </div>
+
+          <div className="text-field-container">
+            <input
+              className="text-field text-field-active"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label className="text-field-label">email</label>
+            <div className="text-field-mask profile-mask-email"></div>
+          </div>
+
+          <select 
+            className="modal-input"  
+            value={industry} 
+            onChange={handleUserIndustry}
+          > 
+            {industryData.map(item => 
+              <option key={item.id}>{item.industry}</option>
             )}
-            <select 
-              className="modal-input"  
-              value={industry} 
-              onChange={handleUserIndustry}
-            > 
-              {industryData.map(item => 
-                <option key={item.id}>{item.industry}</option>
-              )}
-            </select>
+          </select>
 
 
 
