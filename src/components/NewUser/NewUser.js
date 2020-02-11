@@ -33,8 +33,8 @@ export default function NewUser(){
               This will help you better understand how changes in your decision-making and pricing could affect 
               your future profitability.
             </p>
-            <p className="results-text">Click on a Calculator above to begin!</p>
           </div>
+          <p className="results-text new-user-cta-text">Click on a Calculator above to begin!</p>
           <QuestionCheckboxes />
         </div>
       </div>
