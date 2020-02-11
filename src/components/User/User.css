@@ -24,6 +24,11 @@
   width: 55px;
 }
 
+.profile-password-font-size {
+  font-size: 0.7em;
+  display: block;
+}
+
 .profile-personal-details-container {
   margin-bottom: 40px;
 }

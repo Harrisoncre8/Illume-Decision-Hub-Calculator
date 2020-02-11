@@ -224,7 +224,7 @@ export default function User() {
 
 
             {/* MAKE SECONDARY BUTTON */}
-            <button className="normal-btn" onClick={openPassModal}>Change Password?</button>
+            <button className="secondary-btn profile-password-font-size" onClick={openPassModal}>Change Password?</button>
 
 
 
