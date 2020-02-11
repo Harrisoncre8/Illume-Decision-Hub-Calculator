@@ -74,6 +74,13 @@ router.put('/new-password', rejectUnauthenticated, (req, res) => {
   }
 })
 
+router.post('/calc-info', rejectUnauthenticated, (req, res) => {
+  const userId = req.body.userID;
+  const calcID = req.body.calcID;
+  const sqlQuery = `INSERT INTO "toggle_calculator" ("user_id", "calculator_id") VALUES ($1, $2)`;
+  pool.query(sqlQuery, [userId, calcID])
+})
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted.
