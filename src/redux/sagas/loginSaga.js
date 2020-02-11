@@ -23,7 +23,7 @@ function* loginUser(action) {
       // The 401 is the error status sent from passport
       // if user isn't in the database or
       // if the email and password don't match in the database
-      yield put({ type: '_FAILED' });
+      yield put({ type: 'LOGIN_FAILED' });
     } else {
       // Got an error that wasn't a 401
       // Could be anything, but most common cause is the server is not started
@@ -49,7 +49,7 @@ function* logoutUser(action) {
     // now that the session has ended on the server
     // remove the client-side user object to let
     // the client-side code know the user is logged out
-    yield put({ type: 'UNSET_USER' });
+    yield put({ type: 'CLEAR_ALL' });
 
   } catch (error) {
     console.log('Error with user logout:', error);

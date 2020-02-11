@@ -5,7 +5,7 @@ import AdminCalcQuestion from '../AdminCalcQuestion/AdminCalcQuestion';
 
 export default function AdminEditThisCalc(props) {
 
-  const question = useSelector((state)=>state.admin.adminQuestion);
+  const question = useSelector((state)=>state.adminQuestion);
   const dispatch = useDispatch();
 
   useEffect(()=>{
