@@ -130,7 +130,7 @@ class AdminEditUserInfo extends Component {
             <Modal
               visible={this.state.visible}
               width="440"
-              height="500"
+              height="570"
               effect="fadeInUp"
               onClickAway={this.closeModal}
             >
@@ -181,6 +181,7 @@ class AdminEditUserInfo extends Component {
                   <label className="text-field-label">email</label>
                   <div className="text-field-mask admin-user-mask-email"></div>
                 </div>
+
                 <div className="text-field-container">
                   <input
                     className="text-field text-field-active"
@@ -190,29 +191,34 @@ class AdminEditUserInfo extends Component {
                   />
                   <label className="text-field-label">password</label>
                   <div className="text-field-mask admin-user-mask-password"></div>
-                  <input type="checkbox" onChange={this.togglePasswordView} />
-                  <label> Show Password</label>
-
+                  <span>
+                    <input type="checkbox" onClick={this.togglePasswordView} />
+                    <label> Show Password</label>
+                  </span>
                 </div>
 
-                <select
-                  className="modal-input"
-                  value={this.state.selectedUser.industryid || 'industry'}
-                  onChange={(event) => this.handleDropdownChange(event, 'industryid')}
-                >
-                  {this.props.industry.map(industry =>
-                    <option key={industry.id} value={industry.id}>{industry.industry}</option>
-                  )}
-                </select>
+                <div>
+                  <select
+                    className="dropdown register-dropdown"
+                    value={this.state.selectedUser.industryid || 'industry'}
+                    onChange={(event) => this.handleDropdownChange(event, 'industryid')}
+                  >
+                    {this.props.industry.map(industry =>
+                      <option className="dropdown-option" key={industry.id} value={industry.id}>{industry.industry}</option>
+                    )}
+                  </select>
+                </div>
 
-                <select
-                  className="modal-input"
-                  value={this.state.selectedUser.usertype || 'usertype'}
-                  onChange={(event) => this.handleDropdownChange(event, 'usertype')}
-                >
-                  <option key={1} value={false}>User</option>
-                  <option key={2} value={true}>Admin</option>
-                </select>
+                <div>
+                  <select
+                    className="dropdown register-dropdown"
+                    value={this.state.selectedUser.usertype || 'usertype'}
+                    onChange={(event) => this.handleDropdownChange(event, 'usertype')}
+                  >
+                    <option className="dropdown-option" key={1} value={false}>User</option>
+                    <option className="dropdown-option" key={2} value={true}>Admin</option>
+                  </select>
+                </div>
 
                 <div className="modal-btn-container">
                   <button className="normal-btn" onClick={this.handleSave}>Save</button>

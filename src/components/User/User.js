@@ -214,12 +214,12 @@ export default function User() {
               </div>
 
               <select 
-                className="modal-input"  
+                className="dropdown register-dropdown"  
                 value={industry} 
                 onChange={handleUserIndustry}
               > 
                 {industryData.map(item => 
-                  <option key={item.id}>{item.industry}</option>
+                  <option className="dropdown-option" key={item.id}>{item.industry}</option>
                 )}
               </select>
 

@@ -222,11 +222,15 @@ export default function PriceSetting() {
           <h1 className="main-heading">Price Setting</h1>
           <div className="inputs">
             <form>
-              <select onChange={(event) => setMargin(event.target.value)} value={margin}>
-                <option disabled>Select Industry</option>
+              <select 
+                className="dropdown register-dropdown" 
+                onChange={(e) => setMargin(e.target.value)} 
+                value={margin}
+              >
+                <option className="dropdown-option" disabled>Select Industry</option>
                 {industryData.map(industry => {
                   return (
-                    <option key={industry.id} value={industry.margin}>{industry.industry}</option>
+                    <option className="dropdown-option" key={industry.id} value={industry.margin}>{industry.industry}</option>
                   );
                 })}
               </select>
