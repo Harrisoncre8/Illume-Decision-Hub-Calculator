@@ -21,9 +21,10 @@ import NotFoundPage from '../NotFound/NotFound';
 export default function App() {
   // gets user info on all pages DO NOT REMOVE
   const dispatch = useCallback(useDispatch());
+  
   useEffect(()=>{
-    dispatch({type: 'FETCH_USER'})
-  })
+    dispatch({type: 'FETCH_USER'});
+  }, []);
   
   return (
     <Router>
