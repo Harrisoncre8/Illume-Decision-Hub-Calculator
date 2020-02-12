@@ -63,7 +63,6 @@ export default function PriceSetting() {
 
     let cost = directCosts + indirectCosts || 0;
     let price = +inputData[6] || 0;
-    let totalSales = inputData[5] || 0;
     let iNorm = (cost / (1 - margin)).toFixed(2) || 0;
     let pm = +iNorm - cost || 0;
     let um = price - cost || 0;
@@ -285,15 +284,15 @@ export default function PriceSetting() {
                     <input
                       className="text-field text-field-active"
                       type='number'
-                      value={margin}
+                      value={margin*100}
                       onChange={
                         (e) => {
-                          setMargin(e.target.value);
+                          setMargin(e.target.value/100);
                           checkForValue(e);
                         }
                       }
                     />
-                    <label className="text-field-label">enter value</label>
+                    <label className="text-field-label">enter %</label>
                     <div className="text-field-mask stepper-mask"></div>
                   </div>
                 </div>
