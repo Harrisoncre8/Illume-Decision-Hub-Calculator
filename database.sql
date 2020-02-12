@@ -149,7 +149,7 @@ VALUES (
   'Direct Costs Walkthrough'
 ),
 (
-  'What is the rate per hour of this labor?',
+  'What is the rate per hour of this labor for this product?',
   'number',
   'Consider just one labor rate for this field',
   3,
@@ -158,7 +158,7 @@ VALUES (
   'Labor Rate'
 ),
 (
-  'How many hours of labor are done at this rate?',
+  'How many hours of labor is done at this rate for this product??',
   'number',
   'Consider just one labor rate for this field',
   3,
