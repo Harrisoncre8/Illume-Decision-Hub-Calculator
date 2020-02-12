@@ -150,7 +150,7 @@ export default function BreakEven() {
         {doesSplit ?
           null :
           userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
-            <div className="text-field-container">
+            <div className="text-field-container" key={paths[start] && paths[start].question_id}>
               <input
                 className="text-field text-field-active"
                 type={paths[start] && paths[start].response_type}
