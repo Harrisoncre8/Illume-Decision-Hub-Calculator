@@ -38,10 +38,7 @@ export default function PriceSetting() {
   // Finds the users industry and sets it as the default choice
   useEffect(() => {
     if (userData.length > 0 && industryData) {
-      setMargin(
-        industryData[industryData.findIndex(el => el.industry === userData[0].industry)] &&
-        industryData[industryData.findIndex(el => el.industry === userData[0].industry)].margin
-      );
+      setIndustryName(user[0]&&user[0].industry)
     }
   }, [userData, industryData]);
   
@@ -242,16 +239,17 @@ export default function PriceSetting() {
               <select 
                 onChange={
                   (event) => {
-                    setMargin(event.target.value); 
+                    let industry = industryData[industryData.findIndex(el=> el.industry === event.target.value)]
+                    setMargin(
+                      userCheckboxes.findIndex(el => el.question_id === 3) !== -1?
+                        industry.gross_margin:
+                        industry.op_margin
+                    ); 
                     const {options, selectedIndex} = event.target; 
-                    setIndustryName(options[selectedIndex].innerHTML)
+                    setIndustryName(event.target.value)
                   }
                 } 
-                value={
-                  industryName==='All Other'?
-                    null:
-                    margin
-                }
+                value={industryName}
                 className="dropdown register-dropdown" 
               >
                 <option value ='' disabled className="dropdown-option">Select Industry</option>
@@ -261,11 +259,7 @@ export default function PriceSetting() {
                       className="dropdown-option"
                       key={industry.id} 
                       name={industry.industry}
-                      value={
-                        userCheckboxes.findIndex(el => el.question_id === 3) !== -1?
-                          industry.gross_margin:
-                          industry.op_margin
-                      }
+                      value={industry.industry}
                     >
                       {industry.industry}
                     </option>
