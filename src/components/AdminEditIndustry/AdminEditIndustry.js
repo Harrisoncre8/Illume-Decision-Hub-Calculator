@@ -13,12 +13,12 @@ class AdminEditIndustry extends Component{
     selectedIndustry: {
       id: '',
       industry: '',
-      grossMargin: '',
+      gross_margin: '',
       op_margin: ''
     },
     newIndustry: {
       industry: '',
-      grossMargin: '',
+      gross_margin: '',
       op_margin: ''
     }
   }
@@ -39,13 +39,13 @@ class AdminEditIndustry extends Component{
       selectedIndustry: {
         id: '',
         industry: '',
-        grossMargin: '',
-        opMargin: ''
+        gross_margin: '',
+        op_margin: ''
       },
       newIndustry: {
         industry: '',
-        grossMargin: '',
-        opMargin: ''
+        gross_margin: '',
+        op_margin: ''
       }
     });
   }
@@ -100,8 +100,8 @@ class AdminEditIndustry extends Component{
         industry: industry.industry,
         selectedIndustry: {
           ...industry,
-          grossMargin: industry.grossMargin*100,
-          opMargin: industry.opMargin*100
+          gross_margin: industry.gross_margin*100,
+          op_margin: industry.op_margin*100
         }
       });
     }
@@ -227,8 +227,8 @@ class AdminEditIndustry extends Component{
                     <input 
                       className="text-field text-field-active" 
                       type="text" 
-                      value={editIndustry.grossMargin} 
-                      onChange={(event)=>this.handleEditChange(event, 'grossMargin')}
+                      value={editIndustry.gross_margin} 
+                      onChange={(event)=>this.handleEditChange(event, 'gross_margin')}
                     />
                     <label className="text-field-label">gross margin (%)</label>
                     <div className="text-field-mask admin-industry-mask-margin"></div>
@@ -238,8 +238,8 @@ class AdminEditIndustry extends Component{
                     <input 
                       className="text-field text-field-active" 
                       type="text" 
-                      value={editIndustry.opMargin} 
-                      onChange={(event)=>this.handleEditChange(event, 'opMargin')}
+                      value={editIndustry.op_margin} 
+                      onChange={(event)=>this.handleEditChange(event, 'op_margin')}
                     />
                     <label className="text-field-label">operating margin (%)</label>
                     <div className="text-field-mask admin-industry-mask-margin"></div>
@@ -271,8 +271,8 @@ class AdminEditIndustry extends Component{
                     <input 
                       className="text-field" 
                       type="text" 
-                      value={newIndustry.grossMargin} 
-                      onChange={(event)=>this.handleNewChange(event, 'margin')}
+                      value={newIndustry.gross_margin} 
+                      onChange={(event)=>this.handleNewChange(event, 'gross_margin')}
                     />
                     <label className="text-field-label">gross margin (%)</label>
                     <div className="text-field-mask admin-industry-mask-margin"></div>
@@ -282,8 +282,8 @@ class AdminEditIndustry extends Component{
                     <input 
                       className="text-field" 
                       type="text" 
-                      value={newIndustry.opMargin} 
-                      onChange={(event)=>this.handleNewChange(event, 'opMargin')}
+                      value={newIndustry.op_margin} 
+                      onChange={(event)=>this.handleNewChange(event, 'op_margin')}
                     />
                     <label className="text-field-label">operating margin (%)</label>
                     <div className="text-field-mask admin-industry-mask-margin"></div>
