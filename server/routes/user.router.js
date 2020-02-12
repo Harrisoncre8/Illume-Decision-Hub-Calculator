@@ -14,13 +14,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // GET user information by user id
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  let userID = req.params.id
+  let userID = [req.params.id]
   const sqlQuery = `SELECT "user_id", "name", "business_name", "industry_id", "industry"."industry", "industry"."enabled", "users"."email", "phone_number" 
                     FROM "contact_info"
                     JOIN "users" ON "contact_info"."user_id" = "users"."id"
                     JOIN "industry" ON "contact_info"."industry_id" = "industry"."id"
-                    WHERE "user_id" = ${userID};`;
-  pool.query(sqlQuery)
+                    WHERE "user_id" = $1;`;
+  pool.query(sqlQuery, userID)
     .then(result => {
       res.send(result.rows);
     })
