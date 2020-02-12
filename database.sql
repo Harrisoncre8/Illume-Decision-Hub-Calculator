@@ -1,9 +1,3 @@
-DROP SCHEMA public CASCADE;
-CREATE SCHEMA public;
-GRANT ALL ON SCHEMA public TO Awren;
-GRANT ALL ON SCHEMA public TO public;
-COMMENT ON SCHEMA public IS 'standard public schema';
-
 --#region Create Tables
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
