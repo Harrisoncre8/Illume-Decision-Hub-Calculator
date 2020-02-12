@@ -7,18 +7,18 @@ import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
 
 export default function User() {
 
-  // getting data from redux
+  // Set data from redux
   let dispatch = useDispatch();
   let industryData = useSelector(state => state.industry);
   let userData = useSelector(state => state.userInfo);
   let userID = useSelector(state => state.user.id);
   let passwordStatusData = useSelector(state => state.passwordStatus);
 
-  // setting state for modal
+  // Set state for modal
   const [modal, setModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
 
-  // setting state for user information
+  // Set state for user information
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [id, setId] = useState('');
@@ -26,7 +26,8 @@ export default function User() {
   const [industryID, setIndustryID] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  // setting state to be deployed on password change
+
+  // Set state to be deployed on password change
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
@@ -49,36 +50,7 @@ export default function User() {
     }
   }, [userID, dispatch, passwordStatusData]);
 
-  // change state to open user info modal and set default info to the modal
-  const openModal = () => {
-    setModal(true);
-    setIndustry(userData[0].industry);
-    setName(userData[0].name);
-    setCompany(userData[0].business_name);
-    setPhone(userData[0].phone_number);
-    setEmail(userData[0].email);
-    setIndustryID(userData[0].industry_id);
-  }
-
-  // change state to close user info modal
-  const closeModal = () => {
-    setModal(false);
-  }
-
-  // save user info changes and sends to DB
-  const saveChanges = () => {
-    let userInfo = {id, name, company, phone, email, industryID};
-    dispatch({type: `PUT_USER_INFO`, payload: userInfo});
-    setModal(false);
-  }
-
-  // opens modal to change password
-  const openPassModal = () => {
-    setPasswordModal(true);
-  }
-
-  // checks and saves the user's new password
-  // and closes modal
+  // Check and saves the user's new password and closes modal
   const changePassword = () => {
     if(newPassword === checkPassword){
       let passwordInfo = {oldPassword, newPassword, id};
@@ -92,19 +64,47 @@ export default function User() {
     }
   }
 
-  // Adds class if input has a value, removes the class if input has no value
+  // Add class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
-  // close modal to change password
+  // Change state to close user info modal
+  const closeModal = () => {
+    setModal(false);
+  }
+
+  // Close modal to change password
   const closePassModal = () => {
     setPasswordModal(false);
   }
 
-  // handle change for industry drop down
+  // Handle change for industry drop down
   const handleUserIndustry = e => {
     setIndustry(e.target.value);
     setIndustryID(industryData[industryData.findIndex(el => el.industry === e.target.value)] &&
     industryData[industryData.findIndex(el => el.industry === e.target.value)].id);  
+  }
+
+  // Change state to open user info modal and set default info to the modal
+  const openModal = () => {
+    setModal(true);
+    setIndustry(userData[0].industry);
+    setName(userData[0].name);
+    setCompany(userData[0].business_name);
+    setPhone(userData[0].phone_number);
+    setEmail(userData[0].email);
+    setIndustryID(userData[0].industry_id);
+  }
+
+  // Open modal to change password
+  const openPassModal = () => {
+    setPasswordModal(true);
+  }
+
+  // Save user info changes and sends to DB
+  const saveChanges = () => {
+    let userInfo = {id, name, company, phone, email, industryID};
+    dispatch({type: `PUT_USER_INFO`, payload: userInfo});
+    setModal(false);
   }
 
   return(
