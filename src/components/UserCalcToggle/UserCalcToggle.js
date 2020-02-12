@@ -37,8 +37,7 @@ const UserCalcToggle = () => {
 
   return(
     <div>
-      {JSON.stringify(calcData)}
-]      <h2>Toggle Your Calculators</h2>
+      <h2>Toggle Your Calculators</h2>
       <p>* Select a calculator to turn on and off</p>
       <p>* Disabled calculators will be colored out</p>
       <button className={getButtonClass(1)} onClick={() => handleCalcClick(1)}>
