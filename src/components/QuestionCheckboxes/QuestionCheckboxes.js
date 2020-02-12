@@ -22,7 +22,9 @@ const QuestionCheckboxes = () => {
       setChecked(holder);
     } else if (Array.isArray(questions)) {
       const state = questions.reduce((acum,arr)=>{
-        acum[arr.id] = true;
+        if(arr.split){
+          acum[arr.id] = true;
+        }
         return acum;
       },{})
       setChecked(state);
