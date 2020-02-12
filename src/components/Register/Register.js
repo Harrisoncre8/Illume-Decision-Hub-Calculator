@@ -1,24 +1,37 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './Register.css';
+import Modal from 'react-awesome-modal';
 
 class Register extends Component{
 
   //Store local state
   state = {
+    visible: false,
     name: '',
     company: '',
     phone: '',
     industry: '',
     email: '',
     password: '',
-    showPassword: 'password'
-  } 
+    showPassword: 'password',
+    agreement: false
+  }
 
+  // Toggle agreement checkbox
+  agree = e => this.state.agreement ? this.setState({agreement: false}) : this.setState({agreement: true});
+
+  // Close modal popup
+  closeModal = () => this.setState({ visible: false });
 
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
+  // Set local state agreement to false, close modal popup
+  disagree = () => {
+    this.setState({agreement: false});
+    this.closeModal();
+  }
   // Sets local state to current input value, adds or removes class based on input's value
   handleChange = (e, propName) => {
     this.setState({
@@ -33,6 +46,9 @@ class Register extends Component{
     this.props.history.push('/');
   }
 
+  // Open modal popup
+  openModal = () => this.setState({ visible: true });
+
   // Push history to new user page
   pushHistoryToUser = () => {
     this.props.history.push('/new-user');
@@ -42,24 +58,29 @@ class Register extends Component{
   registerUser = e => {
     e.preventDefault();
     if (this.state.name && this.state.company && this.state.phone && this.state.industry && this.state.email && this.state.password){
+      this.openModal();
+      if(this.state.agreement && !this.state.visible){
+        console.log('in there------------------------------------------');
         this.props.dispatch({
-            type: 'REGISTER',
-            payload: {
-              name: this.state.name,
-              company: this.state.company,
-              phone: this.state.phone,
-              industry: this.state.industry,
-              email: this.state.email,
-              password: this.state.password,
-            },
+          type: 'REGISTER',
+          payload: {
+            name: this.state.name,
+            company: this.state.company,
+            phone: this.state.phone,
+            industry: this.state.industry,
+            email: this.state.email,
+            password: this.state.password,
+          },
         });           
-    this.pushHistoryToUser();
+        this.pushHistoryToUser();
+      }
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
   }
-    // Show or hide password
-    togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
+
+  // Show or hide password
+  togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
 
   render(){
     return(
@@ -77,7 +98,7 @@ class Register extends Component{
               type="text" 
               name="name"
               value={this.state.name}
-              onChange={(event)=>this.handleChange(event, 'name')}
+              onChange={(e)=>this.handleChange(e, 'name')}
             />
             <label className="text-field-label">name</label>
             <div className="text-field-mask register-mask-name"></div>
@@ -89,7 +110,7 @@ class Register extends Component{
                 type="text" 
                 name="company"
                 value={this.state.company}
-                onChange={(event)=>this.handleChange(event, 'company')}
+                onChange={(e)=>this.handleChange(e, 'company')}
             />
             <label className="text-field-label">company</label>
             <div className="text-field-mask register-mask-company"></div>
@@ -101,7 +122,7 @@ class Register extends Component{
               type="text" 
               name="phone"
               value={this.state.phone}
-              onChange={(event)=>this.handleChange(event, 'phone')}
+              onChange={(e)=>this.handleChange(e, 'phone')}
             />
             <label className="text-field-label">phone #</label>
             <div className="text-field-mask register-mask-phone"></div>
@@ -113,7 +134,7 @@ class Register extends Component{
               defaultValue="Select Industry"
               name="industry"
               value={this.state.industry}
-              onChange={(event)=>this.handleChange(event, 'industry')}
+              onChange={(e)=>this.handleChange(e, 'industry')}
             >
               <option value='' disabled>Select Industry</option>
               <option value={1}>Attorney</option>
@@ -128,7 +149,7 @@ class Register extends Component{
               type="text" 
               name="email"
               value={this.state.email}
-              onChange={(event)=>this.handleChange(event, 'email')}
+              onChange={(e)=>this.handleChange(e, 'email')}
             />
             <label className="text-field-label">email</label>
             <div className="text-field-mask register-mask-email"></div>
@@ -138,7 +159,7 @@ class Register extends Component{
             <input 
               className="text-field" 
               type={this.state.showPassword} 
-              onChange={(event)=>this.handleChange(event, 'password')}
+              onChange={(e)=>this.handleChange(e, 'password')}
             />
             <label className="text-field-label">password</label>
             <div className="text-field-mask register-mask-password"></div>
@@ -152,10 +173,41 @@ class Register extends Component{
 
           <button className="register-cancel-btn" onClick={this.handleCancel}>cancel</button>
 
+          <Modal
+              visible={this.state.visible}
+              width="440"
+              height="500"
+              effect="fadeInUp"
+            >
+              <div className="modal-container">
+                <h1 className="main-heading modal-heading">Usage Agreement</h1>
+                <div>
+                  <p>{this.props.disclaimer}</p>
+                </div>
+                <div>
+                  <label className="checkbox-container">I AGREE
+                    <input type='checkbox' checked={this.state.agreement} onChange={this.agree} />
+                    <span className="checkbox-check"></span>
+                  </label>
+                </div>
+                <div className="modal-btn-container">
+                  <button className="normal-btn profile-modal-btns" onClick={this.closeModal}>
+                    Confirm
+                  </button>
+                  <button className="normal-btn" onClick={this.disagree}>
+                    Cancel
+                  </button>
+                </div>
+              </div>
+              </Modal>
         </div>
       </center>
     );
   }
 }
 
-export default connect()(Register);
+const putReduxStateOnProps = reduxState=>({
+  disclaimer: reduxState.disclaimer,
+});
+
+export default connect(putReduxStateOnProps)(Register);
