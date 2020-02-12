@@ -483,3 +483,12 @@ p, span, div, h1, h2, h3, label, button {
   box-shadow: 5px 5px 10px #272727;
   border-radius: 25px;
 }
+
+.update-industry-p-container {
+  max-width: 250px;
+  margin: 30px 0;
+}
+
+.update-industry-select {
+  margin-bottom: 30px;
+}

@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Modal from 'react-awesome-modal';
 
 export default function CheckIndustry() {
 
   // Store states
   const dispatch = useCallback(useDispatch());
   const industryData = useSelector(state => state.industry);
-  const userData = useSelector(state => state.user.id);
+  const userData = useSelector(state => state.userInfo);
+  let userID = useSelector(state => state.user.id);
   const [id, setId] = useState('');
   const [industry, setIndustry] = useState('');
   const [modal, setModal] = useState(false);
@@ -22,10 +24,10 @@ export default function CheckIndustry() {
 
   // Open Modal if industry was disabled
   useEffect(()=>{
-    if(!userData[0].enabled){
+    if(userData[0] && !userData[0].enabled){
       openModal();
     }
-  }, []);
+  }, [userData]);
 
   // Close modal popup
   const closeModal = () => setModal(false);
@@ -33,38 +35,47 @@ export default function CheckIndustry() {
   // Open modal popup
   const openModal = () => setModal(true);
 
-  saveChanges = () => {
+  const saveChanges = () => {
 
   }
 
   return(
-    <Modal
-      visible={modal}
-      width="400"
-      height="480"
-      effect="fadeInUp"
-    >
-      <div className="modal-container">
-        {JSON.stringify(industry)}
-        <h1 className="main-heading">Update Industry</h1>
-        <p>Your industry has been removed.</p>
-        <p>Please select a new one.</p>
-        <select 
-          className="modal-input"  
-          value={industry}
-          onChange={(e)=>setIndustry(e.target.value)}
-        > 
-          <option value='' disabled>Select Industry</option>
-          {industryData.map(industry => 
-            <option key={industry.id} value={industry.industry}>{industry.industry}</option>
-          )}
-        </select>
-        <div className="modal-btn-container">
-          <button className="normal-btn" onClick={saveChanges}>
-            Save
-          </button>
+    <center>
+      <Modal
+        visible={modal}
+        width="400"
+        height="300"
+        effect="fadeInUp"
+      >
+        <div className="modal-container">
+          <h1 className="main-heading">Update Industry</h1>
+          <div className="update-industry-p-container">
+            <p className="align-left">Your industry has been removed.</p>
+            <p className="align-left">Please select a new one.</p>
+          </div>
+          <select 
+            className="dropdown update-industry-select"  
+            value={industry}
+            onChange={(e)=>setIndustry(e.target.value)}
+          > 
+            <option value='' disabled>Select Industry</option>
+            {industryData.map(industry => 
+              <option 
+                className="dropdown-option" 
+                key={industry.id} 
+                value={industry.industry}
+              >
+                {industry.industry}
+              </option>
+            )}
+          </select>
+          <div className="modal-btn-container">
+            <button className="normal-btn" onClick={saveChanges}>
+              Save
+            </button>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </center>
   );
 }
