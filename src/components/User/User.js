@@ -264,13 +264,6 @@ export default function User() {
                             }
                 />
                 <label className="text-field-label">current password</label>
-                <div className="text-field-mask login-password-mask"></div>
-                  <span>
-                    <input type="checkbox" onChange={togglePasswordView} />
-                      <label> Show Password</label>
-                  </span>
-                
-                <div className="text-field-mask profile-mask-old-password"></div>
               </div>
 
               <div className="text-field-container ">
@@ -285,12 +278,6 @@ export default function User() {
                             }
                 />
                 <label className="text-field-label">new password</label>
-                <div className="text-field-mask login-password-mask"></div>
-                  <span>
-                    <input type="checkbox" onChange={togglePasswordView} />
-                      <label> Show Password</label>
-                  </span>
-                <div className="text-field-mask profile-mask-new-password"></div>
               </div>
 
               <div className="text-field-container">
@@ -308,9 +295,8 @@ export default function User() {
                 <div className="text-field-mask login-password-mask"></div>
                   <span>
                     <input type="checkbox" onChange={togglePasswordView} />
-                      <label> Show Password</label>
+                      <label> Show Passwords</label>
                   </span>
-                <div className="text-field-mask profile-mask-confirm-new-password"></div>
               </div>
 
 
