@@ -29,7 +29,7 @@ export default function User() {
   // setting state to be deployed on password change
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [showPassword, setShowPassword] = useState('');
+  const [showPassword, setShowPassword] = useState('password');
   const [checkPassword, setCheckPassword] = useState('');
   const [wrongPassword, setWrongPassword] = useState(null);
 
@@ -290,14 +290,13 @@ export default function User() {
                     <input type="checkbox" onChange={togglePasswordView} />
                       <label> Show Password</label>
                   </span>
-              
                 <div className="text-field-mask profile-mask-new-password"></div>
               </div>
 
               <div className="text-field-container">
                 <input
                   className="text-field"
-                  type="text"
+                  type={showPassword}
                   value={checkPassword}
                   onChange={(e) => {
                                 setCheckPassword(e.target.value);
@@ -306,6 +305,11 @@ export default function User() {
                             }
                 />
                 <label className="text-field-label">confirm</label>
+                <div className="text-field-mask login-password-mask"></div>
+                  <span>
+                    <input type="checkbox" onChange={togglePasswordView} />
+                      <label> Show Password</label>
+                  </span>
                 <div className="text-field-mask profile-mask-confirm-new-password"></div>
               </div>
 
