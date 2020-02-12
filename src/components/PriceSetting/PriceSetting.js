@@ -49,7 +49,7 @@ export default function PriceSetting() {
   // Dynamically calculates the price setting depending on settings
   useEffect(() => {
     let directCosts = +splitPath[7] === 10 ?
-      +inputData[3] :
+      +inputData[3] || 0:
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
     let indirectCosts = +splitPath[23] === 11 ?
@@ -61,7 +61,7 @@ export default function PriceSetting() {
 
     let productsSold = +splitPath[1] === 15 ? 1 : +inputData[5] || 1;
 
-    let cost = directCosts + indirectCosts || 0;
+    let cost = directCosts || 0 + indirectCosts || 0;
     let price = +inputData[6] || 0;
     let iNorm = (cost / (1 - margin)).toFixed(2) || 0;
     let pm = +iNorm - cost || 0;

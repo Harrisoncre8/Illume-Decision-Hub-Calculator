@@ -26,7 +26,7 @@ export default function ProfitLever() {
   // Dynamically calculates the profit lever depending on settings
   useEffect(() => {
     let directCosts = +splitPath[7] === 3 ?
-      +inputData[3] :
+      +inputData[3] || 0 :
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
     let indirectCosts = +splitPath[23] === 4 ?
@@ -138,7 +138,7 @@ export default function ProfitLever() {
       return (
         <>
           {
-            splits[split] ?
+            splits[split] && userCheckboxes.findIndex(el => el.question_id === split) !== -1 ?
               <div className="max-width-container">
                 <form>
                   {splits[split].map(radio => {
@@ -247,12 +247,24 @@ export default function ProfitLever() {
             <br />
             <p>A 1% increase in sales will deliver {isNaN(growth.toFixed(1))? 0 : growth.toFixed(1)}% improvement in profit.</p>
             {/* <p>This translate into $x more profit in your pocket per year</p> */}
-            <br />
-            <p>A 1% reduction in direct cost will deliver {isNaN(directCostChange.toFixed(1))? 0 : directCostChange.toFixed(1)}% improvement in profit.</p>
-            {/* <p>This translates into $x more profit in your pocket per year</p> */}
-            <br />
-            <p>A 1% reduction in indirect costs will deliver {isNaN(indirectCostChange.toFixed(1))? 0 : indirectCostChange.toFixed(1)}% improvement in profit.</p>
-            {/* <p>This translates into $x more profit in your pocket each year</p> */}
+            {
+              userCheckboxes.findIndex(el => el.question_id === (7)) !== -1 ?
+                <>
+                  <br />
+                  <p>A 1% reduction in direct cost will deliver {isNaN(directCostChange.toFixed(1))? 0 : directCostChange.toFixed(1)}% improvement in profit.</p>
+                  {/* <p>This translates into $x more profit in your pocket per year</p> */}
+                </>:
+                null
+            }
+            {
+              userCheckboxes.findIndex(el => el.question_id === (23)) !== -1 ?
+                <>
+                  <br />
+                  <p>A 1% reduction in indirect costs will deliver {isNaN(indirectCostChange.toFixed(1))? 0 : indirectCostChange.toFixed(1)}% improvement in profit.</p>
+                  {/* <p>This translates into $x more profit in your pocket each year</p> */}
+                </>:
+                null
+            }
           </div>
         </div>
       </div>
