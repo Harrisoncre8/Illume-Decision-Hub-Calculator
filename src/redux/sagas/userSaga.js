@@ -46,6 +46,16 @@ function* putUserInfo(action) {
   }
 }
 
+// worker Saga: will be fired on "PUT_USER_INDUSTRY" actions
+function* putUserIndustry(action) {
+  try {
+    yield axios.put(`/api/user/industry`, action.payload);
+    yield put({ type: 'GET_USER_INFO', payload: action.payload });
+  } catch (error) {
+    console.log('User put new industry request failed', error);
+  }
+}
+
 // worker Saga: will be fired on "NEW_PASSWORD" actions
 function* putNewPassword(action) {
   try {
@@ -60,6 +70,7 @@ function* putNewPassword(action) {
 
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('PUT_USER_INDUSTRY', putUserIndustry);
   yield takeLatest('GET_USER_INFO', getUserInfo);
   yield takeLatest('PUT_USER_INFO', putUserInfo);
   yield takeLatest('NEW_PASSWORD', putNewPassword);
