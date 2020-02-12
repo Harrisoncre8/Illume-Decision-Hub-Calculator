@@ -16,6 +16,7 @@ export default function PriceSetting() {
   const [paths, setPaths] = useState([]);
   const [splits, setSplits] = useState({});
   const [splitPath, setSplitPath] = useState({});
+  const [industryName, setIndustryName] = useState('')
 
   // Connects to Redux
   const inputData = useSelector(state => state.input);
@@ -24,6 +25,7 @@ export default function PriceSetting() {
   let userData = useSelector(state => state.userInfo);
   const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const dispatch = useCallback(useDispatch(), []);
+  const user = useSelector(state => state.userInfo);
 
   // Ensures that userInfo and industry data is in the reducer
   useEffect(() => {
@@ -36,10 +38,7 @@ export default function PriceSetting() {
   // Finds the users industry and sets it as the default choice
   useEffect(() => {
     if (userData.length > 0 && industryData) {
-      setMargin(
-        industryData[industryData.findIndex(el => el.industry === userData[0].industry)] &&
-        industryData[industryData.findIndex(el => el.industry === userData[0].industry)].margin
-      );
+      setIndustryName(user[0]&&user[0].industry)
     }
   }, [userData, industryData]);
   
@@ -47,7 +46,7 @@ export default function PriceSetting() {
   // Dynamically calculates the price setting depending on settings
   useEffect(() => {
     let directCosts = +splitPath[7] === 10 ?
-      +inputData[3] :
+      +inputData[3] || 0:
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
     let indirectCosts = +splitPath[23] === 11 ?
@@ -57,16 +56,17 @@ export default function PriceSetting() {
       (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
       (+inputData[21] || 0) + (+inputData[22] || 0);
 
-    let cost = directCosts + indirectCosts || 0;
+    let productsSold = +splitPath[1] === 15 ? 1 : +inputData[5] || 1;
+
+    let cost = directCosts || 0 + indirectCosts || 0;
     let price = +inputData[6] || 0;
-    let totalSales = inputData[5] || 0;
     let iNorm = (cost / (1 - margin)).toFixed(2) || 0;
     let pm = +iNorm - cost || 0;
     let um = price - cost || 0;
     setIndustryNorm(+iNorm);
     setProductMargin(+pm.toFixed(2));
     setUserMargin(+um.toFixed(2));
-    setDifference(+Math.abs(Math.ceil(totalSales * ((pm / um) - 1))) || 0);
+    setDifference(+Math.abs(Math.ceil(productsSold * ((pm / um) - 1))) || 0);
   }, [margin, productMargin, userMargin, inputData, splitPath]);
 
   // Gets the questions and splits for the given results page
@@ -132,32 +132,40 @@ export default function PriceSetting() {
       return (
         <>
           {
-            splits[split] ?
-              <form>
-                {splits[split].map(radio => {
-                  return (
-                    <span key={radio.id}>
-                      <div className="radio-wrapper">
-                        <label className="radio-container">{radio.split_text}
-                          <input
-                            type='radio'
-                            name="next"
-                            value={radio.next_id}
-                            checked={+splitPath[split] === +radio.next_id}
-                            onChange={(e) => { radioChange(e, split) }}
-                          />
-                          <span className="radio-btn"></span>
-                        </label>
-                      </div>
-                    </span>
-                  );
-                })}
-              </form> :
+            splits[split] && userCheckboxes.findIndex(el => el.question_id === split) !== -1 ?
+              <div className="max-width-container">
+                <form>
+                  {splits[split].map(radio => {
+                    return (
+                      <span key={radio.id}>
+                        <div className="radio-wrapper">
+                          <label className="radio-container">
+                            {
+                              user[0] && user[0].service && radio.split_text?
+                              radio.split_text.replace(/Product/g, 'Service'):
+                              radio.split_text
+                            }
+                            <input
+                              type='radio'
+                              name="next"
+                              value={radio.next_id}
+                              checked={+splitPath[split] === +radio.next_id}
+                              onChange={(e) => { radioChange(e, split) }}
+                            />
+                            <span className="radio-btn"></span>
+                          </label>
+                        </div>
+                      </span>
+                    );
+                  })}
+                </form> 
+              </div>:
               null
           }
           {
             splitPath[split.toString()] ?
-              stepper(splitPath[split.toString()]) :
+              stepper(splitPath[split.toString()]) 
+              :
               null
           }
         </>
@@ -173,7 +181,13 @@ export default function PriceSetting() {
         <div className="align-left">
           {
             userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
-              <p className="results-text">{paths[start] && paths[start].question}</p>:
+              <p className="results-text">
+                {
+                  user[0] && user[0].service &&  paths[start] && paths[start].question?
+                  paths[start].question.replace(/product/g, 'service'):
+                  paths[start].question
+                }
+              </p>:
               null
           }
         </div>
@@ -223,19 +237,66 @@ export default function PriceSetting() {
           <div className="inputs">
             <form>
               <select 
+                onChange={
+                  (event) => {
+                    let industry = industryData[industryData.findIndex(el=> el.industry === event.target.value)]
+                    setMargin(
+                      userCheckboxes.findIndex(el => el.question_id === 3) !== -1?
+                        industry.gross_margin:
+                        industry.op_margin
+                    ); 
+                    const {options, selectedIndex} = event.target; 
+                    setIndustryName(event.target.value)
+                  }
+                } 
+                value={industryName}
                 className="dropdown register-dropdown" 
-                onChange={(e) => setMargin(e.target.value)} 
-                value={margin}
               >
-                <option className="dropdown-option" disabled>Select Industry</option>
+                <option value ='' disabled className="dropdown-option">Select Industry</option>
                 {industryData.map(industry => {
                   return (
-                    <option className="dropdown-option" key={industry.id} value={industry.margin}>{industry.industry}</option>
+                    <option
+                      className="dropdown-option"
+                      key={industry.id} 
+                      name={industry.industry}
+                      value={industry.industry}
+                    >
+                      {industry.industry}
+                    </option>
                   );
                 })}
               </select>
             </form>
-            {stepper(9)}
+            {
+              industryName==='All Other'? 
+                <div className="max-width-container">
+                  <div className="align-left">
+                    <p className="results-text">
+                      Enter your industry margin if you know it.  
+                      Otherwise, leave the default value
+                    </p>
+                    <br/>
+                  </div>
+                  <div className="text-field-container">
+                    <input
+                      className="text-field text-field-active"
+                      type='number'
+                      value={margin*100}
+                      onChange={
+                        (e) => {
+                          setMargin(e.target.value/100);
+                          checkForValue(e);
+                        }
+                      }
+                    />
+                    <label className="text-field-label">enter %</label>
+                    <div className="text-field-mask stepper-mask"></div>
+                  </div>
+                </div>
+                :
+                null
+            }
+            {stepper(65)}
           </div>
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>
@@ -249,10 +310,10 @@ export default function PriceSetting() {
               You are selling for
               {
                 productMargin>userMargin? 
-                  ` $${productMargin-userMargin.toFixed(2)} less than `:
+                  ` $${(productMargin-userMargin).toFixed(2)} less than `:
                   productMargin === userMargin?
                     ` the same price as `:
-                    ` $${userMargin-productMargin.toFixed(2)} more than `
+                    ` $${(userMargin-productMargin).toFixed(2)} more than `
               }
               industry norms.
             </p>

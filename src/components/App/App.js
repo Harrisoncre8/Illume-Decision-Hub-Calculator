@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 import Admin from '../Admin/Admin';
@@ -22,10 +22,17 @@ import User from '../User/User';
 export default function App() {
   // gets user info on all pages DO NOT REMOVE
   const dispatch = useCallback(useDispatch());
+const userID = useSelector(state => state.user);
 
-  useEffect(()=>{
-    dispatch({type: 'FETCH_USER'});
-  }, []);
+useEffect(() => {
+  dispatch({ type: 'FETCH_USER' })
+},[])
+
+useEffect(() => {
+  if(userID && userID.id){
+    dispatch({ type: 'GET_USER_INFO', payload: userID.id })
+  }
+},[userID])
   
   return (
     <>

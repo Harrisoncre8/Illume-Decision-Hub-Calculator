@@ -13,6 +13,7 @@ export default function Stepper() {
   const splitData = useSelector(state => state.split);
   const lastPageID = useSelector(state => state.previousQuestion);
   const history = useHistory();
+  const user = useSelector(state => state.userInfo);
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
 
@@ -90,7 +91,11 @@ export default function Stepper() {
             <form onSubmit={e=>{submit(e)}}>
               <div>
                 <p className="question-text">
-                  {questionData.question}
+                  {
+                    user[0] && user[0].service && questionData.question? 
+                      questionData.question.replace(/product/g, 'service'): 
+                      questionData.question
+                  }
                 </p>
                 <br />
                 {questionData.split ?
@@ -99,7 +104,12 @@ export default function Stepper() {
                       {splitData.map(split => {
                         return (
                           <span key={split.id}>
-                            <label className="radio-container">{split.split_text}
+                            <label className="radio-container">
+                              {
+                                user[0] && user[0].service && split.split_text?
+                                split.split_text.replace(/Product/g, 'Service'):
+                                split.split_text
+                              }
                               <input
                                 type="radio"
                                 name="next"
@@ -141,7 +151,7 @@ export default function Stepper() {
             </form>
           </div>
         </div>
-        <div onClick={lastPage} className='arrow-left' />
+        {lastPageID.length > 0 ? <div onClick={lastPage} className='arrow-left' />: null}
         <div onClick={nextPage} className='arrow-right' />
       </div>
     </center>
