@@ -399,7 +399,9 @@ VALUES(1,1,'Single Product',2),
 (3,23,'Single',11),
 (3,23,'Walkthrough',53),
 (2,1,'Single Product',14),
-(2,1,'Total Product',64);
+(2,1,'Total Product',64),
+(3,1,'Single Product',15),
+(3,1,'Total Product',9);
 --#endregion
 
 -- dummy industry data 
