@@ -12,6 +12,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
+    console.log('-------------->result is:', result.rows);
+    
   })
   .catch( error => {
     console.log('Error with GET industry', error);

@@ -7,7 +7,7 @@ COMMENT ON SCHEMA public IS 'standard public schema';
 --#region Create Tables
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
-  "email" TEXT,
+  "email" TEXT UNIQUE,
   "hashedpassword" TEXT,
   "admin" BOOLEAN DEFAULT false,
   "super_admin" BOOLEAN DEFAULT false
@@ -16,8 +16,11 @@ CREATE TABLE "users" (
 CREATE TABLE "industry" (
   "id" SERIAL PRIMARY KEY,
   "industry" TEXT,
-  "margin" DECIMAL(4,2),
-  "enabled" BOOLEAN DEFAULT TRUE
+  "gross_margin" DECIMAL(4,2),
+  "op_margin" DECIMAL(4,2),
+  -- service (true), or product (false)
+  "service" BOOLEAN,
+  "enabled" BOOLEAN DEFAULT true
 );
 
 CREATE TABLE "contact_info" (
@@ -160,7 +163,11 @@ VALUES (
   'Direct Costs Walkthrough'
 ),
 (
+<<<<<<< HEAD
   'What is the rate per of this labor?',
+=======
+  'What is the rate per hour of this labor for this product?',
+>>>>>>> master
   'number',
   'Consider just one labor rate for this field.',
   3,
@@ -169,7 +176,11 @@ VALUES (
   'Labor Rate'
 ),
 (
+<<<<<<< HEAD
   'How many hours of labor is done at this rate?',
+=======
+ 'How many hours of labor is done at this rate for this product??',
+>>>>>>> master
   'number',
   'Consider just one labor rate for this field.',
   3,
@@ -323,7 +334,7 @@ ALTER TABLE "user_checks" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
 ('Break Even Pricing', 6),
-('Price Setting', 9);
+('Price Setting', 65);
 
 --#region Set up Paths
 INSERT INTO "question_calculator" ("calculator_id", "question_id", "next_id")
@@ -390,7 +401,8 @@ VALUES (1,1,2),
 (3,20,62),
 (3,21,63),
 (3,22,12),
-(2,5,14);
+(2,5,14),
+(3,1,15);
 --#endregion
 
 --#region Set up Splits
@@ -410,7 +422,9 @@ VALUES(1,1,'Single Product',2),
 (3,23,'Single',11),
 (3,23,'Walkthrough',53),
 (2,1,'Single Product',14),
-(2,1,'Total Product',64);
+(2,1,'Total Product',64),
+(3,1,'Single Product',15),
+(3,1,'Total Product',9);
 --#endregion
 
 --#region Set Disclaimer
@@ -418,12 +432,25 @@ INSERT INTO "disclaimer" ("disclaimer")
 VALUES ('Illume Decision Hub (IDH) is not a replacement for legal advice, nor are the results to be interpreted as absolute fact. The purpose of IDH is to get small business owners thinking about their financials by providing a general, estimated, big-picture look into basic financial areas. Illume Pricing and its employees will not be held liable for any damages, injuries, losses, expenses, or other ramifications while using this product.');
 --#endregion
 
--- dummy industry data 
-INSERT INTO industry ("industry", "margin") 
-VALUES ('Attorney', 0.30), ('Cleaning', 0.20), ('Massage', 0.25);
+-- industry data 
+INSERT INTO industry ("industry", "gross_margin", "op_margin", "service") 
+VALUES ('Professional Services - Businesses',0.4,0.12,true),
+('Professional Services - Consumer',0.31,0.08,true),
+('Transportation / Trucking',0.25,0.05,true),
+('Financial Services',0.7,0.18,true),
+('Insurance',0.3,0.12,true),
+('Construction / Building Materials',0.23,0.09,false),
+('Pharma Medical Device',0.7,0.18,false),
+('Healthcare Services',0.2,0.06,true),
+('Consumer Products',0.5,0.1,false),
+('Restaurant / Retail',0.25,0.07,true),
+('Manufacturing',0.4,0.13,false),
+('All Other',0.35,0.08,null);
 
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
-VALUES ('test@test.co', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
+VALUES ('test@test.com', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
 
 INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "phone_number")
 VALUES (1,'test', 'test co', 1, '1234567890');
+
+INSERT INTO "user_checks" SELECT 1, * FROM generate_series(1, (SELECT COUNT(*) FROM questions));

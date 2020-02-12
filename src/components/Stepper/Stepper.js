@@ -115,7 +115,7 @@ export default function Stepper() {
                   </div>
                   :
                   <center>
-                    <div className="text-field-container">
+                    <div className="text-field-container" key={questionData.question_id}>
                       <input 
                         className="text-field"
                         value={input} 
