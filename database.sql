@@ -1,7 +1,7 @@
 --#region Create Tables
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
-  "email" TEXT,
+  "email" TEXT UNIQUE,
   "hashedpassword" TEXT,
   "admin" BOOLEAN DEFAULT false,
   "super_admin" BOOLEAN DEFAULT false
