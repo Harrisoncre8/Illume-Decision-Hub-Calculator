@@ -8,19 +8,17 @@ export default function CheckIndustry() {
   const dispatch = useCallback(useDispatch());
   const industryData = useSelector(state => state.industry);
   const userData = useSelector(state => state.userInfo);
-  let userID = useSelector(state => state.user.id);
-  const [id, setId] = useState('');
+  const userID = useSelector(state => state.user.id);
   const [industry, setIndustry] = useState('');
   const [modal, setModal] = useState(false);
 
   // Run on component mount
   useEffect(()=>{
     if(userID){
-      setId(userID);
       dispatch({type: `GET_USER_INFO`, payload: userID});
       dispatch({type: `GET_INDUSTRY`});
     }
-  }, [userID]);
+  }, [dispatch, userID]);
 
   // Open Modal if industry was disabled
   useEffect(()=>{
@@ -36,8 +34,10 @@ export default function CheckIndustry() {
   const openModal = () => setModal(true);
 
   const saveChanges = () => {
-    dispatch({type: `PUT_USER_INDUSTRY`, payload: {id: userID, industry: industry}});
-    closeModal();
+    if(industry){
+      dispatch({type: `PUT_USER_INDUSTRY`, payload: {id: userID, industry: industry}});
+      closeModal();
+    }
   }
 
   return(
@@ -64,7 +64,7 @@ export default function CheckIndustry() {
               <option 
                 className="dropdown-option" 
                 key={industry.id} 
-                value={industry.industry}
+                value={industry.id}
               >
                 {industry.industry}
               </option>
