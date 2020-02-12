@@ -127,7 +127,6 @@ class Register extends Component{
           <div className="text-field-container">
             <select 
               className="dropdown register-dropdown"
-              defaultValue="Select Industry"
               name="industry"
               value={this.state.industry}
               onChange={(e)=>this.handleChange(e, 'industry')}
