@@ -24,6 +24,7 @@ export default function PriceSetting() {
   let userData = useSelector(state => state.userInfo);
   const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const dispatch = useCallback(useDispatch(), []);
+  const user = useSelector(state => state.userInfo);
 
   // Ensures that userInfo and industry data is in the reducer
   useEffect(() => {
@@ -135,29 +136,38 @@ export default function PriceSetting() {
         <>
           {
             splits[split] ?
-              <form>
-                {splits[split].map(radio => {
-                  return (
-                    <span key={radio.id}>
-                      <label className="radio-container">{radio.split_text}
-                        <input
-                          type='radio'
-                          name="next"
-                          value={radio.next_id}
-                          checked={+splitPath[split] === +radio.next_id}
-                          onChange={(e) => { radioChange(e, split) }}
-                        />
-                        <span className="radio-btn"></span>
-                      </label>
-                    </span>
-                  );
-                })}
-              </form> :
+              <div className="max-width-container">
+                <form>
+                  {splits[split].map(radio => {
+                    return (
+                      <span key={radio.id}>
+                        <label className="radio-container">
+                          {
+                            user[0] && user[0].service && radio.split_text?
+                            radio.split_text.replace(/Product/g, 'Service'):
+                            radio.split_text
+                          }
+                          <input
+                            type='radio'
+                            name="next"
+                            value={radio.next_id}
+                            checked={+splitPath[split] === +radio.next_id}
+                            onChange={(e) => { radioChange(e, split) }}
+                          />
+                          <span className="radio-btn"></span>
+                        </label>
+                      </span>
+                    );
+                  })}
+                </form>
+              </div>
+              :
               null
           }
           {
             splitPath[split.toString()] ?
-              stepper(splitPath[split.toString()]) :
+              stepper(splitPath[split.toString()]) 
+              :
               null
           }
         </>
@@ -173,7 +183,13 @@ export default function PriceSetting() {
         <div className="align-left">
           {
             userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
-              <p className="results-text">{paths[start] && paths[start].question}</p>:
+              <p className="results-text">
+                {
+                  user[0] && user[0].service &&  paths[start] && paths[start].question?
+                  paths[start].question.replace(/product/g, 'service'):
+                  paths[start].question
+                }
+              </p>:
               null
           }
         </div>

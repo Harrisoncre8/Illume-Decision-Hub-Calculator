@@ -16,6 +16,7 @@ export default function BreakEven() {
   const inputData = useSelector(state => state.input);
   const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const dispatch = useCallback(useDispatch(), []);
+  const user = useSelector(state => state.userInfo);
 
   // Dynamically calculates the break even point depending on settings
   useEffect(() => {
@@ -106,7 +107,12 @@ export default function BreakEven() {
                   {splits[split].map(radio => {
                     return (
                       <span key={radio.id}>
-                        <label className="radio-container">{radio.split_text}
+                        <label className="radio-container">
+                          {
+                            user[0] && user[0].service && radio.split_text?
+                            radio.split_text.replace(/Product/g, 'Service'):
+                            radio.split_text
+                          }
                           <input
                             type='radio'
                             name="next"
@@ -143,7 +149,13 @@ export default function BreakEven() {
         <div className="align-left">
           {
             userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
-              <p className="results-text">{paths[start] && paths[start].question}</p>:
+              <p className="results-text">
+                {
+                  user[0] && user[0].service &&  paths[start] && paths[start].question?
+                  paths[start].question.replace(/product/g, 'service'):
+                  paths[start].question
+                }
+              </p>:
               null
           }
         </div>

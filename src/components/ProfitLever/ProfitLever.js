@@ -20,6 +20,7 @@ export default function ProfitLever() {
   const inputData = useSelector(state => state.input);
   const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const dispatch = useCallback(useDispatch(), []);
+  const user = useSelector(state => state.userInfo);
 
 
   // Dynamically calculates the profit lever depending on settings
@@ -138,35 +139,44 @@ export default function ProfitLever() {
         <>
           {
             splits[split] ?
-              <form>
-                {splits[split].map(radio => {
-                  return (
-                    <span key={radio.id}>
-                      <label className="radio-container">{radio.split_text}
-                        <input
-                          type='radio'
-                          name="next"
-                          value={radio.next_id}
-                          checked={+splitPath[split] === +radio.next_id}
-                          onChange={(e) => { radioChange(e, split) }}
-                        />
-                        <span className="radio-btn"></span>
-                      </label>
-                    </span>
-                  );
-                })}
-              </form> :
+              <div className="max-width-container">
+                <form>
+                  {splits[split].map(radio => {
+                    return (
+                      <span key={radio.id}>
+                        <label className="radio-container">
+                          {
+                            user[0] && user[0].service && radio.split_text?
+                            radio.split_text.replace(/Product/g, 'Service'):
+                            radio.split_text
+                          }
+                          <input
+                            type='radio'
+                            name="next"
+                            value={radio.next_id}
+                            checked={+splitPath[split] === +radio.next_id}
+                            onChange={(e) => { radioChange(e, split) }}
+                          />
+                          <span className="radio-btn"></span>
+                        </label>
+                      </span>
+                    );
+                  })}
+                </form>
+              </div>
+              :
               null
           }
           {
             splitPath[split.toString()] ?
-              stepper(splitPath[split.toString()]) :
+              stepper(splitPath[split.toString()]) 
+              :
               null
           }
         </>
       );
     }
-    
+
     let next = paths[start] && paths[start].next_id;
     let doesSplit = paths[start] && paths[start].split;
     let questionId = paths[start] && paths[start].question_id;
@@ -176,7 +186,13 @@ export default function ProfitLever() {
         <div className="align-left">
           {
             userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
-              <p className="results-text">{paths[start] && paths[start].question}</p>:
+              <p className="results-text">
+                {
+                  user[0] && user[0].service &&  paths[start] && paths[start].question?
+                  paths[start].question.replace(/product/g, 'service'):
+                  paths[start].question
+                }
+              </p>:
               null
           }
         </div>
@@ -186,7 +202,6 @@ export default function ProfitLever() {
             <div className="text-field-container" key={paths[start] && paths[start].question_id}>
               <input
                 className="text-field text-field-active"
-                
                 type={paths[start] && paths[start].response_type}
                 value={inputData[questionId]}
                 onChange={
