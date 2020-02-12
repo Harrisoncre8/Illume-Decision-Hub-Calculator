@@ -51,7 +51,6 @@ class AdminEditUserInfo extends Component {
 
   // Set input value to current dropdown menu selection
   handleDropdownChange = (e, propName) => {
-    console.log('alskjdf;kl', e.target.value);
     switch (propName) {
       case 'industryid':
         this.setState({
@@ -130,7 +129,7 @@ class AdminEditUserInfo extends Component {
             <Modal
               visible={this.state.visible}
               width="440"
-              height="500"
+              height="570"
               effect="fadeInUp"
               onClickAway={this.closeModal}
             >
@@ -143,7 +142,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.name}
-                    onChange={(event) => this.handleChange(event, 'name')}
+                    onChange={(e) => this.handleChange(e, 'name')}
                   />
                   <label className="text-field-label">user's name</label>
                   <div className="text-field-mask admin-user-mask-name"></div>
@@ -154,7 +153,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.company}
-                    onChange={(event) => this.handleChange(event, 'company')}
+                    onChange={(e) => this.handleChange(e, 'company')}
                   />
                   <label className="text-field-label">company</label>
                   <div className="text-field-mask admin-user-mask-company"></div>
@@ -165,7 +164,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.phone}
-                    onChange={(event) => this.handleChange(event, 'phone')}
+                    onChange={(e) => this.handleChange(e, 'phone')}
                   />
                   <label className="text-field-label">phone #</label>
                   <div className="text-field-mask admin-user-mask-phone"></div>
@@ -176,43 +175,49 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.email}
-                    onChange={(event) => this.handleChange(event, 'email')}
+                    onChange={(e) => this.handleChange(e, 'email')}
                   />
                   <label className="text-field-label">email</label>
                   <div className="text-field-mask admin-user-mask-email"></div>
                 </div>
+
                 <div className="text-field-container">
                   <input
                     className="text-field text-field-active"
                     type={this.state.showPassword} 
                     value={editUser.password}
-                    onChange={(event) => this.handleChange(event, 'password')}
+                    onChange={(e) => this.handleChange(e, 'password')}
                   />
                   <label className="text-field-label">password</label>
                   <div className="text-field-mask admin-user-mask-password"></div>
-                  <input type="checkbox" onChange={this.togglePasswordView} />
-                  <label> Show Password</label>
-
+                  <span>
+                    <input type="checkbox" onClick={this.togglePasswordView} />
+                    <label> Show Password</label>
+                  </span>
                 </div>
 
-                <select
-                  className="modal-input"
-                  value={this.state.selectedUser.industryid || 'industry'}
-                  onChange={(event) => this.handleDropdownChange(event, 'industryid')}
-                >
-                  {this.props.industry.map(industry =>
-                    <option key={industry.id} value={industry.id}>{industry.industry}</option>
-                  )}
-                </select>
+                <div>
+                  <select
+                    className="dropdown register-dropdown"
+                    value={this.state.selectedUser.industryid || 'industry'}
+                    onChange={(e) => this.handleDropdownChange(e, 'industryid')}
+                  >
+                    {this.props.industry.map(industry =>
+                      <option className="dropdown-option" key={industry.id} value={industry.id}>{industry.industry}</option>
+                    )}
+                  </select>
+                </div>
 
-                <select
-                  className="modal-input"
-                  value={this.state.selectedUser.usertype || 'usertype'}
-                  onChange={(event) => this.handleDropdownChange(event, 'usertype')}
-                >
-                  <option key={1} value={false}>User</option>
-                  <option key={2} value={true}>Admin</option>
-                </select>
+                <div>
+                  <select
+                    className="dropdown register-dropdown"
+                    value={this.state.selectedUser.usertype || 'usertype'}
+                    onChange={(e) => this.handleDropdownChange(e, 'usertype')}
+                  >
+                    <option className="dropdown-option" key={1} value={false}>User</option>
+                    <option className="dropdown-option" key={2} value={true}>Admin</option>
+                  </select>
+                </div>
 
                 <div className="modal-btn-container">
                   <button className="normal-btn" onClick={this.handleSave}>Save</button>

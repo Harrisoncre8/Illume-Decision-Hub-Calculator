@@ -115,10 +115,10 @@ class Register extends Component{
               value={this.state.industry}
               onChange={(event)=>this.handleChange(event, 'industry')}
             >
-              <option value='' disabled>Select Industry</option>
-              <option value={1}>Attorney</option>
-              <option value={2}>Cleaning</option>
-              <option value={3}>Massage</option>
+              <option className="dropdown-option" value='' disabled>Select Industry</option>
+              <option className="dropdown-option" value={1}>Attorney</option>
+              <option className="dropdown-option" value={2}>Cleaning</option>
+              <option className="dropdown-option" value={3}>Massage</option>
             </select>
           </div>
 
