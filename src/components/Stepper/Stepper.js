@@ -90,7 +90,7 @@ export default function Stepper() {
                 <br />
                 {questionData.split ?
                   <div>
-                    <div className="stepper-radio-container">
+                    <div className="radio-wrapper">
                       {splitData.map(split => {
                         return (
                           <span key={split.id}>

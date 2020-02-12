@@ -274,13 +274,13 @@ p, span, div, h1, h2, h3, label, button {
 }
 
 .radio-container {
-  display: inline-block;
+  display: block;
   position: relative;
-  padding-left: 30px;
-  padding-right: 30px;
   margin: 20px 0;
+  padding-left: 30px;
   cursor: pointer;
   font-size: 1.3em;
+  text-align: left;
 }
 
 .radio-container input[type="radio"] {
@@ -312,6 +312,11 @@ p, span, div, h1, h2, h3, label, button {
   height: 8px;
   border-radius: 50%;
   background: #f0aa42;
+}
+
+.radio-wrapper {
+  width: 200px;
+  padding-left: 20px;
 }
 
 .results-question-container {
