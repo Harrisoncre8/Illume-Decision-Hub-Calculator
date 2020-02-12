@@ -18,6 +18,8 @@ class AdminEditUserInfo extends Component {
       industry: '',
       industryid: '',
       password: '',
+      checkPassword: '',
+      wrongPassword: null,
       usertype: false,
     }
   }
@@ -36,7 +38,6 @@ class AdminEditUserInfo extends Component {
 
   // Show or hide password
   togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
-
 
   // Set local state to current input value
   handleChange = (e, propName) => {
@@ -75,8 +76,20 @@ class AdminEditUserInfo extends Component {
 
   // Dispatch to saga to handle admin edits, close modal
   handleSave = () => {
-    this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
-    this.closeModal();
+    if(this.state.selectedUser.password === this.state.selectedUser.checkPassword){
+      let passwordInfo = [this.state.selectedUser.password, this.state.selectedUser.id];
+      this.props.dispatch({type: `NEW_PASSWORD`, payload: passwordInfo});
+      this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
+      this.closeModal();
+    }
+    else if (!this.state.selectedUser.password && !this.state.selectedUser.checkPassword){
+      this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
+      this.closeModal();
+    }
+    else if(this.state.selectedUser.password !== this.state.selectedUser.checkPassword){
+      alert('make sure your passwords match')
+    }
+
   }
 
   // Open modal popup, populate input fields from local state
@@ -129,7 +142,7 @@ class AdminEditUserInfo extends Component {
             <Modal
               visible={this.state.visible}
               width="440"
-              height="500"
+              height="570"
               effect="fadeInUp"
               onClickAway={this.closeModal}
             >
@@ -142,7 +155,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.name}
-                    onChange={(event) => this.handleChange(event, 'name')}
+                    onChange={(e) => this.handleChange(e, 'name')}
                   />
                   <label className="text-field-label">user's name</label>
                   <div className="text-field-mask admin-user-mask-name"></div>
@@ -153,7 +166,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.company}
-                    onChange={(event) => this.handleChange(event, 'company')}
+                    onChange={(e) => this.handleChange(e, 'company')}
                   />
                   <label className="text-field-label">company</label>
                   <div className="text-field-mask admin-user-mask-company"></div>
@@ -164,7 +177,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.phone}
-                    onChange={(event) => this.handleChange(event, 'phone')}
+                    onChange={(e) => this.handleChange(e, 'phone')}
                   />
                   <label className="text-field-label">phone #</label>
                   <div className="text-field-mask admin-user-mask-phone"></div>
@@ -175,28 +188,41 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.email}
-                    onChange={(event) => this.handleChange(event, 'email')}
+                    onChange={(e) => this.handleChange(e, 'email')}
                   />
                   <label className="text-field-label">email</label>
                   <div className="text-field-mask admin-user-mask-email"></div>
                 </div>
+
                 <div className="text-field-container">
                   <input
                     className="text-field text-field-active"
                     type={this.state.showPassword} 
                     value={editUser.password}
-                    onChange={(event) => this.handleChange(event, 'password')}
+                    onChange={(e) => this.handleChange(e, 'password')}
                   />
                   <label className="text-field-label">password</label>
                   <div className="text-field-mask admin-user-mask-password"></div>
-                  <input type="checkbox" onChange={this.togglePasswordView} />
-                  <label> Show Password</label>
-
                 </div>
 
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type={this.state.showPassword} 
+                    value={editUser.checkPassword}
+                    onChange={(event) => this.handleChange(event, 'checkPassword')}
+                   />
+                  <label className="text-field-label">confirm password</label>{JSON.stringify(editUser.checkPassword)}
+                  <div className="text-field-mask admin-user-mask-password"></div>
+                  <input type="checkbox" onChange={this.togglePasswordView} />
+                  <label> Show Password</label>
+                </div>
+
+
+
                 <select
-                  className="modal-input"
-                  value={this.state.selectedUser.industryid || 'industry'}
+                  className="dropdown register-dropdown"
+                  value={editUser.industryid || 'industry'}
                   onChange={(event) => this.handleDropdownChange(event, 'industryid')}
                 >
                   {this.props.industry.map(industry =>
@@ -205,12 +231,12 @@ class AdminEditUserInfo extends Component {
                 </select>
 
                 <select
-                  className="modal-input"
-                  value={this.state.selectedUser.usertype || 'usertype'}
+                  className="dropdown register-dropdown"
+                  value={editUser.usertype || 'usertype'}
                   onChange={(event) => this.handleDropdownChange(event, 'usertype')}
                 >
-                  <option key={1} value={false}>User</option>
-                  <option key={2} value={true}>Admin</option>
+                  <option className="dropdown-option" key={1} value={false}>User</option>
+                  <option className="dropdown-option" key={2} value={true}>Admin</option>
                 </select>
 
                 <div className="modal-btn-container">

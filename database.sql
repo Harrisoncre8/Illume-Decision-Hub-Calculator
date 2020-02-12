@@ -1,3 +1,9 @@
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+GRANT ALL ON SCHEMA public TO Awren;
+GRANT ALL ON SCHEMA public TO public;
+COMMENT ON SCHEMA public IS 'standard public schema';
+
 --#region Create Tables
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
@@ -96,7 +102,7 @@ INSERT INTO "questions" ("question", "response_type", "help_text", "sub_question
 VALUES (
   'Is this for a single sale or total product sales?',
   'radio',
-  'Single sales are for when you are only considering a single transaction where total product sales considers multiple transactions',
+  'Single sales are for when you are only considering a single transaction where total product sales considers multiple transactions.',
   NULL,
   TRUE,
   FALSE,
@@ -141,7 +147,7 @@ VALUES (
 (
   'What do you plan on pricing this for?',
   'number',
-  'Consider your costs and the value you bring with this product',
+  'Consider your costs and the value you bring with this product.',
   NULL,
   FALSE,
   FALSE,
@@ -150,7 +156,7 @@ VALUES (
 (
   'Would you like to input your direct costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field where the walkthrough will bring you through possible direct cost categories',
+  'A total will just be one input field where the walkthrough will bring you through possible direct cost categories.',
   NULL,
   TRUE,
   FALSE,
@@ -159,7 +165,7 @@ VALUES (
 (
   'What is the rate per hour of this labor for this product?',
   'number',
-  'Consider just one labor rate for this field',
+  'Consider just one labor rate for this field.',
   3,
   FALSE,
   FALSE,
@@ -168,23 +174,23 @@ VALUES (
 (
   'How many hours of labor is done at this rate for this product?',
   'number',
-  'Consider just one labor rate for this field',
+  'Consider just one labor rate for this field.',
   3,
   FALSE,
   FALSE,
   'Labor Hours'
 ),
 (
-  'What are your parts or raw material costs?',
+  'What are your parts/raw material costs?',
   'number',
-  'These are things that go into the making of the product or delivering of the service',
+  'These are things that go into the making of the product or delivering of the service.',
   3,
   FALSE,
   FALSE,
   'Parts/Raw Materials'
 ),
 (
-  'What are some other direct costs you have?',
+  'What are some other direct costs?',
   'number',
   'Other costs may be things like rental space that is unique to each transaction',
   3,
@@ -193,27 +199,27 @@ VALUES (
   'Other Direct Costs'
 ),
 (
-  'What are your salary costs?',
+  'What are salary costs?',
   'number',
-  'Remember to include yourself if you pay yourself a salary',
+  'Remember to include yourself if you pay yourself a salary.',
   4,
   FALSE,
   FALSE,
   'Salary'
 ),
 (
-  'What are your employee benefit costs?',
+  'What are benefit costs?',
   'number',
-  'Benefits include things like health, dental, disability, life, etc',
+  'Benefits include things like health, dental, disability, life, etc.',
   4,
   FALSE,
   FALSE,
   'Benefits'
 ),
 (
-  'What is your rent or morgage payment?',
+  'What is your rent/business morgage payment?',
   'number',
-  'Remember to include escrow payments and insurance',
+  'Remember to include escrow payments and insurance here.',
   4,
   FALSE,
   FALSE,
@@ -222,7 +228,7 @@ VALUES (
 (
   'How much do you spend on supplies?',
   'number',
-  'These are supplies such as office supplies',
+  'These are supplies such as office supplies.',
   4,
   FALSE,
   FALSE,
@@ -231,7 +237,7 @@ VALUES (
 (
   'How much do you spend on travel?',
   'number',
-  'This includes travel by land, sea, and air',
+  'This includes travel by land, sea, and air.',
   4,
   FALSE,
   FALSE,
@@ -240,7 +246,7 @@ VALUES (
 (
   'How much do you spend on business meetings?',
   'number',
-  'This does not include travel but would include lunch costs',
+  'This does not include travel but would include lunch costs.',
   4,
   FALSE,
   FALSE,
@@ -249,16 +255,16 @@ VALUES (
 (
   'How much do you spend on your vehicles?',
   'number',
-  'This includes any loan payments, gas, insurance, and periferals like a phone charger',
+  'This includes any loan payments, gas, insurance, and periferals like a phone charger.',
   4,
   FALSE,
   FALSE,
   'Vehicle'
 ),
 (
-  'How much do you spend on subscriptions?',
+  'How much do you spend subscriptions?',
   'number',
-  'This includes subscriptions like Office 365, adobe, and other regular payments',
+  'This includes subscriptions like Office 365, adobe, and other regular payments.',
   4,
   FALSE,
   FALSE,
@@ -267,7 +273,7 @@ VALUES (
 (
   'How much do you spend on dues and fees?',
   'number',
-  'I am not sure what to include here. Any ideas?',
+  'I am not sure what to include here. Any ideas?.',
   4,
   FALSE,
   FALSE,
@@ -276,7 +282,7 @@ VALUES (
 (
   'How much do you spend on outside services?',
   'number',
-  'I am not sure what to include here. Any ideas?',
+  'I am not sure what to include here. Any ideas?.',
   4,
   FALSE,
   FALSE,
@@ -285,7 +291,7 @@ VALUES (
 (
   'What other expenses do you have across your business?',
   'number',
-  'I am not sure what to include here. Any ideas?',
+  'I am not sure what to include here. Any ideas?.',
   4,
   FALSE,
   FALSE,
@@ -294,7 +300,7 @@ VALUES (
 (
   'Would you like to input your indirect costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field where the walkthrough will bring you through possible indirect cost categories',
+  'A total will just be one input field where the walkthrough will bring you through possible indirect cost categories.',
   NULL,
   TRUE,
   FALSE,
@@ -413,6 +419,11 @@ VALUES(1,1,'Single Product',2),
 (3,1,'Total Product',9);
 --#endregion
 
+--#region Set Disclaimer
+INSERT INTO "disclaimer" ("disclaimer")
+VALUES ('Illume Decision Hub (IDH) is not a replacement for legal advice, nor are the results to be interpreted as absolute fact. The purpose of IDH is to get small business owners thinking about their financials by providing a general, estimated, big-picture look into basic financial areas. Illume Pricing and its employees will not be held liable for any damages, injuries, losses, expenses, or other ramifications while using this product.');
+--#endregion
+
 -- industry data 
 INSERT INTO industry ("industry", "gross_margin", "op_margin", "service") 
 VALUES ('Professional Services - Businesses',0.4,0.12,true),
@@ -428,7 +439,6 @@ VALUES ('Professional Services - Businesses',0.4,0.12,true),
 ('Manufacturing',0.4,0.13,false),
 ('All Other',0.35,0.08,null);
 
--- Dummy super admin
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
 VALUES ('test@test.com', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
 
@@ -436,6 +446,3 @@ INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "
 VALUES (1,'test', 'test co', 1, '1234567890');
 
 INSERT INTO "user_checks" SELECT 1, * FROM generate_series(1, (SELECT COUNT(*) FROM questions));
-
-INSERT INTO "disclaimer" ("disclaimer")
-VALUES ('Illume Decision Hub (IDH) is not a replacement for legal advice, nor are the results to be interpreted as absolute fact. The purpose of IDH is to get small business owners thinking about their financials by providing a general, estimated, big-picture look into basic financial areas. Illume Pricing and its employees will not be held liable for any damages, injuries, losses, expenses, or other ramifications while using this product.');

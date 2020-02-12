@@ -10,7 +10,7 @@ export default function AdminEditThisCalc(props) {
 
   useEffect(()=>{
     dispatch({type: `GET_ADMIN_QUESTION`, payload: props.calcID});
-  }, []);
+  }, [dispatch, props.calcID]);
 
   return(
     <div className="main-container admin-calc-heading">

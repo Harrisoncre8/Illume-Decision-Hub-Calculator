@@ -82,7 +82,7 @@ export default function BreakEven() {
       })
       setSplitPath(temp);
     }
-  }, [splits]);
+  }, [splits, inputData]);
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
@@ -101,27 +101,29 @@ export default function BreakEven() {
       return (
         <>
           {
-            splits[split] ?
+            splits[split] && userCheckboxes.findIndex(el => el.question_id === split) !== -1 ?
               <div className="max-width-container">
                 <form>
                   {splits[split].map(radio => {
                     return (
                       <span key={radio.id}>
-                        <label className="radio-container">
-                          {
-                            user[0] && user[0].service && radio.split_text?
-                            radio.split_text.replace(/Product/g, 'Service'):
-                            radio.split_text
-                          }
-                          <input
-                            type='radio'
-                            name="next"
-                            value={radio.next_id}
-                            checked={+splitPath[split] === +radio.next_id}
-                            onChange={(e) => { radioChange(e, split) }}
-                          />
-                          <span className="radio-btn"></span>
-                        </label>
+                        <div className="radio-wrapper">
+                          <label className="radio-container">
+                            {
+                              user[0] && user[0].service && radio.split_text?
+                              radio.split_text.replace(/Product/g, 'Service'):
+                              radio.split_text
+                            }
+                            <input
+                              type='radio'
+                              name="next"
+                              value={radio.next_id}
+                              checked={+splitPath[split] === +radio.next_id}
+                              onChange={(e) => { radioChange(e, split) }}
+                            />
+                            <span className="radio-btn"></span>
+                          </label>
+                        </div>
                       </span>
                     );
                   })}
