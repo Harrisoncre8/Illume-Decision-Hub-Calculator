@@ -12,8 +12,7 @@ export default function AdminCalcSubquestion(props) {
   const handleSubmit = e => {
     e.preventDefault();
     let id = [props.id, question, tooltip, props.calcID];
-    let popup = window.confirm(`Are you ready to save these changes?`)
-    if(popup){dispatch({type: `PUT_ADMIN_SUB_QUESTION`, payload: id})};
+    dispatch({type: `PUT_ADMIN_SUB_QUESTION`, payload: id});
   }
 
   return(

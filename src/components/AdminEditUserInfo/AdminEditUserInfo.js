@@ -18,6 +18,8 @@ class AdminEditUserInfo extends Component {
       industry: '',
       industryid: '',
       password: '',
+      checkPassword: '',
+      wrongPassword: null,
       usertype: false,
     }
   }
@@ -36,7 +38,6 @@ class AdminEditUserInfo extends Component {
 
   // Show or hide password
   togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
-
 
   // Set local state to current input value
   handleChange = (e, propName) => {
@@ -76,8 +77,16 @@ class AdminEditUserInfo extends Component {
 
   // Dispatch to saga to handle admin edits, close modal
   handleSave = () => {
-    this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
-    this.closeModal();
+
+    if(this.state.selectedUser.password === this.state.selectedUser.checkPassword){
+      let passwordInfo = [this.state.selectedUser.password, this.state.selectedUser.id];
+      this.props.dispatch({type: `NEW_PASSWORD`, payload: passwordInfo});
+      this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
+      this.closeModal();
+    }
+    else if(this.state.selectedUser.password !== this.state.selectedUser.checkPassword){
+      alert('make sure your passwords match')
+    }
   }
 
   // Open modal popup, populate input fields from local state
@@ -181,6 +190,7 @@ class AdminEditUserInfo extends Component {
                   <label className="text-field-label">email</label>
                   <div className="text-field-mask admin-user-mask-email"></div>
                 </div>
+
                 <div className="text-field-container">
                   <input
                     className="text-field text-field-active"
@@ -190,14 +200,26 @@ class AdminEditUserInfo extends Component {
                   />
                   <label className="text-field-label">password</label>
                   <div className="text-field-mask admin-user-mask-password"></div>
+                </div>
+
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type={this.state.showPassword} 
+                    value={editUser.checkPassword}
+                    onChange={(event) => this.handleChange(event, 'checkPassword')}
+                   />
+                  <label className="text-field-label">confirm password</label>{JSON.stringify(editUser.checkPassword)}
+                  <div className="text-field-mask admin-user-mask-password"></div>
                   <input type="checkbox" onChange={this.togglePasswordView} />
                   <label> Show Password</label>
-
                 </div>
+
+
 
                 <select
                   className="modal-input"
-                  value={this.state.selectedUser.industryid || 'industry'}
+                  value={editUser.industryid || 'industry'}
                   onChange={(event) => this.handleDropdownChange(event, 'industryid')}
                 >
                   {this.props.industry.map(industry =>
@@ -207,7 +229,7 @@ class AdminEditUserInfo extends Component {
 
                 <select
                   className="modal-input"
-                  value={this.state.selectedUser.usertype || 'usertype'}
+                  value={editUser.usertype || 'usertype'}
                   onChange={(event) => this.handleDropdownChange(event, 'usertype')}
                 >
                   <option key={1} value={false}>User</option>
