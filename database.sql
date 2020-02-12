@@ -1,7 +1,7 @@
 --#region Create Tables
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
-  "email" TEXT,
+  "email" TEXT UNIQUE,
   "hashedpassword" TEXT,
   "admin" BOOLEAN DEFAULT false,
   "super_admin" BOOLEAN DEFAULT false
@@ -149,7 +149,7 @@ VALUES (
   'Direct Costs Walkthrough'
 ),
 (
-  'What is the rate per hour of this labor?',
+  'What is the rate per hour of this labor for this product?',
   'number',
   'Consider just one labor rate for this field',
   3,
@@ -158,7 +158,7 @@ VALUES (
   'Labor Rate'
 ),
 (
-  'How many hours of labor are done at this rate?',
+  'How many hours of labor is done at this rate for this product??',
   'number',
   'Consider just one labor rate for this field',
   3,
@@ -312,7 +312,7 @@ ALTER TABLE "user_checks" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
 ('Break Even Pricing', 6),
-('Price Setting', 9);
+('Price Setting', 65);
 
 --#region Set up Paths
 INSERT INTO "question_calculator" ("calculator_id", "question_id", "next_id")
@@ -379,7 +379,8 @@ VALUES (1,1,2),
 (3,20,62),
 (3,21,63),
 (3,22,12),
-(2,5,14);
+(2,5,14),
+(3,1,15);
 --#endregion
 
 --#region Set up Splits
@@ -399,7 +400,9 @@ VALUES(1,1,'Single Product',2),
 (3,23,'Single',11),
 (3,23,'Walkthrough',53),
 (2,1,'Single Product',14),
-(2,1,'Total Product',64);
+(2,1,'Total Product',64),
+(3,1,'Single Product',15),
+(3,1,'Total Product',9);
 --#endregion
 
 -- dummy industry data 
