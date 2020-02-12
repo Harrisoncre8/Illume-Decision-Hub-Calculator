@@ -75,10 +75,10 @@ router.put('/new-password', rejectUnauthenticated, (req, res) => {
 
 // POST route to toggle user calculators
 router.post('/calc-info', rejectUnauthenticated, (req, res) => {
-  const userId = req.body.userID;
+  const userID = req.body.userID;
   const calcID = req.body.calcID;
   const sqlQuery = `INSERT INTO "toggle_calculator" ("user_id", "calculator_id") VALUES ($1, $2)`;
-  pool.query(sqlQuery, [userId, calcID]).then(result => {
+  pool.query(sqlQuery, [userID, calcID]).then(result => {
     res.sendStatus(201);
   }) 
   .catch( error => {
@@ -97,6 +97,22 @@ router.get('/calc/:id', rejectUnauthenticated, (req, res) => {
     })
     .catch( error => {
       console.log('Error with GET calculator info', error);
+      res.sendStatus(500);
+    });
+});
+
+// DELETE calculator information by user id
+router.delete('/delete-calc/:id', rejectUnauthenticated, (req, res) => {
+  let userID = req.user.id;
+  let calcID = req.params.id;
+  const sqlQuery = `DELETE FROM "toggle_calculator" 
+                    WHERE "user_id" = ${userID} AND "calculator_id" = ${calcID}`;
+  pool.query(sqlQuery)
+    .then(result => {
+      res.sendStatus(200);
+    })
+    .catch( error => {
+      console.log('Error with DELETE calculator info', error);
       res.sendStatus(500);
     });
 });

@@ -16,11 +16,10 @@ const UserCalcToggle = () => {
   // handle button click to toggle nav 
   const handleCalcClick = calcID => {
     let calcInfo = {userID, calcID};
-    if(!calcData[calcData.findIndex(element => element.calculator_id === calcID)]){
-      dispatch({type: `TOGGLE_CALC`, payload: calcInfo});
-      dispatch({type: `GET_CALC_INFO`, payload: userID});
-    } else {
+    if(calcData[calcData.findIndex(element => element.calculator_id === calcID)]){
       dispatch({type: `DELETE_CALC`, payload: calcInfo});
+    } else {
+      dispatch({type: `TOGGLE_CALC`, payload: calcInfo});
     }
   }
 

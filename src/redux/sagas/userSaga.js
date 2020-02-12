@@ -47,10 +47,24 @@ function* getCalcInfo(action) {
   }
 }
 
+// worker Saga: will be fired on "DELETE_CALC" actions
+function* deleteCalcInfo(action) {
+  try {
+    let id = action.payload.calcID;
+    let userID = action.payload.userID;
+    yield axios.delete(`/api/user/delete-calc/${id}`);
+    yield put({ type: 'GET_CALC_INFO', payload: userID });
+  } catch (error) {
+    console.log('User get info request failed', error);
+  }
+}
+
 // worker Saga: will be fired on "TOGGLE_CALC" actions
 function* postCalcInfo(action) {
   try {
+    let userID = action.payload.userID;
     yield axios.post(`/api/user/calc-info`, action.payload);
+    yield put({ type: 'GET_CALC_INFO', payload: userID });
   } catch (error) {
     console.log('User toggle calculator request failed', error);
   }
@@ -83,6 +97,7 @@ function* userSaga() {
   yield takeLatest('PUT_USER_INFO', putUserInfo);
   yield takeLatest('NEW_PASSWORD', putNewPassword);
   yield takeLatest('GET_CALC_INFO', getCalcInfo)
+  yield takeLatest('DELETE_CALC', deleteCalcInfo)
   yield takeLatest('TOGGLE_CALC', postCalcInfo);
 }
 
