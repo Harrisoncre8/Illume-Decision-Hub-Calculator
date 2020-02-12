@@ -402,9 +402,20 @@ VALUES(1,1,'Single Product',2),
 (2,1,'Total Product',64);
 --#endregion
 
--- dummy industry data 
-INSERT INTO industry ("industry", "margin") 
-VALUES ('Attorney', 0.30), ('Cleaning', 0.20), ('Massage', 0.25);
+-- industry data 
+INSERT INTO industry ("industry", "gross_margin", "op_margin", "service") 
+VALUES ('Professional Services - Businesses',0.4,0.12,true),
+('Professional Services - Consumer',0.31,0.08,true),
+('Transportation / Trucking',0.25,0.05,true),
+('Financial Services',0.7,0.18,true),
+('Insurance',0.3,0.12,true),
+('Construction / Building Materials',0.23,0.09,false),
+('Pharma Medical Device',0.7,0.18,false),
+('Healthcare Services',0.2,0.06,true),
+('Consumer Products',0.5,0.1,false),
+('Restaurant / Retail',0.25,0.07,true),
+('Manufacturing',0.4,0.13,false),
+('All Other',0.35,0.08,null);
 
 -- Dummy super admin
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
@@ -414,3 +425,6 @@ INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "
 VALUES (1,'test', 'test co', 1, '1234567890');
 
 INSERT INTO "user_checks" SELECT 1, * FROM generate_series(1, (SELECT COUNT(*) FROM questions));
+
+INSERT INTO "disclaimer" ("disclaimer")
+VALUES ('Illume Decision Hub (IDH) is not a replacement for legal advice, nor are the results to be interpreted as absolute fact. The purpose of IDH is to get small business owners thinking about their financials by providing a general, estimated, big-picture look into basic financial areas. Illume Pricing and its employees will not be held liable for any damages, injuries, losses, expenses, or other ramifications while using this product.');
