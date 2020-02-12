@@ -18,6 +18,11 @@ class Register extends Component{
     agreement: false,
   }
 
+  // Run on component mount
+  componentDidMount() {
+    this.props.dispatch({type: `GET_DISCLAIMER`});
+  }
+
   // Toggle agreement checkbox
   agree = e => this.state.agreement ? this.setState({agreement:false}) : this.setState({agreement:true});
 
