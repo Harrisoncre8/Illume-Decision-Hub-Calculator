@@ -32,6 +32,8 @@ const rootReducer = combineReducers({
   user: createReducer('SET_USER', {}), // stores user info - basic table (not contact info table)
   userCheckboxes: createReducer('SET_USER_CHECKBOXES'), // holds the users checkboxes
   userInfo: createReducer('SET_USER_INFO'), // stores necessary information for user edit page - this is contact info
+  calcStatus: createReducer('SET_CALC_INFO'), // stores calculator toggle status on page load
+
 });
 
 export default rootReducer;

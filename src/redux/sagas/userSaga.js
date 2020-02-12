@@ -36,7 +36,41 @@ function* getUserInfo(action) {
   }
 }
 
-// worker Saga: will be fired on "PUT_USER_INFO" actions
+// worker Saga: will be fired on "GET_CALC_INFO" actions
+function* getCalcInfo(action) {
+  let id = action.payload;
+  try {
+    const response = yield axios.get(`/api/user/calc/${id}`);
+    yield put({ type: 'SET_CALC_INFO', payload: response.data });
+  } catch (error) {
+    console.log('User get info request failed', error);
+  }
+}
+
+// worker Saga: will be fired on "DELETE_CALC" actions
+function* deleteCalcInfo(action) {
+  try {
+    let id = action.payload.calcID;
+    let userID = action.payload.userID;
+    yield axios.delete(`/api/user/delete-calc/${id}`);
+    yield put({ type: 'GET_CALC_INFO', payload: userID });
+  } catch (error) {
+    console.log('User get info request failed', error);
+  }
+}
+
+// worker Saga: will be fired on "TOGGLE_CALC" actions
+function* postCalcInfo(action) {
+  try {
+    let userID = action.payload.userID;
+    yield axios.post(`/api/user/calc-info`, action.payload);
+    yield put({ type: 'GET_CALC_INFO', payload: userID });
+  } catch (error) {
+    console.log('User toggle calculator request failed', error);
+  }
+}
+
+// worker Saga: will be fired on "GET_USER_INFO" actions
 function* putUserInfo(action) {
   try {
     yield axios.put(`/api/user/info`, action.payload);
@@ -61,7 +95,6 @@ function* putNewPassword(action) {
   try {
     const response = yield axios.put(`/api/user/new-password`, action.payload);
     yield put({type: 'MATCH_PASSWORD', payload: response.status});
-    // yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
   } catch (error) {
     console.log('User put new password request failed', error);
     yield put({type: 'MATCH_PASSWORD', payload: error.response.status});
@@ -74,6 +107,9 @@ function* userSaga() {
   yield takeLatest('GET_USER_INFO', getUserInfo);
   yield takeLatest('PUT_USER_INFO', putUserInfo);
   yield takeLatest('NEW_PASSWORD', putNewPassword);
+  yield takeLatest('GET_CALC_INFO', getCalcInfo)
+  yield takeLatest('DELETE_CALC', deleteCalcInfo)
+  yield takeLatest('TOGGLE_CALC', postCalcInfo);
 }
 
 export default userSaga;

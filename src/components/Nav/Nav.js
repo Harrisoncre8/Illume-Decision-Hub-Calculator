@@ -6,6 +6,7 @@ import './Nav.css';
 export default function Nav() {
   // Set react router hook
   const userData = useSelector(state => state.user.admin);
+  let calcData = useSelector(state => state.calcStatus);
   const history = useHistory();
   const dispatch = useCallback(useDispatch());
   const questionData = useSelector(state=>state.question.calculator_id);
@@ -14,9 +15,29 @@ export default function Nav() {
   const [lever, setLever] = useState('circle-btn');
   const [price, setPrice] = useState('circle-btn');
   const [profile, setProfile] = useState('circle-btn');
+  const [renderLever, setRenderLever] = useState(null);
+  const [renderPrice, setRenderPrice] = useState(null);
+  const [renderBreak, setRenderBreak] = useState(null);
 
   // Run on component mount
   useEffect(()=>{
+    if(calcData[calcData.findIndex(element => element.calculator_id === 1)]){
+      setRenderLever(true);
+    } else {
+      setRenderLever(false);
+    }
+    if(calcData[calcData.findIndex(element => element.calculator_id === 2)]){
+      console.log('BREAK HAPPENS?');
+      setRenderBreak(true);
+    } else {
+      setRenderBreak(false);
+    }
+    if(calcData[calcData.findIndex(element => element.calculator_id === 3)]){
+      console.log('PRICE HAPPENS');
+      setRenderPrice(true);
+    } else {
+      setRenderPrice(false);
+    }
     if(history.location.pathname === '/'){
       setHome('circle-btn-active');
       setBreakEven('circle-btn');
@@ -52,7 +73,7 @@ export default function Nav() {
       setLever('circle-btn');
       setProfile('circle-btn');
     }
-  }, [questionData, userData, history.location.pathname]);
+  }, [questionData, userData, calcData, history.location.pathname]);
 
   // Log user out, push history to login page
   const logout = () => {
@@ -86,15 +107,18 @@ export default function Nav() {
       <button className={`nav-btn ${home}`} onClick={pushHistoryToHome}>
         Home <br /> Page
       </button>
-      <button className={`nav-btn ${breakEven}`} onClick={()=>setStart(2)}>
-        Break Even Calculator
-      </button>
-      <button className={`nav-btn ${lever}`} onClick={()=>setStart(1)}>
-        Profit Lever Calculator
-      </button>
-      <button className={`nav-btn ${price}`} onClick={()=>setStart(3)}>
-        Price Setting Calculator
-      </button>
+      {renderBreak ? null :
+        <button className={`nav-btn ${breakEven}`} onClick={()=>setStart(2)}>
+          Break Even Calculator
+        </button>}
+      {renderLever ? null : 
+        <button className={`nav-btn ${lever}`} onClick={()=>setStart(1)}>
+          Profit Lever Calculator
+        </button>}
+      {renderPrice ? null : 
+        <button className={`nav-btn ${price}`} onClick={()=>setStart(3)}>
+          Price Setting Calculator
+        </button>}
       <button className={`nav-btn ${profile}`} onClick={pushHistoryToProfile}>
         Profile <br /> Page
       </button>

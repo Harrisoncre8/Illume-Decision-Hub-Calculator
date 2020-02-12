@@ -4,6 +4,7 @@ import Modal from 'react-awesome-modal';
 import './User.css'
 import Nav from '../Nav/Nav';
 import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
+import UserCalcToggle from '../UserCalcToggle/UserCalcToggle';
 
 export default function User() {
 
@@ -307,6 +308,7 @@ export default function User() {
             </div>
           </Modal>
           <QuestionCheckboxes />
+          <UserCalcToggle />
         </div>
       </div>
     </center>

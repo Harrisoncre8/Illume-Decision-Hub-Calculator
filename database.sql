@@ -85,6 +85,12 @@ CREATE TABLE "user_checks" (
   PRIMARY KEY ("user_id", "question_id")
 );
 
+CREATE TABLE "toggle_calculator" (
+  "user_id" INT,
+  "calculator_id" INT,
+  PRIMARY KEY ("user_id", "calculator_id")
+);
+
 CREATE TABLE "disclaimer" (
 	"id" SERIAL PRIMARY KEY,
 	"disclaimer" TEXT
