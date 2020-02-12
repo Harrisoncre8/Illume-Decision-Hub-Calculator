@@ -51,7 +51,6 @@ class AdminEditUserInfo extends Component {
 
   // Set input value to current dropdown menu selection
   handleDropdownChange = (e, propName) => {
-    console.log('alskjdf;kl', e.target.value);
     switch (propName) {
       case 'industryid':
         this.setState({
