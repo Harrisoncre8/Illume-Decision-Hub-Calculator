@@ -3,7 +3,6 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
-
 const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
@@ -59,7 +58,7 @@ router.put('/info', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-// put route to check user password and update it in DB
+// PUT route to check user password and update it in DB
 router.put('/new-password', rejectUnauthenticated, (req, res) => {
   const userID = req.body.id;
   const oldPassword = req.body.oldPassword;
@@ -74,12 +73,33 @@ router.put('/new-password', rejectUnauthenticated, (req, res) => {
   }
 })
 
+// POST route to toggle user calculators
 router.post('/calc-info', rejectUnauthenticated, (req, res) => {
   const userId = req.body.userID;
   const calcID = req.body.calcID;
   const sqlQuery = `INSERT INTO "toggle_calculator" ("user_id", "calculator_id") VALUES ($1, $2)`;
-  pool.query(sqlQuery, [userId, calcID])
-})
+  pool.query(sqlQuery, [userId, calcID]).then(result => {
+    res.sendStatus(201);
+  }) 
+  .catch( error => {
+    console.log('Error with POST calculator toggle', error);
+    res.sendStatus(500);
+  });
+});
+
+// GET calculator information by user id
+router.get('/calc/:id', rejectUnauthenticated, (req, res) => {
+  let userID = req.params.id
+  const sqlQuery = `SELECT * FROM "toggle_calculator" WHERE "user_id" = ${userID};`;
+  pool.query(sqlQuery)
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch( error => {
+      console.log('Error with GET calculator info', error);
+      res.sendStatus(500);
+    });
+});
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
@@ -121,7 +141,7 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
   res.sendStatus(200);
 });
 
-// clear all server session information about this user
+// Clear all server session information about this user
 router.post('/logout', (req, res) => {
   // Use passport's built-in method to log out the user
   req.logout();

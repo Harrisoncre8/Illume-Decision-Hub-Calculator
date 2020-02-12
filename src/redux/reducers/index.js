@@ -9,6 +9,7 @@ import previousQuestion from './previousQuestionReducer';
 import input from './inputReducer';
 import userInfo from './userInfoReducer';
 import passwordStatus from './passwordStatusReducer';
+import userCalcReducer from './userCalcReducer';
 import userCheckboxes from './userCheckboxesReducer';
 
 const rootReducer = combineReducers({
@@ -17,12 +18,13 @@ const rootReducer = combineReducers({
   admin, // stores admin information
   industry, // stores industry information
   split, // stores split from the database
-  user,
+  user, // stores user credentials on login
   passwordStatus, // contains password change status
   previousQuestion, // stores id of previous question for stepper
   input, // stores values from inputs from stepper
   userInfo, // stores necessary information for user edit page
   userCheckboxes, // holds the users checkboxes
+  userCalcReducer, // stores calculator toggle status on page load
 });
 
 export default rootReducer;

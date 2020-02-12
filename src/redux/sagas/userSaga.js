@@ -39,7 +39,6 @@ function* getUserInfo(action) {
 // worker Saga: will be fired on "GET_CALC_INFO" actions
 function* getCalcInfo(action) {
   let id = action.payload;
-  console.log('asdfadf', id);
   try {
     const response = yield axios.get(`/api/user/calc/${id}`);
     yield put({ type: 'SET_CALC_INFO', payload: response.data });
