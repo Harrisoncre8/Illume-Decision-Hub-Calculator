@@ -177,17 +177,17 @@ class Register extends Component{
           <Modal
               visible={this.state.visible}
               width="440"
-              height="500"
+              height="330"
               effect="fadeInUp"
               onClickAway={this.closeModal}
             >
               <div className="modal-container">
-                <h1 className="main-heading modal-heading">Usage Agreement</h1>
+                <h1 className="main-heading">Usage Agreement</h1>
                 <div>
-                  <p>{this.props.disclaimer}</p>
+                  <p className="align-left">{this.props.disclaimer.disclaimer}</p>
                 </div>
                 <div className="modal-btn-container">
-                  <button className="normal-btn profile-modal-btns" onClick={this.closeModal}>
+                  <button className="normal-btn" onClick={this.closeModal}>
                     Okay
                   </button>
                 </div>
