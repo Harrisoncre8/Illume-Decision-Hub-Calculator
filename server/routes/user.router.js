@@ -120,4 +120,20 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+// PUT to update user's industry
+router.put('/industry', rejectUnauthenticated, (req, res) => {
+  const id = [req.body.industry, req.body.id];
+  const sqlQuery = `UPDATE users 
+                    SET industry = $1 
+                    WHERE id = $2;`;
+  pool.query(sqlQuery, id)
+  .then(result => {
+    res.send(200);
+  })
+  .catch( error => {
+    console.log('Error with PUT user industry', error);
+    res.sendStatus(500);
+  });
+});
+
 module.exports = router;
