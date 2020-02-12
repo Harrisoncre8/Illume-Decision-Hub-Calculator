@@ -113,7 +113,7 @@ export default function PriceSetting() {
       })
       setSplitPath(temp);
     }
-  }, [splits]);
+  }, [splits, inputData]);
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');

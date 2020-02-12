@@ -113,28 +113,30 @@ export default function User() {
       <div className="main-container">
         <div className="top-card-container">
           <div className="profile-personal-details-container">
-            {userData.map(user => 
-              <div key={user.id}>
+            {userData.map((user, i) => 
+              <div key={i}>
                 <h1 className='user-spacing'>Welcome back, {user.name}!</h1>
                 <h2 className='user-spacing'>Profile Information</h2>
                 <div className="profile-list-container">
                   <table className="profile-text user-info">
-                    <tr>
-                      <td>Name:</td>
-                      <td className="profile-center">{user.name}</td>
-                    </tr>
-                    <tr>
-                      <td>Company:</td>
-                      <td className="profile-center">{user.business_name}</td>
-                    </tr>
-                    <tr>
-                      <td>Phone:</td>
-                      <td className="profile-center">{user.phone_number}</td>
-                    </tr>
-                    <tr>
-                      <td>Email:</td>
-                      <td className="profile-center">{user.email}</td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <td>Name:</td>
+                        <td className="profile-center">{user.name}</td>
+                      </tr>
+                      <tr>
+                        <td>Company:</td>
+                        <td className="profile-center">{user.business_name}</td>
+                      </tr>
+                      <tr>
+                        <td>Phone:</td>
+                        <td className="profile-center">{user.phone_number}</td>
+                      </tr>
+                      <tr>
+                        <td>Email:</td>
+                        <td className="profile-center">{user.email}</td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
               </div>

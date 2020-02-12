@@ -52,7 +52,7 @@ export default function Nav() {
       setLever('circle-btn');
       setProfile('circle-btn');
     }
-  }, [questionData, userData]);
+  }, [questionData, userData, history.location.pathname]);
 
   // Log user out, push history to login page
   const logout = () => {
