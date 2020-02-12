@@ -93,7 +93,6 @@ export default function Stepper() {
                   }
                 </p>
                 <br />
-                {JSON.stringify(user[0] && user[0].service)}
                 {questionData.split ?
                   <div>
                     <div className="stepper-radio-container">
