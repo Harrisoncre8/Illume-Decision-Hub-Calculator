@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
@@ -21,7 +21,7 @@ import NotFoundPage from '../NotFound/NotFound';
 export default function App() {
   // gets user info on all pages DO NOT REMOVE
   const dispatch = useCallback(useDispatch());
-  
+
   useEffect(()=>{
     dispatch({type: 'FETCH_USER'});
   }, []);
