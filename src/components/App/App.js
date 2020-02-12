@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 import Admin from '../Admin/Admin';
@@ -21,10 +21,18 @@ import NotFoundPage from '../NotFound/NotFound';
 export default function App() {
   // gets user info on all pages DO NOT REMOVE
   const dispatch = useCallback(useDispatch());
-  useEffect(()=>{
-    dispatch({type: 'FETCH_USER'})
-  })
-  
+  const userID = useSelector(state => state.user);
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER' })
+  },[])
+
+  useEffect(() => {
+    if(userID && userID.id){
+      dispatch({ type: 'GET_USER_INFO', payload: userID.id })
+    }
+  },[userID])
+
   return (
     <Router>
       <Switch>
@@ -39,7 +47,7 @@ export default function App() {
         <ProtectedRoute exact path='/questionnaire' component={Stepper} />
         <Route exact path='/register' component={Register} />
         <Route exact path='/new-user' component={NewUser} />
-        <Route exact path ='/user' component={User} />
+        <Route exact path='/user' component={User} />
         <Route path="*" component={NotFoundPage} />
       </Switch>
       <Footer />
