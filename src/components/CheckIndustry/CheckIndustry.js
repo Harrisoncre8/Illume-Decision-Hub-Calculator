@@ -36,7 +36,8 @@ export default function CheckIndustry() {
   const openModal = () => setModal(true);
 
   const saveChanges = () => {
-
+    dispatch({type: `PUT_USER_INDUSTRY`, payload: {id: userID, industry: industry}});
+    closeModal();
   }
 
   return(
