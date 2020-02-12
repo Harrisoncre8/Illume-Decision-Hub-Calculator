@@ -16,6 +16,7 @@ export default function PriceSetting() {
   const [paths, setPaths] = useState([]);
   const [splits, setSplits] = useState({});
   const [splitPath, setSplitPath] = useState({});
+  const [industryName, setIndustryName] = useState('')
 
   // Connects to Redux
   const inputData = useSelector(state => state.input);
@@ -238,15 +239,67 @@ export default function PriceSetting() {
           <h1 className="main-heading">Price Setting</h1>
           <div className="inputs">
             <form>
-              <select onChange={(event) => setMargin(event.target.value)} value={margin}>
-                <option disabled>Select Industry</option>
+              <select 
+                onChange={
+                  (event) => {
+                    setMargin(event.target.value); 
+                    const {options, selectedIndex} = event.target; 
+                    setIndustryName(options[selectedIndex].innerHTML)
+                  }
+                } 
+                value={
+                  industryName==='All Other'?
+                    null:
+                    margin
+                }
+              >
+                <option value ='' disabled>Select Industry</option>
                 {industryData.map(industry => {
                   return (
-                    <option key={industry.id} value={industry.margin}>{industry.industry}</option>
+                    <option
+                      key={industry.id} 
+                      name={industry.industry}
+                      value={
+                        userCheckboxes.findIndex(el => el.question_id === 3) !== -1?
+                          industry.gross_margin:
+                          industry.op_margin
+                      }
+                    >
+                      {industry.industry}
+                    </option>
                   );
                 })}
               </select>
             </form>
+            {
+              industryName==='All Other'? 
+                <div className="max-width-container">
+                  <div className="align-left">
+                    <p className="results-text">
+                      Enter your industry margin if you know it.  
+                      Otherwise, leave the default value
+                    </p>
+                    <br/>
+                  </div>
+                  <div className="text-field-container">
+                    <input
+                      className="text-field text-field-active"
+                      type='number'
+                      value={margin}
+                      onChange={
+                        (e) => {
+                          setMargin(e.target.value);
+                          checkForValue(e);
+                        }
+                      }
+                    />
+                    <label className="text-field-label">enter value</label>
+                    <div className="text-field-mask stepper-mask"></div>
+                  </div>
+                </div>
+                :
+                null
+            }
             {stepper(65)}
           </div>
           <div className="data-result">
