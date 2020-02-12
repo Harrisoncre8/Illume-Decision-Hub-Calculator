@@ -6,10 +6,16 @@ const UserCalcToggle = () => {
   let dispatch = useDispatch();
   let userID = useSelector(state => state.user.id);
 
+  useEffect(() => {
+    if(userID){
+      dispatch({type: `GET_CALC_INFO`, payload: userID});
+    }
+  }, [userID, dispatch]);
+
   // handle button click to toggle nav 
   const handleCalcClick = calcID => {
     let calcInfo = {userID, calcID}
-    dispatch({ type: 'TOGGLE_CALC', payload: calcInfo});
+    dispatch({type: `TOGGLE_CALC`, payload: calcInfo});
   }
 
   return(
