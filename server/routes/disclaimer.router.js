@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   const sqlQuery = `SELECT * FROM disclaimer;`;
   pool.query(sqlQuery)
   .then(results=>{
-    res.send(results.rows);
+    res.send(results.rows[0]);
   })
   .catch(error=>{
     console.log(`ERROR IN / GET DISCLAIMER ----------------------> `, error);
