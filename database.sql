@@ -430,7 +430,7 @@ VALUES ('Professional Services - Businesses',0.4,0.12,true),
 
 -- Dummy super admin
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
-VALUES ('test@test.co', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
+VALUES ('test@test.com', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
 
 INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "phone_number")
 VALUES (1,'test', 'test co', 1, '1234567890');
