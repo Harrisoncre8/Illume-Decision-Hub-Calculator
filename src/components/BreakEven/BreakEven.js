@@ -1,163 +1,204 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './BreakEven.css';
+import Nav from '../Nav/Nav';
+import Axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux';
 
-function BreakEven() {
+export default function BreakEven() {
+
+  // States
   const [price, setPrice] = useState('');
-  const [hours, setHours] = useState('');
-  const [rate, setRate] = useState('');
-  const [raw, setRaw] = useState('');
-  const [part, setPart] = useState('');
-  const [indirect, setIndirect] = useState('');
-  const [type, setType] = useState('single');
-  const [sales, setSales] = useState(1);
+  const [paths, setPaths] = useState([]);
+  const [splits, setSplits] = useState({});
+  const [splitPath, setSplitPath] = useState({});
+
+  // Connects to redux
+  const inputData = useSelector(state => state.input);
+  const userCheckboxes = useSelector(state=>state.userCheckboxes);
+  const dispatch = useCallback(useDispatch(), []);
+
+  // Dynamically calculates the break even point depending on settings
+  useEffect(() => {
+    let directCosts = +splitPath[7] === 7 ?
+      +inputData[3] :
+      ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
+
+    let indirectCosts = +splitPath[23] === 8 ?
+      + inputData[4] :
+      (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
+      (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
+      (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
+      (+inputData[21] || 0) + (+inputData[22] || 0);
+
+    let divisor = +splitPath[1] === 14 ? 1 : +inputData[5] || 1;
+
+    setPrice(((+directCosts || 0) + (+indirectCosts || 0)) / (divisor));
+  }, [inputData, splitPath]);
+
+  // Gets the questions and splits for the given results page
+  useEffect(() => {
+    Axios.get('/api/question/results/' + 2).then(response => {
+      let temp = response.data.reduce((acum, arr) => {
+        if (arr.split) {
+          let id = arr.id;
+          let text = acum[id] && acum[id]['split_text'] ?
+            [...acum[id]['split_text'], arr.split_text] : [arr.split_text];
+          let next = acum[id] && acum[id]['split_next_id'] ?
+            [...acum[id]['split_next_id'], arr.split_next_id] : [arr.split_next_id];
+          delete arr.id;
+          delete arr.split_text;
+          delete arr.split_next_id;
+          acum[id] = { ...arr };
+          acum[id]['split_text'] = text;
+          acum[id]['split_next_id'] = next;
+        } else {
+          let id = arr.id;
+          delete arr.id;
+          acum[id] = { ...arr };
+        }
+        return acum;
+      }, {});
+      setPaths(temp);
+    });
+
+    Axios.get('/api/question/splits/' + 2).then(response => {
+      let temp = response.data.reduce((acum, arr) => {
+        acum[arr.question_id] ? acum[arr.question_id].push(arr) : acum[arr.question_id] = [arr];
+        return acum;
+      }, {});
+      setSplits(temp);
+    }).catch(err => {
+      console.log(err);
+    });
+  }, []);
+
+  // Rearranges the response from the server to a JSON styled object
+  useEffect(() => {
+    if (Object.values(splits).length > 0) {
+      const temp = {};
+      Object.values(splits).forEach(arr => {
+        temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
+      })
+      setSplitPath(temp);
+    }
+  }, [splits]);
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
-  
-  // Sets local state to current input value, adds or removes class based on input's value
-  const handleChange = (e, propName) => {
-    propName(e.target.value);
-    checkForValue(e);
+
+  // Handles the change of the radio button
+  function radioChange(e, question) {
+    let temp = { ...splitPath };
+    temp[question] = Number(e.target.value);
+    setSplitPath(temp);
   }
 
-  useEffect(()=>{
-    setPrice(((hours * rate) + +raw + +part + +indirect)/(sales))
-  },[hours, rate, raw, part, indirect, setPrice, type, sales])
+  // Dynamically renders the questions associated with the calculator in the order
+  // they would appear in the stepper component
+  function stepper(start) {
+    function splitter(split) {
+      return (
+        <>
+          {
+            splits[split] ?
+              <div className="max-width-container">
+                <form>
+                  {splits[split].map(radio => {
+                    return (
+                      <span key={radio.id}>
+                        <label className="radio-container">{radio.split_text}
+                          <input
+                            type='radio'
+                            name="next"
+                            value={radio.next_id}
+                            checked={+splitPath[split] === +radio.next_id}
+                            onChange={(e) => { radioChange(e, split) }}
+                          />
+                          <span className="radio-btn"></span>
+                        </label>
+                      </span>
+                    );
+                  })}
+                </form>
+              </div>
+              :
+              null
+          }
+          {
+            splitPath[split.toString()] ?
+              stepper(splitPath[split.toString()]) 
+              :
+              null
+          }
+        </>
+      );
+    }
+
+    let next = paths[start] && paths[start].next_id;
+    let doesSplit = paths[start] && paths[start].split;
+    let questionId = paths[start] && paths[start].question_id;
+
+    return (
+      <div className="max-width-container">
+        <div className="align-left">
+          {
+            userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
+              <p className="results-text">{paths[start] && paths[start].question}</p>:
+              null
+          }
+        </div>
+        {doesSplit ?
+          null :
+          userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
+            <div className="text-field-container" key={paths[start] && paths[start].question_id}>
+              <input
+                className="text-field text-field-active"
+                type={paths[start] && paths[start].response_type}
+                value={inputData[questionId]}
+                onChange={
+                  (e) => {
+                    dispatch({
+                      type: 'ADD_INPUT_VALUE',
+                      payload: {
+                        key: questionId,
+                        value: e.target.value
+                      }
+                    });
+                    checkForValue(e);
+                  }
+                }
+              />
+              <label className="text-field-label">enter value</label>
+              <div className="text-field-mask stepper-mask"></div>
+            </div> :
+            null
+        }
+        {
+          next ?
+            doesSplit ?
+              splitter(questionId) :
+              stepper(next) :
+            null // for next?
+        }
+      </div>
+    );
+  }
 
   return (
     <center>
+      <Nav />
       <div className="main-container">
-      <h1 className="main-heading">Break Even Pricing</h1>
-        <form>
-
-        <div>
-          <label className="break-radio">
-            <input 
-              type="radio" 
-              name="type" 
-              value="single"
-              checked={type === 'single'}
-              onChange={()=>{setType('single'); setSales(1)}}
-            />
-            Single Sale
-          </label>
-        </div>
-          <br/>
-        <div>
-          <label className="break-radio">
-            <input 
-              type="radio" 
-              name="type" 
-              value="total"
-              checked={type === 'total'}
-              onChange={()=>setType('total')}
-            />
-            Total Product
-          </label>
-        </div>
-          <br/>
-
-        <div>
-          <span>What are your Labor Hours?</span>
-          <div className="break-text-field-container">
-            <input 
-              className="text-field break-text-field-hours"
-              type='number' 
-              value={hours} 
-              onChange={(event)=>handleChange(event, setHours)}
-            />
-            <label className="text-field-label break-label-hours">labor hours</label>
-            <div className="text-field-mask break-mask-hours"></div>
+        <div className="top-card-container">
+          <h1 className="main-heading">Break Even Pricing</h1>
+          {stepper(6)}
+          <div className="data-result">
+            <h3 className="data-result-heading">Result</h3>
+            <p>You're break even price is {price.toLocaleString("en-US", { style: "currency", currency: 'USD' })}.</p>
+            <br />
+            <p>You must sell your product at a price higher than {price.toLocaleString("en-US", { style: "currency", currency: 'USD' })} to make a profit.</p>
           </div>
-        </div>
-
-        <div>
-          <span>What are your Labor Rates?</span>
-          <div className="break-text-field-container">
-            <input 
-              className="text-field break-text-field-rate"
-              type='number' 
-              value={rate} 
-              onChange={(event)=>handleChange(event, setRate)}
-            />
-            <label className="text-field-label break-label-rate">labor rate</label>
-            <div className="text-field-mask break-mask-rate"></div>
-          </div>
-        </div>
-
-        <div>
-          <span>How much are the Raw Materials?</span>
-          <div className="break-text-field-container">
-            <input 
-              className="text-field break-text-field-raw-material"
-              type='number' 
-              value={raw} 
-              onChange={(event)=>handleChange(event, setRaw)}
-            />
-            <label className="text-field-label break-label-raw-material">raw material costs</label>
-            <div className="text-field-mask break-mask-raw-material"></div>
-          </div>
-        </div>
-
-        <div>
-          <span>How much are the Parts?</span>
-          <div className="break-text-field-container">
-            <input 
-              className="text-field break-text-field-part"
-              type='number' 
-              value={part} 
-              onChange={(event)=>handleChange(event, setPart)}
-            />
-            <label className="text-field-label break-label-part">part costs</label>
-            <div className="text-field-mask break-mask-part"></div>
-          </div>
-        </div>
-          
-        <div>
-          <span>How much are your Indirect Costs?</span>
-          <div className="break-text-field-container">
-            <input 
-              className="text-field break-text-field-indirect-cost"
-              type='number' 
-              value={indirect} 
-              onChange={(event)=>handleChange(event, setIndirect)}
-            />
-            <label className="text-field-label break-label-indirect-cost">indirect costs</label>
-            <div className="text-field-mask break-mask-indirect-cost"></div>
-          </div>
-        </div>
-          
-
-          
-          {type === 'total' ?
-            <div>
-              <span>How many Total Sales do you have?</span>
-              <div className="break-text-field-container">
-                <input 
-                  className="text-field break-text-field-sales text-field-active"
-                  type='number' 
-                  value={sales} 
-                  min={1}
-                  onChange={(event)=>handleChange(event, setSales)}
-                />
-                <label className="text-field-label break-label-sales">number of sales</label>
-                <div className="text-field-mask break-mask-sales"></div>
-              </div>
-            </div>
-            :
-            ''
-          }
-        </form>
-        <div className="data-result">
-          <h3 className="data-result-heading">Result</h3>
-          <p>You're break even price is {price.toLocaleString("en-US", {style: "currency", currency: 'USD'})}.</p>
-          <br />
-          <p>You must sell your product at a price higher than {price.toLocaleString("en-US", {style: "currency", currency: 'USD'})} to make a profit.</p>
         </div>
       </div>
     </center>
   );
 }
-
-export default BreakEven;

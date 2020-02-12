@@ -1,7 +1,7 @@
 .register-brand-name {
   position: relative;
   bottom: 35px;
-  font-size: 2.6em;
+  font-size: 2.1em;
 }
 
 .register-cancel-btn {
@@ -30,36 +30,12 @@
   width: 80%;
 }
 
-.register-label-company {
-  transform: translate(-52px, 23px);
-}
-
-.register-label-confirm-password {
-  transform: translate(-29px, 23px);
-}
-
-.register-label-email {
-  transform: translate(-60px, 23px);
-}
-
-.register-label-name {
-  transform: translate(-60px, 23px);
-}
-
-.register-label-password {
-  transform: translate(-50px, 23px);
-}
-
-.register-label-phone {
-  transform: translate(-53px, 23px);
-}
-
 .register-logo {
   height: 100px;
 }
 
 .register-mask-company {
-  width: 45px;
+  width: 59px;
 }
 
 .register-mask-confirm-password {
@@ -67,75 +43,22 @@
 }
 
 .register-mask-email {
-  width: 30px;
+  width: 38px;
 }
 
 .register-mask-name {
-  width: 32px;
+  width: 38px;
 }
 
 .register-mask-password {
-  width: 45px;
+  width: 61px;
 }
 
 .register-mask-phone {
-  width: 43px;
+  width: 54px;
 }
 
 .register-register-btn {
   margin-top: 40px;
   margin-bottom: 15px;
-}
-
-.register-text-field-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.register-text-field-company:focus + .register-label-company {
-  transform: translate(-53px, 6px);
-}
-
-.register-text-field-confirm-password:focus + .register-label-confirm-password {
-  transform: translate(-35px, 6px);
-}
-
-.register-text-field-email:focus + .register-label-email {
-  transform: translate(-60px, 6px);
-}
-
-.register-text-field-name:focus + .register-label-name {
-  transform: translate(-60px, 6px);
-}
-
-.register-text-field-password:focus + .register-label-password {
-  transform: translate(-52px, 6px);
-}
-
-.register-text-field-phone:focus + .register-label-phone {
-  transform: translate(-53px, 6px);
-}
-
-.text-field-active + .register-label-company {
-  transform: translate(-53px, 6px);
-}
-
-.text-field-active + .register-label-confirm-password {
-  transform: translate(-35px, 6px);
-}
-
-.text-field-active + .register-label-email {
-  transform: translate(-60px, 6px);
-}
-
-.text-field-active + .register-label-name {
-  transform: translate(-60px, 6px);
-}
-
-.text-field-active + .register-label-password {
-  transform: translate(-52px, 6px);
-}
-
-.text-field-active + .register-label-phone {
-  transform: translate(-53px, 6px);
 }

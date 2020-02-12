@@ -1,3 +1,13 @@
+.admin-delete-industry-cell {
+  cursor: pointer;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+.admin-delete-industry-cell:hover {
+  background-color: #a0a0a0;
+}
+
 .admin-edit-industry-cell {
   cursor: pointer;
   text-decoration: underline;
@@ -9,24 +19,24 @@
   background-color: #f0aa42;
 }
 
+.admin-industry-add-btn {
+  margin-bottom: 20px;
+}
+
+#admin-industry-disabled {
+  background-color: #6d6d6d;
+}
+
 .admin-industry-heading {
   margin-top: 20px;
 }
 
-.admin-industry-label-industry {
-  transform: translate(-54px, 23px);
-}
-
-.admin-industry-label-margin {
-  transform: translate(-46px, 23px);
-}
-
 .admin-industry-mask-industry {
-  width: 43px;
+  width: 52px;
 }
 
 .admin-industry-mask-margin {
-  width: 55px;
+  width: 71px;
 }
 
 .admin-industry-table {
@@ -47,25 +57,4 @@
 
 .admin-industry-table tr:nth-child(even) {
   background-color: #dddddd;
-}
-
-.admin-industry-text-field-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.admin-industry-text-field-industry:focus + .admin-industry-label-industry {
-  transform: translate(-53px, 6px);
-}
-
-.admin-industry-text-field-margin:focus + .admin-industry-label-margin {
-  transform: translate(-47px, 6px);
-}
-
-.text-field-active + .admin-industry-label-industry {
-  transform: translate(-53px, 6px);
-}
-
-.text-field-active + .admin-industry-label-margin {
-  transform: translate(-47px, 6px);
 }

@@ -1,9 +1,7 @@
-const userReducer = (state = {}, action) => {
+const passwordStatusReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_USER':
+    case 'MATCH_PASSWORD':
       return action.payload;
-    case 'UNSET_USER':
-      return null;
     default:
       return state;
   }
@@ -11,4 +9,4 @@ const userReducer = (state = {}, action) => {
 
 // user will be on the redux state at:
 // state.user
-export default userReducer;
+export default passwordStatusReducer;

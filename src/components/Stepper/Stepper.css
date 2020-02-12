@@ -1,0 +1,18 @@
+.stepper-container {
+  padding: 100px 30px;
+}
+
+.stepper-mask {
+  width: 71px;
+}
+
+.stepper-max-width-container {
+  max-width: 800px;
+}
+
+.stepper-radio-container {
+  width: 380px;
+  padding-left: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+}

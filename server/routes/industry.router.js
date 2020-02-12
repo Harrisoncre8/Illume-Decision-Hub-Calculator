@@ -1,10 +1,14 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+
 
 // GET route for industry information
-router.get('/', (req, res) => {
-  let sqlQuery = `SELECT * FROM industry;`;
+router.get('/', rejectUnauthenticated, (req, res) => {
+  let sqlQuery = `SELECT * FROM industry
+                  WHERE enabled = true
+                  ORDER BY industry;`;
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);

@@ -19,13 +19,50 @@ function* fetchUser() {
     // with an id and email set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
+    yield put({ type: 'GET_USER_CHECKBOXES' })
   } catch (error) {
     console.log('User get request failed', error);
   }
 }
 
+// worker Saga: will be fired on "GET_USER_INFO" actions
+function* getUserInfo(action) {
+  let id = action.payload;
+  try {
+    const response = yield axios.get(`/api/user/${id}`);
+    yield put({ type: 'SET_USER_INFO', payload: response.data });
+  } catch (error) {
+    console.log('User get info request failed', error);
+  }
+}
+
+// worker Saga: will be fired on "PUT_USER_INFO" actions
+function* putUserInfo(action) {
+  try {
+    yield axios.put(`/api/user/info`, action.payload);
+    yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
+  } catch (error) {
+    console.log('User put new info request failed', error);
+  }
+}
+
+// worker Saga: will be fired on "NEW_PASSWORD" actions
+function* putNewPassword(action) {
+  try {
+    const response = yield axios.put(`/api/user/new-password`, action.payload);
+    yield put({type: 'MATCH_PASSWORD', payload: response.status});
+    // yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
+  } catch (error) {
+    console.log('User put new password request failed', error);
+    yield put({type: 'MATCH_PASSWORD', payload: error.response.status});
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('GET_USER_INFO', getUserInfo);
+  yield takeLatest('PUT_USER_INFO', putUserInfo);
+  yield takeLatest('NEW_PASSWORD', putNewPassword);
 }
 
 export default userSaga;

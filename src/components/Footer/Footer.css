@@ -1,0 +1,43 @@
+.footer-a {
+  color: #f7d149;
+}
+
+.footer-a:hover {
+  color: #f0aa42;
+}
+
+.footer-a-span {
+  color: white;
+}
+
+.footer-brand-name {
+  position: relative;
+  bottom: 20px;
+  left: 20px;
+  font-size: 1.3em;
+  color: white;
+}
+
+.footer-main-container {
+  position: absolute;
+  bottom: 0;
+  background-color: #000;
+  margin: 0;
+  padding: 30px;
+  width: 96%;
+}
+
+.footer-logo {
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 0 30px #f0aa42;
+  cursor: pointer;
+}
+
+.footer-span-container {
+  text-align: right;
+}
+
+.whitespace {
+  height: 100px;
+}

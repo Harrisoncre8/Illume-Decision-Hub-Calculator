@@ -10,17 +10,26 @@ function* getQuestion(action) {
     }, '').slice(0, -1);
     const response = yield axios.get(`/api/question?${queries}`);
     if (response.data[0].split) {
-      yield put({type: `GET_SPLIT`, payload: response.data[0].question_id})
+      yield put({type: `GET_SPLIT`, payload: {question_id: response.data[0].question_id, calculator_id: response.data[0].calculator_id}})
     }
     yield put({ type: `SET_QUESTION`, payload: response.data[0] })
   } catch (error) {
-    // alert('Sorry, something went wrong while getting questions')
     console.log('Error getting questions in saga', error);
+  }
+}
+
+function* getAllQuestions(action){
+  try {
+    const response = yield axios.get(`/api/question/all`)
+    yield put({ type: `SET_QUESTION`, payload: response.data })
+  } catch (error) {
+    console.log('Error getting all questions in saga', error);
   }
 }
 
 function* questionSaga() {
   yield takeLatest(`GET_QUESTION`, getQuestion);
+  yield takeLatest(`GET_ALL_QUESTIONS`, getAllQuestions);
 }
 
 export default questionSaga;

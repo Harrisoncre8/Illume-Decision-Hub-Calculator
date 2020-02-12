@@ -3,13 +3,15 @@ CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
   "email" TEXT,
   "hashedpassword" TEXT,
-  "admin" BOOLEAN DEFAULT false
+  "admin" BOOLEAN DEFAULT false,
+  "super_admin" BOOLEAN DEFAULT false
 );
 
 CREATE TABLE "industry" (
   "id" SERIAL PRIMARY KEY,
   "industry" TEXT,
-  "margin" DECIMAL(4,2)
+  "margin" DECIMAL(4,2),
+  "enabled" BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE "contact_info" (
@@ -44,6 +46,7 @@ CREATE TABLE "inputs" (
 
 CREATE TABLE "questions" (
   "id" SERIAL PRIMARY KEY,
+  "header" TEXT,
   "question" TEXT,
   "response_type" TEXT,
   "help_text" TEXT,
@@ -74,29 +77,31 @@ CREATE TABLE "checkboxes" (
 );
 
 CREATE TABLE "user_checks" (
-  "id" SERIAL PRIMARY KEY,
   "user_id" INT,
-  "question_id" INT
+  "question_id" INT,
+  PRIMARY KEY ("user_id", "question_id")
 );
 --#endregion
 
 --#region Insert into questions
-INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questions", "split", "checkboxes")
+INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questions", "split", "checkboxes","header")
 VALUES (
   'Is this for a single sale or total product sales?',
   'radio',
-  'Single sales are for when you are only considering a single transaction where total product sales considers multiple transactions.',
+  'Single sales are for when you are only considering a single transaction where total product sales considers multiple transactions',
   NULL,
   TRUE,
-  FALSE
+  FALSE,
+  'Single or Total Sales'
 ),
 (
-  'What is your revinue?',
+  'What is your revenue?',
   'number',
-  'Revinue is that amount of money you charge for a product or service',
+  'Revenue is that amount of money you charge for a product or service',
   NULL,
   FALSE,
-  FALSE
+  FALSE,
+  'Revenue'
 ),
 (
   'What are your direct costs?',
@@ -104,7 +109,8 @@ VALUES (
   'Direct costs are costs that are specific to a sale such as labor costs and material costs',
   NULL,
   FALSE,
-  FALSE
+  FALSE,
+  'Direct Costs'
 ),
 (
   'What are your indirect costs?',
@@ -112,7 +118,8 @@ VALUES (
   'Indirect costs are costs that apply to all sales or services such as gas or rent',
   NULL,
   FALSE,
-  FALSE
+  FALSE,
+  'Indirect Costs'
 ),
 (
   'What is the total number of sales for this product?',
@@ -120,159 +127,170 @@ VALUES (
   'How much of this product or service do you sell?',
   NULL,
   FALSE,
-  FALSE
+  FALSE,
+  'Number of Sales'
 ),
 (
   'What do you plan on pricing this for?',
   'number',
-  'Consider your costs and the value you bring with this product.',
+  'Consider your costs and the value you bring with this product',
   NULL,
   FALSE,
-  FALSE
+  FALSE,
+  'Product/Service Price'
 ),
 (
   'Would you like to input your direct costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field where the walkthrough will bring you through possible direct cost categories.',
+  'A total will just be one input field where the walkthrough will bring you through possible direct cost categories',
   NULL,
   TRUE,
-  FALSE
+  FALSE,
+  'Direct Costs Walkthrough'
 ),
 (
-  'What is the rate per of this labor?',
+  'What is the rate per hour of this labor?',
   'number',
-  'Consider just one labor rate for this field.',
+  'Consider just one labor rate for this field',
   3,
   FALSE,
-  FALSE
+  FALSE,
+  'Labor Rate'
 ),
 (
-  'How many hours of labor is done at this rate?',
+  'How many hours of labor are done at this rate?',
   'number',
-  'Consider just one labor rate for this field.',
+  'Consider just one labor rate for this field',
   3,
   FALSE,
-  FALSE
+  FALSE,
+  'Labor Hours'
 ),
 (
-  'What are your parts/raw material costs?',
+  'What are your parts or raw material costs?',
   'number',
-  'These are things that go into the making of the product or delivering of the service.',
+  'These are things that go into the making of the product or delivering of the service',
   3,
   FALSE,
-  FALSE
+  FALSE,
+  'Parts/Raw Materials'
 ),
 (
-  'What are some other direct costs?',
+  'What are some other direct costs you have?',
   'number',
   'Other costs may be things like rental space that is unique to each transaction',
   3,
   FALSE,
-  FALSE
+  FALSE,
+  'Other Direct Costs'
 ),
 (
-  'What are salary costs?',
+  'What are your salary costs?',
   'number',
-  'Remember to include yourself if you pay yourself a salary.',
+  'Remember to include yourself if you pay yourself a salary',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Salary'
 ),
 (
-  'What are benefit costs?',
+  'What are your employee benefit costs?',
   'number',
-  'Benefits include things like health, dental, disability, life, etc.',
+  'Benefits include things like health, dental, disability, life, etc',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Benefits'
 ),
 (
-  'What is your rent/buisiness morgage payment?',
+  'What is your rent or morgage payment?',
   'number',
-  'Remember to include escrow payments and insurance here.',
+  'Remember to include escrow payments and insurance',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Rent/business'
 ),
 (
   'How much do you spend on supplies?',
   'number',
-  'These are supplies such as office supplies.',
+  'These are supplies such as office supplies',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Supplies'
 ),
 (
   'How much do you spend on travel?',
   'number',
-  'This includes travel by land, sea, and air.',
+  'This includes travel by land, sea, and air',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Travel'
 ),
 (
-  'How much do you spend on buisiness meetings?',
+  'How much do you spend on business meetings?',
   'number',
-  'This does not include travel but would include lunch costs.',
+  'This does not include travel but would include lunch costs',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Meetings'
 ),
 (
   'How much do you spend on your vehicles?',
   'number',
-  'This includes any loan payments, gas, insurance, and periferals like a phone charger.',
+  'This includes any loan payments, gas, insurance, and periferals like a phone charger',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Vehicle'
 ),
 (
-  'How much do you spend subscriptions?',
+  'How much do you spend on subscriptions?',
   'number',
-  'This includes subscriptions like Office 365, adobe, and other regular payments.',
+  'This includes subscriptions like Office 365, adobe, and other regular payments',
   4,
   FALSE,
-  FALSE
-),
-(
-  'How much do you spend on buisiness meetings?',
-  'number',
-  'This does not include travel but would include lunch costs.',
-  4,
   FALSE,
-  FALSE
+  'Subsciptions'
 ),
 (
   'How much do you spend on dues and fees?',
   'number',
-  'I am not sure what to include here. Any ideas?.',
+  'I am not sure what to include here. Any ideas?',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Dues and Fees'
 ),
 (
   'How much do you spend on outside services?',
   'number',
-  'I am not sure what to include here. Any ideas?.',
+  'I am not sure what to include here. Any ideas?',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Outside Services'
 ),
 (
   'What other expenses do you have across your business?',
   'number',
-  'I am not sure what to include here. Any ideas?.',
+  'I am not sure what to include here. Any ideas?',
   4,
   FALSE,
-  FALSE
+  FALSE,
+  'Other Indirect Expenses'
 ),
 (
   'Would you like to input your indirect costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field where the walkthrough will bring you through possible indirect cost categories.',
+  'A total will just be one input field where the walkthrough will bring you through possible indirect cost categories',
   NULL,
   TRUE,
-  FALSE
+  FALSE,
+  'Indirect Costs Walkthrough'
 );
 --#endregion
 
@@ -302,8 +320,8 @@ VALUES (1,1,2),
 (1,2,13),
 (1,3,28),
 (1,4,NULL),
-(1,5,6),
-(2,2,14),
+(1,5,2),
+(2,1,14),
 (2,3,29),
 (2,4,NULL),
 (3,5,15),
@@ -316,18 +334,18 @@ VALUES (1,1,2),
 (1,8,17),
 (1,9,18),
 (1,10,19),
-(1,11,4),
+(1,11,28),
 (2,8,21),
 (2,9,22),
 (2,10,23),
-(2,11,8),
+(2,11,29),
 (3,8,25),
 (3,9,26),
 (3,10,27),
-(3,11,11),
-(1,24,4),
-(2,24,8),
-(3,24,11),
+(3,11,30),
+(1,23,4),
+(2,23,8),
+(3,23,11),
 (1,12,32),
 (1,13,33),
 (1,14,34),
@@ -338,32 +356,30 @@ VALUES (1,1,2),
 (1,19,39),
 (1,20,40),
 (1,21,41),
-(1,22,42),
-(1,23,null),
-(2,12,44),
-(2,13,45),
-(2,14,46),
-(2,15,47),
-(2,16,48),
-(2,17,49),
-(2,18,50),
-(2,19,51),
-(2,20,52),
-(2,21,53),
-(2,22,54),
-(2,23,null),
-(3,12,56),
-(3,13,57),
-(3,14,58),
-(3,15,59),
-(3,16,60),
-(3,17,61),
-(3,18,62),
-(3,19,63),
-(3,20,64),
-(3,21,65),
-(3,22,66),
-(3,23,12);
+(1,22,null),
+(2,12,43),
+(2,13,44),
+(2,14,45),
+(2,15,46),
+(2,16,47),
+(2,17,48),
+(2,18,49),
+(2,19,50),
+(2,20,51),
+(2,21,52),
+(2,22,null),
+(3,12,54),
+(3,13,55),
+(3,14,56),
+(3,15,57),
+(3,16,58),
+(3,17,59),
+(3,18,60),
+(3,19,61),
+(3,20,62),
+(3,21,63),
+(3,22,12),
+(2,5,14);
 --#endregion
 
 --#region Set up Splits
@@ -376,14 +392,25 @@ VALUES(1,1,'Single Product',2),
 (2,7,'Walkthrough',20),
 (3,7,'Single',10),
 (3,7,'Walkthrough',24),
-(1,24,'Single',4),
-(1,24,'Walkthrough',31),
-(2,24,'Single',8),
-(2,24,'Walkthrough',43),
-(3,24,'Single',11),
-(3,24,'Walkthrough',55);
+(1,23,'Single',4),
+(1,23,'Walkthrough',31),
+(2,23,'Single',8),
+(2,23,'Walkthrough',42),
+(3,23,'Single',11),
+(3,23,'Walkthrough',53),
+(2,1,'Single Product',14),
+(2,1,'Total Product',64);
 --#endregion
 
 -- dummy industry data 
 INSERT INTO industry ("industry", "margin") 
 VALUES ('Attorney', 0.30), ('Cleaning', 0.20), ('Massage', 0.25);
+
+-- Dummy super admin
+INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
+VALUES ('test@test.co', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
+
+INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "phone_number")
+VALUES (1,'test', 'test co', 1, '1234567890');
+
+INSERT INTO "user_checks" SELECT 1, * FROM generate_series(1, (SELECT COUNT(*) FROM questions));
