@@ -49,6 +49,7 @@ export default function CheckIndustry() {
         effect="fadeInUp"
       >
         <div className="modal-container">
+          {JSON.stringify(userData)}
           <h1 className="main-heading">Update Industry</h1>
           <div className="update-industry-p-container">
             <p className="align-left">Your industry has been removed.</p>
