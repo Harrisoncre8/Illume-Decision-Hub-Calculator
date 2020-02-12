@@ -57,6 +57,8 @@ export default function PriceSetting() {
       (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
       (+inputData[21] || 0) + (+inputData[22] || 0);
 
+    let productsSold = +splitPath[1] === 15 ? 1 : +inputData[5] || 1;
+
     let cost = directCosts + indirectCosts || 0;
     let price = +inputData[6] || 0;
     let totalSales = inputData[5] || 0;
@@ -66,7 +68,7 @@ export default function PriceSetting() {
     setIndustryNorm(+iNorm);
     setProductMargin(+pm.toFixed(2));
     setUserMargin(+um.toFixed(2));
-    setDifference(+Math.abs(Math.ceil(totalSales * ((pm / um) - 1))) || 0);
+    setDifference(+Math.abs(Math.ceil(productsSold * ((pm / um) - 1))) || 0);
   }, [margin, productMargin, userMargin, inputData, splitPath]);
 
   // Gets the questions and splits for the given results page
@@ -229,7 +231,7 @@ export default function PriceSetting() {
                 })}
               </select>
             </form>
-            {stepper(9)}
+            {stepper(65)}
           </div>
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>
