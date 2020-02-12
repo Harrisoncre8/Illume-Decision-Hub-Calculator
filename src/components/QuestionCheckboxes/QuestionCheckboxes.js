@@ -34,6 +34,11 @@ const QuestionCheckboxes = () => {
   function toggleChecked(id){
     let holder = {...checked};
     holder[id] = !checked[id];
+    if(id === 3){
+      holder[7] = !checked[7];
+    } else if (id === 4){
+      holder[23] = !checked[23];
+    }
     setChecked(holder);
   }
 
@@ -57,7 +62,14 @@ const QuestionCheckboxes = () => {
                   <div key={question.id}>
                     <div>
                       <label className="checkbox-container">{question.header}
-                        <input type='checkbox' checked={checked[question.id]} onChange={()=>toggleChecked(question.id)} />
+                        <input 
+                          type='checkbox' checked={checked[question.id]} 
+                          onChange={
+                            ()=>{
+                              toggleChecked(question.id)
+                            }
+                          } 
+                        />
                         <span className="checkbox-check"></span>
                       </label>
                     </div>
@@ -66,7 +78,7 @@ const QuestionCheckboxes = () => {
                         return(
                           <div key={subQuestion.id}>
                             <label className="checkbox-container">{subQuestion.header}
-                              <input type='checkbox' checked={checked[subQuestion.id]} onChange={()=>toggleChecked(subQuestion.id)} />
+                              <input type='checkbox' checked={checked[subQuestion.sub_questions] && checked[subQuestion.id]} onChange={()=>toggleChecked(subQuestion.id)} />
                               <span className="checkbox-check"></span>
                             </label>
                           </div>
