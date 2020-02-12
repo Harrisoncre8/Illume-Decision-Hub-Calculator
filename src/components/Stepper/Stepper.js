@@ -16,16 +16,18 @@ export default function Stepper() {
   const [input, setInput] = useState(inputData[questionData.question_id] || '');
   const [splitNext, setSplitNext] = useState('');
 
-  // imports previous user inpus
+  // imports previous user inputs
   useEffect(() => {
     setInput(inputData[questionData.question_id] || '');
-  }, [inputData, questionData.question_id])
+  }, [inputData, questionData.question_id]);
 
   // Gives radio button selection a default value
   useEffect(() => {
+    const split = splitData[0] && splitData[0].next_id;
+    const input = splitData[0] && splitData[0].next_id;
     if (questionData.split) {
-      setSplitNext(splitData[0] && splitData[0].next_id || '')
-      setInput(splitData[0] && splitData[0].next_id || '')
+      setSplitNext(split || '');
+      setInput(input || '');
     }
   }, [questionData.split, inputData, questionData.question_id, splitData]);
 
@@ -33,21 +35,24 @@ export default function Stepper() {
     if(questionData && questionData.skipToResults){
       const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
       delete questionData.skipToResults;
-      dispatch({ type: `SET_QUESTION`, payload: questionData })
+      dispatch({ type: `SET_QUESTION`, payload: questionData });
       history.push(`/${url}`);
     }
-  }, [questionData, history, dispatch])
-  // Adds class if input has a value, removes the class if input has no value
+  }, [questionData, history, dispatch]);
+
+  // Add class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
+  // Set local state for input
   const handleChange = e => {
     setInput(e.target.value);
     checkForValue(e);
   }
+
   // Push to next question
   function nextPage() {
-    dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id })
-    dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: questionData.question_id, value: input } })
+    dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id });
+    dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: questionData.question_id, value: input } });
     setInput('');
     if (questionData.next_id == null) {
       const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
@@ -90,7 +95,7 @@ export default function Stepper() {
                 <br />
                 {questionData.split ?
                   <div>
-                    <div className="stepper-radio-container">
+                    <div className="radio-wrapper">
                       {splitData.map(split => {
                         return (
                           <span key={split.id}>

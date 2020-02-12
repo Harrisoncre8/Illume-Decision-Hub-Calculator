@@ -113,7 +113,7 @@ export default function PriceSetting() {
       })
       setSplitPath(temp);
     }
-  }, [splits]);
+  }, [splits, inputData]);
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
@@ -137,16 +137,18 @@ export default function PriceSetting() {
                 {splits[split].map(radio => {
                   return (
                     <span key={radio.id}>
-                      <label className="radio-container">{radio.split_text}
-                        <input
-                          type='radio'
-                          name="next"
-                          value={radio.next_id}
-                          checked={+splitPath[split] === +radio.next_id}
-                          onChange={(e) => { radioChange(e, split) }}
-                        />
-                        <span className="radio-btn"></span>
-                      </label>
+                      <div className="radio-wrapper">
+                        <label className="radio-container">{radio.split_text}
+                          <input
+                            type='radio'
+                            name="next"
+                            value={radio.next_id}
+                            checked={+splitPath[split] === +radio.next_id}
+                            onChange={(e) => { radioChange(e, split) }}
+                          />
+                          <span className="radio-btn"></span>
+                        </label>
+                      </div>
                     </span>
                   );
                 })}
@@ -220,11 +222,15 @@ export default function PriceSetting() {
           <h1 className="main-heading">Price Setting</h1>
           <div className="inputs">
             <form>
-              <select onChange={(event) => setMargin(event.target.value)} value={margin}>
-                <option disabled>Select Industry</option>
+              <select 
+                className="dropdown register-dropdown" 
+                onChange={(e) => setMargin(e.target.value)} 
+                value={margin}
+              >
+                <option className="dropdown-option" disabled>Select Industry</option>
                 {industryData.map(industry => {
                   return (
-                    <option key={industry.id} value={industry.margin}>{industry.industry}</option>
+                    <option className="dropdown-option" key={industry.id} value={industry.margin}>{industry.industry}</option>
                   );
                 })}
               </select>

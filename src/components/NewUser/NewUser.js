@@ -13,7 +13,7 @@ export default function NewUser(){
   // Run on component mount
   useEffect(()=>{
     dispatch({type: `GET_USER_INFO`, payload: userID});
-  }, [userID]);
+  }, [dispatch, userID]);
 
   return(
     <center>

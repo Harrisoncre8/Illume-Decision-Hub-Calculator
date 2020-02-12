@@ -52,7 +52,6 @@ class AdminEditUserInfo extends Component {
 
   // Set input value to current dropdown menu selection
   handleDropdownChange = (e, propName) => {
-    console.log('alskjdf;kl', e.target.value);
     switch (propName) {
       case 'industryid':
         this.setState({
@@ -77,16 +76,20 @@ class AdminEditUserInfo extends Component {
 
   // Dispatch to saga to handle admin edits, close modal
   handleSave = () => {
-
     if(this.state.selectedUser.password === this.state.selectedUser.checkPassword){
       let passwordInfo = [this.state.selectedUser.password, this.state.selectedUser.id];
       this.props.dispatch({type: `NEW_PASSWORD`, payload: passwordInfo});
       this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
       this.closeModal();
     }
+    else if (!this.state.selectedUser.password && !this.state.selectedUser.checkPassword){
+      this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
+      this.closeModal();
+    }
     else if(this.state.selectedUser.password !== this.state.selectedUser.checkPassword){
       alert('make sure your passwords match')
     }
+
   }
 
   // Open modal popup, populate input fields from local state
@@ -139,7 +142,7 @@ class AdminEditUserInfo extends Component {
             <Modal
               visible={this.state.visible}
               width="440"
-              height="500"
+              height="570"
               effect="fadeInUp"
               onClickAway={this.closeModal}
             >
@@ -152,7 +155,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.name}
-                    onChange={(event) => this.handleChange(event, 'name')}
+                    onChange={(e) => this.handleChange(e, 'name')}
                   />
                   <label className="text-field-label">user's name</label>
                   <div className="text-field-mask admin-user-mask-name"></div>
@@ -163,7 +166,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.company}
-                    onChange={(event) => this.handleChange(event, 'company')}
+                    onChange={(e) => this.handleChange(e, 'company')}
                   />
                   <label className="text-field-label">company</label>
                   <div className="text-field-mask admin-user-mask-company"></div>
@@ -174,7 +177,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.phone}
-                    onChange={(event) => this.handleChange(event, 'phone')}
+                    onChange={(e) => this.handleChange(e, 'phone')}
                   />
                   <label className="text-field-label">phone #</label>
                   <div className="text-field-mask admin-user-mask-phone"></div>
@@ -185,7 +188,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type="text"
                     value={editUser.email}
-                    onChange={(event) => this.handleChange(event, 'email')}
+                    onChange={(e) => this.handleChange(e, 'email')}
                   />
                   <label className="text-field-label">email</label>
                   <div className="text-field-mask admin-user-mask-email"></div>
@@ -196,7 +199,7 @@ class AdminEditUserInfo extends Component {
                     className="text-field text-field-active"
                     type={this.state.showPassword} 
                     value={editUser.password}
-                    onChange={(event) => this.handleChange(event, 'password')}
+                    onChange={(e) => this.handleChange(e, 'password')}
                   />
                   <label className="text-field-label">password</label>
                   <div className="text-field-mask admin-user-mask-password"></div>
@@ -218,7 +221,7 @@ class AdminEditUserInfo extends Component {
 
 
                 <select
-                  className="modal-input"
+                  className="dropdown register-dropdown"
                   value={editUser.industryid || 'industry'}
                   onChange={(event) => this.handleDropdownChange(event, 'industryid')}
                 >
@@ -228,12 +231,12 @@ class AdminEditUserInfo extends Component {
                 </select>
 
                 <select
-                  className="modal-input"
+                  className="dropdown register-dropdown"
                   value={editUser.usertype || 'usertype'}
                   onChange={(event) => this.handleDropdownChange(event, 'usertype')}
                 >
-                  <option key={1} value={false}>User</option>
-                  <option key={2} value={true}>Admin</option>
+                  <option className="dropdown-option" key={1} value={false}>User</option>
+                  <option className="dropdown-option" key={2} value={true}>Admin</option>
                 </select>
 
                 <div className="modal-btn-container">
