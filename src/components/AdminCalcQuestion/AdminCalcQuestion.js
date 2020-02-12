@@ -22,7 +22,8 @@ export default function AdminCalcQuestion(props) {
   const handleSubmit = e => {
     e.preventDefault();
     let id = [props.id, question, tooltip, props.calcID];
-    dispatch({type: `PUT_ADMIN_QUESTION`, payload: id});
+    let popup = window.confirm(`Are you ready to save these changes?`)
+    if (popup){dispatch({type: `PUT_ADMIN_QUESTION`, payload: id})};
   }
 
   // Map through sub-questions, increment question number for each question
