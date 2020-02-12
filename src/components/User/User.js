@@ -291,7 +291,7 @@ export default function User() {
                               }
                             }
                 />
-                <label className="text-field-label">confirm</label>
+                <label className="text-field-label">confirm password</label>
                 <div className="text-field-mask profile-mask-confirm-new-password"></div>
               </div>
 

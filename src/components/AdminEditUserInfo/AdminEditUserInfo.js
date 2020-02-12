@@ -18,6 +18,8 @@ class AdminEditUserInfo extends Component {
       industry: '',
       industryid: '',
       password: '',
+      checkPassword: '',
+      wrongPassword: null,
       usertype: false,
     }
   }
@@ -36,7 +38,6 @@ class AdminEditUserInfo extends Component {
 
   // Show or hide password
   togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({showPassword: 'text'}) : this.setState({showPassword: 'password'});
-
 
   // Set local state to current input value
   handleChange = (e, propName) => {
@@ -75,8 +76,20 @@ class AdminEditUserInfo extends Component {
 
   // Dispatch to saga to handle admin edits, close modal
   handleSave = () => {
-    this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
-    this.closeModal();
+    if(this.state.selectedUser.password === this.state.selectedUser.checkPassword){
+      let passwordInfo = [this.state.selectedUser.password, this.state.selectedUser.id];
+      this.props.dispatch({type: `NEW_PASSWORD`, payload: passwordInfo});
+      this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
+      this.closeModal();
+    }
+    else if (!this.state.selectedUser.password && !this.state.selectedUser.checkPassword){
+      this.props.dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: this.state.selectedUser });
+      this.closeModal();
+    }
+    else if(this.state.selectedUser.password !== this.state.selectedUser.checkPassword){
+      alert('make sure your passwords match')
+    }
+
   }
 
   // Open modal popup, populate input fields from local state
@@ -190,34 +203,41 @@ class AdminEditUserInfo extends Component {
                   />
                   <label className="text-field-label">password</label>
                   <div className="text-field-mask admin-user-mask-password"></div>
-                  <span>
-                    <input type="checkbox" onClick={this.togglePasswordView} />
-                    <label> Show Password</label>
-                  </span>
                 </div>
 
-                <div>
-                  <select
-                    className="dropdown register-dropdown"
-                    value={this.state.selectedUser.industryid || 'industry'}
-                    onChange={(e) => this.handleDropdownChange(e, 'industryid')}
-                  >
-                    {this.props.industry.map(industry =>
-                      <option className="dropdown-option" key={industry.id} value={industry.id}>{industry.industry}</option>
-                    )}
-                  </select>
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type={this.state.showPassword} 
+                    value={editUser.checkPassword}
+                    onChange={(event) => this.handleChange(event, 'checkPassword')}
+                   />
+                  <label className="text-field-label">confirm password</label>{JSON.stringify(editUser.checkPassword)}
+                  <div className="text-field-mask admin-user-mask-password"></div>
+                  <input type="checkbox" onChange={this.togglePasswordView} />
+                  <label> Show Password</label>
                 </div>
 
-                <div>
-                  <select
-                    className="dropdown register-dropdown"
-                    value={this.state.selectedUser.usertype || 'usertype'}
-                    onChange={(e) => this.handleDropdownChange(e, 'usertype')}
-                  >
-                    <option className="dropdown-option" key={1} value={false}>User</option>
-                    <option className="dropdown-option" key={2} value={true}>Admin</option>
-                  </select>
-                </div>
+
+
+                <select
+                  className="dropdown register-dropdown"
+                  value={editUser.industryid || 'industry'}
+                  onChange={(event) => this.handleDropdownChange(event, 'industryid')}
+                >
+                  {this.props.industry.map(industry =>
+                    <option key={industry.id} value={industry.id}>{industry.industry}</option>
+                  )}
+                </select>
+
+                <select
+                  className="dropdown register-dropdown"
+                  value={editUser.usertype || 'usertype'}
+                  onChange={(event) => this.handleDropdownChange(event, 'usertype')}
+                >
+                  <option className="dropdown-option" key={1} value={false}>User</option>
+                  <option className="dropdown-option" key={2} value={true}>Admin</option>
+                </select>
 
                 <div className="modal-btn-container">
                   <button className="normal-btn" onClick={this.handleSave}>Save</button>
