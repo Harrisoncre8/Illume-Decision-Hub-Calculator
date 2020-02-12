@@ -136,7 +136,7 @@ export default function Stepper() {
             </form>
           </div>
         </div>
-        <div onClick={lastPage} className='arrow-left' />
+        {lastPageID.length > 0 ? <div onClick={lastPage} className='arrow-left' />: null}
         <div onClick={nextPage} className='arrow-right' />
       </div>
     </center>
