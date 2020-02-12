@@ -123,9 +123,9 @@ router.post('/logout', (req, res) => {
 // PUT to update user's industry
 router.put('/industry', rejectUnauthenticated, (req, res) => {
   const id = [req.body.industry, req.body.id];
-  const sqlQuery = `UPDATE users 
-                    SET industry = $1 
-                    WHERE id = $2;`;
+  const sqlQuery = `UPDATE contact_info 
+                    SET industry_id = $1 
+                    WHERE user_id = $2;`;
   pool.query(sqlQuery, id)
   .then(result => {
     res.send(200);
