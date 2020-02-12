@@ -70,7 +70,11 @@ class Register extends Component{
         },
       });
       this.pushHistoryToUser();
-    } else {
+    } 
+    else if(this.state.name && this.state.company && this.state.phone && this.state.industry && this.state.email && this.state.password){
+      this.props.dispatch({type: `REGISTRATION_TOS_NOT_CHECKED`});
+    }
+    else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
   }
@@ -82,6 +86,14 @@ class Register extends Component{
     return(
       <center>
         <div className="register-container">
+        {this.props.errors.registrationMessage && (
+          <h2
+            className="alert"
+            role="alert"
+          >
+            {this.props.errors.registrationMessage}
+          </h2>
+        )}
 
           <div>
             <img className="register-logo" src="illume-logo180.png" alt="illume logo" />
@@ -200,6 +212,7 @@ class Register extends Component{
 
 const putReduxStateOnProps = reduxState=>({
   disclaimer: reduxState.disclaimer,
+  errors: reduxState.errors,
 });
 
 export default connect(putReduxStateOnProps)(Register);
