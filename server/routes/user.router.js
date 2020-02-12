@@ -90,7 +90,7 @@ router.post('/calc-info', rejectUnauthenticated, (req, res) => {
 // GET calculator information by user id
 router.get('/calc/:id', rejectUnauthenticated, (req, res) => {
   let userID = req.params.id
-  const sqlQuery = `SELECT * FROM "toggle_calculator" WHERE "user_id" = ${userID};`;
+  const sqlQuery = `SELECT "calculator_id" FROM "toggle_calculator" WHERE "user_id" = ${userID};`;
   pool.query(sqlQuery)
     .then(result => {
       res.send(result.rows);

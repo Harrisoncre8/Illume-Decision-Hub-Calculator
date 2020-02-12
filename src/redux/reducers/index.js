@@ -9,7 +9,7 @@ import previousQuestion from './previousQuestionReducer';
 import input from './inputReducer';
 import userInfo from './userInfoReducer';
 import passwordStatus from './passwordStatusReducer';
-import userCalcReducer from './userCalcReducer';
+import calcStatus from './userCalcReducer';
 import userCheckboxes from './userCheckboxesReducer';
 
 const rootReducer = combineReducers({
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   input, // stores values from inputs from stepper
   userInfo, // stores necessary information for user edit page
   userCheckboxes, // holds the users checkboxes
-  userCalcReducer, // stores calculator toggle status on page load
+  calcStatus, // stores calculator toggle status on page load
 });
 
 export default rootReducer;
