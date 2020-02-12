@@ -160,16 +160,13 @@ class Register extends Component{
             </span>
           </div>
 
-          <div>
+          <div className="register-tos-container">
             <input type="checkbox" onClick={this.agree} />
             <label> I agree to the <span className="tos" onClick={this.openModal}>Terms of Service</span></label>
           </div>
 
-          {JSON.stringify(this.state.agreement)}
-
           <button className="normal-btn register-register-btn" onClick={this.registerUser}>Confirm</button>
           <hr className="register-hr" />
-
           <button className="register-cancel-btn" onClick={this.handleCancel}>cancel</button>
 
           <Modal

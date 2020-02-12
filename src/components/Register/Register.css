@@ -63,6 +63,10 @@
   margin-bottom: 15px;
 }
 
+.register-tos-container {
+  margin-top: 10px;
+}
+
 .tos {
   cursor: pointer;
   text-decoration: underline;
