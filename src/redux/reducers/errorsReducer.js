@@ -26,11 +26,11 @@ const registrationMessage = (state = '', action) => {
     case 'CLEAR_REGISTRATION_ERROR':
       return '';
     case 'REGISTRATION_INPUT_ERROR':
-      return 'Choose an email and password';
+      return 'Fill out all the fields';
     case 'REGISTRATION_FAILED':
       return 'That email might already be taken';
     case 'REGISTRATION_TOS_NOT_CHECKED':
-      return 'Please check the Terms of Service box to continue';
+      return 'Please agree to the Terms of Service to continue';
     case 'CLEAR_ALL':
       return [];
     default:
