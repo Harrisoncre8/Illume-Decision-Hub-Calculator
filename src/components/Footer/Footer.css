@@ -19,11 +19,12 @@
 }
 
 .footer-main-container {
-  position: relative;
+  position: absolute;
   bottom: 0;
   background-color: #000;
   margin: 0;
   padding: 30px;
+  width: 96%;
 }
 
 .footer-logo {
@@ -38,5 +39,5 @@
 }
 
 .whitespace {
-  height: 450px;
+  height: 100px;
 }

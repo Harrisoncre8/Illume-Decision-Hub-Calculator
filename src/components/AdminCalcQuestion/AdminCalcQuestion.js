@@ -5,7 +5,7 @@ import AdminCalcSubquestion from '../AdminCalcSubquestion/AdminCalcSubquestion';
 
 export default function AdminCalcQuestion(props) {
 
-  const subQuestion = useSelector((state)=>state.admin.adminSubquestion);
+  const subQuestion = useSelector((state)=>state.adminSubquestion);
   const dispatch = useCallback(useDispatch(), []);
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
@@ -16,7 +16,7 @@ export default function AdminCalcQuestion(props) {
     if(props.id === 3 || props.id === 4){
       dispatch({type: `GET_ADMIN_SUB_QUESTION`});
     }
-  }, [props.id]);
+  }, [dispatch, props.id]);
 
   // Dispatch to saga to update question and tooltip in database
   const handleSubmit = e => {

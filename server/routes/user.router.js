@@ -13,13 +13,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // GET user information by user id
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  let userID = req.params.id
-  const sqlQuery = `SELECT "user_id", "name", "business_name", "industry_id", "industry"."industry", "users"."email", "phone_number" 
+  let userID = [req.params.id]
+  const sqlQuery = `SELECT "user_id", "name", "business_name", "industry_id", "industry"."industry", "industry"."service", "industry"."enabled", "users"."email", "phone_number" 
                     FROM "contact_info"
                     JOIN "users" ON "contact_info"."user_id" = "users"."id"
                     JOIN "industry" ON "contact_info"."industry_id" = "industry"."id"
-                    WHERE "user_id" = ${userID};`;
-  pool.query(sqlQuery)
+                    WHERE "user_id" = $1;`;
+  pool.query(sqlQuery, userID)
     .then(result => {
       res.send(result.rows);
     })
@@ -137,7 +137,6 @@ router.post('/register', async (req, res, next) => {
     await connection.query(`BEGIN`);
     const id = await connection.query(queryTextUser, [email, password]);
     await connection.query(queryTextContact, [name, company, industry, phone, id.rows[0].id]);
-    await connection.query(`INSERT INTO "user_checks" SELECT $1,* FROM generate_series(1, (SELECT COUNT(*) FROM questions));`, [id.rows[0].id]);
     await connection.query(`COMMIT`);
     res.sendStatus(201);
   }catch(error){
@@ -162,6 +161,22 @@ router.post('/logout', (req, res) => {
   // Use passport's built-in method to log out the user
   req.logout();
   res.sendStatus(200);
+});
+
+// PUT to update user's industry
+router.put('/industry', rejectUnauthenticated, (req, res) => {
+  const id = [req.body.industry, req.body.id];
+  const sqlQuery = `UPDATE contact_info 
+                    SET industry_id = $1 
+                    WHERE user_id = $2;`;
+  pool.query(sqlQuery, id)
+  .then(result => {
+    res.send(200);
+  })
+  .catch( error => {
+    console.log('Error with PUT user industry', error);
+    res.sendStatus(500);
+  });
 });
 
 module.exports = router;

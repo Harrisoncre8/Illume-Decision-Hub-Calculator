@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './NewUser.css';
 import Nav from '../Nav/Nav';
@@ -6,14 +6,14 @@ import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
 
 export default function NewUser(){
 
-  const dispatch = useDispatch();
+  const dispatch = useCallback(useDispatch());
   const user = useSelector(state => state.userInfo);
   const userID = useSelector(state => state.user.id);
 
   // Run on component mount
   useEffect(()=>{
     dispatch({type: `GET_USER_INFO`, payload: userID});
-  }, [userID]);
+  }, [dispatch, userID]);
 
   return(
     <center>
@@ -33,8 +33,8 @@ export default function NewUser(){
               This will help you better understand how changes in your decision-making and pricing could affect 
               your future profitability.
             </p>
-            <p className="results-text">Click on a Calculator above to begin!</p>
           </div>
+          <p className="results-text new-user-cta-text">Click on a Calculator above to begin!</p>
           <QuestionCheckboxes />
         </div>
       </div>

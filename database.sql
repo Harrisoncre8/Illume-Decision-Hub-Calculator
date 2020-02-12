@@ -1,7 +1,7 @@
 --#region Create Tables
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
-  "email" TEXT,
+  "email" TEXT UNIQUE,
   "hashedpassword" TEXT,
   "admin" BOOLEAN DEFAULT false,
   "super_admin" BOOLEAN DEFAULT false
@@ -10,8 +10,11 @@ CREATE TABLE "users" (
 CREATE TABLE "industry" (
   "id" SERIAL PRIMARY KEY,
   "industry" TEXT,
-  "margin" DECIMAL(4,2),
-  "enabled" BOOLEAN DEFAULT TRUE
+  "gross_margin" DECIMAL(4,2),
+  "op_margin" DECIMAL(4,2),
+  -- service (true), or product (false)
+  "service" BOOLEAN,
+  "enabled" BOOLEAN DEFAULT true
 );
 
 CREATE TABLE "contact_info" (
@@ -87,6 +90,11 @@ CREATE TABLE "toggle_calculator" (
   "calculator_id" INT,
   PRIMARY KEY ("user_id", "calculator_id")
 );
+
+CREATE TABLE "disclaimer" (
+	"id" SERIAL PRIMARY KEY,
+	"disclaimer" TEXT
+);
 --#endregion
 
 --#region Insert into questions
@@ -94,7 +102,7 @@ INSERT INTO "questions" ("question", "response_type", "help_text", "sub_question
 VALUES (
   'Is this for a single sale or total product sales?',
   'radio',
-  'Single sales are for when you are only considering a single transaction where total product sales considers multiple transactions',
+  'Single sales are for when you are only considering a single transaction where total product sales considers multiple transactions.',
   NULL,
   TRUE,
   FALSE,
@@ -139,7 +147,7 @@ VALUES (
 (
   'What do you plan on pricing this for?',
   'number',
-  'Consider your costs and the value you bring with this product',
+  'Consider your costs and the value you bring with this product.',
   NULL,
   FALSE,
   FALSE,
@@ -148,41 +156,41 @@ VALUES (
 (
   'Would you like to input your direct costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field where the walkthrough will bring you through possible direct cost categories',
+  'A total will just be one input field where the walkthrough will bring you through possible direct cost categories.',
   NULL,
   TRUE,
   FALSE,
   'Direct Costs Walkthrough'
 ),
 (
-  'What is the rate per hour of this labor?',
+  'What is the rate per hour of this labor for this product?',
   'number',
-  'Consider just one labor rate for this field',
+  'Consider just one labor rate for this field.',
   3,
   FALSE,
   FALSE,
   'Labor Rate'
 ),
 (
-  'How many hours of labor are done at this rate?',
+  'How many hours of labor is done at this rate for this product?',
   'number',
-  'Consider just one labor rate for this field',
+  'Consider just one labor rate for this field.',
   3,
   FALSE,
   FALSE,
   'Labor Hours'
 ),
 (
-  'What are your parts or raw material costs?',
+  'What are your parts/raw material costs?',
   'number',
-  'These are things that go into the making of the product or delivering of the service',
+  'These are things that go into the making of the product or delivering of the service.',
   3,
   FALSE,
   FALSE,
   'Parts/Raw Materials'
 ),
 (
-  'What are some other direct costs you have?',
+  'What are some other direct costs?',
   'number',
   'Other costs may be things like rental space that is unique to each transaction',
   3,
@@ -191,27 +199,27 @@ VALUES (
   'Other Direct Costs'
 ),
 (
-  'What are your salary costs?',
+  'What are salary costs?',
   'number',
-  'Remember to include yourself if you pay yourself a salary',
+  'Remember to include yourself if you pay yourself a salary.',
   4,
   FALSE,
   FALSE,
   'Salary'
 ),
 (
-  'What are your employee benefit costs?',
+  'What are benefit costs?',
   'number',
-  'Benefits include things like health, dental, disability, life, etc',
+  'Benefits include things like health, dental, disability, life, etc.',
   4,
   FALSE,
   FALSE,
   'Benefits'
 ),
 (
-  'What is your rent or morgage payment?',
+  'What is your rent/business morgage payment?',
   'number',
-  'Remember to include escrow payments and insurance',
+  'Remember to include escrow payments and insurance here.',
   4,
   FALSE,
   FALSE,
@@ -220,7 +228,7 @@ VALUES (
 (
   'How much do you spend on supplies?',
   'number',
-  'These are supplies such as office supplies',
+  'These are supplies such as office supplies.',
   4,
   FALSE,
   FALSE,
@@ -229,7 +237,7 @@ VALUES (
 (
   'How much do you spend on travel?',
   'number',
-  'This includes travel by land, sea, and air',
+  'This includes travel by land, sea, and air.',
   4,
   FALSE,
   FALSE,
@@ -238,7 +246,7 @@ VALUES (
 (
   'How much do you spend on business meetings?',
   'number',
-  'This does not include travel but would include lunch costs',
+  'This does not include travel but would include lunch costs.',
   4,
   FALSE,
   FALSE,
@@ -247,16 +255,16 @@ VALUES (
 (
   'How much do you spend on your vehicles?',
   'number',
-  'This includes any loan payments, gas, insurance, and periferals like a phone charger',
+  'This includes any loan payments, gas, insurance, and periferals like a phone charger.',
   4,
   FALSE,
   FALSE,
   'Vehicle'
 ),
 (
-  'How much do you spend on subscriptions?',
+  'How much do you spend subscriptions?',
   'number',
-  'This includes subscriptions like Office 365, adobe, and other regular payments',
+  'This includes subscriptions like Office 365, adobe, and other regular payments.',
   4,
   FALSE,
   FALSE,
@@ -265,7 +273,7 @@ VALUES (
 (
   'How much do you spend on dues and fees?',
   'number',
-  'I am not sure what to include here. Any ideas?',
+  'I am not sure what to include here. Any ideas?.',
   4,
   FALSE,
   FALSE,
@@ -274,7 +282,7 @@ VALUES (
 (
   'How much do you spend on outside services?',
   'number',
-  'I am not sure what to include here. Any ideas?',
+  'I am not sure what to include here. Any ideas?.',
   4,
   FALSE,
   FALSE,
@@ -283,7 +291,7 @@ VALUES (
 (
   'What other expenses do you have across your business?',
   'number',
-  'I am not sure what to include here. Any ideas?',
+  'I am not sure what to include here. Any ideas?.',
   4,
   FALSE,
   FALSE,
@@ -292,7 +300,7 @@ VALUES (
 (
   'Would you like to input your indirect costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field where the walkthrough will bring you through possible indirect cost categories',
+  'A total will just be one input field where the walkthrough will bring you through possible indirect cost categories.',
   NULL,
   TRUE,
   FALSE,
@@ -318,7 +326,7 @@ ALTER TABLE "user_checks" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
 ('Break Even Pricing', 6),
-('Price Setting', 9);
+('Price Setting', 65);
 
 --#region Set up Paths
 INSERT INTO "question_calculator" ("calculator_id", "question_id", "next_id")
@@ -385,7 +393,8 @@ VALUES (1,1,2),
 (3,20,62),
 (3,21,63),
 (3,22,12),
-(2,5,14);
+(2,5,14),
+(3,1,15);
 --#endregion
 
 --#region Set up Splits
@@ -405,16 +414,33 @@ VALUES(1,1,'Single Product',2),
 (3,23,'Single',11),
 (3,23,'Walkthrough',53),
 (2,1,'Single Product',14),
-(2,1,'Total Product',64);
+(2,1,'Total Product',64),
+(3,1,'Single Product',15),
+(3,1,'Total Product',9);
 --#endregion
 
--- dummy industry data 
-INSERT INTO industry ("industry", "margin") 
-VALUES ('Attorney', 0.30), ('Cleaning', 0.20), ('Massage', 0.25);
+--#region Set Disclaimer
+INSERT INTO "disclaimer" ("disclaimer")
+VALUES ('Illume Decision Hub (IDH) is not a replacement for legal advice, nor are the results to be interpreted as absolute fact. The purpose of IDH is to get small business owners thinking about their financials by providing a general, estimated, big-picture look into basic financial areas. Illume Pricing and its employees will not be held liable for any damages, injuries, losses, expenses, or other ramifications while using this product.');
+--#endregion
 
--- Dummy super admin
+-- industry data 
+INSERT INTO industry ("industry", "gross_margin", "op_margin", "service") 
+VALUES ('Professional Services - Businesses',0.4,0.12,true),
+('Professional Services - Consumer',0.31,0.08,true),
+('Transportation / Trucking',0.25,0.05,true),
+('Financial Services',0.7,0.18,true),
+('Insurance',0.3,0.12,true),
+('Construction / Building Materials',0.23,0.09,false),
+('Pharma Medical Device',0.7,0.18,false),
+('Healthcare Services',0.2,0.06,true),
+('Consumer Products',0.5,0.1,false),
+('Restaurant / Retail',0.25,0.07,true),
+('Manufacturing',0.4,0.13,false),
+('All Other',0.35,0.08,null);
+
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
-VALUES ('test@test.co', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
+VALUES ('test@test.com', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
 
 INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "phone_number")
 VALUES (1,'test', 'test co', 1, '1234567890');

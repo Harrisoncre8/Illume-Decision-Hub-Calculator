@@ -1,16 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import './AdminEditThisCalc.css';
 import AdminCalcQuestion from '../AdminCalcQuestion/AdminCalcQuestion';
 
 export default function AdminEditThisCalc(props) {
 
-  const question = useSelector((state)=>state.admin.adminQuestion);
-  const dispatch = useDispatch();
+  const question = useSelector((state)=>state.adminQuestion);
+  const dispatch = useCallback(useDispatch());
 
   useEffect(()=>{
     dispatch({type: `GET_ADMIN_QUESTION`, payload: props.calcID});
-  }, []);
+  }, [dispatch, props.calcID]);
 
   return(
     <div className="main-container admin-calc-heading">
