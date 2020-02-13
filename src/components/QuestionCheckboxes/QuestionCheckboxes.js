@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './QuestionCheckboxes.css';
 
@@ -26,7 +26,7 @@ const QuestionCheckboxes = () => {
           acum[arr.id] = true;
         }
         return acum;
-      },{})
+      },{});
       setChecked(state);
     }
   },[questions,userCheckboxes]);
@@ -66,7 +66,7 @@ const QuestionCheckboxes = () => {
                           type='checkbox' checked={checked[question.id]} 
                           onChange={
                             ()=>{
-                              toggleChecked(question.id)
+                              toggleChecked(question.id);
                             }
                           } 
                         />
