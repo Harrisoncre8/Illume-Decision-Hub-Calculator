@@ -105,7 +105,7 @@ class Login extends Component{
             <div className="text-field-mask login-password-mask"></div>
             <span>
               <input type="checkbox" onChange={this.togglePasswordView} />
-                <label> Show Password</label>
+              <label> {this.state.showPassword === 'text' ? 'Hide' : 'Show'} Password</label>
             </span>
           </div>
 
