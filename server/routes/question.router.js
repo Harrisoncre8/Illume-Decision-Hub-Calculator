@@ -16,6 +16,9 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
         "q"."help_text",
         "q"."sub_questions",
         "q"."split",
+        "q"."question2", 
+        "q"."response_type2", 
+        "q"."help_text2",
         "c"."calculator",
         (SELECT 
           (SELECT 
