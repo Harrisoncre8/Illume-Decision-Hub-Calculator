@@ -19,6 +19,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
         "q"."question2", 
         "q"."response_type2", 
         "q"."help_text2",
+        "q"."header",
         "c"."calculator",
         (SELECT 
           (SELECT 
@@ -96,6 +97,7 @@ router.get('/results/:id', (req,res)=>{
         "q"."question2", 
         "q"."response_type2", 
         "q"."help_text2",
+        "q"."header",
         "s"."next_id" as "split_next_id"
       FROM question_calculator qc
       JOIN "questions" q ON "qc"."question_id" = "q"."id"
