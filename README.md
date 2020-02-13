@@ -12,11 +12,11 @@ The application is designed to help small business owners generate more profits.
 [Find the app deployed here](https://illume-decision-hub.herokuapp.com/).
 
 ## Screen Shots
-User Registration Page
+User Registration Page <br/>
 <img src=public/ScreenShots/register.png width="400" alt="Reigister Page"/>
 
 
-Stepper Example
+Stepper Example <br/>
 <img src=public/ScreenShots/stepper.png width="400" alt="Stepper Example"/>
 
 
