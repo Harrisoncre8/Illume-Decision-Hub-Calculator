@@ -37,7 +37,7 @@ const QuestionCheckboxes = () => {
     if(id === 3){
       holder[7] = checked[id];
     } else if (id === 4){
-      holder[23] = checked[id];
+      holder[22] = checked[id];
     }
     setChecked(holder);
   }
