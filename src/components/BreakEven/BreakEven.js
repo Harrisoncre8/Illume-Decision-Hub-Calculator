@@ -270,7 +270,6 @@ export default function BreakEven() {
       <div className="main-container">
         <div className="top-card-container">
           <h1 className="main-heading">Break Even Pricing</h1>
-          {JSON.stringify(splitPath)}
           {stepper(6)}
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>
