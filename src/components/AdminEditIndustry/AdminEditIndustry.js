@@ -173,6 +173,7 @@ class AdminEditIndustry extends Component{
                 )}
               </tbody>
             </table>
+
             <Modal 
               visible={this.state.visible}
               width="440"
@@ -204,7 +205,7 @@ class AdminEditIndustry extends Component{
                       onChange={(event)=>this.handleEditChange(event, 'gross_margin')}
                     />
                     <label className="text-field-label">gross margin (%)</label>
-                    <div className="text-field-mask admin-industry-mask-margin"></div>
+                    <div className="text-field-mask admin-industry-mask-gross-margin"></div>
                   </div>
 
                   <div className="text-field-container">
@@ -215,7 +216,7 @@ class AdminEditIndustry extends Component{
                       onChange={(event)=>this.handleEditChange(event, 'op_margin')}
                     />
                     <label className="text-field-label">operating margin (%)</label>
-                    <div className="text-field-mask admin-industry-mask-margin"></div>
+                    <div className="text-field-mask admin-industry-mask-op-margin"></div>
                   </div>
 
                   <div className="modal-btn-container">
@@ -248,7 +249,7 @@ class AdminEditIndustry extends Component{
                       onChange={(event)=>this.handleNewChange(event, 'gross_margin')}
                     />
                     <label className="text-field-label">gross margin (%)</label>
-                    <div className="text-field-mask admin-industry-mask-margin"></div>
+                    <div className="text-field-mask admin-industry-mask-gross-margin"></div>
                   </div>
 
                   <div className="text-field-container">
@@ -259,7 +260,7 @@ class AdminEditIndustry extends Component{
                       onChange={(event)=>this.handleNewChange(event, 'op_margin')}
                     />
                     <label className="text-field-label">operating margin (%)</label>
-                    <div className="text-field-mask admin-industry-mask-margin"></div>
+                    <div className="text-field-mask admin-industry-mask-op-margin"></div>
                   </div>
 
                   <div className="modal-btn-container">
@@ -267,8 +268,8 @@ class AdminEditIndustry extends Component{
                   </div>
                 </div>
               }
-              
             </Modal>
+
           </div>
         </div>
       </center>
