@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import './AdminEditCalc.css';
 import AdminEditThisCalc from '../AdminEditThisCalc/AdminEditThisCalc';
+import Nav from '../Nav/Nav';
 
 export default function AdminEditCalc() {
 
@@ -38,6 +39,7 @@ export default function AdminEditCalc() {
 
   return(
     <center>
+      <Nav />
       <div className="main-container admin-padding">
         <div className="top-card-container">
         <button className="close-window-button" onClick={pushHistoryBack}>x</button>
