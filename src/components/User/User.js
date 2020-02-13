@@ -296,7 +296,6 @@ export default function User() {
                 <div className="text-field-mask profile-mask-confirm-new-password"></div>
               </div>
 
-
               <div className="modal-btn-container">
                 <button className="normal-btn profile-modal-btns" onClick={closePassModal}>
                   Cancel
