@@ -10,11 +10,6 @@ export default function NewUser() {
   const user = useSelector(state => state.userInfo);
   const userID = useSelector(state => state.user.id);
 
-  // Run on component mount
-  useEffect(()=>{
-    dispatch({type: `GET_USER_INFO`, payload: userID});
-  }, [dispatch, userID]);
-
   return(
     <center>
       <Nav />
