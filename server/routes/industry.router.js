@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 
 // GET route for industry information
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', (req, res) => {
   let sqlQuery = `SELECT * FROM industry
                   WHERE enabled = true
                   ORDER BY industry;`;

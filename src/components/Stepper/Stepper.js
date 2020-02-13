@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './Stepper.css';
@@ -92,8 +92,9 @@ export default function Stepper() {
               <div>
                 <p className="question-text">
                   {
-                    user[0] && user[0].service && questionData.question? 
-                      questionData.question.replace(/product/g, 'service'): 
+                    user[0] && user[0].service && questionData.question ? 
+                      questionData.question.replace(/product/g, 'service')
+                      : 
                       questionData.question
                   }
                 </p>
@@ -107,7 +108,8 @@ export default function Stepper() {
                             <label className="radio-container">
                               {
                                 user[0] && user[0].service && split.split_text?
-                                split.split_text.replace(/Product/g, 'Service'):
+                                split.split_text.replace(/Product/g, 'Service')
+                                :
                                 split.split_text
                               }
                               <input
@@ -151,7 +153,7 @@ export default function Stepper() {
             </form>
           </div>
         </div>
-        {lastPageID.length > 0 ? <div onClick={lastPage} className='arrow-left' />: null}
+        {lastPageID.length > 0 ? <div onClick={lastPage} className='arrow-left' /> : null}
         <div onClick={nextPage} className='arrow-right' />
       </div>
     </center>

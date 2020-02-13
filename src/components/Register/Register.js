@@ -21,10 +21,11 @@ class Register extends Component{
   // Run on component mount
   componentDidMount() {
     this.props.dispatch({type: `GET_DISCLAIMER`});
+    this.props.dispatch({type: `GET_INDUSTRY`});
   }
 
   // Toggle agreement checkbox
-  agree = e => this.state.agreement ? this.setState({agreement:false}) : this.setState({agreement:true});
+  agree = () => this.state.agreement ? this.setState({agreement:false}) : this.setState({agreement:true});
 
   // Close modal popup
   closeModal = () => this.setState({visible:false});
@@ -42,17 +43,13 @@ class Register extends Component{
   }
   
   // Return to login page
-  handleCancel = () => {
-    this.props.history.push('/');
-  }
+  handleCancel = () => this.props.history.push('/');
 
   // Open modal popup
   openModal = () => this.setState({visible:true});
 
   // Push history to new user page
-  pushHistoryToUser = () => {
-    this.props.history.push('/new-user');
-  }
+  pushHistoryToUser = () => this.props.history.push('/new-user');
 
   // Log new user information into database, push history to new user page
   registerUser = e => {
@@ -144,9 +141,15 @@ class Register extends Component{
               onChange={(e)=>this.handleChange(e, 'industry')}
             >
               <option className="dropdown-option" value='' disabled>Select Industry</option>
-              <option className="dropdown-option" value={1}>Attorney</option>
-              <option className="dropdown-option" value={2}>Cleaning</option>
-              <option className="dropdown-option" value={3}>Massage</option>
+              {this.props.industry.map(industry =>
+                <option 
+                  className="dropdown-option" 
+                  key={industry.id}
+                  value={industry.id}
+                >
+                  {industry.industry}
+                </option>
+              )}
             </select>
           </div>
 
@@ -193,7 +196,7 @@ class Register extends Component{
               onClickAway={this.closeModal}
             >
               <div className="modal-container">
-                <h1 className="main-heading">Usage Agreement</h1>
+                <h1 className="main-heading">Terms of Service Agreement</h1>
                 <div>
                   <p className="align-left">{this.props.disclaimer.disclaimer}</p>
                 </div>
@@ -213,6 +216,7 @@ class Register extends Component{
 const putReduxStateOnProps = reduxState=>({
   disclaimer: reduxState.disclaimer,
   errors: reduxState.errors,
+  industry: reduxState.industry,
 });
 
 export default connect(putReduxStateOnProps)(Register);

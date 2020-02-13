@@ -160,6 +160,32 @@ p, span, div, h1, h2, h3, label, button {
   transition: 0.3s;
 }
 
+.circle-btn-disabled {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  background-color: #acacac;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 1px 3px grey;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.circle-btn-disabled:hover {
+  box-shadow: 1px 5px 6px grey;
+  background: #acacac radial-gradient(circle, transparent 1%, #d3d3d3 1%) center/15000%;
+  transition: background 0s, box-shadow 0.3s;
+}
+
+.circle-btn-disabled:active {
+  box-shadow: 0 8px 10px grey;
+  background-color: #d3d3d3;
+  background-size: 100%;
+  transition: 0.3s;
+}
+
 .close-window-button {
   background-color: transparent;
   border: none;

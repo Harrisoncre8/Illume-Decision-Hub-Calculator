@@ -1,9 +1,8 @@
-import React, { useState, useCallback } from 'react';
-import { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Axios from 'axios'
 import './PriceSetting.css';
 import Nav from '../Nav/Nav';
-import Axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux';
 
 export default function PriceSetting() {
 
@@ -16,31 +15,29 @@ export default function PriceSetting() {
   const [paths, setPaths] = useState([]);
   const [splits, setSplits] = useState({});
   const [splitPath, setSplitPath] = useState({});
-  const [industryName, setIndustryName] = useState('')
+  const [industryName, setIndustryName] = useState('');
 
   // Connects to Redux
   const inputData = useSelector(state => state.input);
   const industryData = useSelector(state => state.industry);
-  let userID = useSelector(state => state.user.id);
-  let userData = useSelector(state => state.userInfo);
+  const userID = useSelector(state => state.user.id);
+  const user = useSelector(state => state.userInfo);
   const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const dispatch = useCallback(useDispatch(), []);
-  const user = useSelector(state => state.userInfo);
 
   // Ensures that userInfo and industry data is in the reducer
   useEffect(() => {
     if (userID) {
-      dispatch({ type: `GET_USER_INFO`, payload: userID });
       dispatch({ type: `GET_INDUSTRY` });
     }
   }, [userID, dispatch]);
 
   // Finds the users industry and sets it as the default choice
   useEffect(() => {
-    if (userData.length > 0 && industryData) {
-      setIndustryName(user[0]&&user[0].industry)
+    if (user.length > 0 && industryData) {
+      setIndustryName(user[0]&&user[0].industry);
     }
-  }, [userData, industryData]);
+  }, [user, industryData, user]);
   
 
   // Dynamically calculates the price setting depending on settings
@@ -110,7 +107,7 @@ export default function PriceSetting() {
       const temp = {};
       Object.values(splits).forEach(arr => {
         temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
-      })
+      });
       setSplitPath(temp);
     }
   }, [splits, inputData]);
@@ -141,8 +138,9 @@ export default function PriceSetting() {
                         <div className="radio-wrapper">
                           <label className="radio-container">
                             {
-                              user[0] && user[0].service && radio.split_text?
-                              radio.split_text.replace(/Product/g, 'Service'):
+                              user[0] && user[0].service && radio.split_text ?
+                              radio.split_text.replace(/Product/g, 'Service')
+                              :
                               radio.split_text
                             }
                             <input
@@ -159,14 +157,14 @@ export default function PriceSetting() {
                     );
                   })}
                 </form> 
-              </div>:
-              null
-          }
-          {
-            splitPath[split.toString()] ?
-              stepper(splitPath[split.toString()]) 
+              </div>
               :
               null
+          }
+          {splitPath[split.toString()] ?
+            stepper(splitPath[split.toString()]) 
+            :
+            null
           }
         </>
       );
@@ -184,15 +182,18 @@ export default function PriceSetting() {
               <p className="results-text">
                 {
                   user[0] && user[0].service &&  paths[start] && paths[start].question?
-                  paths[start].question.replace(/product/g, 'service'):
+                  paths[start].question.replace(/product/g, 'service')
+                  :
                   paths[start].question
                 }
-              </p>:
+              </p>
+              :
               null
           }
         </div>
         {doesSplit ?
-          null :
+          null 
+          :
           userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
             <div className="text-field-container" key={paths[start] && paths[start].question_id}>
               <input
@@ -214,15 +215,17 @@ export default function PriceSetting() {
               />
               <label className="text-field-label">enter value</label>
               <div className="text-field-mask stepper-mask"></div>
-            </div> :
+            </div> 
+            :
             null
         }
-        {
-          next ?
-            doesSplit ?
-              splitter(questionId) :
-              stepper(next) :
-            null // for next?
+        {next ?
+          doesSplit ?
+            splitter(questionId) 
+            :
+            stepper(next)
+          :
+          null // for next?
         }
       </div>
     );
@@ -239,14 +242,14 @@ export default function PriceSetting() {
               <select 
                 onChange={
                   (event) => {
-                    let industry = industryData[industryData.findIndex(el=> el.industry === event.target.value)]
+                    let industry = industryData[industryData.findIndex(el=> el.industry === event.target.value)];
                     setMargin(
-                      userCheckboxes.findIndex(el => el.question_id === 3) !== -1?
-                        industry.gross_margin:
+                      userCheckboxes.findIndex(el => el.question_id === 3) !== -1 ?
+                        industry.gross_margin
+                        :
                         industry.op_margin
                     ); 
-                    const {options, selectedIndex} = event.target; 
-                    setIndustryName(event.target.value)
+                    setIndustryName(event.target.value);
                   }
                 } 
                 value={industryName}
@@ -268,7 +271,7 @@ export default function PriceSetting() {
               </select>
             </form>
             {
-              industryName==='All Other'? 
+              industryName==='All Other' ? 
                 <div className="max-width-container">
                   <div className="align-left">
                     <p className="results-text">
@@ -309,10 +312,12 @@ export default function PriceSetting() {
             <p>
               You are selling for
               {
-                productMargin>userMargin? 
-                  ` $${(productMargin-userMargin).toFixed(2)} less than `:
-                  productMargin === userMargin?
-                    ` the same price as `:
+                productMargin>userMargin ? 
+                  ` $${(productMargin-userMargin).toFixed(2)} less than `
+                  :
+                  productMargin === userMargin ?
+                    ` the same price as `
+                    :
                     ` $${(userMargin-productMargin).toFixed(2)} more than `
               }
               industry norms.
@@ -324,7 +329,8 @@ export default function PriceSetting() {
               {' ' + difference + ' '}
               {
                 productMargin >= userMargin ?
-                  ' more ' :
+                  ' more ' 
+                  :
                   ' less '
               }
               units to make the same revenue as the industry norm price would.</p>
