@@ -191,7 +191,7 @@ class AdminEditIndustry extends Component{
                       className="text-field text-field-active" 
                       type="text" 
                       value={editIndustry.industry}
-                      onChange={(event)=>this.handleEditChange(event, 'industry')}
+                      onChange={(e)=>this.handleEditChange(e, 'industry')}
                     />
                     <label className="text-field-label">industry</label>
                     <div className="text-field-mask admin-industry-mask-industry"></div>
@@ -202,7 +202,7 @@ class AdminEditIndustry extends Component{
                       className="text-field text-field-active" 
                       type="text" 
                       value={editIndustry.gross_margin} 
-                      onChange={(event)=>this.handleEditChange(event, 'gross_margin')}
+                      onChange={(e)=>this.handleEditChange(e, 'gross_margin')}
                     />
                     <label className="text-field-label">gross margin (%)</label>
                     <div className="text-field-mask admin-industry-mask-gross-margin"></div>
@@ -213,7 +213,7 @@ class AdminEditIndustry extends Component{
                       className="text-field text-field-active" 
                       type="text" 
                       value={editIndustry.op_margin} 
-                      onChange={(event)=>this.handleEditChange(event, 'op_margin')}
+                      onChange={(e)=>this.handleEditChange(e, 'op_margin')}
                     />
                     <label className="text-field-label">operating margin (%)</label>
                     <div className="text-field-mask admin-industry-mask-op-margin"></div>
@@ -235,7 +235,7 @@ class AdminEditIndustry extends Component{
                       className="text-field" 
                       type="text" 
                       value={newIndustry.industry}
-                      onChange={(event)=>this.handleNewChange(event, 'industry')}
+                      onChange={(e)=>this.handleNewChange(e, 'industry')}
                     />
                     <label className="text-field-label">industry</label>
                     <div className="text-field-mask admin-industry-mask-industry"></div>
@@ -246,7 +246,7 @@ class AdminEditIndustry extends Component{
                       className="text-field" 
                       type="text" 
                       value={newIndustry.gross_margin} 
-                      onChange={(event)=>this.handleNewChange(event, 'gross_margin')}
+                      onChange={(e)=>this.handleNewChange(e, 'gross_margin')}
                     />
                     <label className="text-field-label">gross margin (%)</label>
                     <div className="text-field-mask admin-industry-mask-gross-margin"></div>
@@ -257,7 +257,7 @@ class AdminEditIndustry extends Component{
                       className="text-field" 
                       type="text" 
                       value={newIndustry.op_margin} 
-                      onChange={(event)=>this.handleNewChange(event, 'op_margin')}
+                      onChange={(e)=>this.handleNewChange(e, 'op_margin')}
                     />
                     <label className="text-field-label">operating margin (%)</label>
                     <div className="text-field-mask admin-industry-mask-op-margin"></div>
