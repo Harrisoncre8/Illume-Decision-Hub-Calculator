@@ -62,3 +62,11 @@
 .admin-industry-table tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.edit-info-cell-width {
+  width: 70px;
+}
+
+.op-margin-cell-width {
+  width: 60px;
+}

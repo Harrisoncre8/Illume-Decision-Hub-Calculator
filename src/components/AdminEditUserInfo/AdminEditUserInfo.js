@@ -124,7 +124,7 @@ class AdminEditUserInfo extends Component {
                   <th>Company</th>
                   <th>Phone Number</th>
                   <th>Email</th>
-                  <th>Actions</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -209,7 +209,6 @@ class AdminEditUserInfo extends Component {
                   <input
                     className="text-field text-field-active"
                     type={this.state.showPassword} 
-                    value={editUser.checkPassword}
                     onChange={(e) => this.handleChange(e, 'checkPassword')}
                    />
                   <label className="text-field-label">confirm password</label>
