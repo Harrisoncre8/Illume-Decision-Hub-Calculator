@@ -1,16 +1,15 @@
-# Illume Decision Hub Calculator
+# Illume Decision Hub
 Group Project for Prime Digital Academy 
 
 Client: Illume Pricing
 
 Group: Phillip Berg, Harrison Nguyen, Awren Nuit, and Courtney Olesee
 
-
-_Duration: 2 week sprint_
+Duration: 2 week sprint
 
 The application is designed to help small business owners generate more profits. Using conversational language through a “choose your own adventure” format, clients will be prompted to enter their financial information to create predictive calculations based on business decisions they can make around product pricing, operating costs, and total revenue. This will help clients better understand how changes in their decision-making and pricing could affect their future profitability.
 
-Find the app deployed [here](https://illume-decision-hub.herokuapp.com/).
+[Find the app deployed here](https://illume-decision-hub.herokuapp.com/).
 
 ## Screen Shots
 
@@ -48,7 +47,7 @@ Find the app deployed [here](https://illume-decision-hub.herokuapp.com/).
 - Redux (logger, sagas)
 
 ## Challenges
-- Git branching with multiple users
+- Git branching and merging with multiple users
     - Solved by having multi-phase testing so that each contributor has branches tested by another user before being able to create pull request. This way we rarely (if ever) had any broken code in master. First, the creator tested their own code and solved any master conflicts. Then, another contributor tested that branch. Then the creator of the code created a new pull request which was checked by another contributor before merging to the master branch. 
 - Database construction 
     - To achieve the step through format of the calculator inputs, the database contains a table with quesiton, calculator, and next ids so that the stepper routes can be set, and edited based on what kind of relevant costs the user has checked. 
