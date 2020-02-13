@@ -38,10 +38,12 @@ const UserCalcToggle = () => {
   }
 
   return(
-    <div>
-      <h2>Toggle Your Calculators</h2>
-      <p>* Select a calculator to turn on and off</p>
-      <p>* Disabled calculators will appear grey</p>
+    <div className="toggle-btn-main-wrapper">
+      <h1>Toggle Your Calculators</h1>
+      <div className="toggle-btn-text-container">
+        <p className="results-text">Click on a button below to toggle that calculator on or off.</p>
+        <p className="results-text">Disabled calculators will appear grey.</p>
+      </div>
       <div className="toggle-btn-main-container">
         <span className="toggle-btn-container">
           <button className={getButtonClass(1)} onClick={() => handleCalcClick(1)}>
