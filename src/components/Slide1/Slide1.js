@@ -1,4 +1,5 @@
 import React from 'react';
+import './Slide1.css';
 
 export default function Slide1() {
 
@@ -29,7 +30,7 @@ export default function Slide1() {
             <p className="slide-name">Courtney Olesee</p>
           </div>
         </div>
-        
+
       </div>
     </center>
   );
