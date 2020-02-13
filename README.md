@@ -14,12 +14,16 @@ The application is designed to help small business owners generate more profits.
 ## Screen Shots
 
 <img src=public/ScreenShots/register.png width="400" alt="Reigister Page"/>
+User Registration Page
 
 <img src=public/ScreenShots/stepper.png width="400" alt="Stepper Example"/>
+Stepper Example
 
-<img src=public/ScreenShots/useroptions.png width="400" alt="User Options"/>
+<img src=public/ScreenShots/useroptions.png width="400" alt="User Options"/> 
+User Options: able to to check relevant costs and toggle relevant calculators 
 
 <img src=public/ScreenShots/resultspage.png width="400" alt="Results Page"/>
+Profit Levers Calculator Results Page: able to continue to edit their inputs
 
 
 ## Installation
