@@ -1,11 +1,14 @@
 import React from 'react';
 import './Slide1.css';
+import { useHistory } from 'react-router-dom';
 
 export default function Slide1() {
 
+  const history = useHistory();
+
   return(
     <center>
-      <div className="slide-main-container">
+      <div className="slide-main-container" onClick={()=>history.push(`/slide2`)}>
 
         <div className="slide-heading-container">
         <img className="slide-logo" src="illume-logo180.png" alt="Illume Logo" />

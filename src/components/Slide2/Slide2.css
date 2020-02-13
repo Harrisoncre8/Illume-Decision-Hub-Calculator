@@ -23,10 +23,10 @@
 }
 
 .slide2-img {
-  height: 250px;
+  height: 350px;
   border-radius: 50%;
   box-shadow: 0 0 10px #f0aa42;
-  margin: 50px;
+  margin: 0 50px;
 }
 
 .slide2-img-name-container {
@@ -51,7 +51,7 @@
   width: 100%;
 }
 
-.slide-name {
+.slide2-name {
   color: #f7d149;
-  font-size: 1.6em;
+  font-size: 1.8em;
 }
