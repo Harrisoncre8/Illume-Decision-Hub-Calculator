@@ -74,9 +74,18 @@ export default function User() {
     setModal(false);
   }
 
-  // Close modal to change password
+  // Close modal to change password and reset fields
+  // Show or hide password
+  const togglePasswordView = () => showPassword === 'password' ? setShowPassword('text') : setShowPassword('password');
+
+  // close modal to change password
   const closePassModal = () => {
+    setWrongPassword(null);
     setPasswordModal(false);
+    dispatch({type: `MATCH_PASSWORD`, payload: null});
+    setOldPassword('');
+    setNewPassword('');
+    setCheckPassword('');
   }
 
   // Handle change for industry drop down
@@ -260,6 +269,7 @@ export default function User() {
                   onChange={(e) => {
                                 setOldPassword(e.target.value);
                                 checkForValue(e);
+                                dispatch({type: `MATCH_PASSWORD`, payload: null});
                               }
                             }
                 />
@@ -267,7 +277,7 @@ export default function User() {
                 <div className="text-field-mask profile-mask-old-password"></div>
               </div>
 
-              <div className="text-field-container">
+              <div className="text-field-container ">
                 <input
                   className="text-field"
                   type={showPassword}
@@ -275,6 +285,7 @@ export default function User() {
                   onChange={(e) => {
                                 setNewPassword(e.target.value);
                                 checkForValue(e);
+                                setWrongPassword(null);
                               }
                             }
                 />
@@ -290,15 +301,16 @@ export default function User() {
                   onChange={(e) => {
                                 setCheckPassword(e.target.value);
                                 checkForValue(e);
+                                setWrongPassword(null);
                               }
                             }
                 />
-                <label className="text-field-label">confirm password</label>
+                <label className="text-field-label">confirm</label>
                 <div className="text-field-mask profile-mask-confirm-new-password"></div>
-                <span>
-                  <input type="checkbox" onClick={()=>showPassword === 'text' ? setShowPassword('password') : setShowPassword('text')} />
-                  <label> Show Password</label>
-                </span>
+                  <span>
+                    <input type="checkbox" onChange={togglePasswordView} />
+                      <label> Show Passwords</label>
+                  </span>
               </div>
 
               <div className="modal-btn-container">
