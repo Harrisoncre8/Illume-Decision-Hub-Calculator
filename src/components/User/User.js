@@ -261,7 +261,7 @@ export default function User() {
               {wrongPassword ? <p>Oops, your new password does not match.</p> : null}
               {passwordStatusData === 401 ? <p>Oops, your current password is incorrect, please try again</p> : null}
 
-              <div className="text-field-container login-text-field-container">
+              <div className="text-field-container">
                 <input
                   className="text-field"
                   type={showPassword}
@@ -274,6 +274,7 @@ export default function User() {
                             }
                 />
                 <label className="text-field-label">current password</label>
+                <div className="text-field-mask profile-mask-old-password"></div>
               </div>
 
               <div className="text-field-container ">
@@ -289,6 +290,7 @@ export default function User() {
                             }
                 />
                 <label className="text-field-label">new password</label>
+                <div className="text-field-mask profile-mask-new-password"></div>
               </div>
 
               <div className="text-field-container">
@@ -304,7 +306,7 @@ export default function User() {
                             }
                 />
                 <label className="text-field-label">confirm</label>
-                <div className="text-field-mask login-password-mask"></div>
+                <div className="text-field-mask profile-mask-confirm-new-password"></div>
                   <span>
                     <input type="checkbox" onChange={togglePasswordView} />
                       <label> Show Passwords</label>
