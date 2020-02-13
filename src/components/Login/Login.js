@@ -9,7 +9,7 @@ class Login extends Component{
     email: '',
     password: '',
     showPassword: 'password'
-  };
+  }
 
   // Use previous props to check user type for route
   componentDidUpdate(prevProps){
@@ -44,18 +44,21 @@ class Login extends Component{
           password: this.state.password,
         },
       });
-    } else {
+    } 
+    else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
   }
 
   // Push user to admin or user based on admin boolean
   pushHistoryToUser = () => {
-    if (this.props.user && this.props.user.admin){
+    if(this.props.user && this.props.user.admin){
       this.props.history.push('/admin');
-    }else if (this.props.user && this.props.user.id){
+    }
+    else if(this.props.user && this.props.user.id){
       this.props.history.push('/user');
-    }else{
+    }
+    else {
       this.props.history.push('/');
     }
   }
@@ -102,7 +105,7 @@ class Login extends Component{
             <div className="text-field-mask login-password-mask"></div>
             <span>
               <input type="checkbox" onChange={this.togglePasswordView} />
-                <label> Show Password</label>
+              <label> Show Password</label>
             </span>
           </div>
 

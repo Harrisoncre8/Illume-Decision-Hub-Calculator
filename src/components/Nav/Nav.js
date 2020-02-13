@@ -87,7 +87,7 @@ export default function Nav() {
     if(userData === true){
       history.push('/admin');
     }
-    else{
+    else {
       history.push('/new-user');
     }
   }
@@ -107,18 +107,27 @@ export default function Nav() {
       <button className={`nav-btn ${home}`} onClick={pushHistoryToHome}>
         Home <br /> Page
       </button>
-      {renderBreak ? null :
+      {renderBreak ? 
+        null 
+        :
         <button className={`nav-btn ${breakEven}`} onClick={()=>setStart(2)}>
           Break Even Calculator
-        </button>}
-      {renderLever ? null : 
+        </button>
+      }
+      {renderLever ? 
+        null 
+        : 
         <button className={`nav-btn ${lever}`} onClick={()=>setStart(1)}>
           Profit Lever Calculator
-        </button>}
-      {renderPrice ? null : 
+        </button>
+      }
+      {renderPrice ? 
+        null 
+        : 
         <button className={`nav-btn ${price}`} onClick={()=>setStart(3)}>
           Price Setting Calculator
-        </button>}
+        </button>
+      }
       <button className={`nav-btn ${profile}`} onClick={pushHistoryToProfile}>
         Profile <br /> Page
       </button>

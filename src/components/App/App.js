@@ -22,17 +22,17 @@ import User from '../User/User';
 export default function App() {
   // gets user info on all pages DO NOT REMOVE
   const dispatch = useCallback(useDispatch());
-const userID = useSelector(state => state.user);
+  const userID = useSelector(state => state.user);
 
-useEffect(() => {
-  dispatch({ type: 'FETCH_USER' })
-},[])
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER' });
+  },[dispatch]);
 
-useEffect(() => {
-  if(userID && userID.id){
-    dispatch({ type: 'GET_USER_INFO', payload: userID.id })
-  }
-},[userID])
+  useEffect(() => {
+    if(userID && userID.id){
+      dispatch({ type: 'GET_USER_INFO', payload: userID.id });
+    }
+  },[userID]);
   
   return (
     <>
