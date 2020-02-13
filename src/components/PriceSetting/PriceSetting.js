@@ -21,25 +21,23 @@ export default function PriceSetting() {
   const inputData = useSelector(state => state.input);
   const industryData = useSelector(state => state.industry);
   const userID = useSelector(state => state.user.id);
-  const userData = useSelector(state => state.userInfo);
+  const user = useSelector(state => state.userInfo);
   const userCheckboxes = useSelector(state=>state.userCheckboxes);
   const dispatch = useCallback(useDispatch(), []);
-  const user = useSelector(state => state.userInfo);
 
   // Ensures that userInfo and industry data is in the reducer
   useEffect(() => {
     if (userID) {
-      dispatch({ type: `GET_USER_INFO`, payload: userID });
       dispatch({ type: `GET_INDUSTRY` });
     }
   }, [userID, dispatch]);
 
   // Finds the users industry and sets it as the default choice
   useEffect(() => {
-    if (userData.length > 0 && industryData) {
+    if (user.length > 0 && industryData) {
       setIndustryName(user[0]&&user[0].industry);
     }
-  }, [userData, industryData, user]);
+  }, [user, industryData, user]);
   
 
   // Dynamically calculates the price setting depending on settings
