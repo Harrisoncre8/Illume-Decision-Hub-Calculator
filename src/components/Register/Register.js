@@ -175,7 +175,7 @@ class Register extends Component{
             <div className="text-field-mask register-mask-password"></div>
             <span>
               <input type="checkbox" onClick={this.togglePasswordView} />
-              <label> {this.state.showPassword === 'text' ? 'Hide' : 'Show'} Password</label>
+              <label> Show Password</label>
             </span>
           </div>
 

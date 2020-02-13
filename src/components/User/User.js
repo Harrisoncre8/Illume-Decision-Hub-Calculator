@@ -297,7 +297,7 @@ export default function User() {
                 <div className="text-field-mask profile-mask-confirm-new-password"></div>
                 <span>
                   <input type="checkbox" onClick={()=>showPassword === 'text' ? setShowPassword('password') : setShowPassword('text')} />
-                  <label> {showPassword === 'text' ? 'Hide' : 'Show'} Password</label>
+                  <label> Show Password</label>
                 </span>
               </div>
 

@@ -216,7 +216,7 @@ class AdminEditUserInfo extends Component {
                   <div className="text-field-mask admin-user-mask-confirm-password"></div>
                   <span>
                     <input type="checkbox" onChange={this.togglePasswordView} />
-                    <label> {this.state.showPassword === 'text' ? 'Hide' : 'Show'} Passwords</label>
+                    <label> Show Passwords</label>
                   </span>
                 </div>
 
