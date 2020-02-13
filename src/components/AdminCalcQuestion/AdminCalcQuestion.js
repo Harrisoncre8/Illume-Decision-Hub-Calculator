@@ -10,6 +10,7 @@ export default function AdminCalcQuestion(props) {
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
   const [showSub, setShowSub] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   // Runs when component mounts
   useEffect(()=>{
@@ -23,6 +24,8 @@ export default function AdminCalcQuestion(props) {
     e.preventDefault();
     let id = [props.id, question, tooltip, props.calcID];
     dispatch({type: `PUT_ADMIN_QUESTION`, payload: id});
+    setSaved(true)
+    setTimeout(()=>setSaved(false), 3000);
   }
 
   // Map through sub-questions, increment question number for each question
@@ -70,6 +73,7 @@ export default function AdminCalcQuestion(props) {
         />
         <div>
           <button className="normal-btn admin-edit-calc-btn" type="submit">SAVE</button>
+          {saved ? <p>SAVED!</p> : ''}
         </div>
       </form>
       <hr />
