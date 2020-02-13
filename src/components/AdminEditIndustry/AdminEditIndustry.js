@@ -130,10 +130,10 @@ class AdminEditIndustry extends Component{
                 <tr>
                   <th>Industry</th>
                   <th>Gross Margin</th>
-                  <th>Operating Margin</th>
+                  <th className="op-margin-cell-width">Operating Margin</th>
                   <th>Enabled?</th>
                   <th></th>
-                  <th></th>
+                  <th className="edit-info-cell-width"></th>
                 </tr>
               </thead>
               <tbody>
@@ -141,7 +141,7 @@ class AdminEditIndustry extends Component{
                   <tr id={industry.enabled ? '' : "admin-industry-disabled"} key={industry.id}>
                     <td>{industry.industry}</td>
                     <td>{(industry.gross_margin * 100).toFixed(0)}%</td>
-                    <td>{(industry.op_margin * 100).toFixed(0)}%</td>
+                    <td className="op-margin-cell-width">{(industry.op_margin * 100).toFixed(0)}%</td>
                     {industry.enabled ?
                       <>
                         <td>Yes</td>
@@ -164,7 +164,7 @@ class AdminEditIndustry extends Component{
                       </>
                     }
                     <td 
-                      className="admin-edit-industry-cell" 
+                      className="admin-edit-industry-cell edit-info-cell-width" 
                       onClick={()=>this.openModal(industry)}
                     >
                       Edit Info
