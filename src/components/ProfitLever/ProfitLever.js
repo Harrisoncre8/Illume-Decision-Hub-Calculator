@@ -113,10 +113,12 @@ export default function ProfitLever() {
   useEffect(() => {
     if (Object.values(splits).length > 0) {
       const temp = {};
-      Object.values(splits).forEach(arr => {
-        temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
-      });
-      setSplitPath(temp);
+      if(Object.entries(splitPath).length === 0){
+        Object.values(splits).forEach(arr => {
+          temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
+        });
+        setSplitPath(temp);
+      }
     }
   }, [splits, inputData]);
 
