@@ -24,15 +24,15 @@ export default function App() {
   const dispatch = useCallback(useDispatch());
   const userID = useSelector(state => state.user);
 
-useEffect(() => {
-  dispatch({ type: 'FETCH_USER' })
-},[])
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER' });
+  },[dispatch]);
 
-useEffect(() => {
-  if(userID && userID.id){
-    dispatch({ type: 'GET_USER_INFO', payload: userID.id })
-  }
-},[userID])
+  useEffect(() => {
+    if(userID && userID.id){
+      dispatch({ type: 'GET_USER_INFO', payload: userID.id });
+    }
+  },[userID]);
   
   return (
     <>

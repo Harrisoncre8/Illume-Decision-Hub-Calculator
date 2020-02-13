@@ -1,8 +1,7 @@
-import React, { useState, useCallback } from 'react';
-import { useEffect } from 'react';
-import './ProfitLever.css';
-import Axios from 'axios'
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Axios from 'axios'
+import './ProfitLever.css';
 import Nav from '../Nav/Nav';
 
 export default function ProfitLever() {
@@ -116,7 +115,7 @@ export default function ProfitLever() {
       const temp = {};
       Object.values(splits).forEach(arr => {
         temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
-      })
+      });
       setSplitPath(temp);
     }
   }, [splits, inputData]);
@@ -148,7 +147,8 @@ export default function ProfitLever() {
                           <label className="radio-container">
                             {
                               user[0] && user[0].service && radio.split_text?
-                              radio.split_text.replace(/Product/g, 'Service'):
+                              radio.split_text.replace(/Product/g, 'Service')
+                              :
                               radio.split_text
                             }
                             <input
@@ -165,14 +165,14 @@ export default function ProfitLever() {
                     );
                   })}
                 </form>
-              </div> :
-              null
-          }
-          {
-            splitPath[split.toString()] ?
-              stepper(splitPath[split.toString()]) 
+              </div> 
               :
               null
+          }
+          {splitPath[split.toString()] ?
+            stepper(splitPath[split.toString()]) 
+            :
+            null
           }
         </>
       );
@@ -190,15 +190,18 @@ export default function ProfitLever() {
               <p className="results-text">
                 {
                   user[0] && user[0].service &&  paths[start] && paths[start].question?
-                  paths[start].question.replace(/product/g, 'service'):
+                  paths[start].question.replace(/product/g, 'service')
+                  :
                   paths[start].question
                 }
-              </p>:
+              </p>
+              :
               null
           }
         </div>
         {doesSplit ?
-          null :
+          null 
+          :
           userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
             <div className="text-field-container" key={paths[start] && paths[start].question_id}>
               <input
@@ -220,14 +223,17 @@ export default function ProfitLever() {
               />
               <label className="text-field-label">enter value</label>
               <div className="text-field-mask stepper-mask"></div>
-            </div> :
+            </div> 
+            :
             null
         }
         {
           next ?
             doesSplit ?
-              splitter(questionId) :
-              stepper(next) :
+              splitter(questionId) 
+              :
+              stepper(next) 
+            :
             null // for next?
         }
       </div>
@@ -254,7 +260,8 @@ export default function ProfitLever() {
                   <br />
                   <p>A 1% reduction in direct cost will deliver {isNaN(directCostChange.toFixed(1))? 0 : directCostChange.toFixed(1)}% improvement in profit.</p>
                   {/* <p>This translates into $x more profit in your pocket per year</p> */}
-                </>:
+                </>
+                :
                 null
             }
             {
@@ -263,7 +270,8 @@ export default function ProfitLever() {
                   <br />
                   <p>A 1% reduction in indirect costs will deliver {isNaN(indirectCostChange.toFixed(1))? 0 : indirectCostChange.toFixed(1)}% improvement in profit.</p>
                   {/* <p>This translates into $x more profit in your pocket each year</p> */}
-                </>:
+                </>
+                :
                 null
             }
           </div>

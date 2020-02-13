@@ -15,7 +15,6 @@ export default function CheckIndustry() {
   // Run on component mount
   useEffect(()=>{
     if(userID){
-      dispatch({type: `GET_USER_INFO`, payload: userID});
       dispatch({type: `GET_INDUSTRY`});
     }
   }, [dispatch, userID]);

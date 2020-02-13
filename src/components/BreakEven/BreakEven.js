@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Axios from 'axios'
 import './BreakEven.css';
 import Nav from '../Nav/Nav';
-import Axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux';
 
 export default function BreakEven() {
 
@@ -79,7 +79,7 @@ export default function BreakEven() {
       const temp = {};
       Object.values(splits).forEach(arr => {
         temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
-      })
+      });
       setSplitPath(temp);
     }
   }, [splits, inputData]);
@@ -157,12 +157,14 @@ export default function BreakEven() {
                   paths[start].question.replace(/product/g, 'service'):
                   paths[start].question
                 }
-              </p>:
+              </p>
+              :
               null
           }
         </div>
         {doesSplit ?
-          null :
+          null 
+          :
           userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
             <div className="text-field-container" key={paths[start] && paths[start].question_id}>
               <input
@@ -184,15 +186,17 @@ export default function BreakEven() {
               />
               <label className="text-field-label">enter value</label>
               <div className="text-field-mask stepper-mask"></div>
-            </div> :
+            </div> 
+            :
             null
         }
-        {
-          next ?
-            doesSplit ?
-              splitter(questionId) :
-              stepper(next) :
-            null // for next?
+        {next ?
+          doesSplit ?
+            splitter(questionId) 
+            :
+            stepper(next)
+          :
+          null // for next?
         }
       </div>
     );

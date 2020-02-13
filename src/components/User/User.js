@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
 import './User.css'
@@ -9,11 +9,11 @@ import UserCalcToggle from '../UserCalcToggle/UserCalcToggle';
 export default function User() {
 
   // Set data from redux
-  let dispatch = useDispatch();
-  let industryData = useSelector(state => state.industry);
-  let userData = useSelector(state => state.userInfo);
-  let userID = useSelector(state => state.user.id);
-  let passwordStatusData = useSelector(state => state.passwordStatus);
+  const dispatch = useDispatch();
+  const industryData = useSelector(state => state.industry);
+  const userData = useSelector(state => state.userInfo);
+  const userID = useSelector(state => state.user.id);
+  const passwordStatusData = useSelector(state => state.passwordStatus);
 
   // Set state for modal
   const [modal, setModal] = useState(false);
@@ -27,6 +27,7 @@ export default function User() {
   const [industryID, setIndustryID] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [showPassword, setShowPassword] = useState('password');
 
   // Set state to be deployed on password change
   const [oldPassword, setOldPassword] = useState('');
@@ -73,9 +74,18 @@ export default function User() {
     setModal(false);
   }
 
-  // Close modal to change password
+  // Close modal to change password and reset fields
+  // Show or hide password
+  const togglePasswordView = () => showPassword === 'password' ? setShowPassword('text') : setShowPassword('password');
+
+  // close modal to change password
   const closePassModal = () => {
+    setWrongPassword(null);
     setPasswordModal(false);
+    dispatch({type: `MATCH_PASSWORD`, payload: null});
+    setOldPassword('');
+    setNewPassword('');
+    setCheckPassword('');
   }
 
   // Handle change for industry drop down
@@ -228,11 +238,11 @@ export default function User() {
 
               <button className="secondary-btn profile-password-font-size" onClick={openPassModal}>Change Password?</button>
               <div className="modal-btn-container">
-                <button className="normal-btn profile-modal-btns" onClick={saveChanges}>
-                  Save
-                </button>
-                <button className="normal-btn" onClick={closeModal}>
+                <button className="normal-btn profile-modal-btns" onClick={closeModal}>
                   Cancel
+                </button>
+                <button className="normal-btn" onClick={saveChanges}>
+                  Save
                 </button>
               </div>
             </div>
@@ -254,11 +264,12 @@ export default function User() {
               <div className="text-field-container">
                 <input
                   className="text-field"
-                  type="text"
+                  type={showPassword}
                   value={oldPassword}
                   onChange={(e) => {
                                 setOldPassword(e.target.value);
                                 checkForValue(e);
+                                dispatch({type: `MATCH_PASSWORD`, payload: null});
                               }
                             }
                 />
@@ -266,14 +277,15 @@ export default function User() {
                 <div className="text-field-mask profile-mask-old-password"></div>
               </div>
 
-              <div className="text-field-container">
+              <div className="text-field-container ">
                 <input
                   className="text-field"
-                  type="text"
+                  type={showPassword}
                   value={newPassword}
                   onChange={(e) => {
                                 setNewPassword(e.target.value);
                                 checkForValue(e);
+                                setWrongPassword(null);
                               }
                             }
                 />
@@ -284,25 +296,29 @@ export default function User() {
               <div className="text-field-container">
                 <input
                   className="text-field"
-                  type="text"
+                  type={showPassword}
                   value={checkPassword}
                   onChange={(e) => {
                                 setCheckPassword(e.target.value);
                                 checkForValue(e);
+                                setWrongPassword(null);
                               }
                             }
                 />
-                <label className="text-field-label">confirm password</label>
+                <label className="text-field-label">confirm</label>
                 <div className="text-field-mask profile-mask-confirm-new-password"></div>
+                  <span>
+                    <input type="checkbox" onChange={togglePasswordView} />
+                      <label> Show Passwords</label>
+                  </span>
               </div>
 
-
               <div className="modal-btn-container">
-                <button className="normal-btn profile-modal-btns" onClick={changePassword}>
-                  Confirm
-                </button>
-                <button className="normal-btn" onClick={closePassModal}>
+                <button className="normal-btn profile-modal-btns" onClick={closePassModal}>
                   Cancel
+                </button>
+                <button className="normal-btn" onClick={changePassword}>
+                  Save
                 </button>
               </div>
             </div>
