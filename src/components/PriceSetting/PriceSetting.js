@@ -48,7 +48,7 @@ export default function PriceSetting() {
       (+inputData[9] || 0);
 
     let indirectCosts = +splitPath[22] === 11 ?
-      +inputData[4] :
+      +inputData[4] || 0 :
       (+inputData[10] || 0) + (+inputData[11] || 0) + (+inputData[12] || 0) + 
       (+inputData[13] || 0) + (+inputData[14] || 0) + (+inputData[15] || 0) + 
       (+inputData[16] || 0) + (+inputData[17] || 0) + (+inputData[18] || 0) + 
@@ -56,8 +56,7 @@ export default function PriceSetting() {
       (+inputData[23] || 0) + (+inputData[24] || 0) + (+inputData[25] || 0);
 
     let productsSold = +splitPath[1] === 15 ? 1 : +inputData[5] || 1;
-    console.log(directCosts,indirectCosts)
-    let cost = directCosts || 0 + indirectCosts || 0;
+    let cost = (directCosts || 0) + (indirectCosts || 0);
     let price = +inputData[6] || 0;
     let iNorm = (cost / (1 - margin)).toFixed(2) || 0;
     let pm = +iNorm - cost || 0;
