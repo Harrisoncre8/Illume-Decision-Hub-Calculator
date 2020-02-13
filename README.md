@@ -13,6 +13,18 @@ The application is designed to help small business owners generate more profits.
 
 ## Screen Shots
 
+![Register Page](public/ScreenShots/register.png)
+
+
+![Stepper](public/ScreenShots/stepper.png)
+
+
+![User Options](public/ScreenShots/useroptions.png)
+
+
+![Results Page](public/ScreenShots/resultspage.png)
+
+
 ## Installation
 > npm install 
 
