@@ -77,10 +77,12 @@ export default function BreakEven() {
   useEffect(() => {
     if (Object.values(splits).length > 0) {
       const temp = {};
-      Object.values(splits).forEach(arr => {
-        temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
-      });
-      setSplitPath(temp);
+      if(Object.entries(splitPath).length === 0){
+        Object.values(splits).forEach(arr => {
+          temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
+        });
+        setSplitPath(temp);
+      }
     }
   }, [splits, inputData]);
 
@@ -166,27 +168,63 @@ export default function BreakEven() {
           null 
           :
           userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
-            <div className="text-field-container" key={paths[start] && paths[start].question_id}>
-              <input
-                className="text-field text-field-active"
-                type={paths[start] && paths[start].response_type}
-                value={inputData[questionId]}
-                onChange={
-                  (e) => {
-                    dispatch({
-                      type: 'ADD_INPUT_VALUE',
-                      payload: {
-                        key: questionId,
-                        value: e.target.value
-                      }
-                    });
-                    checkForValue(e);
+            <>
+              <div className="text-field-container" key={paths[start] && paths[start].question_id}>
+                <input
+                  className="text-field text-field-active"
+                  type={paths[start] && paths[start].response_type}
+                  value={inputData[questionId]}
+                  onChange={
+                    (e) => {
+                      dispatch({
+                        type: 'ADD_INPUT_VALUE',
+                        payload: {
+                          key: questionId,
+                          value: e.target.value
+                        }
+                      });
+                      checkForValue(e);
+                    }
                   }
-                }
-              />
-              <label className="text-field-label">enter value</label>
-              <div className="text-field-mask stepper-mask"></div>
-            </div> 
+                />
+                <label className="text-field-label">enter value</label>
+                <div className="text-field-mask stepper-mask"></div>
+              </div>
+              {
+                paths[start] && paths[start].question2?
+                  <>
+                    <p className="results-text">
+                      {
+                        user[0] && user[0].service &&  paths[start] && paths[start].question?
+                        paths[start].question.replace(/product/g, 'service'):
+                        paths[start].question
+                      }
+                    </p>
+                    <div className="text-field-container" key={paths[start] && paths[start].question_id}>
+                      <input
+                        className="text-field text-field-active"
+                        type={paths[start] && paths[start].response_type}
+                        value={inputData[questionId]}
+                        onChange={
+                          (e) => {
+                            dispatch({
+                              type: 'ADD_INPUT_VALUE',
+                              payload: {
+                                key: questionId,
+                                value: e.target.value
+                              }
+                            });
+                            checkForValue(e);
+                          }
+                        }
+                      />
+                      <label className="text-field-label">enter value</label>
+                      <div className="text-field-mask stepper-mask"></div>
+                    </div>
+                  </>:
+                  null
+              }
+            </>
             :
             null
         }
@@ -208,6 +246,7 @@ export default function BreakEven() {
       <div className="main-container">
         <div className="top-card-container">
           <h1 className="main-heading">Break Even Pricing</h1>
+          {JSON.stringify(splitPath)}
           {stepper(6)}
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>
