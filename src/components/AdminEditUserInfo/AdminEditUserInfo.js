@@ -225,6 +225,7 @@ class AdminEditUserInfo extends Component {
                   value={editUser.industryid || 'industry'}
                   onChange={(e) => this.handleDropdownChange(e, 'industryid')}
                 >
+                  <option className="dropdown-option" value='' disabled>Select Industry</option>
                   {this.props.industry.map(industry =>
                     <option key={industry.id} value={industry.id}>{industry.industry}</option>
                   )}
@@ -235,6 +236,7 @@ class AdminEditUserInfo extends Component {
                   value={editUser.usertype || 'usertype'}
                   onChange={(e) => this.handleDropdownChange(e, 'usertype')}
                 >
+                  <option className="dropdown-option" value='' disabled>Select User Type</option>
                   <option className="dropdown-option" key={1} value={false}>User</option>
                   <option className="dropdown-option" key={2} value={true}>Admin</option>
                 </select>
