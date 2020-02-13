@@ -46,7 +46,13 @@ export default function Stepper() {
 
   // Set local state for input
   const handleChange = e => {
-    setInput(e.target.value);
+    if(questionData.question2){
+      let holder = {...input}
+      holder[e.target.name] = e.target.value;
+      setInput(holder)
+    } else {
+      setInput(e.target.value);
+    }
     checkForValue(e);
   }
 
@@ -136,7 +142,8 @@ export default function Stepper() {
                       <div className="text-field-container" key={questionData.question_id}>
                         <input 
                           className="text-field"
-                          value={input} 
+                          value={questionData.question2? input[questionData.header]: input} 
+                          name={questionData.header}
                           onChange={(e)=>handleChange(e)} 
                           type={questionData.response_type} 
                           autoFocus
@@ -163,7 +170,8 @@ export default function Stepper() {
                             <div className="text-field-container" key={questionData.question_id}>
                               <input 
                                 className="text-field"
-                                value={input} 
+                                value={input[questionData.header + '2']} 
+                                name={questionData.header + '2'}
                                 onChange={(e)=>handleChange(e)} 
                                 type={questionData.response_type2} 
                                 autoFocus
