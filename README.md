@@ -13,16 +13,16 @@ The application is designed to help small business owners generate more profits.
 
 ## Screen Shots
 
-![Register Page](public/ScreenShots/register.png =100x)
+![Register Page](public/ScreenShots/register.png=100x)
 
 
-![Stepper](public/ScreenShots/stepper.png =100x)
+![Stepper Example](public/ScreenShots/stepper.png=100x)
 
 
-![User Options](public/ScreenShots/useroptions.png =100x)
+![User Options](public/ScreenShots/useroptions.png=100x)
 
 
-![Results Page](public/ScreenShots/resultspage.png =100x)
+![Results Page](public/ScreenShots/resultspage.png=100x)
 
 
 ## Installation
