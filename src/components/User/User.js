@@ -73,9 +73,14 @@ export default function User() {
     setModal(false);
   }
 
-  // Close modal to change password
+  // Close modal to change password and reset fields
   const closePassModal = () => {
+    setWrongPassword(null);
     setPasswordModal(false);
+    dispatch({type: `MATCH_PASSWORD`, payload: null});
+    setOldPassword('');
+    setNewPassword('');
+    setCheckPassword('');
   }
 
   // Handle change for industry drop down
