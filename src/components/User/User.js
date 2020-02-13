@@ -264,6 +264,7 @@ export default function User() {
                   onChange={(e) => {
                                 setOldPassword(e.target.value);
                                 checkForValue(e);
+                                dispatch({type: `MATCH_PASSWORD`, payload: null});
                               }
                             }
                 />
@@ -279,6 +280,7 @@ export default function User() {
                   onChange={(e) => {
                                 setNewPassword(e.target.value);
                                 checkForValue(e);
+                                setWrongPassword(null);
                               }
                             }
                 />
@@ -294,13 +296,13 @@ export default function User() {
                   onChange={(e) => {
                                 setCheckPassword(e.target.value);
                                 checkForValue(e);
+                                setWrongPassword(null);
                               }
                             }
                 />
                 <label className="text-field-label">confirm password</label>
                 <div className="text-field-mask profile-mask-confirm-new-password"></div>
               </div>
-
 
               <div className="modal-btn-container">
                 <button className="normal-btn profile-modal-btns" onClick={changePassword}>
