@@ -124,7 +124,7 @@ class AdminEditUserInfo extends Component {
                   <th>Company</th>
                   <th>Phone Number</th>
                   <th>Email</th>
-                  <th>Actions</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>

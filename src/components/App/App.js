@@ -32,7 +32,7 @@ export default function App() {
     if(userID && userID.id){
       dispatch({ type: 'GET_USER_INFO', payload: userID.id });
     }
-  },[userID]);
+  },[dispatch, userID]);
   
   return (
     <>
