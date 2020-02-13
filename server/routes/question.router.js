@@ -93,6 +93,9 @@ router.get('/results/:id', (req,res)=>{
         "q"."split",
         "c"."calculator",
         "s"."split_text",
+        "q"."question2", 
+        "q"."response_type2", 
+        "q"."help_text2",
         "s"."next_id" as "split_next_id"
       FROM question_calculator qc
       JOIN "questions" q ON "qc"."question_id" = "q"."id"
