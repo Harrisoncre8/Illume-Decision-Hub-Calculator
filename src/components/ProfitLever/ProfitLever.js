@@ -50,8 +50,7 @@ export default function ProfitLever() {
     setGrowth(
       (
         (
-          (
-            (+inputData[2] * 1.01 - directCosts * 1.01) - indirectCosts) /
+          ((+inputData[2] * 1.01 - directCosts * 1.01) - indirectCosts) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
       ) * 100 / divisor
