@@ -228,11 +228,11 @@ export default function User() {
 
               <button className="secondary-btn profile-password-font-size" onClick={openPassModal}>Change Password?</button>
               <div className="modal-btn-container">
-                <button className="normal-btn profile-modal-btns" onClick={saveChanges}>
-                  Save
-                </button>
-                <button className="normal-btn" onClick={closeModal}>
+                <button className="normal-btn profile-modal-btns" onClick={closeModal}>
                   Cancel
+                </button>
+                <button className="normal-btn" onClick={saveChanges}>
+                  Save
                 </button>
               </div>
             </div>
@@ -298,11 +298,11 @@ export default function User() {
 
 
               <div className="modal-btn-container">
-                <button className="normal-btn profile-modal-btns" onClick={changePassword}>
-                  Confirm
-                </button>
-                <button className="normal-btn" onClick={closePassModal}>
+                <button className="normal-btn profile-modal-btns" onClick={closePassModal}>
                   Cancel
+                </button>
+                <button className="normal-btn" onClick={changePassword}>
+                  Save
                 </button>
               </div>
             </div>
