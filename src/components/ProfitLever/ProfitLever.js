@@ -24,16 +24,17 @@ export default function ProfitLever() {
 
   // Dynamically calculates the profit lever depending on settings
   useEffect(() => {
-    let directCosts = +splitPath[7] === 3 ?
-      +inputData[3] || 0 :
-      ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
+    let directCosts = +splitPath[7] === 7 ?
+      +inputData[3] || 0:
+      ((inputData[8] && +inputData[8]['Labor'] || 0) * (inputData[8] && +inputData[8]['Labor2'] || 0)) + 
+      (+inputData[9] || 0) + (+inputData[10] || 0);
 
-    let indirectCosts = +splitPath[22] === 4 ?
+    let indirectCosts = +splitPath[22] === 8 ?
       + inputData[4] :
-      (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
-      (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
-      (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
-      (+inputData[21] || 0) + (+inputData[22] || 0);
+      (+inputData[11] || 0) + (+inputData[12] || 0) + (+inputData[13] || 0) +
+      (+inputData[14] || 0) + (+inputData[15] || 0) + (+inputData[16] || 0) +
+      (+inputData[17] || 0) + (+inputData[18] || 0) + (+inputData[19] || 0) +
+      (+inputData[20] || 0) + (+inputData[21] || 0);
 
     let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
 
@@ -205,27 +206,85 @@ export default function ProfitLever() {
           null 
           :
           userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
-            <div className="text-field-container" key={paths[start] && paths[start].question_id}>
-              <input
-                className="text-field text-field-active"
-                type={paths[start] && paths[start].response_type}
-                value={inputData[questionId]}
-                onChange={
-                  (e) => {
-                    dispatch({
-                      type: 'ADD_INPUT_VALUE',
-                      payload: {
-                        key: questionId,
-                        value: e.target.value
+            <>
+              <div className="text-field-container" key={paths[start] && paths[start].question_id}>
+                <input
+                  className="text-field text-field-active"
+                  type={paths[start] && paths[start].response_type}
+                  name={paths[start] && paths[start].header}
+                  value={
+                    paths[start] && paths[start].question2?
+                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header]:
+                    inputData[questionId]
+                  } 
+                  onChange={
+                    (e) => {
+                      if(paths[start] && paths[start].question2){
+                        dispatch({
+                          type: 'ADD_INPUT_VALUE',
+                          payload: {
+                            key: questionId,
+                            value: {
+                              [e.target.name]: e.target.value,
+                              [e.target.name + '2']: inputData[questionId] && inputData[questionId][e.target.name + '2']
+                            }
+                          }
+                        });
+                      } else {
+                        dispatch({
+                          type: 'ADD_INPUT_VALUE',
+                          payload: {
+                            key: questionId,
+                            value: e.target.value
+                          }
+                        });
                       }
-                    });
-                    checkForValue(e);
+                      checkForValue(e);
+                    }
                   }
-                }
-              />
-              <label className="text-field-label">enter value</label>
-              <div className="text-field-mask stepper-mask"></div>
-            </div> 
+                />
+                <label className="text-field-label">enter value</label>
+                <div className="text-field-mask stepper-mask"></div>
+              </div>
+              {
+                paths[start] && paths[start].question2?
+                  <>
+                    <p className="results-text">
+                      {
+                        user[0] && user[0].service && paths[start] && paths[start].question2?
+                        paths[start].question2.replace(/product/g, 'service'):
+                        paths[start].question2
+                      }
+                    </p>
+                    <div className="text-field-container" key={paths[start] && paths[start].question_id}>
+                      <input
+                        className="text-field text-field-active"
+                        type={paths[start] && paths[start].response_type2}
+                        value={inputData[questionId] && inputData[questionId][paths[start] && paths[start].header + '2']}
+                        name={paths[start] && paths[start].header + '2'}
+                        onChange={
+                          (e) => {
+                            dispatch({
+                              type: 'ADD_INPUT_VALUE',
+                              payload: {
+                                key: questionId,
+                                value: {
+                                  [e.target.name]: e.target.value,
+                                  [paths[start] && paths[start].header]: inputData[questionId] && inputData[questionId][paths[start] && paths[start].header]
+                                }
+                              }
+                            });
+                            checkForValue(e);
+                          }
+                        }
+                      />
+                      <label className="text-field-label">enter value</label>
+                      <div className="text-field-mask stepper-mask"></div>
+                    </div>
+                  </>:
+                  null
+              }
+            </>
             :
             null
         }
@@ -267,7 +326,7 @@ export default function ProfitLever() {
                 null
             }
             {
-              userCheckboxes.findIndex(el => el.question_id === (23)) !== -1 ?
+              userCheckboxes.findIndex(el => el.question_id === (22)) !== -1 ?
                 <>
                   <br />
                   <p>A 1% reduction in indirect costs will deliver {isNaN(indirectCostChange.toFixed(1))? 0 : indirectCostChange.toFixed(1)}% improvement in profit.</p>
