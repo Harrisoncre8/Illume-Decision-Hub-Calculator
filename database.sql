@@ -55,7 +55,10 @@ CREATE TABLE "questions" (
   "help_text" TEXT,
   "sub_questions" INT,
   "split" BOOLEAN,
-  "checkboxes" BOOLEAN
+  "checkboxes" BOOLEAN,
+  "question2" TEXT DEFAULT NULL,
+  "response_type2" TEXT DEFAULT NULL,
+  "help_text2" TEXT DEFAULT NULL
 );
 
 CREATE TABLE "split" (
@@ -98,7 +101,7 @@ CREATE TABLE "disclaimer" (
 --#endregion
 
 --#region Insert into questions
-INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questions", "split", "checkboxes","header")
+INSERT INTO "questions" ("question", "response_type", "help_text", "sub_questions", "split", "checkboxes", "header", "question2", "response_type2", "help_text2")
 VALUES (
   'Is this for a single sale or total product sales?',
   'radio',
@@ -106,7 +109,10 @@ VALUES (
   NULL,
   TRUE,
   FALSE,
-  'Single or Total Sales'
+  'Single or Total Sales',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What is your revenue?',
@@ -115,7 +121,10 @@ VALUES (
   NULL,
   FALSE,
   FALSE,
-  'Revenue'
+  'Revenue',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What are your direct costs?',
@@ -124,7 +133,10 @@ VALUES (
   NULL,
   FALSE,
   FALSE,
-  'Direct Costs'
+  'Direct Costs',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What are your indirect costs?',
@@ -133,7 +145,10 @@ VALUES (
   NULL,
   FALSE,
   FALSE,
-  'Indirect Costs'
+  'Indirect Costs',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What is the total number of sales for this product?',
@@ -142,7 +157,10 @@ VALUES (
   NULL,
   FALSE,
   FALSE,
-  'Number of Sales'
+  'Number of Sales',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What do you plan on pricing this for?',
@@ -151,7 +169,10 @@ VALUES (
   NULL,
   FALSE,
   FALSE,
-  'Product/Service Price'
+  'Product/Service Price',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'Would you like to input your direct costs as a total or walkthrough the categories?',
@@ -160,7 +181,10 @@ VALUES (
   NULL,
   TRUE,
   FALSE,
-  'Direct Costs Walkthrough'
+  'Direct Costs Walkthrough',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What is the rate per hour of this labor for this product?',
@@ -169,16 +193,10 @@ VALUES (
   3,
   FALSE,
   FALSE,
-  'Labor Rate'
-),
-(
+  'Labor',
   'How many hours of labor is done at this rate for this product?',
   'number',
-  'Consider just one labor rate for this field.',
-  3,
-  FALSE,
-  FALSE,
-  'Labor Hours'
+  'Consider just one labor rate for this field.'
 ),
 (
   'What are your parts/raw material costs?',
@@ -187,7 +205,10 @@ VALUES (
   3,
   FALSE,
   FALSE,
-  'Parts/Raw Materials'
+  'Parts/Raw Materials',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What are some other direct costs?',
@@ -196,7 +217,10 @@ VALUES (
   3,
   FALSE,
   FALSE,
-  'Other Direct Costs'
+  'Other Direct Costs',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What are salary costs?',
@@ -205,7 +229,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Salary'
+  'Salary',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What are benefit costs?',
@@ -214,7 +241,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Benefits'
+  'Benefits',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What is your rent/business morgage payment?',
@@ -223,7 +253,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Rent/business'
+  'Rent/business',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'How much do you spend on supplies?',
@@ -232,7 +265,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Supplies'
+  'Supplies',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'How much do you spend on travel?',
@@ -241,7 +277,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Travel'
+  'Travel',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'How much do you spend on business meetings?',
@@ -250,7 +289,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Meetings'
+  'Meetings',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'How much do you spend on your vehicles?',
@@ -259,7 +301,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Vehicle'
+  'Vehicle',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'How much do you spend subscriptions?',
@@ -268,7 +313,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Subsciptions'
+  'Subsciptions',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'How much do you spend on dues and fees?',
@@ -277,7 +325,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Dues and Fees'
+  'Dues and Fees',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'How much do you spend on outside services?',
@@ -286,7 +337,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Outside Services'
+  'Outside Services',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'What other expenses do you have across your business?',
@@ -295,7 +349,10 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Other Indirect Expenses'
+  'Other Indirect Expenses',
+  NULL,
+  NULL,
+  NULL
 ),
 (
   'Would you like to input your indirect costs as a total or walkthrough the categories?',
@@ -304,7 +361,10 @@ VALUES (
   NULL,
   TRUE,
   FALSE,
-  'Indirect Costs Walkthrough'
+  'Indirect Costs Walkthrough',
+  NULL,
+  NULL,
+  NULL
 );
 --#endregion
 
@@ -326,20 +386,20 @@ ALTER TABLE "user_checks" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 INSERT INTO "calculators" ("calculator", "start_id") 
 VALUES ('Define Your Profit Lever', 1),
 ('Break Even Pricing', 6),
-('Price Setting', 65);
+('Price Setting', 62);
 
 --#region Set up Paths
 INSERT INTO "question_calculator" ("calculator_id", "question_id", "next_id")
 VALUES (1,1,2),
 (1,2,13),
-(1,3,28),
+(1,3,25),
 (1,4,NULL),
 (1,5,2),
 (2,1,14),
-(2,3,29),
+(2,3,26),
 (2,4,NULL),
 (3,5,15),
-(3,3,30),
+(3,3,27),
 (3,4,12),
 (3,6,NULL),
 (1,7,3),
@@ -347,76 +407,73 @@ VALUES (1,1,2),
 (3,7,10),
 (1,8,17),
 (1,9,18),
-(1,10,19),
-(1,11,28),
-(2,8,21),
-(2,9,22),
-(2,10,23),
-(2,11,29),
-(3,8,25),
-(3,9,26),
+(1,10,25),
+(2,8,20),
+(2,9,21),
+(2,10,26),
+(3,8,23),
+(3,9,24),
 (3,10,27),
-(3,11,30),
-(1,23,4),
-(2,23,8),
-(3,23,11),
-(1,12,32),
-(1,13,33),
-(1,14,34),
-(1,15,35),
-(1,16,36),
-(1,17,37),
-(1,18,38),
-(1,19,39),
-(1,20,40),
-(1,21,41),
-(1,22,null),
-(2,12,43),
-(2,13,44),
-(2,14,45),
-(2,15,46),
-(2,16,47),
-(2,17,48),
-(2,18,49),
-(2,19,50),
-(2,20,51),
-(2,21,52),
-(2,22,null),
-(3,12,54),
-(3,13,55),
-(3,14,56),
-(3,15,57),
-(3,16,58),
-(3,17,59),
-(3,18,60),
-(3,19,61),
-(3,20,62),
-(3,21,63),
-(3,22,12),
+(1,22,4),
+(2,22,8),
+(3,22,11),
+(1,11,29),
+(1,12,30),
+(1,13,31),
+(1,14,32),
+(1,15,33),
+(1,16,34),
+(1,17,35),
+(1,18,36),
+(1,19,37),
+(1,20,38),
+(1,21,null),
+(2,11,40),
+(2,12,41),
+(2,13,42),
+(2,14,43),
+(2,15,44),
+(2,16,45),
+(2,17,46),
+(2,18,47),
+(2,19,48),
+(2,20,49),
+(2,21,null),
+(3,11,51),
+(3,12,52),
+(3,13,53),
+(3,14,54),
+(3,15,55),
+(3,16,56),
+(3,17,57),
+(3,18,58),
+(3,19,59),
+(3,20,60),
+(3,21,12),
 (2,5,14),
 (3,1,15);
 --#endregion
 
 --#region Set up Splits
 INSERT INTO "split" ("calculator_id", "question_id","split_text","next_id")
-VALUES(1,1,'Single Product',2),
-(1,1,'Total Product',5),
+VALUES(1,1,'Single Product',2),
+(1,1,'Total Product',5),
 (1,7,'Single',3),
 (1,7,'Walkthrough',16),
 (2,7,'Single',7),
-(2,7,'Walkthrough',20),
+(2,7,'Walkthrough',19),
 (3,7,'Single',10),
-(3,7,'Walkthrough',24),
-(1,23,'Single',4),
-(1,23,'Walkthrough',31),
-(2,23,'Single',8),
-(2,23,'Walkthrough',42),
-(3,23,'Single',11),
-(3,23,'Walkthrough',53),
-(2,1,'Single Product',14),
-(2,1,'Total Product',64),
-(3,1,'Single Product',15),
-(3,1,'Total Product',9);
+(3,7,'Walkthrough',22),
+(1,22,'Single',4),
+(1,22,'Walkthrough',28),
+(2,22,'Single',8),
+(2,22,'Walkthrough',39),
+(3,22,'Single',11),
+(3,22,'Walkthrough',50),
+(2,1,'Single Product',14),
+(2,1,'Total Product',61),
+(3,1,'Single Product',15),
+(3,1,'Total Product',9);
 --#endregion
 
 --#region Set Disclaimer
