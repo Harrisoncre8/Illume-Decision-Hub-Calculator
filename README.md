@@ -34,6 +34,8 @@ Profit Levers Calculator Results Page: able to continue to edit their inputs
 
 > npm run server
 
+> go to http://localhost:3000/
+
 ## Usage 
 - User:
     - Must register for login
