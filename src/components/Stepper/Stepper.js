@@ -129,23 +129,55 @@ export default function Stepper() {
                     </span>
                   </div>
                   :
-                  <center>
-                    <div className="text-field-container" key={questionData.question_id}>
-                      <input 
-                        className="text-field"
-                        value={input} 
-                        onChange={(e)=>handleChange(e)} 
-                        type={questionData.response_type} 
-                        autoFocus
-                      />
-                      <label className="text-field-label">enter value</label>
-                      <div className="text-field-mask stepper-mask"></div>
-                      <span className="tooltip-background tooltip-background-textfield">
-                        <span className="tooltip-icon">?</span>
-                        <span className="tooltip-text">{questionData.help_text}</span>
-                      </span>
-                    </div>
-                  </center>
+                  <>
+                    <center>
+                      <div className="text-field-container" key={questionData.question_id}>
+                        <input 
+                          className="text-field"
+                          value={input} 
+                          onChange={(e)=>handleChange(e)} 
+                          type={questionData.response_type} 
+                          autoFocus
+                        />
+                        <label className="text-field-label">enter value</label>
+                        <div className="text-field-mask stepper-mask"></div>
+                        <span className="tooltip-background tooltip-background-textfield">
+                          <span className="tooltip-icon">?</span>
+                          <span className="tooltip-text">{questionData.help_text}</span>
+                        </span>
+                      </div>
+                    </center>
+                    {
+                      questionData.question2? 
+                        <>
+                          <p className="question-text">
+                          {
+                            user[0] && user[0].service && questionData.question2? 
+                              questionData.question2.replace(/product/g, 'service'): 
+                              questionData.question2
+                          }
+                          </p>
+                          <center>
+                            <div className="text-field-container" key={questionData.question_id}>
+                              <input 
+                                className="text-field"
+                                value={input} 
+                                onChange={(e)=>handleChange(e)} 
+                                type={questionData.response_type2} 
+                                autoFocus
+                              />
+                              <label className="text-field-label">enter value</label>
+                              <div className="text-field-mask stepper-mask"></div>
+                              <span className="tooltip-background tooltip-background-textfield">
+                                <span className="tooltip-icon">?</span>
+                                <span className="tooltip-text">{questionData.help_text2}</span>
+                              </span>
+                            </div>
+                          </center>
+                        </>:
+                        null
+                    }
+                  </>
                 }
               </div>
             </form>
