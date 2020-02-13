@@ -24,7 +24,7 @@ export default function BreakEven() {
       +inputData[3] || 0:
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
-    let indirectCosts = +splitPath[23] === 8 ?
+    let indirectCosts = +splitPath[22] === 8 ?
       + inputData[4] :
       (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
       (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
