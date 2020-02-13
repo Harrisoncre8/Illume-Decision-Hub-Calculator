@@ -37,7 +37,7 @@ export default function PriceSetting() {
     if (user.length > 0 && industryData) {
       setIndustryName(user[0]&&user[0].industry);
     }
-  }, [user, industryData, user]);
+  }, [industryData, user]);
   
 
   // Dynamically calculates the price setting depending on settings
