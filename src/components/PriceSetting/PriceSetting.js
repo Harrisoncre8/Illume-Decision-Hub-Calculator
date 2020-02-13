@@ -49,7 +49,7 @@ export default function PriceSetting() {
       +inputData[3] || 0:
       ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
 
-    let indirectCosts = +splitPath[23] === 11 ?
+    let indirectCosts = +splitPath[22] === 11 ?
       + inputData[4] :
       (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
       (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
@@ -296,7 +296,7 @@ export default function PriceSetting() {
                 :
                 null
             }
-            {stepper(65)}
+            {stepper(62)}
           </div>
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>
