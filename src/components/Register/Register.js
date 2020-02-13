@@ -145,9 +145,11 @@ class Register extends Component {
               onChange={(e) => this.handleChange(e, 'industry')}
             >
               <option className="dropdown-option" value='' disabled>Select Industry</option>
-              {this.props.industry.map((industryRow=>{
-                return(
-                  <option className="dropdown-option" value ={industryRow.id}>{industryRow.industry}</option>
+              {this.props.industry.map((industryRow => {
+                return (
+                  <option className="dropdown-option" value={industryRow.id} key={industryRow.id}>
+                    {industryRow.industry}
+                  </option>
                 )
               }))}
             </select>
