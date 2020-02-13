@@ -196,7 +196,7 @@ class Register extends Component{
               onClickAway={this.closeModal}
             >
               <div className="modal-container">
-                <h1 className="main-heading">Usage Agreement</h1>
+                <h1 className="main-heading">Terms of Service Agreement</h1>
                 <div>
                   <p className="align-left">{this.props.disclaimer.disclaimer}</p>
                 </div>
