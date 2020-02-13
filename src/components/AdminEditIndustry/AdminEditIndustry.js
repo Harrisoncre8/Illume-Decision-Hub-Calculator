@@ -138,65 +138,38 @@ class AdminEditIndustry extends Component{
               </thead>
               <tbody>
                 {this.props.industry.map(industry => 
-                  <>
+                  <tr id={industry.enabled ? '' : "admin-industry-disabled"} key={industry.id}>
+                    <td>{industry.industry}</td>
+                    <td>{(industry.gross_margin * 100).toFixed(0)}%</td>
+                    <td>{(industry.op_margin * 100).toFixed(0)}%</td>
                     {industry.enabled ?
-                      <tr key={industry.id}>
-                        <td>{industry.industry}</td>
-                        <td>{(industry.gross_margin * 100).toFixed(0)}%</td>
-                        <td>{(industry.op_margin * 100).toFixed(0)}%</td>
+                      <>
                         <td>Yes</td>
-                        {industry.enabled ?
-                          <td 
-                            className="admin-delete-industry-cell" 
-                            onClick={()=>this.handleDelete(industry)}
-                          >
-                            DISABLE
-                          </td>
-                          :
-                          <td 
-                            className="admin-delete-industry-cell" 
-                            onClick={()=>this.handleDelete(industry)}
-                          >
-                            ENABLE
-                          </td>
-                        }
                         <td 
-                          className="admin-edit-industry-cell" 
-                          onClick={()=>this.openModal(industry)}
+                          className="admin-delete-industry-cell" 
+                          onClick={()=>this.handleDelete(industry)}
                         >
-                          Edit Info
+                          DISABLE
                         </td>
-                      </tr>
+                      </>
                       :
-                      <tr id="admin-industry-disabled" key={industry.id}>
-                        <td>{industry.industry}</td>
-                        <td>{(industry.gross_margin * 100).toFixed(0)}%</td>
-                        <td>{(industry.op_margin * 100).toFixed(0)}%</td>
+                      <>
                         <td>No</td>
-                        {industry.enabled ?
-                          <td 
-                            className="admin-delete-industry-cell" 
-                            onClick={()=>this.handleDelete(industry)}
-                          >
-                            DISABLE
-                          </td>
-                          :
-                          <td 
-                            className="admin-delete-industry-cell" 
-                            onClick={()=>this.handleDelete(industry)}
-                          >
-                            ENABLE
-                          </td>
-                        }
                         <td 
-                          className="admin-edit-industry-cell" 
-                          onClick={()=>this.openModal(industry)}
+                          className="admin-delete-industry-cell" 
+                          onClick={()=>this.handleDelete(industry)}
                         >
-                          Edit Info
+                          ENABLE
                         </td>
-                      </tr>
+                      </>
                     }
-                  </>
+                    <td 
+                      className="admin-edit-industry-cell" 
+                      onClick={()=>this.openModal(industry)}
+                    >
+                      Edit Info
+                    </td>
+                  </tr>
                 )}
               </tbody>
             </table>
