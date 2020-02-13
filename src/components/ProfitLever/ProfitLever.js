@@ -24,13 +24,13 @@ export default function ProfitLever() {
 
   // Dynamically calculates the profit lever depending on settings
   useEffect(() => {
-    let directCosts = +splitPath[7] === 7 ?
+    let directCosts = +splitPath[7] === 3 ?
       +inputData[3] || 0:
       ((inputData[8] && +inputData[8]['Labor'] || 0) * (inputData[8] && +inputData[8]['Labor2'] || 0)) + 
       (+inputData[9] || 0);
 
-    let indirectCosts = +splitPath[22] === 8 ?
-      +inputData[4] :
+    let indirectCosts = +splitPath[22] === 4 ?
+      +inputData[4] || 0 :
       (+inputData[10] || 0) + (+inputData[11] || 0) + (+inputData[12] || 0) + 
       (+inputData[13] || 0) + (+inputData[14] || 0) + (+inputData[15] || 0) + 
       (+inputData[16] || 0) + (+inputData[17] || 0) + (+inputData[18] || 0) + 
@@ -38,7 +38,7 @@ export default function ProfitLever() {
       (+inputData[23] || 0) + (+inputData[24] || 0) + (+inputData[25] || 0);
 
     let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
-
+    console.log(directCosts,indirectCosts, inputData[3]);
     setPrice(
       (
         (
