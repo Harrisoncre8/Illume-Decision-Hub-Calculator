@@ -247,7 +247,7 @@ VALUES (
   NULL
 ),
 (
-  'What is your rent/business morgage payment?',
+  'What is your rent/business mortgage payment?',
   'number',
   'Remember to include escrow payments and insurance here.',
   4,
@@ -297,7 +297,7 @@ VALUES (
 (
   'How much do you spend on your vehicles?',
   'number',
-  'This includes any loan payments, gas, insurance, and periferals like a phone charger.',
+  'This includes any loan payments, gas, insurance, and peripherals like a phone charger.',
   4,
   FALSE,
   FALSE,
@@ -313,7 +313,7 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Subsciptions',
+  'Subscriptions',
   NULL,
   NULL,
   NULL
