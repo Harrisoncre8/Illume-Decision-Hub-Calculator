@@ -14,6 +14,7 @@ The application is designed to help small business owners generate more profits.
 ## Screen Shots
 
 ![Register Page](public/ScreenShots/register.png=100)
+<img src=public/ScreenShots/register.png width="100" />
 
 
 ![Stepper Example](public/ScreenShots/stepper.png=100)
