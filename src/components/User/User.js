@@ -158,7 +158,7 @@ export default function User() {
           <Modal
             visible={modal}
             width="400"
-            height="480"
+            height="500"
             effect="fadeInUp"
             onClickAway={closeModal}
           >
