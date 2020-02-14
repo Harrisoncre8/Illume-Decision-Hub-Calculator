@@ -8,7 +8,7 @@ export default function Slide2() {
 
   return(
     <center>
-      <div className="slide-main-container"  onClick={()=>history.push(`/`)}>
+      <div className="slide-main-container"  onClick={()=>history.push(`/slide4`)}>
 
         <div className="slide-heading-container">
           <img className="slide-logo" src="illume-logo180.png" alt="Illume Logo" />
