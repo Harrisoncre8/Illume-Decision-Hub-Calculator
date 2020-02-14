@@ -4,6 +4,7 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import questionSaga from '../sagas/questionSaga';
 import admin from './adminSaga';
+import disclaimer from './disclaimerSaga';
 import industry from './industrySaga';
 import question from './questionSaga';
 import splitSaga from './splitSaga';
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     question(),
     splitSaga(),
     checkboxSaga(),
+    disclaimer(),
   ]);
 }

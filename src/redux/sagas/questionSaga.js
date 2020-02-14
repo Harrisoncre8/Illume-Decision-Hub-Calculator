@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, takeLeading } from 'redux-saga/effects';
 
 // worker Saga: will be fired on 'GET_QUESTION' action
 function* getQuestion(action) {
@@ -28,7 +28,7 @@ function* getAllQuestions(action){
 }
 
 function* questionSaga() {
-  yield takeLatest(`GET_QUESTION`, getQuestion);
+  yield takeLeading(`GET_QUESTION`, getQuestion);
   yield takeLatest(`GET_ALL_QUESTIONS`, getAllQuestions);
 }
 

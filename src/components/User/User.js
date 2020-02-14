@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-awesome-modal';
 import './User.css'
 import Nav from '../Nav/Nav';
 import QuestionCheckboxes from '../QuestionCheckboxes/QuestionCheckboxes';
+import UserCalcToggle from '../UserCalcToggle/UserCalcToggle';
 
 export default function User() {
 
-  // getting data from redux
-  let dispatch = useDispatch();
-  let industryData = useSelector(state => state.industry);
-  let userData = useSelector(state => state.userInfo);
-  let userID = useSelector(state => state.user.id);
-  let passwordStatusData = useSelector(state => state.passwordStatus);
+  // Set data from redux
+  const dispatch = useDispatch();
+  const industryData = useSelector(state => state.industry);
+  const userData = useSelector(state => state.userInfo);
+  const userID = useSelector(state => state.user.id);
+  const passwordStatusData = useSelector(state => state.passwordStatus);
 
-  // setting state for modal
+  // Set state for modal
   const [modal, setModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
 
-  // setting state for user information
+  // Set state for user information
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [id, setId] = useState('');
@@ -26,7 +27,9 @@ export default function User() {
   const [industryID, setIndustryID] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  // setting state to be deployed on password change
+  const [showPassword, setShowPassword] = useState('password');
+
+  // Set state to be deployed on password change
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
@@ -49,36 +52,7 @@ export default function User() {
     }
   }, [userID, dispatch, passwordStatusData]);
 
-  // change state to open user info modal and set default info to the modal
-  const openModal = () => {
-    setModal(true);
-    setIndustry(userData[0].industry);
-    setName(userData[0].name);
-    setCompany(userData[0].business_name);
-    setPhone(userData[0].phone_number);
-    setEmail(userData[0].email);
-    setIndustryID(userData[0].industry_id);
-  }
-
-  // change state to close user info modal
-  const closeModal = () => {
-    setModal(false);
-  }
-
-  // save user info changes and sends to DB
-  const saveChanges = () => {
-    let userInfo = {id, name, company, phone, email, industryID};
-    dispatch({type: `PUT_USER_INFO`, payload: userInfo});
-    setModal(false);
-  }
-
-  // opens modal to change password
-  const openPassModal = () => {
-    setPasswordModal(true);
-  }
-
-  // checks and saves the user's new password
-  // and closes modal
+  // Check and saves the user's new password and closes modal
   const changePassword = () => {
     if(newPassword === checkPassword){
       let passwordInfo = {oldPassword, newPassword, id};
@@ -92,19 +66,56 @@ export default function User() {
     }
   }
 
-  // Adds class if input has a value, removes the class if input has no value
+  // Add class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
+
+  // Change state to close user info modal
+  const closeModal = () => {
+    setModal(false);
+  }
+
+  // Close modal to change password and reset fields
+  // Show or hide password
+  const togglePasswordView = () => showPassword === 'password' ? setShowPassword('text') : setShowPassword('password');
 
   // close modal to change password
   const closePassModal = () => {
+    setWrongPassword(null);
     setPasswordModal(false);
+    dispatch({type: `MATCH_PASSWORD`, payload: null});
+    setOldPassword('');
+    setNewPassword('');
+    setCheckPassword('');
   }
 
-  // handle change for industry drop down
+  // Handle change for industry drop down
   const handleUserIndustry = e => {
     setIndustry(e.target.value);
     setIndustryID(industryData[industryData.findIndex(el => el.industry === e.target.value)] &&
     industryData[industryData.findIndex(el => el.industry === e.target.value)].id);  
+  }
+
+  // Change state to open user info modal and set default info to the modal
+  const openModal = () => {
+    setModal(true);
+    setIndustry(userData[0].industry);
+    setName(userData[0].name);
+    setCompany(userData[0].business_name);
+    setPhone(userData[0].phone_number);
+    setEmail(userData[0].email);
+    setIndustryID(userData[0].industry_id);
+  }
+
+  // Open modal to change password
+  const openPassModal = () => {
+    setPasswordModal(true);
+  }
+
+  // Save user info changes and sends to DB
+  const saveChanges = () => {
+    let userInfo = {id, name, company, phone, email, industryID};
+    dispatch({type: `PUT_USER_INFO`, payload: userInfo});
+    setModal(false);
   }
 
   return(
@@ -113,28 +124,30 @@ export default function User() {
       <div className="main-container">
         <div className="top-card-container">
           <div className="profile-personal-details-container">
-            {userData.map(user => 
-              <div key={user.id}>
+            {userData.map((user, i) => 
+              <div key={i}>
                 <h1 className='user-spacing'>Welcome back, {user.name}!</h1>
                 <h2 className='user-spacing'>Profile Information</h2>
                 <div className="profile-list-container">
                   <table className="profile-text user-info">
-                    <tr>
-                      <td>Name:</td>
-                      <td className="profile-center">{user.name}</td>
-                    </tr>
-                    <tr>
-                      <td>Company:</td>
-                      <td className="profile-center">{user.business_name}</td>
-                    </tr>
-                    <tr>
-                      <td>Phone:</td>
-                      <td className="profile-center">{user.phone_number}</td>
-                    </tr>
-                    <tr>
-                      <td>Email:</td>
-                      <td className="profile-center">{user.email}</td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <td>Name:</td>
+                        <td className="profile-center">{user.name}</td>
+                      </tr>
+                      <tr>
+                        <td>Company:</td>
+                        <td className="profile-center">{user.business_name}</td>
+                      </tr>
+                      <tr>
+                        <td>Phone:</td>
+                        <td className="profile-center">{user.phone_number}</td>
+                      </tr>
+                      <tr>
+                        <td>Email:</td>
+                        <td className="profile-center">{user.email}</td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -214,22 +227,22 @@ export default function User() {
               </div>
 
               <select 
-                className="modal-input"  
+                className="dropdown register-dropdown"  
                 value={industry} 
                 onChange={handleUserIndustry}
               > 
                 {industryData.map(item => 
-                  <option key={item.id}>{item.industry}</option>
+                  <option className="dropdown-option" key={item.id}>{item.industry}</option>
                 )}
               </select>
 
               <button className="secondary-btn profile-password-font-size" onClick={openPassModal}>Change Password?</button>
               <div className="modal-btn-container">
-                <button className="normal-btn profile-modal-btns" onClick={saveChanges}>
-                  Save
-                </button>
-                <button className="normal-btn" onClick={closeModal}>
+                <button className="normal-btn profile-modal-btns" onClick={closeModal}>
                   Cancel
+                </button>
+                <button className="normal-btn" onClick={saveChanges}>
+                  Save
                 </button>
               </div>
             </div>
@@ -251,11 +264,12 @@ export default function User() {
               <div className="text-field-container">
                 <input
                   className="text-field"
-                  type="text"
+                  type={showPassword}
                   value={oldPassword}
                   onChange={(e) => {
                                 setOldPassword(e.target.value);
                                 checkForValue(e);
+                                dispatch({type: `MATCH_PASSWORD`, payload: null});
                               }
                             }
                 />
@@ -263,14 +277,15 @@ export default function User() {
                 <div className="text-field-mask profile-mask-old-password"></div>
               </div>
 
-              <div className="text-field-container">
+              <div className="text-field-container ">
                 <input
                   className="text-field"
-                  type="text"
+                  type={showPassword}
                   value={newPassword}
                   onChange={(e) => {
                                 setNewPassword(e.target.value);
                                 checkForValue(e);
+                                setWrongPassword(null);
                               }
                             }
                 />
@@ -281,30 +296,35 @@ export default function User() {
               <div className="text-field-container">
                 <input
                   className="text-field"
-                  type="text"
+                  type={showPassword}
                   value={checkPassword}
                   onChange={(e) => {
                                 setCheckPassword(e.target.value);
                                 checkForValue(e);
+                                setWrongPassword(null);
                               }
                             }
                 />
                 <label className="text-field-label">confirm</label>
                 <div className="text-field-mask profile-mask-confirm-new-password"></div>
+                  <span>
+                    <input type="checkbox" onChange={togglePasswordView} />
+                      <label> Show Passwords</label>
+                  </span>
               </div>
 
-
               <div className="modal-btn-container">
-                <button className="normal-btn profile-modal-btns" onClick={changePassword}>
-                  Confirm
-                </button>
-                <button className="normal-btn" onClick={closePassModal}>
+                <button className="normal-btn profile-modal-btns" onClick={closePassModal}>
                   Cancel
+                </button>
+                <button className="normal-btn" onClick={changePassword}>
+                  Save
                 </button>
               </div>
             </div>
           </Modal>
           <QuestionCheckboxes />
+          <UserCalcToggle />
         </div>
       </div>
     </center>

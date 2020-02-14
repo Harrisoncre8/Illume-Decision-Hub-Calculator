@@ -31,12 +31,16 @@
   margin-top: 20px;
 }
 
+.admin-industry-mask-gross-margin {
+  width: 106px;
+}
+
 .admin-industry-mask-industry {
   width: 52px;
 }
 
-.admin-industry-mask-margin {
-  width: 71px;
+.admin-industry-mask-op-margin {
+  width: 131px;
 }
 
 .admin-industry-table {
@@ -57,4 +61,12 @@
 
 .admin-industry-table tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+.edit-info-cell-width {
+  width: 70px;
+}
+
+.op-margin-cell-width {
+  width: 60px;
 }

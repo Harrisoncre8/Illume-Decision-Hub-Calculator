@@ -9,12 +9,19 @@ class Login extends Component{
     email: '',
     password: '',
     showPassword: 'password'
-  };
+  }
+
+  // Use previous props to check user type for route
+  componentDidUpdate(prevProps){
+    if(this.props.user !== prevProps.user){
+      this.pushHistoryToUser();
+    }
+  }
 
   // Adds class if input has a value, removes the class if input has no value
   checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
-  // Sets local state to current input value, adds or removes class based on input's value
+  // Set local state to current input value, adds or removes class based on input's value
   handleChange = (e, propName) => {
     this.setState({
       ...this.state,
@@ -24,9 +31,7 @@ class Login extends Component{
   }
 
   // Push history to registration page
-  handleRegister = () => {
-    this.props.history.push('/register');
-  }
+  handleRegister = () => this.props.history.push('/register');
 
   // Handle user log-in and push history to main user page, otherwise return an error message
   login = e => {
@@ -39,25 +44,21 @@ class Login extends Component{
           password: this.state.password,
         },
       });
-    } else {
+    } 
+    else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-    }
-  }
-
-  // using previous props to check user type for route
-  componentDidUpdate(prevProps){
-    if(this.props.user !== prevProps.user){
-      this.pushHistoryToUser();
     }
   }
 
   // Push user to admin or user based on admin boolean
   pushHistoryToUser = () => {
-    if (this.props.user && this.props.user.admin){
+    if(this.props.user && this.props.user.admin){
       this.props.history.push('/admin');
-    }else if (this.props.user && this.props.user.id){
+    }
+    else if(this.props.user && this.props.user.id){
       this.props.history.push('/user');
-    }else{
+    }
+    else {
       this.props.history.push('/');
     }
   }
@@ -87,7 +88,7 @@ class Login extends Component{
             <input 
               className="text-field" 
               type="text" 
-              onChange={(event)=>this.handleChange(event, 'email')}
+              onChange={(e)=>this.handleChange(e, 'email')}
             />
             <label className="text-field-label">email</label>
             <div className="text-field-mask login-email-mask"></div>
@@ -97,16 +98,16 @@ class Login extends Component{
             <input 
               className="text-field" 
               type={this.state.showPassword} 
-              onChange={(event)=>this.handleChange(event, 'password')}
+              onChange={(e)=>this.handleChange(e, 'password')}
             />
 
             <label className="text-field-label">password</label>
             <div className="text-field-mask login-password-mask"></div>
-            <span>
-              <input type="checkbox" onChange={this.togglePasswordView} />
-                <label> Show Password</label>
-            </span>
-          </div>
+              <span>
+                <input type="checkbox" onChange={this.togglePasswordView} />
+                  <label> Show Password</label>
+              </span>
+            </div>
 
           <button className="normal-btn login-login-btn" type="submit" onClick={this.login}>Log In</button>
           </form>

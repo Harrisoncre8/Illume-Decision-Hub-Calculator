@@ -10,19 +10,22 @@ export default function AdminCalcQuestion(props) {
   const [question, setQuestion] = useState(props.question);
   const [tooltip, setTooltip] = useState(props.tooltip);
   const [showSub, setShowSub] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   // Runs when component mounts
   useEffect(()=>{
     if(props.id === 3 || props.id === 4){
       dispatch({type: `GET_ADMIN_SUB_QUESTION`});
     }
-  }, [props.id]);
+  }, [dispatch, props.id]);
 
   // Dispatch to saga to update question and tooltip in database
   const handleSubmit = e => {
     e.preventDefault();
     let id = [props.id, question, tooltip, props.calcID];
     dispatch({type: `PUT_ADMIN_QUESTION`, payload: id});
+    setSaved(true)
+    setTimeout(()=>setSaved(false), 3000);
   }
 
   // Map through sub-questions, increment question number for each question
@@ -70,6 +73,7 @@ export default function AdminCalcQuestion(props) {
         />
         <div>
           <button className="normal-btn admin-edit-calc-btn" type="submit">SAVE</button>
+          {saved ? <p>SAVED!</p> : ''}
         </div>
       </form>
       <hr />
