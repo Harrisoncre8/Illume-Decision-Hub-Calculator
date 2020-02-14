@@ -223,9 +223,9 @@ VALUES (
   NULL
 ),
 (
-  'What are your rent, lease, business mortgage, and utility payments?',
+  'What are your rent, lease, business mortgage, and utility payments?',
   'number',
-  'Remember to include escrow payments here',
+  'Remember to include escrow payments here',
   4,
   FALSE,
   FALSE,
@@ -247,9 +247,9 @@ VALUES (
   NULL
 ),
 (
-  'What are your office staff salary costs?',
+  'What are your office staff salary costs?',
   'number',
-  'Remember to include yourself if you pay yourself a salary',
+  'Remember to include yourself if you pay yourself a salary',
   4,
   FALSE,
   FALSE,
@@ -261,7 +261,7 @@ VALUES (
 (
   'What are your employee benefits costs?',
   'number',
-  'Benefits include things like health, dental, disability, life, etc',
+  'Benefits include things like health, dental, disability, life, etc',
   4,
   FALSE,
   FALSE,
@@ -309,7 +309,7 @@ VALUES (
 (
   'How much do you spend on travel?',
   'number',
-  'This includes meals and entertainment while on business',
+  'This includes meals and entertainment while on business',
   4,
   FALSE,
   FALSE,
@@ -321,7 +321,7 @@ VALUES (
 (
   'How much do you spend subscriptions, dues, and fees?',
   'number',
-  'This includes subscriptions like Office 365, adobe, and other regular payments',
+  'This includes subscriptions like Office 365, adobe, and other regular payments',
   4,
   FALSE,
   FALSE,
@@ -357,7 +357,7 @@ VALUES (
 (
   'Would you like to input your indirect costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field; the walkthrough will bring you through common indirect cost categories',
+  'A total will just be one input field; the walkthrough will bring you through common indirect cost categories',
   NULL,
   TRUE,
   FALSE,
