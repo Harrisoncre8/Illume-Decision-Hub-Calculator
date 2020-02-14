@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import './ExploreMore.css'
 
 const ExploreMore = ()=>{
 
@@ -35,92 +36,111 @@ const ExploreMore = ()=>{
     setSales( +inputData[1] === 2 ? 1 : +inputData[5] || 1);
   },[inputData])
   return(
-    <div style={{display:'flex', justifyContent: 'center'}}>
-      <div style={{padding: 10}}>
-        <br/>
-        <div className="text-field-container" >
-          <input
-            className="text-field text-field-active"
-            value={revenue} 
-            disabled
-          />
+    <div>
+      <br/>
+      <label class="switch">
+        <input type="checkbox"/>
+        <span class="slider round"></span>
+      </label>
+      <div style={{display:'flex', justifyContent: 'center'}}>
+        <div style={{padding: 10}}>
+          <br/>
+          <div className="text-field-container" >
+            <input
+              className="text-field text-field-active"
+              value={revenue} 
+              disabled
+            />
+          </div>
+          <br/>
+          <div className="text-field-container" >
+            <input
+              className="text-field text-field-active"
+              value={sales} 
+              disabled
+            />
+          </div>
+          <br/>
+          <div className="text-field-container" >
+            <input
+              className="text-field text-field-active"
+              value={directCost} 
+              disabled
+            />
+          </div>
+          <br/>
+          <div className="text-field-container" >
+            <input
+              className="text-field text-field-active"
+              value={indirectCost} 
+              disabled
+            />
+          </div>
+          <br/>
         </div>
-        <br/>
-        <div className="text-field-container" >
-          <input
-            className="text-field text-field-active"
-            value={sales} 
-            disabled
-          />
+        <div style={{padding: 10}}>
+          <br/>
+          <label class="switch">
+            <input type="checkbox"/>
+            <span class="slider round"></span>
+          </label>
+          <br/><br/>
+          <label class="switch">
+            <input type="checkbox"/>
+            <span class="slider round"></span>
+          </label>
+          <br/><br/>
+          <label class="switch">
+            <input type="checkbox"/>
+            <span class="slider round"></span>
+          </label>
+          <br/><br/>
+          <label class="switch">
+            <input type="checkbox"/>
+            <span class="slider round"></span>
+          </label>
         </div>
-        <br/>
-        <div className="text-field-container" >
-          <input
-            className="text-field text-field-active"
-            value={directCost} 
-            disabled
-          />
+        <div style={{padding: 10}}>
+          <br/>
+          <div className="text-field-container" >
+            <input
+              className="text-field text-field-active"
+              value={newRevenue} 
+            />
+          </div>
+          <br/>
+          <div className="text-field-container" >
+            <input
+              className="text-field text-field-active"
+              value={newSales} 
+            />
+          </div>
+          <br/>
+          <div className="text-field-container" >
+            <input
+              className="text-field text-field-active"
+              value={newDirectCost} 
+            />
+          </div>
+          <br/>
+          <div className="text-field-container" >
+            <input
+              className="text-field text-field-active"
+              value={newIndirectCost} 
+            />
+          </div>
+          <br/>
         </div>
-        <br/>
-        <div className="text-field-container" >
-          <input
-            className="text-field text-field-active"
-            value={indirectCost} 
-            disabled
-          />
+        <div style={{padding: 10}}>
+          <br/>
+          <p>Increase By {''}</p>
+          <br/><br/>
+          <p>Increase By</p>
+          <br/><br/>
+          <p>Increase By</p>
+          <br/><br/>
+          <p>Increase By</p>
         </div>
-        <br/>
-      </div>
-      <div style={{padding: 10}}>
-        <br/>
-        <button>Increase By</button>
-        <br/>
-        <button>Increase By</button>
-        <br/>
-        <button>Increase By</button>
-        <br/>
-        <button>Increase By</button>
-      </div>
-      <div style={{padding: 10}}>
-        <br/>
-        <div className="text-field-container" >
-          <input
-            className="text-field text-field-active"
-            value={newRevenue} 
-          />
-        </div>
-        <br/>
-        <div className="text-field-container" >
-          <input
-            className="text-field text-field-active"
-            value={newSales} 
-          />
-        </div>
-        <br/>
-        <div className="text-field-container" >
-          <input
-            className="text-field text-field-active"
-            value={newDirectCost} 
-          />
-        </div>
-        <br/>
-        <div className="text-field-container" >
-          <input
-            className="text-field text-field-active"
-            value={newIndirectCost} 
-          />
-        </div>
-        <br/>
-      </div>
-      <div style={{padding: 10}}>
-        <br/>
-        <p>Increase By {''}</p>
-        <br/>
-        <p>Increase By</p>
-        <br/>
-        <p>Increase By</p>
-        <br/>
-        <p>Increase By</p>
       </div>
     </div>
   )
