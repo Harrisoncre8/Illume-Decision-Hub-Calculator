@@ -223,9 +223,9 @@ VALUES (
   NULL
 ),
 (
-  'What are your rent, lease, business mortgage, and utility payments?',
+  'What are your rent, lease, business mortgage, and utility payments?',
   'number',
-  'Remember to include escrow payments here',
+  'Remember to include escrow payments here',
   4,
   FALSE,
   FALSE,
@@ -247,9 +247,9 @@ VALUES (
   NULL
 ),
 (
-  'What are your office staff salary costs?',
+  'What are your office staff salary costs?',
   'number',
-  'Remember to include yourself if you pay yourself a salary',
+  'Remember to include yourself if you pay yourself a salary',
   4,
   FALSE,
   FALSE,
@@ -261,7 +261,7 @@ VALUES (
 (
   'What are your employee benefits costs?',
   'number',
-  'Benefits include things like health, dental, disability, life, etc',
+  'Benefits include things like health, dental, disability, life, etc',
   4,
   FALSE,
   FALSE,
@@ -309,7 +309,7 @@ VALUES (
 (
   'How much do you spend on travel?',
   'number',
-  'This includes meals and entertainment while on business',
+  'This includes meals and entertainment while on business',
   4,
   FALSE,
   FALSE,
@@ -321,7 +321,7 @@ VALUES (
 (
   'How much do you spend subscriptions, dues, and fees?',
   'number',
-  'This includes subscriptions like Office 365, adobe, and other regular payments',
+  'This includes subscriptions like Office 365, adobe, and other regular payments',
   4,
   FALSE,
   FALSE,
@@ -357,23 +357,11 @@ VALUES (
 (
   'Would you like to input your indirect costs as a total or walkthrough the categories?',
   'radio',
-  'A total will just be one input field; the walkthrough will bring you through common indirect cost categories',
+  'A total will just be one input field; the walkthrough will bring you through common indirect cost categories',
   NULL,
   TRUE,
   FALSE,
   'Indirect Costs Walkthrough',
-  NULL,
-  NULL,
-  NULL
-),
-(
-  'How much are you insurance costs?',
-  'number',
-  'Depending on your business, you may have multiple types of insurance.  Add them together here',
-  4,
-  FALSE,
-  FALSE,
-  'Insurance',
   NULL,
   NULL,
   NULL
@@ -474,7 +462,7 @@ VALUES (1,1,2),
 (2,18,47),
 (2,19,48),
 (2,20,49),
-(2,21,66),
+(2,21,65),
 (3,11,51),
 (3,12,52),
 (3,13,53),
@@ -485,18 +473,15 @@ VALUES (1,1,2),
 (3,18,58),
 (3,19,59),
 (3,20,60),
-(3,21,69),
+(3,21,67),
 (2,5,14),
 (3,1,15),
 (1,23,64),
-(1,24,65),
-(1,25,18),
-(2,23,67),
-(2,24,68),
-(2,25,21),
-(3,23,70),
-(3,24,71),
-(3,25,24);
+(1,24,18),
+(2,23,66),
+(2,24,21),
+(3,23,68),
+(3,24,24);
 --#endregion
 
 --#region Set up Splits
@@ -542,12 +527,9 @@ VALUES ('Professional Services - Businesses',0.4,0.12,true),
 ('All Other',0.35,0.08,null);
 
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
-VALUES ('test@test.com', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
+VALUES ('phillip@gmail.com', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
 
 INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "phone_number")
-VALUES (1,'test', 'test co', 1, '1234567890');
+VALUES (1,'Phillip Berg', 'Phillip Berg Development', 1, '763-867-5309');
 
 INSERT INTO "user_checks" SELECT 1, * FROM generate_series(1, (SELECT COUNT(*) FROM questions));
-
-INSERT INTO "disclaimer" ("disclaimer")
-VALUES ('Illume Decision Hub (IDH) is not a replacement for legal advice, nor are the results to be interpreted as absolute fact. The purpose of IDH is to get small business owners thinking about their financials by providing a general, estimated, big-picture look into basic financial areas. Illume Pricing and its employees will not be held liable for any damages, injuries, losses, expenses, or other ramifications while using this product.');

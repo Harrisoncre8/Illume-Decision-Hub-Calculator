@@ -16,6 +16,7 @@ class Register extends Component {
     password: '',
     showPassword: '',
     agreement: false,
+    textField: '',
   }
 
   // Run on component mount
@@ -91,7 +92,6 @@ class Register extends Component {
               {this.props.errors.registrationMessage}
             </h2>
           )}
-
           <div>
             <img className="register-logo" src="illume-logo180.png" alt="illume logo" 
               onClick={()=>this.setState({
@@ -102,6 +102,7 @@ class Register extends Component {
                 email: 'afa@gmail.com',
                 password: '12345678',
                 showPassword: 'password',
+                textField: 'text-field-active',
               })}
             />
             <span className="register-brand-name">illume decision hub</span>
@@ -109,7 +110,7 @@ class Register extends Component {
 
           <div className="text-field-container">
             <input
-              className="text-field"
+              className={`text-field ${this.state.textField}`}
               type="text"
               name="name"
               value={this.state.name}
@@ -121,7 +122,7 @@ class Register extends Component {
 
           <div className="text-field-container">
             <input
-              className="text-field"
+              className={`text-field ${this.state.textField}`}
               type="text"
               name="company"
               value={this.state.company}
@@ -133,7 +134,7 @@ class Register extends Component {
 
           <div className="text-field-container">
             <input
-              className="text-field"
+              className={`text-field ${this.state.textField}`}
               type="text"
               name="phone"
               value={this.state.phone}
@@ -165,7 +166,7 @@ class Register extends Component {
 
           <div className="text-field-container">
             <input
-              className="text-field"
+              className={`text-field ${this.state.textField}`}
               type="text"
               name="email"
               value={this.state.email}
@@ -177,7 +178,7 @@ class Register extends Component {
 
           <div className="text-field-container">
             <input
-              className="text-field"
+              className={`text-field ${this.state.textField}`}
               value={this.state.password}
               type={this.state.showPassword}
               onChange={(e) => this.handleChange(e, 'password')}

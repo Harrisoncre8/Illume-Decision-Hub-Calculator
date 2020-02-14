@@ -117,15 +117,7 @@ export default function Nav() {
       {renderLever ? 
         null 
         : 
-        <button className={`nav-btn ${lever}`} onClick={()=>{
-          setStart(1)
-          dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: 2, value: 120 } })
-          dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: 3, value: 40 } })
-          dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: 22, value: 28 } })
-          dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: 16, value: 15 } })
-          dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: 18, value: 20 } })
-          dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: 19, value: 15 } })
-        }}>
+        <button className={`nav-btn ${lever}`} onClick={()=>{setStart(1)}}>
           Profit Lever Calculator
         </button>
       }
