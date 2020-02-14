@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Axios from 'axios'
 import './ProfitLever.css';
 import Nav from '../Nav/Nav';
+import ExploreMore from '../ExploreMore/ExploreMore';
 
 export default function ProfitLever() {
 
@@ -335,6 +336,7 @@ export default function ProfitLever() {
                 null
             }
           </div>
+          <ExploreMore/>
           {stepper(1)}
         </div>
       </div>
