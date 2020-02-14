@@ -126,7 +126,7 @@ export default function User() {
           <div className="profile-personal-details-container">
             {userData.map((user, i) => 
               <div key={i}>
-                <h1 className='user-spacing'>Welcome back, {user.name}!</h1>
+                <h1 className='user-spacing'>Hello, {user.name}!</h1>
                 <h2 className='user-spacing'>Profile Information</h2>
                 <div className="profile-list-container">
                   <table className="profile-text user-info">
