@@ -1,7 +1,7 @@
 import React from 'react';
 import './Slide3.css';
 
-export default function Slide1() {
+export default function Slide3() {
 
   return(
     <center>

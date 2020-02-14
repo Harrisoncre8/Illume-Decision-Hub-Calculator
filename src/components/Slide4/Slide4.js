@@ -5,12 +5,13 @@ const history = useHistory();
 
 export default function Slide4() {
   return(
-    <div className="list-slide-main-container">
-      <h1 className="list-slide-heading">Targets</h1>
+    <div className="list-slide-main-container" onClick={()=>history.push(`/slide5`)}>
+      <h1 className="list-slide-heading">Challenges</h1>
       <ul>
-        <li>Woman-owned small businesses</li>
-        <li>Conversational language</li>
-        <li>Increasing overall finances</li>
+        <li>Unreadable speadsheets</li>
+        <li>Financial jargon</li>
+        <li>Unknown factors</li>
+        <li>Translating information</li>
       </ul>
     </div>
   );
