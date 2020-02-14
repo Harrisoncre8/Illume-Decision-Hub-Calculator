@@ -128,7 +128,6 @@ const QuestionCheckboxes = () => {
   return(
     <center>
       <h1>Which costs are relevant to you?</h1>
-      {JSON.stringify(checked)}
       <form onSubmit={(e)=>submit(e)}>
         <div className="questions-checkbox-container">
           {
