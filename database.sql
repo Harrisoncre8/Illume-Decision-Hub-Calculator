@@ -217,7 +217,7 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Other Administrative Expenses',
+  'Other Administrative Expenses',
   NULL,
   NULL,
   NULL
@@ -229,13 +229,13 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Office - Mortgage, Lease, Rent, and Utilities',
+  'Office - Mortgage, Lease, Rent, and Utilities',
   NULL,
   NULL,
   NULL
 ),
 (
-  'What are your sales costs or commissions?',
+  'What are your sales costs or commissions?',
   'number',
   'How much does it cost to make a sale, or what do you pay on commission when a sale is made?',
   4,
@@ -253,19 +253,19 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Office Staff Salaries',
+  'Office Staff Salaries',
   NULL,
   NULL,
   NULL
 ),
 (
-  'What are your employee benefits costs?',
+  'What are your employee benefits costs?',
   'number',
   'Benefits include things like health, dental, disability, life, etc',
   4,
   FALSE,
   FALSE,
-  'Employee Benefits Costs',
+  'Employee Benefits Costs',
   NULL,
   NULL,
   NULL
@@ -283,7 +283,7 @@ VALUES (
   NULL
 ),
 (
-  'How much do you spend on your network, telecomunications, and other comunication platforms?',
+  'How much do you spend on your network, telecomunications, and other communication platforms?',
   'number',
   'Internet, phone, vpn, and other types of communication costs would fall under this category',
   4,
@@ -307,9 +307,9 @@ VALUES (
   NULL
 ),
 (
-  'How much do you spend on travel?',
+  'How much do you spend on travel?',
   'number',
-  'This includes meals and entertainment while on buisiness',
+  'This includes meals and entertainment while on business',
   4,
   FALSE,
   FALSE,
@@ -319,7 +319,7 @@ VALUES (
   NULL
 ),
 (
-  'How much do you spend subscriptions, dues, and fees?',
+  'How much do you spend subscriptions, dues, and fees?',
   'number',
   'This includes subscriptions like Office 365, adobe, and other regular payments',
   4,
@@ -331,7 +331,7 @@ VALUES (
   NULL
 ),
 (
-  'How much do you spend on education and trainings?',
+  'How much do you spend on education and trainings?',
   'number',
   'Consider both one-off events and continual education/trainings',
   4,
@@ -361,7 +361,7 @@ VALUES (
   NULL,
   TRUE,
   FALSE,
-  'Indirect Costs Walkthrough',
+  'Indirect Costs Walkthrough',
   NULL,
   NULL,
   NULL
@@ -397,7 +397,7 @@ VALUES (
   4,
   FALSE,
   FALSE,
-  'Other Office Expenses',
+  'Other Office Expenses',
   NULL,
   NULL,
   NULL
@@ -501,8 +501,8 @@ VALUES (1,1,2),
 
 --#region Set up Splits
 INSERT INTO "split" ("calculator_id", "question_id","split_text","next_id")
-VALUES(1,1,'Single Product',2),
-(1,1,'Total Product',5),
+VALUES(1,1,'Single Product',2),
+(1,1,'Total Product',5),
 (1,7,'Single',3),
 (1,7,'Walkthrough',16),
 (2,7,'Single',7),
@@ -515,10 +515,10 @@ VALUES(1,1,'Single Product',2),
 (2,22,'Walkthrough',39),
 (3,22,'Single',11),
 (3,22,'Walkthrough',50),
-(2,1,'Single Product',14),
-(2,1,'Total Product',61),
-(3,1,'Single Product',15),
-(3,1,'Total Product',9);
+(2,1,'Single Product',14),
+(2,1,'Total Product',61),
+(3,1,'Single Product',15),
+(3,1,'Total Product',9);
 --#endregion
 
 --#region Set Disclaimer
