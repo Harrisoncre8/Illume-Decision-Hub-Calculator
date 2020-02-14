@@ -367,18 +367,6 @@ VALUES (
   NULL
 ),
 (
-  'How much are you insurance costs?',
-  'number',
-  'Depending on your business, you may have multiple types of insurance.  Add them together here',
-  4,
-  FALSE,
-  FALSE,
-  'Insurance',
-  NULL,
-  NULL,
-  NULL
-),
-(
   'How much do you spend on delivery or freight?',
   'number',
   'Enter delivery fees here',
@@ -474,7 +462,7 @@ VALUES (1,1,2),
 (2,18,47),
 (2,19,48),
 (2,20,49),
-(2,21,66),
+(2,21,65),
 (3,11,51),
 (3,12,52),
 (3,13,53),
@@ -485,18 +473,15 @@ VALUES (1,1,2),
 (3,18,58),
 (3,19,59),
 (3,20,60),
-(3,21,69),
+(3,21,67),
 (2,5,14),
 (3,1,15),
 (1,23,64),
-(1,24,65),
-(1,25,18),
-(2,23,67),
-(2,24,68),
-(2,25,21),
-(3,23,70),
-(3,24,71),
-(3,25,24);
+(1,24,18),
+(2,23,66),
+(2,24,21),
+(3,23,68),
+(3,24,24);
 --#endregion
 
 --#region Set up Splits
@@ -548,6 +533,3 @@ INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "
 VALUES (1,'Phillip Berg', 'Phillip Berg Development', 1, '763-867-5309');
 
 INSERT INTO "user_checks" SELECT 1, * FROM generate_series(1, (SELECT COUNT(*) FROM questions));
-
-INSERT INTO "disclaimer" ("disclaimer")
-VALUES ('Illume Decision Hub (IDH) is not a replacement for legal advice, nor are the results to be interpreted as absolute fact. The purpose of IDH is to get small business owners thinking about their financials by providing a general, estimated, big-picture look into basic financial areas. Illume Pricing and its employees will not be held liable for any damages, injuries, losses, expenses, or other ramifications while using this product.');
