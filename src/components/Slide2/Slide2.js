@@ -12,7 +12,7 @@ export default function Slide2() {
 
         <div className="slide-heading-container">
           <img className="slide-logo" src="illume-logo180.png" alt="Illume Logo" />
-          <span className="slide-heading">ILLUME PRICING</span>
+          <span className="slide-heading">illume</span>
         </div>
 
         <div className="slide2-img-name-container">
