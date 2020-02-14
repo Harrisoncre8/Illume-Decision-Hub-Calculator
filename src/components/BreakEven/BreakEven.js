@@ -20,9 +20,11 @@ export default function BreakEven() {
 
   // Dynamically calculates the break even point depending on settings
   useEffect(() => {
+    const input8First = inputData[8] && +inputData[8]['Labor'];
+    const input8Second = inputData[8] && +inputData[8]['Labor2'];
     let directCosts = +splitPath[7] === 7 ?
       +inputData[3] || 0 :
-      ((inputData[8] && +inputData[8]['Labor'] || 0) * (inputData[8] && +inputData[8]['Labor2'] || 0)) + 
+      ((input8First || 0) * (input8Second || 0)) + 
       (+inputData[9] || 0);
 
     let indirectCosts = +splitPath[22] === 8 ?
@@ -86,7 +88,7 @@ export default function BreakEven() {
         setSplitPath(temp);
       }
     }
-  }, [splits, inputData]);
+  }, [splits, splitPath, inputData]);
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
