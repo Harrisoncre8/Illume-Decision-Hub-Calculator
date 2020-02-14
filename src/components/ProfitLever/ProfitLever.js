@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Axios from 'axios'
+import Axios from 'axios';
 import './ProfitLever.css';
 import Nav from '../Nav/Nav';
 
@@ -192,7 +192,7 @@ export default function ProfitLever() {
             userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
               <p className="results-text">
                 {
-                  user[0] && user[0].service &&  paths[start] && paths[start].question?
+                  user[0] && user[0].service &&  paths[start] && paths[start].question ?
                   paths[start].question.replace(/product/g, 'service')
                   :
                   paths[start].question
@@ -213,8 +213,9 @@ export default function ProfitLever() {
                   type={paths[start] && paths[start].response_type}
                   name={paths[start] && paths[start].header}
                   value={
-                    paths[start] && paths[start].question2?
-                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header]:
+                    paths[start] && paths[start].question2 ?
+                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header] 
+                    :
                     inputData[questionId]
                   } 
                   onChange={
@@ -247,12 +248,13 @@ export default function ProfitLever() {
                 <div className="text-field-mask stepper-mask"></div>
               </div>
               {
-                paths[start] && paths[start].question2?
+                paths[start] && paths[start].question2 ?
                   <>
                     <p className="results-text">
                       {
-                        user[0] && user[0].service && paths[start] && paths[start].question2?
-                        paths[start].question2.replace(/product/g, 'service'):
+                        user[0] && user[0].service && paths[start] && paths[start].question2 ?
+                        paths[start].question2.replace(/product/g, 'service') 
+                        :
                         paths[start].question2
                       }
                     </p>
@@ -281,7 +283,8 @@ export default function ProfitLever() {
                       <label className="text-field-label">enter value</label>
                       <div className="text-field-mask stepper-mask"></div>
                     </div>
-                  </>:
+                  </>
+                  :
                   null
               }
             </>
