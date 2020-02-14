@@ -14,7 +14,7 @@ class Register extends Component {
     industry: '',
     email: '',
     password: '',
-    showPassword: 'password',
+    showPassword: '',
     agreement: false,
   }
 
@@ -93,7 +93,17 @@ class Register extends Component {
           )}
 
           <div>
-            <img className="register-logo" src="illume-logo180.png" alt="illume logo" />
+            <img className="register-logo" src="illume-logo180.png" alt="illume logo" 
+              onClick={()=>this.setState({
+                name: 'Awren Nuit',
+                company: "Awren's Fantastics Arts",
+                phone: '651-474-8732',
+                industry: 9,
+                email: 'afa@gmail.com',
+                password: '12345678',
+                showPassword: 'password',
+              })}
+            />
             <span className="register-brand-name">illume decision hub</span>
           </div>
 
@@ -168,6 +178,7 @@ class Register extends Component {
           <div className="text-field-container">
             <input
               className="text-field"
+              value={this.state.password}
               type={this.state.showPassword}
               onChange={(e) => this.handleChange(e, 'password')}
             />
