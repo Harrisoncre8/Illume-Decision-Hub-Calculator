@@ -43,7 +43,7 @@ export default function PriceSetting() {
   // Dynamically calculates the price setting depending on settings
   useEffect(() => {
     let directCosts = +splitPath[7] === 10 ?
-      +inputData[3] || 0:
+      +inputData[3] || 0 :
       ((inputData[8] && +inputData[8]['Labor'] || 0) * (inputData[8] && +inputData[8]['Labor2'] || 0)) + 
       (+inputData[9] || 0);
 
@@ -184,7 +184,7 @@ export default function PriceSetting() {
             userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
               <p className="results-text">
                 {
-                  user[0] && user[0].service &&  paths[start] && paths[start].question?
+                  user[0] && user[0].service &&  paths[start] && paths[start].question ?
                   paths[start].question.replace(/product/g, 'service')
                   :
                   paths[start].question
@@ -205,8 +205,9 @@ export default function PriceSetting() {
                   type={paths[start] && paths[start].response_type}
                   name={paths[start] && paths[start].header}
                   value={
-                    paths[start] && paths[start].question2?
-                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header]:
+                    paths[start] && paths[start].question2 ?
+                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header] 
+                    :
                     inputData[questionId]
                   } 
                   onChange={
@@ -239,12 +240,13 @@ export default function PriceSetting() {
                 <div className="text-field-mask stepper-mask"></div>
               </div>
               {
-                paths[start] && paths[start].question2?
+                paths[start] && paths[start].question2 ?
                   <>
                     <p className="results-text">
                       {
-                        user[0] && user[0].service && paths[start] && paths[start].question2?
-                        paths[start].question2.replace(/product/g, 'service'):
+                        user[0] && user[0].service && paths[start] && paths[start].question2 ?
+                        paths[start].question2.replace(/product/g, 'service') 
+                        :
                         paths[start].question2
                       }
                     </p>
@@ -273,7 +275,8 @@ export default function PriceSetting() {
                       <label className="text-field-label">enter value</label>
                       <div className="text-field-mask stepper-mask"></div>
                     </div>
-                  </>:
+                  </> 
+                  :
                   null
               }
             </>
