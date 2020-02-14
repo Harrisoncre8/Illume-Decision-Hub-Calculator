@@ -9,9 +9,12 @@ export default function Slide5() {
       <img className="slide-logo" src="illume-logo180.png" alt="Illume Logo" />
           <span className="slide-heading">illume decision hub</span>
       <ul>
-        <li>Woman-owned small businesses</li>
+        <li>Dynamic information gathering</li>
         <li>Conversational language</li>
-        <li>Increasing overall finances</li>
+        <li>Prompted consideration</li>
+        <li>Profit Opportunities</li>
+        <li>Productive calculations</li>
+
       </ul>
     </div>
   );

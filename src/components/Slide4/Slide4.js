@@ -11,6 +11,7 @@ export default function Slide4() {
         <li>Unreadable speadsheets</li>
         <li>Financial jargon</li>
         <li>Unknown factors</li>
+        <li>Gender pay gap</li>
         <li>Translating information</li>
       </ul>
     </div>
