@@ -115,7 +115,7 @@ const QuestionCheckboxes = () => {
       }
     }
     setChecked(holder);
-  }, [checked, totalSub, subQuestionCount]);
+  }, [totalSub, subQuestionCount]);
 
   function submit(e){
     e.preventDefault();
