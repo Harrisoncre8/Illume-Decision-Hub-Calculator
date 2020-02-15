@@ -14,7 +14,7 @@ export default function Slide5() {
           <li className="list-li">Dynamic information gathering</li>
           <li className="list-li">Conversational language</li>
           <li className="list-li">Prompted consideration</li>
-          <li className="list-li">Profit Opportunities</li>
+          <li className="list-li">Profit opportunities</li>
           <li className="list-li">Predictive calculations</li>
         </ul>
       </div>
