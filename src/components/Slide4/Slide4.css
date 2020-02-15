@@ -1,0 +1,36 @@
+.list-slide-heading {
+  font-size: 5em;
+  text-decoration: underline;
+  animation: roll 5s alternate infinite;
+}
+
+.list-li {
+  margin-top: 30px;
+}
+
+.list-slide-main-container {
+  margin: 30px;
+}
+
+.list-tagline {
+  color: #f0aa42;
+  font-size: 1.8em;
+  margin-top: 140px;
+}
+
+.list-ul {
+  margin: 60px;
+  width: 400px;
+  color: #f7d149;
+  font-size: 2.2em;
+  text-align: left;
+}
+
+@keyframes roll {
+  from {
+    color: #f7d149;
+  }
+  to {
+    color: #f0aa42;
+  }
+}
