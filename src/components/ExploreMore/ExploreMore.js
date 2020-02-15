@@ -16,16 +16,17 @@ const ExploreMore = () => {
   const [sales, setSales] = useState();
 
   // States to hold testing input values
-  const [newRevenue, setNewRevenue] = useState();
-  const [newDirectCost, setNewDirectCost] = useState();
-  const [newIndirectCost, setNewIndirectCost] = useState();
-  const [newSales, setNewSales] = useState();
+  const [newRevenue, setNewRevenue] = useState(.01);
+  const [newSales, setNewSales] = useState(.01);
+  const [newDirectCost, setNewDirectCost] = useState(.01);
+  const [newIndirectCost, setNewIndirectCost] = useState(.01);
 
   // States to hold toggles
   const [revIncrease, setRevIncrease] = useState(true);
   const [salesIncrease, setSalesIncrease] = useState(true);
   const [directIncrease, setDirectIncrease] = useState(false);
   const [indirectIncrease, setIndirectIncrease] = useState(false);
+  const [dollarToggle, setDollarToggle] = useState(false);
 
   // States to hold math results
   const [revChange, setRevChange] = useState('')
@@ -62,7 +63,43 @@ const ExploreMore = () => {
 
   // Does the math
   useEffect(()=>{
-    
+    let profit = revenue - directCost/sales - indirectCost/sales
+    if(dollarToggle){
+
+    } else {
+      setRevChange(
+        (
+          (
+            (revenue * (revIncrease? 1 + newRevenue: 1 - newRevenue) - directCost/sales - indirectCost/sales)/
+            profit - 1
+          ) * profit * sales
+        ).toFixed(2)
+      );
+      setSalesChange(
+        (
+          (
+            ((revenue - directCost/sales) * (salesIncrease? 1 + newSales: 1 - newSales) - indirectCost/sales)/
+            profit - 1
+          ) * profit * sales * (salesIncrease? 1 + newSales: 1 - newSales)
+        ).toFixed(2)
+      );
+      setDirectChange(
+        (
+          (
+            (revenue - directCost/sales * (directIncrease? 1 + newDirectCost: 1 - newDirectCost)  - indirectCost/sales)/
+            profit - 1
+          ) * profit * sales
+        ).toFixed(2)
+      );
+      setIndirectChange(
+        (
+          (
+            (revenue - directCost/sales - indirectCost/sales * (indirectIncrease? 1 + newIndirectCost: 1 - newIndirectCost))/
+            profit - 1
+          ) * profit * sales
+        ).toFixed(2)
+      );
+    }
   },
   [
     newRevenue,
@@ -73,7 +110,11 @@ const ExploreMore = () => {
     salesIncrease,
     directIncrease,
     indirectIncrease,
-    inputData
+    revenue,
+    directCost,
+    indirectCost,
+    sales,
+    dollarToggle
   ])
 
   return (
@@ -150,46 +191,50 @@ const ExploreMore = () => {
         <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
           <div className="text-field-container" >
             <input
-              className="text-field"
-              value={newRevenue}
-              onChange={(e)=>{setNewRevenue(e.target.value); checkForValue(e);}}
+              className="text-field text-field-active"
+              value={dollarToggle? newRevenue: newRevenue*100}
+              type='number'
+              onChange={(e)=>{setNewRevenue(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
             />
             <label className="text-field-label">Price</label>
             <div className="text-field-mask" style={{ width: revLabel.current && revLabel.current.clientWidth + 3.4 }}></div>
           </div>
           <div className="text-field-container" >
             <input
-              className="text-field"
-              value={newSales}
-              onChange={(e)=>{setNewSales(e.target.value); checkForValue(e);}}
+              className="text-field text-field-active"
+              value={dollarToggle? newSales: newSales*100}
+              type='number'
+              onChange={(e)=>{setNewSales(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
             />
             <label className="text-field-label">Sales</label>
             <div className="text-field-mask" style={{ width: salesLabel.current && salesLabel.current.clientWidth + 3.4 }}></div>
           </div>
           <div className="text-field-container" >
             <input
-              className="text-field"
-              value={newDirectCost}
-              onChange={(e)=>{setNewDirectCost(e.target.value); checkForValue(e);}}
+              className="text-field text-field-active"
+              value={dollarToggle? newDirectCost: newDirectCost*100}
+              type='number'
+              onChange={(e)=>{setNewDirectCost(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
             />
             <label className="text-field-label">Direct Costs</label>
             <div className="text-field-mask" style={{ width: directLabel.current && directLabel.current.clientWidth + 3.4 }}></div>
           </div>
           <div className="text-field-container" >
             <input
-              className="text-field"
-              value={newIndirectCost}
-              onChange={(e)=>{setNewIndirectCost(e.target.value); checkForValue(e);}}
+              className="text-field text-field-active"
+              value={dollarToggle? newIndirectCost: newIndirectCost*100}
+              type='number'
+              onChange={(e)=>{setNewIndirectCost(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
             />
             <label className="text-field-label">Indirect Costs</label>
             <div className="text-field-mask" style={{ width: indirectLabel.current && indirectLabel.current.clientWidth + 3.4 }}></div>
           </div>
         </div>
         <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
-          <p>Increase By {''}</p>
-          <p>Increase By</p>
-          <p>Increase By</p>
-          <p>Increase By</p>
+          <p>{revChange.toLocaleString("en-US", { style: "currency", currency: 'USD' })} {revIncrease? 'increase': 'decrease'} in profits</p>
+          <p>{salesChange.toLocaleString("en-US", { style: "currency", currency: 'USD' })} {salesIncrease? 'increase': 'decrease'} in profits</p>
+          <p>{directChange.toLocaleString("en-US", { style: "currency", currency: 'USD' })} {directIncrease? 'decrease': 'increase'} in profits</p>
+          <p>{indirectChange.toLocaleString("en-US", { style: "currency", currency: 'USD' })} {indirectIncrease? 'decrease': 'increase'} in profits</p>
         </div>
       </div>
     </div>
