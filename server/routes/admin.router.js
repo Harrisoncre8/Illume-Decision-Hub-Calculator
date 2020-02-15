@@ -142,9 +142,9 @@ router.put('/user-info', rejectUnauthenticated, rejectNonAdmin, async (req, res)
   const name = req.body.name;
   const company = req.body.company;
   const phone = req.body.phone;
-  const industry = req.body.industryid;
+  const industry = req.body.industryId;
   const email = req.body.email;
-  const password = encryptLib.encryptPassword(req.body.password);
+  const password = encryptLib.encryptPassword(req.body.password); // This only has data, needs salt parameter as well
   const usertype = req.body.usertype;
   const sqlQueryContactInfo = ` UPDATE contact_info
                                 SET "name" = $1, "business_name" = $2, phone_number = $3, industry_id = $4

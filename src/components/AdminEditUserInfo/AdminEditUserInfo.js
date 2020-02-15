@@ -22,9 +22,8 @@ export default function AdminEditUserInfo() {
   const [phone, setPhone] = useState('');
   const [showPassword, setShowPassword] = useState('password');
   const [username, setUsername] = useState('');
-  const [userType, setUserType] = useState(false);
+  const [usertype, setUsertype] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [wrongPassword, setWrongPassword] = useState(null);
 
   // Run on component mount
   useEffect(()=>{
@@ -41,40 +40,17 @@ export default function AdminEditUserInfo() {
   // Show or hide password
   const togglePasswordView = () => showPassword === 'password' ? setShowPassword('text') : setShowPassword('password');
 
-  // Set input value to current dropdown menu selection
-  // handleDropdownChange = (e, propName) => {
-  //   switch (propName) {
-  //     case 'industryid':
-  //       this.setState({
-  //         selectedUser: {
-  //           ...this.state.selectedUser,
-  //           [propName]: e.target.value
-  //         }
-  //       });
-  //       break;
-  //     case 'usertype':
-  //       this.setState({
-  //         selectedUser: {
-  //           ...this.state.selectedUser,
-  //           usertype: !this.state.selectedUser.usertype
-  //         }
-  //       });
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
-
   // Dispatch to saga to handle admin edits, close modal ///////////////////////////////////////////TEST TEST TEST TEST
-  const handleSave = () => {
-    if(password === checkPassword){
+  const handleSave = e => {
+    e.preventDefault();
+    let selectedUser = {id, name, company, phone, email, industryId, password, usertype};
+    if(password.length > 0 && password === checkPassword){
       let passwordInfo = [password, id];
-      let selectedUser = {id, name, company, phone, email, industry, industryId, password, checkPassword, wrongPassword, userType}
       dispatch({type: `NEW_PASSWORD`, payload: passwordInfo});
       dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: selectedUser });
       closeModal();
     }
-    else if(!password && !checkPassword){
+    else if(password.length === 0 && checkPassword.length === 0){
       dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: selectedUser });
       closeModal();
     }
@@ -93,13 +69,11 @@ export default function AdminEditUserInfo() {
     setPhone(user.phone);
     setEmail(user.email);
     setIndustry(user.industry);
-    setIndustryId(user.industryId);
+    setIndustryId(user.industryid);
   }
 
   // Return to admin home page
   const pushHistoryBack = () => history.push('/admin');
-
-    let editUser = this.state.selectedUser; ///////////////////////////////////////////
 
   return (
     <center>
@@ -125,115 +99,142 @@ export default function AdminEditUserInfo() {
                   <td>{user.company}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
-                  <td className="admin-edit-user-cell" onClick={() => this.openModal(user)}>Edit Info</td>
+                  <td className="admin-edit-user-cell" onClick={() => openModal(user)}>Edit Info</td>
                 </tr>
               )}
             </tbody>
           </table>
           <Modal
-            visible={this.state.visible}
+            visible={visible}
             width="440"
             height="570"
             effect="fadeInUp"
-            onClickAway={this.closeModal}
+            onClickAway={closeModal}
           >
             <div className="modal-container">
-              <button className="close-window-button" onClick={this.closeModal}>x</button>
-              <h1 className="main-heading modal-heading">{this.state.username}</h1>
+              <button className="close-window-button" onClick={closeModal}>x</button>
+              <h1 className="main-heading modal-heading">{username}</h1>
 
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type="text"
-                  value={editUser.name}
-                  onChange={(e) => this.handleChange(e, 'name')}
-                />
-                <label className="text-field-label">user's name</label>
-                <div className="text-field-mask admin-user-mask-name"></div>
-              </div>
-
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type="text"
-                  value={editUser.company}
-                  onChange={(e) => this.handleChange(e, 'company')}
-                />
-                <label className="text-field-label">company</label>
-                <div className="text-field-mask admin-user-mask-company"></div>
-              </div>
-
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type="text"
-                  value={editUser.phone}
-                  onChange={(e) => this.handleChange(e, 'phone')}
-                />
-                <label className="text-field-label">phone #</label>
-                <div className="text-field-mask admin-user-mask-phone"></div>
-              </div>
-
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type="text"
-                  value={editUser.email}
-                  onChange={(e) => this.handleChange(e, 'email')}
-                />
-                <label className="text-field-label">email</label>
-                <div className="text-field-mask admin-user-mask-email"></div>
-              </div>
-
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type={this.state.showPassword} 
-                  value={editUser.password}
-                  onChange={(e) => this.handleChange(e, 'password')}
-                />
-                <label className="text-field-label">password</label>
-                <div className="text-field-mask admin-user-mask-password"></div>
-              </div>
-
-              <div className="text-field-container">
-                <input
-                  className="text-field text-field-active"
-                  type={this.state.showPassword} 
-                  onChange={(e) => this.handleChange(e, 'checkPassword')}
+              <form onSubmit={handleSave}>
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type="text"
+                    value={name}
+                    onChange={(e) => {
+                                  setName(e.target.value);
+                                  checkForValue(e);
+                                }
+                              }
                   />
-                <label className="text-field-label">confirm password</label>
-                <div className="text-field-mask admin-user-mask-confirm-password"></div>
-                <span>
-                  <input type="checkbox" onChange={this.togglePasswordView} />
-                  <label> Show Passwords</label>
-                </span>
-              </div>
+                  <label className="text-field-label">user's name</label>
+                  <div className="text-field-mask admin-user-mask-name"></div>
+                </div>
 
-              <select
-                className="dropdown register-dropdown"
-                value={editUser.industryid || 'industry'}
-                onChange={(e) => this.handleDropdownChange(e, 'industryid')}
-              >
-                <option className="dropdown-option" value='' disabled>Select Industry</option>
-                {this.props.industry.map(industry =>
-                  <option key={industry.id} value={industry.id}>{industry.industry}</option>
-                )}
-              </select>
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type="text"
+                    value={company}
+                    onChange={(e) => {
+                                  setCompany(e.target.value);
+                                  checkForValue(e);
+                                }
+                              }
+                  />
+                  <label className="text-field-label">company</label>
+                  <div className="text-field-mask admin-user-mask-company"></div>
+                </div>
 
-              <select
-                className="dropdown register-dropdown"
-                value={editUser.usertype || 'usertype'}
-                onChange={(e) => this.handleDropdownChange(e, 'usertype')}
-              >
-                <option className="dropdown-option" value='' disabled>Select User Type</option>
-                <option className="dropdown-option" key={1} value={false}>User</option>
-                <option className="dropdown-option" key={2} value={true}>Admin</option>
-              </select>
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type="text"
+                    value={phone}
+                    onChange={(e) => {
+                                  setPhone(e.target.value);
+                                  checkForValue(e);
+                                }
+                              }
+                  />
+                  <label className="text-field-label">phone #</label>
+                  <div className="text-field-mask admin-user-mask-phone"></div>
+                </div>
 
-              <div className="modal-btn-container">
-                <button className="normal-btn" onClick={this.handleSave}>Save</button>
-              </div>
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type="text"
+                    value={email}
+                    onChange={(e) => {
+                                  setEmail(e.target.value);
+                                  checkForValue(e);
+                                }
+                              }
+                  />
+                  <label className="text-field-label">email</label>
+                  <div className="text-field-mask admin-user-mask-email"></div>
+                </div>
+
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type={showPassword} 
+                    value={password}
+                    onChange={(e) => {
+                                  setPassword(e.target.value);
+                                  checkForValue(e);
+                                }
+                              }
+                  />
+                  <label className="text-field-label">password</label>
+                  <div className="text-field-mask admin-user-mask-password"></div>
+                </div>
+
+                <div className="text-field-container">
+                  <input
+                    className="text-field text-field-active"
+                    type={showPassword} 
+                    onChange={(e) => {
+                                  setCheckPassword(e.target.value);
+                                  checkForValue(e);
+                                }
+                              }
+                    />
+                  <label className="text-field-label">confirm password</label>
+                  <div className="text-field-mask admin-user-mask-confirm-password"></div>
+                  <span>
+                    <input type="checkbox" onChange={togglePasswordView} />
+                    <label> Show Passwords</label>
+                  </span>
+                </div>
+
+                <select
+                  className="dropdown register-dropdown"
+                  value={industryId || 'industry'}
+                  onChange={(e) => setIndustryId(e.target.value)} ///////////////////////////////////////////
+                >
+                  <option className="dropdown-option" value='' disabled>Select Industry</option>
+                  {industryList.map(industry =>
+                    <option key={industry.id} value={industry.id}>{industry.industry}</option>
+                  )}
+                </select>
+
+                <select
+                  className="dropdown register-dropdown"
+                  value={usertype || 'usertype'}
+                  onChange={() => setUsertype(!usertype)}
+                >
+                  <option className="dropdown-option" value='' disabled>Select User Type</option>
+                  <option className="dropdown-option" key={1} value={false}>User</option>
+                  <option className="dropdown-option" key={2} value={true}>Admin</option>
+                </select>
+
+                <div className="modal-btn-container">
+                  <button className="normal-btn" type="submit">Save</button>
+                </div>
+              </form>
+
             </div>
           </Modal>
         </div>
