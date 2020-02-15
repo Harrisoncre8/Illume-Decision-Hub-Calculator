@@ -39,12 +39,13 @@ export default function PriceSetting() {
     }
   }, [industryData, user]);
   
-
   // Dynamically calculates the price setting depending on settings
   useEffect(() => {
+    const input8First = inputData[8] && +inputData[8]['Labor'];
+    const input8Second = inputData[8] && +inputData[8]['Labor2'];
     let directCosts = +splitPath[7] === 10 ?
-      +inputData[3] || 0:
-      ((inputData[8] && +inputData[8]['Labor'] || 0) * (inputData[8] && +inputData[8]['Labor2'] || 0)) + 
+      +inputData[3] || 0 :
+      ((input8First || 0) * (input8Second || 0)) + 
       (+inputData[9] || 0);
 
     let indirectCosts = +splitPath[22] === 11 ?
@@ -113,7 +114,7 @@ export default function PriceSetting() {
         setSplitPath(temp);
       }
     }
-  }, [splits, inputData]);
+  }, [splits, splitPath, inputData]);
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
@@ -124,6 +125,18 @@ export default function PriceSetting() {
     temp[question] = Number(e.target.value);
     setSplitPath(temp);
   }
+
+  // Updates margin based on new industry selected
+  useEffect(()=>{
+    if(Array.isArray(industryData) && industryData.length>0 && industryName && userCheckboxes.length >0){
+      let industryHolder = industryData[industryData.findIndex(el=> el.industry === industryName)];
+      let marginHolder = userCheckboxes.findIndex(el => el.question_id === 3) !== -1 ?
+        industryHolder.gross_margin
+        :
+        industryHolder.op_margin;
+      setMargin(marginHolder);
+    }
+  },[industryName, industryData, userCheckboxes])
 
   // Dynamically renders the questions associated with the calculator in the order
   // they would appear in the stepper component
@@ -184,7 +197,7 @@ export default function PriceSetting() {
             userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
               <p className="results-text">
                 {
-                  user[0] && user[0].service &&  paths[start] && paths[start].question?
+                  user[0] && user[0].service &&  paths[start] && paths[start].question ?
                   paths[start].question.replace(/product/g, 'service')
                   :
                   paths[start].question
@@ -205,8 +218,9 @@ export default function PriceSetting() {
                   type={paths[start] && paths[start].response_type}
                   name={paths[start] && paths[start].header}
                   value={
-                    paths[start] && paths[start].question2?
-                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header]:
+                    paths[start] && paths[start].question2 ?
+                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header] 
+                    :
                     inputData[questionId]
                   } 
                   onChange={
@@ -239,12 +253,13 @@ export default function PriceSetting() {
                 <div className="text-field-mask stepper-mask"></div>
               </div>
               {
-                paths[start] && paths[start].question2?
+                paths[start] && paths[start].question2 ?
                   <>
                     <p className="results-text">
                       {
-                        user[0] && user[0].service && paths[start] && paths[start].question2?
-                        paths[start].question2.replace(/product/g, 'service'):
+                        user[0] && user[0].service && paths[start] && paths[start].question2 ?
+                        paths[start].question2.replace(/product/g, 'service') 
+                        :
                         paths[start].question2
                       }
                     </p>
@@ -273,7 +288,8 @@ export default function PriceSetting() {
                       <label className="text-field-label">enter value</label>
                       <div className="text-field-mask stepper-mask"></div>
                     </div>
-                  </>:
+                  </> 
+                  :
                   null
               }
             </>
@@ -303,13 +319,6 @@ export default function PriceSetting() {
               <select 
                 onChange={
                   (event) => {
-                    let industry = industryData[industryData.findIndex(el=> el.industry === event.target.value)];
-                    setMargin(
-                      userCheckboxes.findIndex(el => el.question_id === 3) !== -1 ?
-                        industry.gross_margin
-                        :
-                        industry.op_margin
-                    ); 
                     setIndustryName(event.target.value);
                   }
                 } 

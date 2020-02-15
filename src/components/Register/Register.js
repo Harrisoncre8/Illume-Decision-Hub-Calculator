@@ -1,109 +1,104 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useCallback, useEffect } from 'react';
 import './Register.css';
 import Modal from 'react-awesome-modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-class Register extends Component {
+export default function Register() {
 
-  //Store local state
-  state = {
-    visible: false,
-    name: '',
-    company: '',
-    phone: '',
-    industry: '',
-    email: '',
-    password: '',
-    showPassword: 'password',
-    agreement: false,
-  }
+  const dispatch = useCallback(useDispatch());
+  const history = useHistory();
+  const disclaimer = useSelector(state => state.disclaimer);
+  const error = useSelector(state => state.errors);
+  const industryList = useSelector(state => state.industry);
+  const [agreement, setAgreement] = useState(false);
+  const [company, setCompany] = useState('');
+  const [email, setEmail] = useState('');
+  const [industry, setIndustry] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [showPassword, setShowPassword] = useState('password');
+  const [visible, setVisible] = useState(false);
 
   // Run on component mount
-  componentDidMount() {
-    this.props.dispatch({type: `GET_DISCLAIMER`});
-    this.props.dispatch({type: `GET_INDUSTRY`});
-  }
-
-  // Toggle agreement checkbox
-  agree = () => this.state.agreement ? this.setState({agreement:false}) : this.setState({agreement:true});
+  useEffect(()=>{
+    dispatch({type: `GET_DISCLAIMER`});
+    dispatch({type: `GET_INDUSTRY`});
+  }, [dispatch]);
 
   // Close modal popup
-  closeModal = () => this.setState({ visible: false });
+  const closeModal = () => setVisible(false);
 
   // Adds class if input has a value, removes the class if input has no value
-  checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
-
-  // Sets local state to current input value, adds or removes class based on input's value
-  handleChange = (e, propName) => {
-    this.setState({
-      ...this.state,
-      [propName]: e.target.value
-    });
-    this.checkForValue(e);
-  }
+  const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
   // Return to login page
-  handleCancel = () => this.props.history.push('/');
+  const handleCancel = () => history.push('/');
 
   // Open modal popup
-  openModal = () => this.setState({ visible: true });
+  const openModal = () => setVisible(true);
 
   // Push history to new user page
-  pushHistoryToUser = () => this.props.history.push('/new-user');
+  const pushHistoryToUser = () => history.push('/new-user');
 
   // Log new user information into database, push history to new user page
-  registerUser = e => {
+  const registerUser = e => {
     e.preventDefault();
-    if (this.state.name && this.state.company && this.state.phone && this.state.industry && this.state.email && this.state.password && this.state.agreement) {
-      this.props.dispatch({
+    if(name && company && phone && industry && email && password && agreement) {
+      dispatch({
         type: 'REGISTER',
         payload: {
-          name: this.state.name,
-          company: this.state.company,
-          phone: this.state.phone,
-          industry: this.state.industry,
-          email: this.state.email,
-          password: this.state.password,
+          name: name,
+          company: company,
+          phone: phone,
+          industry: industry,
+          email: email,
+          password: password,
         },
       });
-      this.pushHistoryToUser();
+      pushHistoryToUser();
     }
-    else if (this.state.name && this.state.company && this.state.phone && this.state.industry && this.state.email && this.state.password) {
-      this.props.dispatch({ type: `REGISTRATION_TOS_NOT_CHECKED` });
+    else if(name && company && phone && industry && email && password) {
+      dispatch({ type: `REGISTRATION_TOS_NOT_CHECKED` });
     }
     else {
-      this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
+      dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
     }
   }
 
   // Show or hide password
-  togglePasswordView = () => this.state.showPassword === 'password' ? this.setState({ showPassword: 'text' }) : this.setState({ showPassword: 'password' });
+  const togglePasswordView = () => showPassword === 'password' ? setShowPassword('text') : setShowPassword('password');
 
-  render() {
-    return (
-      <center>
-        <div className="register-container">
-          {this.props.errors.registrationMessage && (
-            <h2
-              className="alert"
-              role="alert"
-            >
-              {this.props.errors.registrationMessage}
-            </h2>
-          )}
+  return (
+    <center>
+      <div className="register-container">
+        {error.registrationMessage && (
+          <h2
+            className="alert"
+            role="alert"
+          >
+            {error.registrationMessage}
+          </h2>
+        )}
 
-          <div>
-            <img className="register-logo" src="illume-logo180.png" alt="illume logo" />
-            <span className="register-brand-name">illume decision hub</span>
-          </div>
+        <div>
+          <img className="register-logo" src="illume-logo180.png" alt="illume logo" />
+          <span className="register-brand-name">illume decision hub</span>
+        </div>
 
+        <form  onSubmit={registerUser}>
           <div className="text-field-container">
             <input
               className="text-field"
               type="text"
               name="name"
-              value={this.state.name}
-              onChange={(e) => this.handleChange(e, 'name')}
+              value={name}
+              onChange={(e) => {
+                          setName(e.target.value);
+                          checkForValue(e);
+                          }
+                        }
             />
             <label className="text-field-label">name</label>
             <div className="text-field-mask register-mask-name"></div>
@@ -114,8 +109,12 @@ class Register extends Component {
               className="text-field"
               type="text"
               name="company"
-              value={this.state.company}
-              onChange={(e) => this.handleChange(e, 'company')}
+              value={company}
+              onChange={(e) => {
+                          setCompany(e.target.value);
+                          checkForValue(e);
+                          }
+                        }
             />
             <label className="text-field-label">company</label>
             <div className="text-field-mask register-mask-company"></div>
@@ -126,8 +125,12 @@ class Register extends Component {
               className="text-field"
               type="text"
               name="phone"
-              value={this.state.phone}
-              onChange={(e) => this.handleChange(e, 'phone')}
+              value={phone}
+              onChange={(e) => {
+                          setPhone(e.target.value);
+                          checkForValue(e);
+                          }
+                        }
             />
             <label className="text-field-label">phone #</label>
             <div className="text-field-mask register-mask-phone"></div>
@@ -137,11 +140,15 @@ class Register extends Component {
             <select
               className="dropdown register-dropdown"
               name="industry"
-              value={this.state.industry}
-              onChange={(e) => this.handleChange(e, 'industry')}
+              value={industry}
+              onChange={(e) => {
+                          setIndustry(e.target.value);
+                          checkForValue(e);
+                          }
+                        }
             >
               <option className="dropdown-option" value='' disabled>Select Industry</option>
-              {this.props.industry.map(industry =>
+              {industryList.map(industry =>
                 <option 
                   className="dropdown-option" 
                   key={industry.id}
@@ -158,8 +165,12 @@ class Register extends Component {
               className="text-field"
               type="text"
               name="email"
-              value={this.state.email}
-              onChange={(e) => this.handleChange(e, 'email')}
+              value={email}
+              onChange={(e) => {
+                          setEmail(e.target.value);
+                          checkForValue(e);
+                          }
+                        }
             />
             <label className="text-field-label">email</label>
             <div className="text-field-mask register-mask-email"></div>
@@ -168,55 +179,52 @@ class Register extends Component {
           <div className="text-field-container">
             <input
               className="text-field"
-              type={this.state.showPassword}
-              onChange={(e) => this.handleChange(e, 'password')}
+              type={showPassword}
+              onChange={(e) => {
+                          setPassword(e.target.value);
+                          checkForValue(e);
+                          }
+                        }
             />
             <label className="text-field-label">password</label>
             <div className="text-field-mask register-mask-password"></div>
             <span>
-              <input type="checkbox" onClick={this.togglePasswordView} />
+              <input type="checkbox" onClick={togglePasswordView} />
               <label> Show Password</label>
             </span>
           </div>
 
           <div className="register-tos-container">
-            <input type="checkbox" onClick={this.agree} />
-            <label> I agree to the <span className="tos" onClick={this.openModal}>Terms of Service</span></label>
+            <input type="checkbox" onClick={()=>setAgreement(!agreement)} />
+            <label> I agree to the <span className="tos" onClick={openModal}>Terms of Service</span></label>
           </div>
 
-          <button className="normal-btn register-register-btn" onClick={this.registerUser}>Confirm</button>
-          <hr className="register-hr" />
-          <button className="register-cancel-btn" onClick={this.handleCancel}>cancel</button>
+          <button className="normal-btn register-register-btn" type="submit">Confirm</button>
+        </form>
+        <hr className="register-hr" />
 
-          <Modal
-              visible={this.state.visible}
-              width="440"
-              height="330"
-              effect="fadeInUp"
-              onClickAway={this.closeModal}
-            >
-              <div className="modal-container">
-                <h1 className="main-heading">Terms of Service Agreement</h1>
-                <div>
-                  <p className="align-left">{this.props.disclaimer.disclaimer}</p>
-                </div>
-                <div className="modal-btn-container">
-                  <button className="normal-btn" onClick={this.closeModal}>
-                    Okay
-                  </button>
+        <button className="register-cancel-btn" onClick={handleCancel}>cancel</button>
+
+        <Modal
+            visible={visible}
+            width="440"
+            height="330"
+            effect="fadeInUp"
+            onClickAway={closeModal}
+          >
+            <div className="modal-container">
+              <h1 className="main-heading">Terms of Service Agreement</h1>
+              <div>
+                <p className="align-left">{disclaimer.disclaimer}</p>
               </div>
+              <div className="modal-btn-container">
+                <button className="normal-btn" onClick={closeModal}>
+                  Okay
+                </button>
             </div>
-          </Modal>
-        </div>
-      </center>
-    );
-  }
+          </div>
+        </Modal>
+      </div>
+    </center>
+  );
 }
-
-const putReduxStateOnProps = reduxState => ({
-  disclaimer: reduxState.disclaimer,
-  errors: reduxState.errors,
-  industry: reduxState.industry,
-});
-
-export default connect(putReduxStateOnProps)(Register);
