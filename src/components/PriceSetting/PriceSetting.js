@@ -126,6 +126,18 @@ export default function PriceSetting() {
     setSplitPath(temp);
   }
 
+  // Updates margin based on new industry selected
+  useEffect(()=>{
+    if(Array.isArray(industryData) && industryData.length>0 && industryName && userCheckboxes.length >0){
+      let industryHolder = industryData[industryData.findIndex(el=> el.industry === industryName)];
+      let marginHolder = userCheckboxes.findIndex(el => el.question_id === 3) !== -1 ?
+        industryHolder.gross_margin
+        :
+        industryHolder.op_margin;
+      setMargin(marginHolder);
+    }
+  },[industryName, industryData, userCheckboxes])
+
   // Dynamically renders the questions associated with the calculator in the order
   // they would appear in the stepper component
   function stepper(start) {
@@ -307,13 +319,6 @@ export default function PriceSetting() {
               <select 
                 onChange={
                   (event) => {
-                    let industry = industryData[industryData.findIndex(el=> el.industry === event.target.value)];
-                    setMargin(
-                      userCheckboxes.findIndex(el => el.question_id === 3) !== -1 ?
-                        industry.gross_margin
-                        :
-                        industry.op_margin
-                    ); 
                     setIndustryName(event.target.value);
                   }
                 } 
