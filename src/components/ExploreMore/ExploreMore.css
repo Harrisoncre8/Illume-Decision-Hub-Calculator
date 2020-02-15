@@ -62,5 +62,5 @@ input:checked + .slider:before {
 } 
 
 .text-field-label {
-  width: fit-content;
+  width: max-content;
 }
