@@ -34,6 +34,8 @@ const ExploreMore = () => {
   const [directChange, setDirectChange] = useState('')
   const [indirectChange, setIndirectChange] = useState('')
 
+  const [hide, setHide] = useState(true);
+
   // Brings in input values
   const inputData = useSelector(state => state.input);
 
@@ -64,8 +66,40 @@ const ExploreMore = () => {
   // Does the math
   useEffect(()=>{
     let profit = revenue - directCost/sales - indirectCost/sales
+    console.log(revenue,sales,directCost,indirectCost,profit)
     if(dollarToggle){
-
+      setRevChange(
+        (
+          (
+            ((revIncrease? +revenue + +newRevenue: +revenue - +newRevenue) - directCost/sales - indirectCost/sales)/
+            profit - 1
+          ) * profit * sales
+        ).toFixed(2)
+      );
+      setSalesChange(
+        (
+          (
+            ((revenue - directCost/sales) * ((salesIncrease? +sales + +newSales: +sales - +newSales)/sales) - indirectCost/sales)/
+            profit - 1
+          ) * profit * (salesIncrease? +sales + +newSales: +sales - +newSales)
+        ).toFixed(2)
+      );
+      setDirectChange(
+        (
+          (
+            (revenue - (directIncrease? +directCost + +newDirectCost: +directCost - +newDirectCost)/sales  - indirectCost/sales)/
+            profit - 1
+          ) * profit * sales
+        ).toFixed(2)
+      );
+      setIndirectChange(
+        (
+          (
+            (revenue - directCost/sales - (indirectIncrease? +indirectCost + +newIndirectCost: +indirectCost - +newIndirectCost)/sales)/
+            profit - 1
+          ) * profit * sales
+        ).toFixed(2)
+      );
     } else {
       setRevChange(
         (
@@ -117,126 +151,152 @@ const ExploreMore = () => {
     dollarToggle
   ])
 
+  function toggleDollar(){
+    if(dollarToggle){
+      setNewRevenue(newRevenue/100)
+      setNewSales(newSales/100)
+      setNewDirectCost(newDirectCost/100)
+      setNewIndirectCost(newIndirectCost/100)
+    } else {
+      setNewRevenue(newRevenue*100)
+      setNewSales(newSales*100)
+      setNewDirectCost(newDirectCost*100)
+      setNewIndirectCost(newIndirectCost*100)
+    }
+    setDollarToggle(!dollarToggle)
+  }
+
   return (
     <div>
-      <label class="switch">
-        <input type="checkbox" />
-        <span class="slider round"></span>
-      </label>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
-          <div className="text-field-container" >
-            <input
-              className="text-field text-field-active"
-              value={revenue}
-              disabled
-            />
-            <label className="text-field-label" ref={revLabel}>Price</label>
-            <div className="text-field-mask" style={{ width: revLabel.current && revLabel.current.clientWidth + 3.4 }}></div>
-          </div>
-          <div className="text-field-container" >
-            <input
-              className="text-field text-field-active"
-              value={sales}
-              disabled
-            />
-            <label className="text-field-label" ref={salesLabel}>Sales</label>
-            <div className="text-field-mask" style={{ width: salesLabel.current && salesLabel.current.clientWidth + 3.4 }}></div>
-          </div>
-          <div className="text-field-container" >
-            <input
-              className="text-field text-field-active"
-              value={directCost}
-              disabled
-            />
-            <label className="text-field-label" ref={directLabel}>Direct Costs</label>
-            <div className="text-field-mask" style={{ width: directLabel.current && directLabel.current.clientWidth + 3.4 }}></div>
-          </div>
-          <div className="text-field-container" >
-            <input
-              className="text-field text-field-active"
-              value={indirectCost}
-              disabled
-            />
-            <label className="text-field-label" ref={indirectLabel}>Indirect Costs</label>
-            <div className="text-field-mask" style={{ width: indirectLabel.current && indirectLabel.current.clientWidth + 3.4 }}></div>
-          </div>
-        </div>
-        <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
-          <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
+      <button onClick={()=>setHide(!hide)}>{hide? 'Explore More Options': 'hide'}</button>
+      {
+        hide? 
+          null: 
+          <div>
+            <br/><br/>
+            <p>%&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $</p>
             <label class="switch">
-              <input type="checkbox" checked={revIncrease} onChange={()=>setRevIncrease(!revIncrease)} />
+              <input type="checkbox" checked={dollarToggle} onChange={toggleDollar}/>
               <span class="slider round"></span>
             </label>
+            <br/><br/><br/>
+            <div style={{width:'max-content', marginRight:200}}><p style={{width:'max-content'}}>decrease&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; increase </p></div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
+                <div className="text-field-container" >
+                  <input
+                    className="text-field text-field-active"
+                    value={revenue}
+                    disabled
+                  />
+                  <label className="text-field-label" ref={revLabel}>Price</label>
+                  <div className="text-field-mask" style={{ width: revLabel.current && revLabel.current.clientWidth + 3.4 }}></div>
+                </div>
+                <div className="text-field-container" >
+                  <input
+                    className="text-field text-field-active"
+                    value={sales}
+                    disabled
+                  />
+                  <label className="text-field-label" ref={salesLabel}>Sales</label>
+                  <div className="text-field-mask" style={{ width: salesLabel.current && salesLabel.current.clientWidth + 3.4 }}></div>
+                </div>
+                <div className="text-field-container" >
+                  <input
+                    className="text-field text-field-active"
+                    value={directCost}
+                    disabled
+                  />
+                  <label className="text-field-label" ref={directLabel}>Direct Costs</label>
+                  <div className="text-field-mask" style={{ width: directLabel.current && directLabel.current.clientWidth + 3.4 }}></div>
+                </div>
+                <div className="text-field-container" >
+                  <input
+                    className="text-field text-field-active"
+                    value={indirectCost}
+                    disabled
+                  />
+                  <label className="text-field-label" ref={indirectLabel}>Indirect Costs</label>
+                  <div className="text-field-mask" style={{ width: indirectLabel.current && indirectLabel.current.clientWidth + 3.4 }}></div>
+                </div>
+              </div>
+              <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
+                <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
+                  <label class="switch">
+                    <input type="checkbox" checked={revIncrease} onChange={()=>setRevIncrease(!revIncrease)} />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
+                  <label class="switch">
+                  <input type="checkbox" checked={salesIncrease} onChange={()=>setSalesIncrease(!salesIncrease)} />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
+                  <label class="switch">
+                  <input type="checkbox" checked={directIncrease} onChange={()=>setDirectIncrease(!directIncrease)} />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
+                  <label class="switch">
+                  <input type="checkbox" checked={indirectIncrease} onChange={()=>setIndirectIncrease(!indirectIncrease)} />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+              <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
+                <div className="text-field-container" >
+                  <input
+                    className="text-field text-field-active"
+                    value={dollarToggle? newRevenue: newRevenue*100}
+                    type='number'
+                    onChange={(e)=>{setNewRevenue(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
+                  />
+                  <label className="text-field-label">Price</label>
+                  <div className="text-field-mask" style={{ width: revLabel.current && revLabel.current.clientWidth + 3.4 }}></div>
+                </div>
+                <div className="text-field-container" >
+                  <input
+                    className="text-field text-field-active"
+                    value={dollarToggle? newSales: newSales*100}
+                    type='number'
+                    onChange={(e)=>{setNewSales(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
+                  />
+                  <label className="text-field-label">Sales</label>
+                  <div className="text-field-mask" style={{ width: salesLabel.current && salesLabel.current.clientWidth + 3.4 }}></div>
+                </div>
+                <div className="text-field-container" >
+                  <input
+                    className="text-field text-field-active"
+                    value={dollarToggle? newDirectCost: newDirectCost*100}
+                    type='number'
+                    onChange={(e)=>{setNewDirectCost(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
+                  />
+                  <label className="text-field-label">Direct Costs</label>
+                  <div className="text-field-mask" style={{ width: directLabel.current && directLabel.current.clientWidth + 3.4 }}></div>
+                </div>
+                <div className="text-field-container" >
+                  <input
+                    className="text-field text-field-active"
+                    value={dollarToggle? newIndirectCost: newIndirectCost*100}
+                    type='number'
+                    onChange={(e)=>{setNewIndirectCost(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
+                  />
+                  <label className="text-field-label">Indirect Costs</label>
+                  <div className="text-field-mask" style={{ width: indirectLabel.current && indirectLabel.current.clientWidth + 3.4 }}></div>
+                </div>
+              </div>
+              <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
+                <p>{(+revChange).toLocaleString("en-US", { style: "currency", currency: 'USD' })} change in profits</p>
+                <p>{(+salesChange).toLocaleString("en-US", { style: "currency", currency: 'USD' })} change in profits</p>
+                <p>{(+directChange).toLocaleString("en-US", { style: "currency", currency: 'USD' })} change in profits</p>
+                <p>{(+indirectChange).toLocaleString("en-US", { style: "currency", currency: 'USD' })} change in profits</p>
+              </div>
+            </div>
           </div>
-          <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
-            <label class="switch">
-            <input type="checkbox" checked={salesIncrease} onChange={()=>setSalesIncrease(!salesIncrease)} />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
-            <label class="switch">
-            <input type="checkbox" checked={directIncrease} onChange={()=>setDirectIncrease(!directIncrease)} />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
-            <label class="switch">
-            <input type="checkbox" checked={indirectIncrease} onChange={()=>setIndirectIncrease(!indirectIncrease)} />
-              <span class="slider round"></span>
-            </label>
-          </div>
-        </div>
-        <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
-          <div className="text-field-container" >
-            <input
-              className="text-field text-field-active"
-              value={dollarToggle? newRevenue: newRevenue*100}
-              type='number'
-              onChange={(e)=>{setNewRevenue(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
-            />
-            <label className="text-field-label">Price</label>
-            <div className="text-field-mask" style={{ width: revLabel.current && revLabel.current.clientWidth + 3.4 }}></div>
-          </div>
-          <div className="text-field-container" >
-            <input
-              className="text-field text-field-active"
-              value={dollarToggle? newSales: newSales*100}
-              type='number'
-              onChange={(e)=>{setNewSales(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
-            />
-            <label className="text-field-label">Sales</label>
-            <div className="text-field-mask" style={{ width: salesLabel.current && salesLabel.current.clientWidth + 3.4 }}></div>
-          </div>
-          <div className="text-field-container" >
-            <input
-              className="text-field text-field-active"
-              value={dollarToggle? newDirectCost: newDirectCost*100}
-              type='number'
-              onChange={(e)=>{setNewDirectCost(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
-            />
-            <label className="text-field-label">Direct Costs</label>
-            <div className="text-field-mask" style={{ width: directLabel.current && directLabel.current.clientWidth + 3.4 }}></div>
-          </div>
-          <div className="text-field-container" >
-            <input
-              className="text-field text-field-active"
-              value={dollarToggle? newIndirectCost: newIndirectCost*100}
-              type='number'
-              onChange={(e)=>{setNewIndirectCost(dollarToggle? e.target.value: e.target.value/100); checkForValue(e);}}
-            />
-            <label className="text-field-label">Indirect Costs</label>
-            <div className="text-field-mask" style={{ width: indirectLabel.current && indirectLabel.current.clientWidth + 3.4 }}></div>
-          </div>
-        </div>
-        <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
-          <p>{revChange.toLocaleString("en-US", { style: "currency", currency: 'USD' })} {revIncrease? 'increase': 'decrease'} in profits</p>
-          <p>{salesChange.toLocaleString("en-US", { style: "currency", currency: 'USD' })} {salesIncrease? 'increase': 'decrease'} in profits</p>
-          <p>{directChange.toLocaleString("en-US", { style: "currency", currency: 'USD' })} {directIncrease? 'decrease': 'increase'} in profits</p>
-          <p>{indirectChange.toLocaleString("en-US", { style: "currency", currency: 'USD' })} {indirectIncrease? 'decrease': 'increase'} in profits</p>
-        </div>
-      </div>
+      }
     </div>
   )
 }
