@@ -38,7 +38,6 @@ export default function ProfitLever() {
       (+inputData[19] || 0) + (+inputData[20] || 0) + (+inputData[21] || 0) + 
       (+inputData[23] || 0) + (+inputData[24] || 0) + (+inputData[25] || 0);
 
-    let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
     console.log(directCosts,indirectCosts, inputData[3]);
     setPrice(
       (
@@ -46,7 +45,7 @@ export default function ProfitLever() {
           (+inputData[2] * 1.01 - directCosts - indirectCosts) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100 / divisor
+      ) * 100
     );
     setGrowth(
       (
@@ -54,7 +53,7 @@ export default function ProfitLever() {
           ((+inputData[2] * 1.01 - directCosts * 1.01) - indirectCosts) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100 / divisor
+      ) * 100
     );
     setDirectCostChange(
       (
@@ -62,7 +61,7 @@ export default function ProfitLever() {
           (+inputData[2] - (directCosts * .99) - indirectCosts) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100 / divisor
+      ) * 100
     );
     setIndirectCostChange(
       (
@@ -70,7 +69,7 @@ export default function ProfitLever() {
           (+inputData[2] - directCosts - (indirectCosts * .99)) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100 / divisor
+      ) * 100
     );
   }, [inputData, splitPath]);
 
@@ -160,7 +159,18 @@ export default function ProfitLever() {
                               name="next"
                               value={radio.next_id}
                               checked={+splitPath[split] === +radio.next_id}
-                              onChange={(e) => { radioChange(e, split) }}
+                              onChange={
+                                (e) => { 
+                                  radioChange(e, split); 
+                                  dispatch({ 
+                                    type: 'ADD_INPUT_VALUE',
+                                    payload: {
+                                      key: radio.question_id,
+                                      value: radio.next_id 
+                                    } 
+                                  });
+                                }
+                              }
                             />
                             <span className="radio-btn"></span>
                           </label>
