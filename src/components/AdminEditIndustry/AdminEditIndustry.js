@@ -40,7 +40,6 @@ export default function AdminEditIndustry() {
     }
   }
 
-
   // Dispatch new industry to saga
   const handlePost = e => {
     e.preventDefault();

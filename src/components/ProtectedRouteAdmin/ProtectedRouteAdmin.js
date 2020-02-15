@@ -3,7 +3,6 @@ import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import User from '../User/User';
 
-
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
 // API for this component is the same as a regular route
@@ -14,7 +13,7 @@ import User from '../User/User';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-const ProtectedRouteAdmin = (props) => {
+const ProtectedRouteAdmin = props => {
   // Using destructuring, this takes ComponentToProtect from component
   // prop and grabs all other props to pass them along to Route
   const {
@@ -51,7 +50,7 @@ const ProtectedRouteAdmin = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user,
     loginMode: state.loginMode,

@@ -39,7 +39,6 @@ export default function PriceSetting() {
     }
   }, [industryData, user]);
   
-
   // Dynamically calculates the price setting depending on settings
   useEffect(() => {
     const input8First = inputData[8] && +inputData[8]['Labor'];

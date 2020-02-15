@@ -4,7 +4,7 @@ import './NotFound.css';
 
 export default function NotFound() {
 
-    return(
+  return(
     <center>
       <div className="nf-container">
         <h1>Oops! This page does not exist!</h1>

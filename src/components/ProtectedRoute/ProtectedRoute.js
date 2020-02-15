@@ -13,7 +13,7 @@ import Login from '../Login/Login';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-const ProtectedRoute = (props) => {
+const ProtectedRoute = props => {
   // Using destructuring, this takes ComponentToProtect from component
   // prop and grabs all other props to pass them along to Route
   const {
@@ -50,7 +50,7 @@ const ProtectedRoute = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user,
     loginMode: state.loginMode,
