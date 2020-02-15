@@ -21,9 +21,6 @@ export default function Login() {
     else if(user && user.id){
       history.push('/user');
     }
-    else {
-      history.push('/');
-    }
   }, [history, user]);
 
   // Add class if input has a value, removes the class if input has no value
