@@ -3,28 +3,38 @@ import { useSelector } from 'react-redux';
 import './ExploreMore.css'
 
 const ExploreMore = () => {
-
+  // References for masks to dynamically get width of label
   const revLabel = useRef(null);
   const saleLabel = useRef(null);
   const directLabel = useRef(null);
   const indirectLabel = useRef(null);
 
+  // States to hold stepper input values
   const [revenue, setRevenue] = useState();
   const [directCost, setDirectCost] = useState();
   const [indirectCost, setIndirectCost] = useState();
   const [sales, setSales] = useState();
 
+  // States to hold testing input values
   const [newRevenue, setNewRevenue] = useState();
   const [newDirectCost, setNewDirectCost] = useState();
   const [newIndirectCost, setNewIndirectCost] = useState();
   const [newSales, setNewSales] = useState();
 
+  const [revIncrease, setRevIncrease] = useState(true);
+  const [saleIncrease, setSaleIncrease] = useState(true);
+  const [directIncrease, setDirectIncrease] = useState(false);
+  const [indirectIncrease, setIndirectIncrease] = useState(false);
+
+  // Brings in input values
   const inputData = useSelector(state => state.input);
 
+  // Checks for text in a field and freezes lable if text exists
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
+  // Sets stepper input fields
   useEffect(() => {
-    setRevenue(inputData[2] || 0);
+    setRevenue(inputData[2]/(+inputData[5] || 1) || 0);
     setDirectCost(
       +inputData[7] === 3 ?
         +inputData[3] || 0 :
@@ -42,6 +52,7 @@ const ExploreMore = () => {
     );
     setSales(+inputData[1] === 2 ? 1 : +inputData[5] || 1);
   }, [inputData])
+
   return (
     <div>
       <label class="switch">
@@ -56,7 +67,7 @@ const ExploreMore = () => {
               value={revenue}
               disabled
             />
-            <label className="text-field-label" ref={revLabel}>Revenue</label>
+            <label className="text-field-label" ref={revLabel}>Price</label>
             <div className="text-field-mask" style={{ width: revLabel.current && revLabel.current.clientWidth + 3.4 }}></div>
           </div>
           <div className="text-field-container" >
@@ -90,25 +101,25 @@ const ExploreMore = () => {
         <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
           <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
             <label class="switch">
-              <input type="checkbox" />
+              <input type="checkbox" checked={revIncrease} onChange={()=>setRevIncrease(!revIncrease)} />
               <span class="slider round"></span>
             </label>
           </div>
           <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
             <label class="switch">
-              <input type="checkbox" />
+            <input type="checkbox" checked={saleIncrease} onChange={()=>setSaleIncrease(!saleIncrease)} />
               <span class="slider round"></span>
             </label>
           </div>
           <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
             <label class="switch">
-              <input type="checkbox" />
+            <input type="checkbox" checked={directIncrease} onChange={()=>setDirectIncrease(!directIncrease)} />
               <span class="slider round"></span>
             </label>
           </div>
           <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
             <label class="switch">
-              <input type="checkbox" />
+            <input type="checkbox" checked={indirectIncrease} onChange={()=>setIndirectIncrease(!indirectIncrease)} />
               <span class="slider round"></span>
             </label>
           </div>
@@ -120,7 +131,7 @@ const ExploreMore = () => {
               value={newRevenue}
               onChange={(e)=>{setNewRevenue(e.target.value); checkForValue(e);}}
             />
-            <label className="text-field-label">Revenue</label>
+            <label className="text-field-label">Price</label>
             <div className="text-field-mask" style={{ width: revLabel.current && revLabel.current.clientWidth + 3.4 }}></div>
           </div>
           <div className="text-field-container" >
