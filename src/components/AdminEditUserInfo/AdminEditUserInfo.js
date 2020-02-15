@@ -15,7 +15,6 @@ export default function AdminEditUserInfo() {
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [id, setId] = useState('');
-  const [industry, setIndustry] = useState('');
   const [industryId, setIndustryId] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -68,7 +67,6 @@ export default function AdminEditUserInfo() {
     setCompany(user.company);
     setPhone(user.phone);
     setEmail(user.email);
-    setIndustry(user.industry);
     setIndustryId(user.industryid);
   }
 
