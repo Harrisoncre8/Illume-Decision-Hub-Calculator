@@ -91,7 +91,7 @@ router.get('/user-info',rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
 // POST route for admin to add new industry information
 router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const id = [req.body.industry, req.body.gross_margin/100, req.body.op_margin/100];
+  const id = [req.body.newIndustry, req.body.newGrossMargin/100, req.body.newOpMargin/100];
   const sqlQuery = `INSERT INTO industry (industry, gross_margin, op_margin)
                     VALUES ($1, $2, $3);`;
   pool.query(sqlQuery, id)
@@ -106,7 +106,7 @@ router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) 
 
 // PUT route for admin to update industry information
 router.put('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const id = [req.body.id, req.body.industry, req.body.gross_margin/100, req.body.op_margin/100];
+  const id = [req.body.selectedId, req.body.selectedIndustry, req.body.selectedGrossMargin/100, req.body.selectedOpMargin/100];
   const sqlQuery = `UPDATE industry 
                     SET industry = $2, gross_margin = $3, op_margin = $4
                     WHERE id = $1;`;
