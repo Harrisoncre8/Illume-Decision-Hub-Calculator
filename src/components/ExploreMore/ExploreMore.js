@@ -113,11 +113,12 @@ const ExploreMore = () => {
             </label>
           </div>
         </div>
-        <div style={{ padding: 10 }}>
+        <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
           <div className="text-field-container" >
             <input
               className="text-field"
               value={newRevenue}
+              onChange={(e)=>{setNewRevenue(e.target.value); checkForValue(e);}}
             />
             <label className="text-field-label">Revenue</label>
             <div className="text-field-mask" style={{ width: revLabel.current && revLabel.current.clientWidth + 3.4 }}></div>
@@ -126,6 +127,7 @@ const ExploreMore = () => {
             <input
               className="text-field"
               value={newSales}
+              onChange={(e)=>{setNewSales(e.target.value); checkForValue(e);}}
             />
             <label className="text-field-label">Sales</label>
             <div className="text-field-mask" style={{ width: saleLabel.current && saleLabel.current.clientWidth + 3.4 }}></div>
@@ -134,6 +136,7 @@ const ExploreMore = () => {
             <input
               className="text-field"
               value={newDirectCost}
+              onChange={(e)=>{setNewDirectCost(e.target.value); checkForValue(e);}}
             />
             <label className="text-field-label">Direct Costs</label>
             <div className="text-field-mask" style={{ width: directLabel.current && directLabel.current.clientWidth + 3.4 }}></div>
@@ -142,6 +145,7 @@ const ExploreMore = () => {
             <input
               className="text-field"
               value={newIndirectCost}
+              onChange={(e)=>{setNewIndirectCost(e.target.value); checkForValue(e);}}
             />
             <label className="text-field-label">Indirect Costs</label>
             <div className="text-field-mask" style={{ width: indirectLabel.current && indirectLabel.current.clientWidth + 3.4 }}></div>
