@@ -56,3 +56,9 @@
 .admin-user-table tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.slide-btn {
+  float: right;
+  height: 100vh;
+  width: 400px;
+}

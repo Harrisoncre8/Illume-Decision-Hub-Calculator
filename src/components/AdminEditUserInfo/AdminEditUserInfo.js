@@ -112,6 +112,7 @@ class AdminEditUserInfo extends Component {
 
     return (
       <center>
+        <div className="slide-btn" onClick={()=>this.props.history.push('/slide6')}></div>
         <Nav />
         <div className="main-container">
           <div className="top-card-container">
