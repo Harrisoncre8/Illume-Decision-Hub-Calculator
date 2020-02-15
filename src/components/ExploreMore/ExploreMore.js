@@ -5,7 +5,7 @@ import './ExploreMore.css'
 const ExploreMore = () => {
   // References for masks to dynamically get width of label
   const revLabel = useRef(null);
-  const saleLabel = useRef(null);
+  const salesLabel = useRef(null);
   const directLabel = useRef(null);
   const indirectLabel = useRef(null);
 
@@ -21,10 +21,17 @@ const ExploreMore = () => {
   const [newIndirectCost, setNewIndirectCost] = useState();
   const [newSales, setNewSales] = useState();
 
+  // States to hold toggles
   const [revIncrease, setRevIncrease] = useState(true);
-  const [saleIncrease, setSaleIncrease] = useState(true);
+  const [salesIncrease, setSalesIncrease] = useState(true);
   const [directIncrease, setDirectIncrease] = useState(false);
   const [indirectIncrease, setIndirectIncrease] = useState(false);
+
+  // States to hold math results
+  const [revChange, setRevChange] = useState('')
+  const [salesChange, setSalesChange] = useState('')
+  const [directChange, setDirectChange] = useState('')
+  const [indirectChange, setIndirectChange] = useState('')
 
   // Brings in input values
   const inputData = useSelector(state => state.input);
@@ -53,6 +60,22 @@ const ExploreMore = () => {
     setSales(+inputData[1] === 2 ? 1 : +inputData[5] || 1);
   }, [inputData])
 
+  // Does the math
+  useEffect(()=>{
+    
+  },
+  [
+    newRevenue,
+    newDirectCost,
+    newIndirectCost,
+    newSales,
+    revIncrease,
+    salesIncrease,
+    directIncrease,
+    indirectIncrease,
+    inputData
+  ])
+
   return (
     <div>
       <label class="switch">
@@ -76,8 +99,8 @@ const ExploreMore = () => {
               value={sales}
               disabled
             />
-            <label className="text-field-label" ref={saleLabel}>Sales</label>
-            <div className="text-field-mask" style={{ width: saleLabel.current && saleLabel.current.clientWidth + 3.4 }}></div>
+            <label className="text-field-label" ref={salesLabel}>Sales</label>
+            <div className="text-field-mask" style={{ width: salesLabel.current && salesLabel.current.clientWidth + 3.4 }}></div>
           </div>
           <div className="text-field-container" >
             <input
@@ -107,7 +130,7 @@ const ExploreMore = () => {
           </div>
           <div style={{ height: 51.6, display: 'flex', alignItems: 'center' }}>
             <label class="switch">
-            <input type="checkbox" checked={saleIncrease} onChange={()=>setSaleIncrease(!saleIncrease)} />
+            <input type="checkbox" checked={salesIncrease} onChange={()=>setSalesIncrease(!salesIncrease)} />
               <span class="slider round"></span>
             </label>
           </div>
@@ -141,7 +164,7 @@ const ExploreMore = () => {
               onChange={(e)=>{setNewSales(e.target.value); checkForValue(e);}}
             />
             <label className="text-field-label">Sales</label>
-            <div className="text-field-mask" style={{ width: saleLabel.current && saleLabel.current.clientWidth + 3.4 }}></div>
+            <div className="text-field-mask" style={{ width: salesLabel.current && salesLabel.current.clientWidth + 3.4 }}></div>
           </div>
           <div className="text-field-container" >
             <input
