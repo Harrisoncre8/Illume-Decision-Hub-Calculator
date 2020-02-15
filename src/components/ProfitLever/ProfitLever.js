@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Axios from 'axios'
+import Axios from 'axios';
 import './ProfitLever.css';
 import Nav from '../Nav/Nav';
 import ExploreMore from '../ExploreMore/ExploreMore';
@@ -25,9 +25,11 @@ export default function ProfitLever() {
 
   // Dynamically calculates the profit lever depending on settings
   useEffect(() => {
+    const input8First = inputData[8] && +inputData[8]['Labor'];
+    const input8Second = inputData[8] && +inputData[8]['Labor2'];
     let directCosts = +splitPath[7] === 3 ?
       +inputData[3] || 0:
-      ((inputData[8] && +inputData[8]['Labor'] || 0) * (inputData[8] && +inputData[8]['Labor2'] || 0)) + 
+      ((input8First || 0) * (input8Second || 0)) + 
       (+inputData[9] || 0);
 
     let indirectCosts = +splitPath[22] === 4 ?
@@ -121,7 +123,7 @@ export default function ProfitLever() {
         setSplitPath(temp);
       }
     }
-  }, [splits, inputData]);
+  }, [splits, splitPath, inputData]);
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
@@ -203,7 +205,7 @@ export default function ProfitLever() {
             userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
               <p className="results-text">
                 {
-                  user[0] && user[0].service &&  paths[start] && paths[start].question?
+                  user[0] && user[0].service &&  paths[start] && paths[start].question ?
                   paths[start].question.replace(/product/g, 'service')
                   :
                   paths[start].question
@@ -224,8 +226,9 @@ export default function ProfitLever() {
                   type={paths[start] && paths[start].response_type}
                   name={paths[start] && paths[start].header}
                   value={
-                    paths[start] && paths[start].question2?
-                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header]:
+                    paths[start] && paths[start].question2 ?
+                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header] 
+                    :
                     inputData[questionId]
                   } 
                   onChange={
@@ -258,12 +261,13 @@ export default function ProfitLever() {
                 <div className="text-field-mask stepper-mask"></div>
               </div>
               {
-                paths[start] && paths[start].question2?
+                paths[start] && paths[start].question2 ?
                   <>
                     <p className="results-text">
                       {
-                        user[0] && user[0].service && paths[start] && paths[start].question2?
-                        paths[start].question2.replace(/product/g, 'service'):
+                        user[0] && user[0].service && paths[start] && paths[start].question2 ?
+                        paths[start].question2.replace(/product/g, 'service') 
+                        :
                         paths[start].question2
                       }
                     </p>
@@ -292,7 +296,8 @@ export default function ProfitLever() {
                       <label className="text-field-label">enter value</label>
                       <div className="text-field-mask stepper-mask"></div>
                     </div>
-                  </>:
+                  </>
+                  :
                   null
               }
             </>

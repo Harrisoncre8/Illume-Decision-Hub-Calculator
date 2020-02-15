@@ -49,7 +49,7 @@ function* postAdminIndustryInfo(action){
 function* putAdminIndustryInfo(action){
   try{
     yield axios.put(`/api/admin/industry-info`, action.payload);
-    yield put({type: `GET_INDUSTRY`});
+    yield put({type: `GET_ADMIN_INDUSTRY`});
   } catch(error){
     console.log('Error in admin industry info PUT', error);
   }

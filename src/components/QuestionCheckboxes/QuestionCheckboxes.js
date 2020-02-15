@@ -12,9 +12,9 @@ const QuestionCheckboxes = () => {
   }, [dispatch]);
 
   const [checked, setChecked] = useState({});
-  const [subQuestionCount, setSubquestionCount] = useState({})
+  const [subQuestionCount, setSubquestionCount] = useState({});
   const [countChecked, setCountChecked] = useState({});
-  const [totalSub, setTotalSub] = useState({})
+  const [totalSub, setTotalSub] = useState({});
 
   useEffect(()=>{
     if(userCheckboxes[0] && userCheckboxes[0].user_id){
@@ -22,20 +22,20 @@ const QuestionCheckboxes = () => {
       userCheckboxes.forEach(el=>{
         holder[el.question_id] = true;
       });
-      const subCount = {}
+      const subCount = {};
       userCheckboxes.forEach(el=>{
         if(questions[el.question_id - 1]){
           let subquestionID = questions[el.question_id - 1] && questions[el.question_id - 1].sub_questions;
           if(subquestionID){
             if(subCount[subquestionID]){
-              subCount[subquestionID][el.question_id] = true
+              subCount[subquestionID][el.question_id] = true;
             } else {
-              subCount[subquestionID] = {[el.question_id]: true}
+              subCount[subquestionID] = {[el.question_id]: true};
             }
           }
         }
       })
-      setCountChecked(subCount)
+      setCountChecked(subCount);
       setChecked(holder);
     } else if (Array.isArray(questions)) {
       const state = questions.reduce((acum,arr)=>{
@@ -52,7 +52,7 @@ const QuestionCheckboxes = () => {
     if(Array.isArray(questions)){
       const count = questions.reduce((acum,arr)=>{
         if(arr.sub_questions){
-          acum[arr.sub_questions] = acum[arr.sub_questions]? acum[arr.sub_questions] + 1 : 1
+          acum[arr.sub_questions] = acum[arr.sub_questions] ? acum[arr.sub_questions] + 1 : 1;
         }
         return acum;
       },{});
@@ -72,23 +72,23 @@ const QuestionCheckboxes = () => {
       let subHolder = {...countChecked};
       let subID = questions[id-1].sub_questions;
       if(subHolder[subID]){
-        subHolder[subID][id] = !countChecked[subID][id]
+        subHolder[subID][id] = !countChecked[subID][id];
       } else {
-        subHolder[subID] = {[id]: true}
+        subHolder[subID] = {[id]: true};
       }
-      // subHolder[subID][id] = !countChecked[questions[id] && questions[id].sub_questions][id] || true
-      setCountChecked(subHolder)
+      // subHolder[subID][id] = !countChecked[questions[id] && questions[id].sub_questions][id] || true;
+      setCountChecked(subHolder);
     }
     setChecked(holder);
   }
 
   useEffect(()=>{
-    let holder = {}
+    let holder = {};
     for(let key of Object.keys(countChecked)){
-      let count = 0
+      let count = 0;
       for(let subKey of Object.keys(countChecked[key])){
         if(countChecked[key][subKey]){
-          count++
+          count++;
         }
       }
       holder[key] = count;
@@ -97,28 +97,28 @@ const QuestionCheckboxes = () => {
   },[countChecked]);
 
   useEffect(()=>{
-    let holder = {...checked}
+    let holder = {...checked};
     for(let key of Object.keys(totalSub)){
       if(!subQuestionCount[key]){
         if(key==='3'){
-          holder[7] = false
+          holder[7] = false;
         }
         if(key==='4'){
-          holder[22] = false
+          holder[22] = false;
         }
         holder[key] = false;
       } else {
         holder[key] = true;
         if(key==='3'){
-          holder[7] = true
+          holder[7] = true;
         }
         if(key==='4'){
-          holder[22] = true
+          holder[22] = true;
         }
       }
     }
     setChecked(holder);
-  }, [totalSub, subQuestionCount])
+  }, [totalSub, subQuestionCount]);
 
   function submit(e){
     e.preventDefault();
