@@ -18,7 +18,7 @@ export default function Slide1() {
         <div className="slide-img-name-container">
           <img className="slide-img img-1" src="https://avatars1.githubusercontent.com/u/52988745?s=460&v=4" alt="Harrison Nguyen" />
             <div className="slide-name n1">Harrison Nguyen</div>
-          <img className="slide-img img-2" src="https://avatars2.githubusercontent.com/u/54560441?s=460&v=4" alt="Awren Nuit" />
+          <img className="slide-img img-2" src="awren.jpg" alt="Awren Nuit" />
             <div className="slide-name n2">Awren Nuit</div>
           <img className="slide-img img-3" src="phillip.jpg" alt="Phillip Berg" />
             <div className="slide-name n3">Phillip Berg</div>
