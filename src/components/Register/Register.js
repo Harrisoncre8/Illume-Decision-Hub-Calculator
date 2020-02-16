@@ -178,12 +178,6 @@ export default function Register() {
 
           <div className="text-field-container">
             <input
-<<<<<<< HEAD
-              className={`text-field ${this.state.textField}`}
-              value={this.state.password}
-              type={this.state.showPassword}
-              onChange={(e) => this.handleChange(e, 'password')}
-=======
               className="text-field"
               type={showPassword}
               onChange={(e) => {
@@ -191,7 +185,6 @@ export default function Register() {
                           checkForValue(e);
                           }
                         }
->>>>>>> master
             />
             <label className="text-field-label">password</label>
             <div className="text-field-mask register-mask-password"></div>
