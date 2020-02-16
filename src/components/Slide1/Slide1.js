@@ -22,7 +22,7 @@ export default function Slide1() {
             <div className="slide-name n2">Awren Nuit</div>
           <img className="slide-img img-3" src="phillip.jpg" alt="Phillip Berg" />
             <div className="slide-name n3">Phillip Berg</div>
-          <img className="slide-img img-4" src="Courtney.png" alt="Courtney Olesee" />
+          <img className="slide-img img-4" src="Courtney.jpg" alt="Courtney Olesee" />
             <div className="slide-name n4">Courtney Olesee</div>
         </div>
 
