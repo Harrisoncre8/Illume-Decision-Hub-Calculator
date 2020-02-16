@@ -6,7 +6,7 @@ import './Nav.css';
 export default function Nav() {
   // Set react router hook
   const userData = useSelector(state => state.user.admin);
-  let calcData = useSelector(state => state.calcStatus);
+  const calcData = useSelector(state => state.calcStatus);
   const history = useHistory();
   const dispatch = useCallback(useDispatch());
   const questionData = useSelector(state=>state.question.calculator_id);

@@ -78,7 +78,7 @@ router.get('/user-info',rejectUnauthenticated, rejectNonAdmin, (req, res) => {
                     JOIN users u ON u.id = c.user_id
                     JOIN industry i ON i.id = c.industry_id
                     WHERE super_admin != true
-                    ORDER BY c.business_name;`;
+                    ORDER BY c.business_name, c.name, id;`;
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
@@ -91,7 +91,7 @@ router.get('/user-info',rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
 // POST route for admin to add new industry information
 router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const id = [req.body.industry, req.body.gross_margin/100, req.body.op_margin/100];
+  const id = [req.body.newIndustry, req.body.newGrossMargin/100, req.body.newOpMargin/100];
   const sqlQuery = `INSERT INTO industry (industry, gross_margin, op_margin)
                     VALUES ($1, $2, $3);`;
   pool.query(sqlQuery, id)
@@ -106,7 +106,7 @@ router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) 
 
 // PUT route for admin to update industry information
 router.put('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const id = [req.body.id, req.body.industry, req.body.gross_margin/100, req.body.op_margin/100];
+  const id = [req.body.selectedId, req.body.selectedIndustry, req.body.selectedGrossMargin/100, req.body.selectedOpMargin/100];
   const sqlQuery = `UPDATE industry 
                     SET industry = $2, gross_margin = $3, op_margin = $4
                     WHERE id = $1;`;
@@ -142,9 +142,9 @@ router.put('/user-info', rejectUnauthenticated, rejectNonAdmin, async (req, res)
   const name = req.body.name;
   const company = req.body.company;
   const phone = req.body.phone;
-  const industry = req.body.industryid;
+  const industry = req.body.industryId;
   const email = req.body.email;
-  const password = encryptLib.encryptPassword(req.body.password);
+  const password = encryptLib.encryptPassword(req.body.password); // This only has data, needs salt parameter as well
   const usertype = req.body.usertype;
   const sqlQueryContactInfo = ` UPDATE contact_info
                                 SET "name" = $1, "business_name" = $2, phone_number = $3, industry_id = $4
