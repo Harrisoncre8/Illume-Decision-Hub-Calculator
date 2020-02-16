@@ -44,9 +44,17 @@ const QuestionCheckboxes = () => {
         }
         return acum;
       },{});
+      state[1] = true;
+      state[2] = true;
+      state[5] = true;
+      state[6] = true;
+      state[7] = true;
+      state[9] = true;
       state[16] = true;
       state[18] = true;
       state[19] = true;
+      state[22] = true;
+      setSubquestionCount({[3]: 1, [4]: 3})
       setChecked(state);
     }
     if(Array.isArray(questions)){

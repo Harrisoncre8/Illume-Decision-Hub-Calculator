@@ -99,7 +99,7 @@ class Register extends Component {
                 company: "Awren's Fantastics Arts",
                 phone: '651-474-8732',
                 industry: 9,
-                email: 'afa@gmail.com',
+                email: 'awren@gmail.com',
                 password: '12345678',
                 showPassword: 'password',
                 textField: 'text-field-active',
