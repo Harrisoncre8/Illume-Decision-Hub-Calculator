@@ -8,6 +8,11 @@
   margin-top: 30px;
 }
 
+.list3-li {
+  margin-top: 30px;
+  list-style: none;
+}
+
 .list-slide-main-container {
   margin: 30px;
 }
@@ -19,6 +24,14 @@
 }
 
 .list-ul {
+  margin: 100px;
+  width: 400px;
+  color: #f7d149;
+  font-size: 2.2em;
+  text-align: left;
+}
+
+.list2-ul {
   margin: 60px;
   width: 400px;
   color: #f7d149;
