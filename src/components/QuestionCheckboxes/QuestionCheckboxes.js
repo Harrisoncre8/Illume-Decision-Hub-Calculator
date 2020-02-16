@@ -190,9 +190,6 @@ const QuestionCheckboxes = () => {
         </div>
         <button className="normal-btn questions-checkbox-btn" type="submit">Save</button>
       </form>
-      {JSON.stringify(checked)}
-      {JSON.stringify(totalSub)}
-      {JSON.stringify(subQuestionCount)}
     </center>
   );
 };
