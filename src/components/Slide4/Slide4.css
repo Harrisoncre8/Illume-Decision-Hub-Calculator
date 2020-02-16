@@ -8,6 +8,11 @@
   margin-top: 30px;
 }
 
+.list3-li {
+  margin-top: 30px;
+  list-style: none;
+}
+
 .list-slide-main-container {
   margin: 30px;
 }
