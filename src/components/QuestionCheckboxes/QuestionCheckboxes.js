@@ -46,8 +46,6 @@ const QuestionCheckboxes = () => {
       },{});
       state[1] = true;
       state[2] = true;
-      state[3] = true;
-      state[4] = true;
       state[5] = true;
       state[6] = true;
       state[7] = true;
@@ -56,6 +54,7 @@ const QuestionCheckboxes = () => {
       state[18] = true;
       state[19] = true;
       state[22] = true;
+      setSubquestionCount({[3]: 1, [4]: 3})
       setChecked(state);
     }
     if(Array.isArray(questions)){
@@ -191,6 +190,9 @@ const QuestionCheckboxes = () => {
         </div>
         <button className="normal-btn questions-checkbox-btn" type="submit">Save</button>
       </form>
+      {JSON.stringify(checked)}
+      {JSON.stringify(totalSub)}
+      {JSON.stringify(subQuestionCount)}
     </center>
   );
 };
