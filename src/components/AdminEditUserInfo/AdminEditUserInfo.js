@@ -75,6 +75,7 @@ export default function AdminEditUserInfo() {
 
   return (
     <center>
+      <span className="slide-btn" onClick={()=>history.push('/slide6')}></span>
       <Nav />
       <div className="main-container">
         <div className="top-card-container">
