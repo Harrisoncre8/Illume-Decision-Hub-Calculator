@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './Slide4.css';
 
-
 export default function Slide4() {
   
   const history = useHistory();
