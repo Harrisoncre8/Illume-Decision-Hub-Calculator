@@ -15,6 +15,7 @@ export default function ProfitLever() {
   const [growth, setGrowth] = useState(0);
   const [directCostChange, setDirectCostChange] = useState(0);
   const [indirectCostChange, setIndirectCostChange] = useState(0);
+  const [showExplore, setShowExplore] = useState(false);
 
   // Connects to redux
   const inputData = useSelector(state => state.input);
@@ -351,7 +352,11 @@ export default function ProfitLever() {
                 null
             }
           </div>
-          <ExploreMore/>
+          <br/>
+          <button onClick={()=>setShowExplore(!showExplore)} className='secondary-btn'>
+            {showExplore? 'hide': 'Explore More Options'}
+          </button>
+          {showExplore? <ExploreMore/>: null}
           {stepper(1)}
         </div>
       </div>
