@@ -10,7 +10,7 @@ export default function Slide5() {
       <div className="list-slide-main-container" onClick={()=>history.push(`/`)}>
         <img className="slide-logo" src="illume-logo180.png" alt="Illume Logo" />
             <span className="slide-heading">illume decision hub</span>
-        <ul className="list-ul">
+        <ul className="list2-ul">
           <li className="list-li">Dynamic information gathering</li>
           <li className="list-li">Conversational language</li>
           <li className="list-li">Prompted consideration</li>
