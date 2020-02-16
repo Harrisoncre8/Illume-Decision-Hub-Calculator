@@ -24,7 +24,7 @@ export default function Slide3() {
             <div className="slide-name n1">Harrison Nguyen</div>
           <img className="slide-img img-2" src="awren.jpg" alt="Awren Nuit" />
             <div className="slide-name n2">Awren Nuit</div>
-            <img className="slide-img img-3" src="https://avatars0.githubusercontent.com/u/55601904?s=460&v=4" alt="Courtney Olesee" />
+            <img className="slide-img img-3" src="Courtney.jpg" alt="Courtney Olesee" />
             <div className="slide-name n3">Courtney Olesee</div>
           <img className="slide-img img-4" src="phillip.jpg" alt="Phillip Berg" />
             <div className="slide-name n4">Phillip Berg</div>
