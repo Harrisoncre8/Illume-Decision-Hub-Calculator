@@ -200,6 +200,7 @@ export default function Register() {
                           checkForValue(e);
                           }
                         }
+              value={password}
             />
             <label className="text-field-label">password</label>
             <div className="text-field-mask register-mask-password"></div>
