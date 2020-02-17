@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function Slide6() {
 
   const history = useHistory();
+
+  useEffect(()=>{
+    for(let i=0; i<1; i++){
+      let audio = new Audio('thx.mp3');
+      audio.play();
+    }
+  }, []);
 
   return(
     <center>
