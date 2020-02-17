@@ -23,20 +23,20 @@
 }
 
 .slide-img3 {
-  height: 250px;
+  height: 200px;
   border-radius: 50%;
   box-shadow: 0 0 10px #f0aa42;
 }
 
 .slide3-img3-s {
-  height: 250px;
+  height: 200px;
   margin-right: 130px;
   border-radius: 50%;
   box-shadow: 0 0 10px #f0aa42;
 }
 
 .slide3-img3-j {
-  height: 250px;
+  height: 200px;
   margin-left: 130px;
   border-radius: 50%;
   box-shadow: 0 0 10px #f0aa42;
@@ -50,7 +50,7 @@
   grid-column-gap: 50px;
   grid-row-gap: 10px;
   text-align: center;
-  margin-top: -30px;
+  margin-top: -50px;
   text-align: center;
   justify-content: center;
 }
