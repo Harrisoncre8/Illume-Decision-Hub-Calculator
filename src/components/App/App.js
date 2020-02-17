@@ -24,6 +24,7 @@ import Slide3 from '../Slide3/Slide3';
 import Slide4 from '../Slide4/Slide4';
 import Slide5 from '../Slide5/Slide5';
 import Slide6 from '../Slide6/Slide6';
+import Slide7 from '../Slide7/Slide7';
 
 export default function App() {
   // gets user info on all pages DO NOT REMOVE
@@ -51,6 +52,7 @@ export default function App() {
           <Route exact path="/slide4" component={Slide4} />
           <Route exact path="/slide5" component={Slide5} />
           <Route exact path="/slide6" component={Slide6} />
+          <Route exact path="/slide7" component={Slide7} />
           <Route exact path='/' component={Login} />
           <ProtectedRoute exact path='/admin' component={Admin} />
           <ProtectedRoute exact path='/admin/edit-calculator-info' component={AdminEditCalc} />

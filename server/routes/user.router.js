@@ -171,7 +171,7 @@ router.put('/industry', rejectUnauthenticated, (req, res) => {
                     WHERE user_id = $2;`;
   pool.query(sqlQuery, id)
   .then(result => {
-    res.send(200);
+    res.sendStatus(200);
   })
   .catch( error => {
     console.log('Error with PUT user industry', error);

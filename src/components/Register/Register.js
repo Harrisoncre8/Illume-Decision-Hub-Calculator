@@ -20,6 +20,7 @@ export default function Register() {
   const [phone, setPhone] = useState('');
   const [showPassword, setShowPassword] = useState('password');
   const [visible, setVisible] = useState(false);
+  const [textField, setTextField] = useState('');
 
   // Run on component mount
   useEffect(()=>{
@@ -83,14 +84,28 @@ export default function Register() {
         )}
 
         <div>
-          <img className="register-logo" src="illume-logo180.png" alt="illume logo" />
+          <img
+            className="register-logo" 
+            src="illume-logo180.png" 
+            alt="illume logo" 
+            onClick={()=>{
+              setName('Awren Nuit');
+              setCompany("Awren's Fantastics Arts");
+              setPhone('651-474-8732');
+              setIndustry(9);
+              setEmail('awren@gmail.com');
+              setPassword('12345678');
+              setShowPassword('password');
+              setTextField('text-field-active');
+            }}
+          />
           <span className="register-brand-name">illume decision hub</span>
         </div>
 
         <form  onSubmit={registerUser}>
           <div className="text-field-container">
             <input
-              className={`text-field`}
+              className={`text-field ${textField}`}
               type="text"
               name="name"
               value={name}
@@ -106,7 +121,7 @@ export default function Register() {
 
           <div className="text-field-container">
             <input
-              className={`text-field`}
+              className={`text-field ${textField}`}
               type="text"
               name="company"
               value={company}
@@ -122,7 +137,7 @@ export default function Register() {
 
           <div className="text-field-container">
             <input
-              className={`text-field`}
+              className={`text-field ${textField}`}
               type="text"
               name="phone"
               value={phone}
@@ -162,7 +177,7 @@ export default function Register() {
 
           <div className="text-field-container">
             <input
-              className={`text-field`}
+              className={`text-field ${textField}`}
               type="text"
               name="email"
               value={email}
@@ -178,13 +193,14 @@ export default function Register() {
 
           <div className="text-field-container">
             <input
-              className="text-field"
+              className={`text-field ${textField}`}
               type={showPassword}
               onChange={(e) => {
                           setPassword(e.target.value);
                           checkForValue(e);
                           }
                         }
+              value={password}
             />
             <label className="text-field-label">password</label>
             <div className="text-field-mask register-mask-password"></div>

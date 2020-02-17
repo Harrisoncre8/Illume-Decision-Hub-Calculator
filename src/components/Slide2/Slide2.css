@@ -15,7 +15,7 @@
 }
 
 .slide2-img {
-  height: 350px;
+  height: 300px;
   border-radius: 50%;
   box-shadow: 0 0 10px #f0aa42;
   margin: 0 50px;
@@ -29,7 +29,6 @@
   grid-gap: 50px;
   text-align: center;
   padding: 20px;
-  margin-top: 50px;
   text-align: center;
   justify-content: center;
 }

@@ -1,11 +1,5 @@
-.list-slide-heading {
-  font-size: 5em;
-  text-decoration: underline;
-  animation: roll 5s alternate infinite;
-}
-
 .list-li {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .list3-li {
@@ -17,14 +11,8 @@
   margin: 30px;
 }
 
-.list-tagline {
-  color: #f0aa42;
-  font-size: 1.8em;
-  margin-top: 170px;
-}
-
 .list-ul {
-  margin: 100px;
+  margin: 30px;
   width: 410px;
   color: #f7d149;
   font-size: 2.2em;
@@ -32,18 +20,9 @@
 }
 
 .list2-ul {
-  margin: 60px;
-  width: 410px;
+  margin: 30px;
+  width: 510px;
   color: #f7d149;
   font-size: 2.2em;
   text-align: left;
-}
-
-@keyframes roll {
-  from {
-    color: #f7d149;
-  }
-  to {
-    color: #f0aa42;
-  }
 }

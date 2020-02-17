@@ -96,7 +96,7 @@ export default function AdminEditUserInfo() {
                 <tr key={user.id}>
                   <td>{user.name}</td>
                   <td>{user.company}</td>
-                  <td>{user.phone}</td>
+                  <td className="phone">{user.phone}</td>
                   <td>{user.email}</td>
                   <td className="admin-edit-user-cell" onClick={() => openModal(user)}>Edit Info</td>
                 </tr>
