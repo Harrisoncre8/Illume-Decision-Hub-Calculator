@@ -13,10 +13,10 @@ export default function Slide3() {
         </div>
 
         <div className="slide3-img-name-container-clients">
-          <img className="slide-img3 img-1" src="susan.jpeg" alt="Susan Heinlein" />
-            <div className="slide3-name n1">Susan Heinlein</div>
-          <img className="slide-img3 img-2" src="jenny.jpg" alt="Jenny Niemela" />
-            <div className="slide3-name n2">Jenny Niemela</div>
+          <img className="slide3-img3-s img-1" src="susan.jpeg" alt="Susan Heinlein" />
+            <div className="slide3-name-s n1">Susan Heinlein</div>
+          <img className="slide3-img3-j img-2" src="jenny.jpg" alt="Jenny Niemela" />
+            <div className="slide3-name-j n2">Jenny Niemela</div>
         </div>
 
         <div className="slide3-img-name-container-team">
