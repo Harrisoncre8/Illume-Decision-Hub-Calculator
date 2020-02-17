@@ -76,7 +76,7 @@ export default function Slide6() {
           </li>
 
           <li className="list3-li">
-            <label className="checkbox-container">Profit opportunities
+            <label className="checkbox-container">Predictive calculations
               <input
                 type='checkbox' 
                 checked={check4} 
@@ -86,7 +86,7 @@ export default function Slide6() {
           </li>
 
           <li className="list3-li">
-            <label className="checkbox-container">Predictive calculations
+            <label className="checkbox-container">Profit opportunities
               <input
                 type='checkbox' 
                 checked={check5} 
