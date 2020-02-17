@@ -13,20 +13,20 @@ export default function Slide3() {
         </div>
 
         <div className="slide3-img-name-container-clients">
-          <img className="slide3-img img-1" src="susan.jpeg" alt="Susan Heinlein" />
+          <img className="slide-img3 img-1" src="susan.jpeg" alt="Susan Heinlein" />
             <div className="slide3-name n1">Susan Heinlein</div>
-          <img className="slide3-img img-2" src="jenny.jpg" alt="Jenny Niemela" />
+          <img className="slide-img3 img-2" src="jenny.jpg" alt="Jenny Niemela" />
             <div className="slide3-name n2">Jenny Niemela</div>
         </div>
 
         <div className="slide3-img-name-container-team">
-          <img className="slide-img img-1" src="harrison.jpg" alt="Harrison Nguyen" />
+          <img className="slide-img3 img-1" src="harrison.jpg" alt="Harrison Nguyen" />
             <div className="slide-name n1">Harrison Nguyen</div>
-          <img className="slide-img img-2" src="awren.jpg" alt="Awren Nuit" />
+          <img className="slide-img3 img-2" src="awren.jpg" alt="Awren Nuit" />
             <div className="slide-name n2">Awren Nuit</div>
-            <img className="slide-img img-3" src="Courtney.jpg" alt="Courtney Olesee" />
+            <img className="slide-img3 img-3" src="Courtney.jpg" alt="Courtney Olesee" />
             <div className="slide-name n3">Courtney Olesee</div>
-          <img className="slide-img img-4" src="phillip.jpg" alt="Phillip Berg" />
+          <img className="slide-img3 img-4" src="phillip.jpg" alt="Phillip Berg" />
             <div className="slide-name n4">Phillip Berg</div>
         </div>
 
