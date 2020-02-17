@@ -62,5 +62,9 @@
   right: 0;
   top: -30px;
   height: 100vh;
-  width: 350px;
+  width: 320px;
+}
+
+.phone {
+  min-width: 140px;
 }
