@@ -20,7 +20,7 @@ export default function Slide3() {
         </div>
 
         <div className="slide3-img-name-container-team">
-          <img className="slide-img img-1" src="https://avatars1.githubusercontent.com/u/52988745?s=460&v=4" alt="Harrison Nguyen" />
+          <img className="slide-img img-1" src="harrison.jpg" alt="Harrison Nguyen" />
             <div className="slide-name n1">Harrison Nguyen</div>
           <img className="slide-img img-2" src="awren.jpg" alt="Awren Nuit" />
             <div className="slide-name n2">Awren Nuit</div>
