@@ -30,7 +30,12 @@ export default function AdminCalcSubquestion(props) {
           onChange={(event)=>setQuestion(event.target.value)} 
           placeholder="enter sub-question"
         />
-        <div className="admin-calc-tooltip-label">Tooltip:</div>
+        <div 
+          className="admin-calc-tooltip-label"
+          onClick={()=>props.id?setTooltip('A business mortgage is the loan you may have taken out to buy an office building or space.  Make sure you include your escrow and utilities such as gas, electricity, and water.'): null}
+        >
+          Tooltip:
+        </div>
         <textarea 
           rows="6" 
           cols="30" 
