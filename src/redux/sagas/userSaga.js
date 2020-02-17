@@ -84,7 +84,7 @@ function* putUserInfo(action) {
 function* putUserIndustry(action) {
   try {
     yield axios.put(`/api/user/industry`, action.payload);
-    yield put({ type: 'GET_USER_INFO', payload: action.payload });
+    yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
   } catch (error) {
     console.log('User put new industry request failed', error);
   }
