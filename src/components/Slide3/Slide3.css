@@ -22,11 +22,10 @@
   border-bottom: 5px solid #f0aa42;
 }
 
-.slide3-img {
+.slide-img3 {
   height: 250px;
   border-radius: 50%;
   box-shadow: 0 0 10px #f0aa42;
-  margin: 0 50px;
 }
 
 .slide3-img-name-container-clients {
@@ -37,7 +36,6 @@
   grid-column-gap: 50px;
   grid-row-gap: 10px;
   text-align: center;
-  padding: 20px;
   margin-top: 10px;
   text-align: center;
   justify-content: center;
@@ -51,7 +49,6 @@
   grid-column-gap: 50px;
   grid-row-gap: 10px;
   text-align: center;
-  padding: 20px;
   margin-top: 20px;
   text-align: center;
   justify-content: center;
