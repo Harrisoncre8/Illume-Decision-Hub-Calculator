@@ -90,7 +90,7 @@ export default function Register() {
         <form  onSubmit={registerUser}>
           <div className="text-field-container">
             <input
-              className={`text-field ${this.state.textField}`}
+              className={`text-field`}
               type="text"
               name="name"
               value={name}
@@ -106,7 +106,7 @@ export default function Register() {
 
           <div className="text-field-container">
             <input
-              className={`text-field ${this.state.textField}`}
+              className={`text-field`}
               type="text"
               name="company"
               value={company}
@@ -122,7 +122,7 @@ export default function Register() {
 
           <div className="text-field-container">
             <input
-              className={`text-field ${this.state.textField}`}
+              className={`text-field`}
               type="text"
               name="phone"
               value={phone}
@@ -162,7 +162,7 @@ export default function Register() {
 
           <div className="text-field-container">
             <input
-              className={`text-field ${this.state.textField}`}
+              className={`text-field`}
               type="text"
               name="email"
               value={email}
