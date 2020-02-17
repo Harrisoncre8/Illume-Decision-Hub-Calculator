@@ -7,9 +7,9 @@ export default function Slide6() {
 
   return(
     <center>
-      <div className="list-slide-main-container" onClick={()=>history.push(`/slide3`)}>
+      <div className="list-slide-main-container" onClick={()=>history.push(`/slide7`)}>
         <img className="slide-logo" src="illume-logo180.png" alt="Illume Logo" />
-            <span className="slide-heading">illume decision hub</span>
+            <span className="slide-heading">challenges</span>
         <ul className="list-ul">
           <li className="list-li">Unreadable spreadsheets</li>
           <li className="list-li">Financial jargon</li>
