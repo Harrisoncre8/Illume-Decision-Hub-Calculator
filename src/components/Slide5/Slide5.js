@@ -17,7 +17,6 @@ export default function Slide5() {
           <li className="list-li">Profit opportunities</li>
           <li className="list-li">Predictive calculations</li>
         </ul>
-        <p className="list-tagline">Small changes result in big improvements.</p>
       </div>
     </center>
   );
