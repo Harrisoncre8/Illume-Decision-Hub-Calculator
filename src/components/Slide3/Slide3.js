@@ -12,6 +12,8 @@ export default function Slide3() {
           <span className="slide3-heading">team illume</span>
         </div>
 
+        <p className="thx">thank you!</p>
+
         <div className="slide3-img-name-container-clients">
           <img className="slide3-img3-s img-1" src="susan.jpeg" alt="Susan Heinlein" />
             <div className="slide3-name-s n1">Susan Heinlein</div>
