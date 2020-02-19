@@ -14,8 +14,8 @@ export default function About(){
               <span className="slide-heading">illume Decision Hub</span>
             </div>
 
-            <div className="slide-name n3">
-              Jenny and Susan are business owners themselves, with a passion 
+            <div className="slide">
+              Jenny and Susan are business owners with a passion 
               for helping other business owners fulfill their potential. 
               Their biggest goal is helping their clients to work less and earn more.
             </div>
@@ -27,61 +27,61 @@ export default function About(){
               <div className="slide-name n3">Jenny Niemala</div>
             </div>
 
-            <div className="slide-name n3">
-              The challenge
+            <div className="heading">
+              The Challenge
             </div>
 
-            <ul className="">
-              <li>
+            <ul className="list-ul">
+              <li className="list-li">
                 To help small to midsize business owners understand how changes 
                 in their financial decision-making could affect their future profitability.
               </li> 
-              <li>
+              <li className="list-li">
                 Currently, Jenny and Susan see many of their clients suffer through barriers to 
                 making these informed decisions. Their clients are limited by convoluted financial 
                 jargon, feeling overworked and underpaid, and having a lack of clear information.
               </li>
-              <li>
+              <li className="list-li">
                 They see women business owners paying themselves less than men who own businesses, 
                 clients burning themselves out with a lack of work life balance, and an overall lack 
                 of confidence in making financial change. 
               </li>
-              <li>
+              <li className="list-li">
                 Jenny and Susan took on the challenge of simplifying the process by formulating 
                 a dynamic tool to help clients make these educated business decisions, so that both 
                 they and their clients could work less and earn more.
               </li>
             </ul>
 
-            <div className="slide-name n3">
-              The solution
+            <div className="heading">
+              The Solution
             </div>
             
-            <ul className="">
-              <li>
+            <ul className="list-ul">
+              <li className="list-li">
                 The Illume Decision Hub addresses the challenge of handling unreadable spreadsheets by dynamically 
                 collecting data that the user types in and uses it throughout their financial 
                 calculation process.
               </li> 
-              <li>
+              <li className="list-li">
                 Using conversational language in tandem with help text, the application 
                 is able to translate financial jargon into easy to understand language.
               </li>
-              <li>
+              <li className="list-li">
                 The Illume Decision Hub also identifies for clients many unknown financial factors 
                 such as indirect costs and increasing prices as a way to improve profits. 
               </li>
-              <li>
+              <li className="list-li">
                 On the results page, the application uses Predictive Calculations to translate 
                 the user’s outputs into easy to understand call to actions. 
               </li>
-              <li>
+              <li className="list-li">
                 Along with solving the listed challenges, the Illume Decision Hub helps users 
                 generate new Profit Opportunities that they can further explore.  
               </li>
             </ul>
 
-            <div className="slide-name n3">
+            <div className="last-heading">
               The Illume Decision Hub started as an idea to help people work less and earn more and we 
               hope it will become a tool that encourages you to understand the worth of your 
               time, effort, and product.
