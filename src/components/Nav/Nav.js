@@ -82,6 +82,8 @@ export default function Nav() {
     history.push('/');
   }
 
+  const pushHistoryToAbout = () => history.push('/about');
+
   // Push history to user profile
   const pushHistoryToHome = () => {
     if(userData === true){
@@ -106,6 +108,9 @@ export default function Nav() {
     <center>
       <button className={`nav-btn ${home}`} onClick={pushHistoryToHome}>
         Home <br /> Page
+      </button>
+      <button className={`circle-btn`} onClick={pushHistoryToAbout}>
+        About <br/> Page
       </button>
       {renderBreak ? 
         null 
