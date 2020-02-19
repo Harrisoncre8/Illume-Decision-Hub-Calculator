@@ -1,20 +1,19 @@
 # Illume Decision Hub
-Duration: 2 week sprint
-
 Group Project for Prime Digital Academy 
 
 Client: Illume Pricing
 
 Group: Phillip Berg, Harrison Nguyen, Awren Nuit, and Courtney Olesee
 
-## Description
+Duration: 2 week sprint
+
 The application is designed to help small business owners generate more profits. Using conversational language through a “choose your own adventure” format, clients will be prompted to enter their financial information to create predictive calculations based on business decisions they can make around product pricing, operating costs, and total revenue. This will help clients better understand how changes in their decision-making and pricing could affect their future profitability.
 
 [Find the app deployed here](https://illume-decision-hub.herokuapp.com/).
 
 ## Screen Shots
 User Registration Page <br/>
-<img src=public/ScreenShots/register.png width="400" alt="Register Page"/>
+<img src=public/ScreenShots/register.png width="400" alt="Reigister Page"/>
 
 
 Stepper Example <br/>
@@ -31,11 +30,11 @@ Profit Levers Calculator Results Page: able to continue to edit their inputs
 ## Installation
 > npm install 
 
-> npm run server
-
 > npm run client
 
-> navigate to http://localhost:3000/
+> npm run server
+
+> go to http://localhost:3000/
 
 ## Usage 
 - User:
@@ -53,24 +52,21 @@ Profit Levers Calculator Results Page: able to continue to edit their inputs
     - Can use all tool functionality of regular user
 
 ## Built With
-- JavaScript
-- JSX
 - React (React Awesome Modal)
-- Redux (logger, saga)
 - Axios
-- Node.js (nodemon)
+- Node (nodemon)
 - Express
-- PostgreSQL
+- PostgresSQL
 - CSS
-- HTML
-- Bcrypt
+- Bycrpyt
 - Passport
+- Redux (logger, sagas)
 
 ## Challenges
 - Git branching and merging with multiple users
     - Solved by having multi-phase testing so that each contributor has branches tested by another user before being able to create pull request. This way we rarely (if ever) had any broken code in master. First, the creator tested their own code and solved any master conflicts. Then, another contributor tested that branch. Then the creator of the code created a new pull request which was checked by another contributor before merging to the master branch. 
 - Database construction 
-    - To achieve the step through format of the calculator inputs, the database contains a table with question, calculator, and next ids so that the stepper routes can be set, and edited based on what kind of relevant costs the user has checked. 
+    - To achieve the step through format of the calculator inputs, the database contains a table with quesiton, calculator, and next ids so that the stepper routes can be set, and edited based on what kind of relevant costs the user has checked. 
 
 ## Stretch Goals
 - Admin ability to change order of questions 
