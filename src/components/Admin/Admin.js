@@ -39,6 +39,15 @@ export default function Admin() {
                 Edit Industries
               </button>
             </div>
+            <div className="admin-btn-flex-column">
+              <button 
+                className="circle-btn" 
+                onClick={()=>pushHistory('/admin/help-about-page')}
+              >
+                Help Page
+              </button>
+            </div>
+
           </div>
         </div>
       </div>
