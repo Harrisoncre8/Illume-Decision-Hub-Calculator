@@ -37,7 +37,8 @@ export default function Nav() {
     } else {
       setRenderPrice(false);
     }
-    if(history.location.pathname === '/' || history.location.pathname === '/admin'){
+    if(history.location.pathname === '/' || history.location.pathname === '/admin'
+       || history.location.pathname === '/new-user'){
       setHome('circle-btn-active');
       setAbout('circle-btn');
       setBreakEven('circle-btn');
