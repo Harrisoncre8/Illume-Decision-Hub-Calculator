@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
     res.send(result.rows);
   })
   .catch( error => {
-    console.log('Error with GET industry', error);
     res.sendStatus(500);
   });
 });

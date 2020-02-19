@@ -73,7 +73,6 @@ export default function BreakEven() {
       }, {});
       setSplits(temp);
     }).catch(err => {
-      console.log(err);
     });
   }, []);
 

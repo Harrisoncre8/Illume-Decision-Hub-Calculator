@@ -27,13 +27,11 @@ export default function Nav() {
       setRenderLever(false);
     }
     if(calcData[calcData.findIndex(element => element.calculator_id === 2)]){
-      console.log('BREAK HAPPENS?');
       setRenderBreak(true);
     } else {
       setRenderBreak(false);
     }
     if(calcData[calcData.findIndex(element => element.calculator_id === 3)]){
-      console.log('PRICE HAPPENS');
       setRenderPrice(true);
     } else {
       setRenderPrice(false);

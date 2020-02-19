@@ -12,7 +12,6 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     res.send(results.rows);
   })
   .catch(err=>{
-    console.log(err);
     res.sendStatus(500);
   });
 });
