@@ -14,6 +14,10 @@
   grid-area: name2;
 }
 
+.n3 {
+  grid-area: name3;
+}
+
 .slide-heading {
   position: relative;
   bottom: 85px;
