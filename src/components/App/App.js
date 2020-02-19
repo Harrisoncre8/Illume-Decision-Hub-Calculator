@@ -8,6 +8,7 @@ import Admin from '../Admin/Admin';
 import AdminEditCalc from '../AdminEditCalc/AdminEditCalc';
 import AdminEditIndustry from '../AdminEditIndustry/AdminEditIndustry';
 import AdminEditUserInfo from '../AdminEditUserInfo/AdminEditUserInfo';
+import AdminHelpAbout from '../AdminHelpAbout/AdminHelpAbout';
 import BreakEven from '../BreakEven/BreakEven';
 import CheckIndustry from '../CheckIndustry/CheckIndustry';
 import Footer from '../Footer/Footer';
@@ -46,6 +47,7 @@ export default function App() {
           <ProtectedRoute exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
           <ProtectedRoute exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
           <ProtectedRoute exact path='/admin/edit-user-info' component={AdminEditUserInfo} />
+          <ProtectedRoute exact path='/admin/help-about-page' component={AdminHelpAbout} />
           <ProtectedRoute exact path='/break-even-pricing' component={BreakEven} />
           <ProtectedRoute exact path='/price-setting' component={PriceSetting} />
           <ProtectedRoute exact path='/define-your-profit-lever' component={ProfitLever} />

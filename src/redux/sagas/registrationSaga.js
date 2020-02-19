@@ -18,7 +18,7 @@ function* registerUser(action) {
     yield put({type: 'SET_TO_LOGIN_MODE'});
 
   } catch (error) {
-      console.log('Error with user registration:', error);
+      alert('Error registering new account');
       yield put({type: 'REGISTRATION_FAILED'});
   }
 }

@@ -99,7 +99,6 @@ export default function PriceSetting() {
       }, {});
       setSplits(temp);
     }).catch(err => {
-      console.log(err);
     });
   }, []);
 
