@@ -3,9 +3,13 @@ import Nav from '../Nav/Nav';
 
 export default function About(){
   return(
-    <div>
+    <center>
       <Nav />
-      Hi
-    </div>
+       <div className="main-container">
+          <div className="top-card-container">
+            
+          </div>
+        </div>
+    </center>
   )
 }

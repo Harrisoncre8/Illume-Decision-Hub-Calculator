@@ -2,7 +2,6 @@ import React, {useState, useEffect, useCallback} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './Nav.css';
-import About from '../About/About';
 
 export default function Nav() {
   // Set react router hook
@@ -40,7 +39,7 @@ export default function Nav() {
     } else {
       setRenderPrice(false);
     }
-    if(history.location.pathname === '/'){
+    if(history.location.pathname === '/' || history.location.pathname === '/admin'){
       setHome('circle-btn-active');
       setAbout('circle-btn');
       setBreakEven('circle-btn');
