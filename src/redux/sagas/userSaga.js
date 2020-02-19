@@ -21,7 +21,6 @@ function* fetchUser() {
     yield put({ type: 'SET_USER', payload: response.data });
     yield put({ type: 'GET_USER_CHECKBOXES' })
   } catch (error) {
-    alert('Error retrieving credentials');
   }
 }
 
