@@ -1,7 +1,7 @@
 # Illume Decision Hub
 Group Project for Prime Digital Academy 
 
-Client: Illume Pricing
+Client: Illume Pricing, Jenny Niemela & Susan Heinlein
 
 Group: Phillip Berg, Harrison Nguyen, Awren Nuit, and Courtney Olesee
 
@@ -44,6 +44,8 @@ Profit Levers Calculator Results Page: able to continue to edit their inputs
         - Each calculator keeps user inputted data in state to output in 'results' page where user can continue to edit inputted numbers to dynamically view results 
         - Results suggest changes in user financial decisions to positively impact business
         - Users are able to turn calculators on/off to take ones that aren't relevant to their business out of their navigation bar
+        - 'Explore More' in the Profit Lever allows users to increase (toggle between dollars and percentage) the improvement results to see what the increase would do to their costs, prices, or revenue.
+
 - Admin:
     - Must be created by another Admin
     - Able to edit each calculator's question, sub-question, and tool tip text
@@ -70,5 +72,4 @@ Profit Levers Calculator Results Page: able to continue to edit their inputs
 
 ## Stretch Goals
 - Admin ability to change order of questions 
-- An 'Explore More' option for users to the impact improvements could have on their costs or revenues.
-    - For example, in the Profit Lever Calculator's results, a user could increase (toggle between dollars and percentage) the improvement results to see what the increase would do to their costs, prices, or revenue.
+- User ability to add another labor rate with a description field
