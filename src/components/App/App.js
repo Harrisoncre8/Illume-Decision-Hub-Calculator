@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
+import About from '../About/About';
 import Admin from '../Admin/Admin';
 import AdminEditCalc from '../AdminEditCalc/AdminEditCalc';
 import AdminEditIndustry from '../AdminEditIndustry/AdminEditIndustry';
@@ -54,6 +55,7 @@ export default function App() {
           <Route exact path="/slide6" component={Slide6} />
           <Route exact path="/slide7" component={Slide7} />
           <Route exact path='/' component={Login} />
+          <ProtectedRoute exact path='/about' component={About} />
           <ProtectedRoute exact path='/admin' component={Admin} />
           <ProtectedRoute exact path='/admin/edit-calculator-info' component={AdminEditCalc} />
           <ProtectedRoute exact path='/admin/edit-industry-info' component={AdminEditIndustry} />
