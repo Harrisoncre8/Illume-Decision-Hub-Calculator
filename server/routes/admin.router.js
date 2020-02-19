@@ -16,7 +16,6 @@ router.delete('/industry-info/:id', rejectUnauthenticated, rejectNonAdmin, (req,
     res.sendStatus(200);
   })
   .catch( error => {
-    console.log('Error with DELETE admin industry info', error);
     res.sendStatus(500);
   });
 });
@@ -30,7 +29,6 @@ router.get('/industry', rejectUnauthenticated, (req, res) => {
     res.send(result.rows);
   })
   .catch( error => {
-    console.log('Error with GET industry', error);
     res.sendStatus(500);
   });
 });
@@ -49,7 +47,6 @@ router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) =
     res.send(result.rows);
   })
   .catch( error => {
-    console.log('Error with GET admin questions', error);
     res.sendStatus(500);
   });
 });
@@ -66,7 +63,6 @@ router.get('/subquestions', rejectUnauthenticated, rejectNonAdmin, (req, res) =>
     res.send(result.rows);
   })
   .catch( error => {
-    console.log('Error with GET admin sub-questions', error);
     res.sendStatus(500);
   });
 });
@@ -78,20 +74,19 @@ router.get('/user-info',rejectUnauthenticated, rejectNonAdmin, (req, res) => {
                     JOIN users u ON u.id = c.user_id
                     JOIN industry i ON i.id = c.industry_id
                     WHERE super_admin != true
-                    ORDER BY c.business_name;`;
+                    ORDER BY c.business_name, c.name, id;`;
   pool.query(sqlQuery)
     .then(result => {
     res.send(result.rows);
   })
   .catch( error => {
-    console.log('Error with GET admin user info', error);
     res.sendStatus(500);
   });
 });
 
 // POST route for admin to add new industry information
 router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const id = [req.body.industry, req.body.gross_margin/100, req.body.op_margin/100];
+  const id = [req.body.newIndustry, req.body.newGrossMargin/100, req.body.newOpMargin/100];
   const sqlQuery = `INSERT INTO industry (industry, gross_margin, op_margin)
                     VALUES ($1, $2, $3);`;
   pool.query(sqlQuery, id)
@@ -99,14 +94,13 @@ router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) 
     res.sendStatus(201);
   })
   .catch( error => {
-    console.log('Error with POST admin industry info', error);
     res.sendStatus(500);
   });
 });
 
 // PUT route for admin to update industry information
 router.put('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
-  const id = [req.body.id, req.body.industry, req.body.gross_margin/100, req.body.op_margin/100];
+  const id = [req.body.selectedId, req.body.selectedIndustry, req.body.selectedGrossMargin/100, req.body.selectedOpMargin/100];
   const sqlQuery = `UPDATE industry 
                     SET industry = $2, gross_margin = $3, op_margin = $4
                     WHERE id = $1;`;
@@ -115,7 +109,6 @@ router.put('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) =
     res.sendStatus(200);
   })
   .catch( error => {
-    console.log('Error with PUT admin industry info', error);
     res.sendStatus(500);
   });
 });
@@ -131,7 +124,6 @@ router.put('/question', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     res.sendStatus(200);
   })
   .catch( error => {
-    console.log('Error with PUT admin calculator question', error);
     res.sendStatus(500);
   });
 });
@@ -142,9 +134,9 @@ router.put('/user-info', rejectUnauthenticated, rejectNonAdmin, async (req, res)
   const name = req.body.name;
   const company = req.body.company;
   const phone = req.body.phone;
-  const industry = req.body.industryid;
+  const industry = req.body.industryId;
   const email = req.body.email;
-  const password = encryptLib.encryptPassword(req.body.password);
+  const password = encryptLib.encryptPassword(req.body.password); // This only has data, needs salt parameter as well
   const usertype = req.body.usertype;
   const sqlQueryContactInfo = ` UPDATE contact_info
                                 SET "name" = $1, "business_name" = $2, phone_number = $3, industry_id = $4
@@ -163,7 +155,6 @@ router.put('/user-info', rejectUnauthenticated, rejectNonAdmin, async (req, res)
     await connection.query(`COMMIT`);
     res.sendStatus(200);
   } catch(error) {
-    console.log('Error with PUT admin edit user info', error);
     await connection.query(`ROLLBACK`);
     res.sendStatus(500);
   }

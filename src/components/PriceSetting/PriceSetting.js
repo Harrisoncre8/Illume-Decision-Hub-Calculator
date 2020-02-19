@@ -39,23 +39,25 @@ export default function PriceSetting() {
     }
   }, [industryData, user]);
   
-
   // Dynamically calculates the price setting depending on settings
   useEffect(() => {
+    const input8First = inputData[8] && +inputData[8]['Labor'];
+    const input8Second = inputData[8] && +inputData[8]['Labor2'];
     let directCosts = +splitPath[7] === 10 ?
-      +inputData[3] || 0:
-      ((+inputData[8] || 0) * (+inputData[9] || 0)) + (+inputData[10] || 0) + (+inputData[11] || 0);
+      +inputData[3] || 0 :
+      ((input8First || 0) * (input8Second || 0)) + 
+      (+inputData[9] || 0);
 
-    let indirectCosts = +splitPath[23] === 11 ?
-      + inputData[4] :
-      (+inputData[12] || 0) + (+inputData[13] || 0) + (+inputData[14] || 0) +
-      (+inputData[15] || 0) + (+inputData[16] || 0) + (+inputData[17] || 0) +
-      (+inputData[18] || 0) + (+inputData[19] || 0) + (+inputData[20] || 0) +
-      (+inputData[21] || 0) + (+inputData[22] || 0);
+    let indirectCosts = +splitPath[22] === 11 ?
+      +inputData[4] || 0 :
+      (+inputData[10] || 0) + (+inputData[11] || 0) + (+inputData[12] || 0) + 
+      (+inputData[13] || 0) + (+inputData[14] || 0) + (+inputData[15] || 0) + 
+      (+inputData[16] || 0) + (+inputData[17] || 0) + (+inputData[18] || 0) + 
+      (+inputData[19] || 0) + (+inputData[20] || 0) + (+inputData[21] || 0) + 
+      (+inputData[23] || 0) + (+inputData[24] || 0) + (+inputData[25] || 0);
 
     let productsSold = +splitPath[1] === 15 ? 1 : +inputData[5] || 1;
-
-    let cost = directCosts || 0 + indirectCosts || 0;
+    let cost = (directCosts || 0) + (indirectCosts || 0);
     let price = +inputData[6] || 0;
     let iNorm = (cost / (1 - margin)).toFixed(2) || 0;
     let pm = +iNorm - cost || 0;
@@ -97,7 +99,6 @@ export default function PriceSetting() {
       }, {});
       setSplits(temp);
     }).catch(err => {
-      console.log(err);
     });
   }, []);
 
@@ -105,12 +106,14 @@ export default function PriceSetting() {
   useEffect(() => {
     if (Object.values(splits).length > 0) {
       const temp = {};
-      Object.values(splits).forEach(arr => {
-        temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
-      });
-      setSplitPath(temp);
+      if(Object.entries(splitPath).length === 0){
+        Object.values(splits).forEach(arr => {
+          temp[arr[0].question_id] = inputData[arr[0].question_id] || arr[0].next_id
+        });
+        setSplitPath(temp);
+      }
     }
-  }, [splits, inputData]);
+  }, [splits, splitPath, inputData]);
 
   // Adds class if input has a value, removes the class if input has no value
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
@@ -121,6 +124,18 @@ export default function PriceSetting() {
     temp[question] = Number(e.target.value);
     setSplitPath(temp);
   }
+
+  // Updates margin based on new industry selected
+  useEffect(()=>{
+    if(Array.isArray(industryData) && industryData.length>0 && industryName && userCheckboxes.length >0){
+      let industryHolder = industryData[industryData.findIndex(el=> el.industry === industryName)];
+      let marginHolder = userCheckboxes.findIndex(el => el.question_id === 3) !== -1 ?
+        industryHolder.gross_margin
+        :
+        industryHolder.op_margin;
+      setMargin(marginHolder);
+    }
+  },[industryName, industryData, userCheckboxes])
 
   // Dynamically renders the questions associated with the calculator in the order
   // they would appear in the stepper component
@@ -181,7 +196,7 @@ export default function PriceSetting() {
             userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
               <p className="results-text">
                 {
-                  user[0] && user[0].service &&  paths[start] && paths[start].question?
+                  user[0] && user[0].service &&  paths[start] && paths[start].question ?
                   paths[start].question.replace(/product/g, 'service')
                   :
                   paths[start].question
@@ -195,27 +210,88 @@ export default function PriceSetting() {
           null 
           :
           userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
-            <div className="text-field-container" key={paths[start] && paths[start].question_id}>
-              <input
-                className="text-field text-field-active"
-                type={paths[start] && paths[start].response_type}
-                value={inputData[questionId]}
-                onChange={
-                  (e) => {
-                    dispatch({
-                      type: 'ADD_INPUT_VALUE',
-                      payload: {
-                        key: questionId,
-                        value: e.target.value
+            <>
+              <div className="text-field-container" key={paths[start] && paths[start].question_id}>
+                <input
+                  className="text-field text-field-active"
+                  type={paths[start] && paths[start].response_type}
+                  name={paths[start] && paths[start].header}
+                  value={
+                    paths[start] && paths[start].question2 ?
+                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header] 
+                    :
+                    inputData[questionId]
+                  } 
+                  onChange={
+                    (e) => {
+                      if(paths[start] && paths[start].question2){
+                        dispatch({
+                          type: 'ADD_INPUT_VALUE',
+                          payload: {
+                            key: questionId,
+                            value: {
+                              [e.target.name]: e.target.value,
+                              [e.target.name + '2']: inputData[questionId] && inputData[questionId][e.target.name + '2']
+                            }
+                          }
+                        });
+                      } else {
+                        dispatch({
+                          type: 'ADD_INPUT_VALUE',
+                          payload: {
+                            key: questionId,
+                            value: e.target.value
+                          }
+                        });
                       }
-                    });
-                    checkForValue(e);
+                      checkForValue(e);
+                    }
                   }
-                }
-              />
-              <label className="text-field-label">enter value</label>
-              <div className="text-field-mask stepper-mask"></div>
-            </div> 
+                />
+                <label className="text-field-label">enter value</label>
+                <div className="text-field-mask stepper-mask"></div>
+              </div>
+              {
+                paths[start] && paths[start].question2 ?
+                  <>
+                    <p className="results-text">
+                      {
+                        user[0] && user[0].service && paths[start] && paths[start].question2 ?
+                        paths[start].question2.replace(/product/g, 'service') 
+                        :
+                        paths[start].question2
+                      }
+                    </p>
+                    <div className="text-field-container" key={paths[start] && paths[start].question_id}>
+                      <input
+                        className="text-field text-field-active"
+                        type={paths[start] && paths[start].response_type2}
+                        value={inputData[questionId] && inputData[questionId][paths[start] && paths[start].header + '2']}
+                        name={paths[start] && paths[start].header + '2'}
+                        onChange={
+                          (e) => {
+                            dispatch({
+                              type: 'ADD_INPUT_VALUE',
+                              payload: {
+                                key: questionId,
+                                value: {
+                                  [e.target.name]: e.target.value,
+                                  [paths[start] && paths[start].header]: inputData[questionId] && inputData[questionId][paths[start] && paths[start].header]
+                                }
+                              }
+                            });
+                            checkForValue(e);
+                          }
+                        }
+                      />
+                      <label className="text-field-label">enter value</label>
+                      <div className="text-field-mask stepper-mask"></div>
+                    </div>
+                  </> 
+                  :
+                  null
+              }
+            </>
             :
             null
         }
@@ -242,13 +318,6 @@ export default function PriceSetting() {
               <select 
                 onChange={
                   (event) => {
-                    let industry = industryData[industryData.findIndex(el=> el.industry === event.target.value)];
-                    setMargin(
-                      userCheckboxes.findIndex(el => el.question_id === 3) !== -1 ?
-                        industry.gross_margin
-                        :
-                        industry.op_margin
-                    ); 
                     setIndustryName(event.target.value);
                   }
                 } 
@@ -299,7 +368,7 @@ export default function PriceSetting() {
                 :
                 null
             }
-            {stepper(65)}
+            {stepper(62)}
           </div>
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>

@@ -6,7 +6,7 @@ function* getAdminIndustry(action){
     const response = yield axios.get(`/api/admin/industry`);
     yield put({type: `SET_ADMIN_INDUSTRY`, payload: response.data})
   } catch(error){
-    console.log('Error in admin industry GET', error);
+    alert('Error retrieving industries');
   }
 }
 
@@ -15,7 +15,7 @@ function* getIndustry(action){
     const response = yield axios.get(`/api/industry`);
     yield put({type: `SET_INDUSTRY`, payload: response.data})
   } catch(error){
-    console.log('Error in industry GET', error);
+    alert('Error retrieving industries');
   }
 }
 

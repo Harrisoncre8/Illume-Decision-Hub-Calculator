@@ -6,7 +6,7 @@ import './Nav.css';
 export default function Nav() {
   // Set react router hook
   const userData = useSelector(state => state.user.admin);
-  let calcData = useSelector(state => state.calcStatus);
+  const calcData = useSelector(state => state.calcStatus);
   const history = useHistory();
   const dispatch = useCallback(useDispatch());
   const questionData = useSelector(state=>state.question.calculator_id);
@@ -27,13 +27,11 @@ export default function Nav() {
       setRenderLever(false);
     }
     if(calcData[calcData.findIndex(element => element.calculator_id === 2)]){
-      console.log('BREAK HAPPENS?');
       setRenderBreak(true);
     } else {
       setRenderBreak(false);
     }
     if(calcData[calcData.findIndex(element => element.calculator_id === 3)]){
-      console.log('PRICE HAPPENS');
       setRenderPrice(true);
     } else {
       setRenderPrice(false);
