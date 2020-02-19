@@ -14,7 +14,7 @@ function* getQuestion(action) {
     }
     yield put({ type: `SET_QUESTION`, payload: response.data[0] })
   } catch (error) {
-    console.log('Error getting questions in saga', error);
+    alert('Error retrieving questions');
   }
 }
 
@@ -23,7 +23,7 @@ function* getAllQuestions(action){
     const response = yield axios.get(`/api/question/all`)
     yield put({ type: `SET_QUESTION`, payload: response.data })
   } catch (error) {
-    console.log('Error getting all questions in saga', error);
+    alert('Error retrieving questions');
   }
 }
 
