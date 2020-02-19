@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
     res.send(results.rows[0]);
   })
   .catch(error=>{
-    console.log(`ERROR IN / GET DISCLAIMER ----------------------> `, error);
     res.sendStatus(500);
   });
 });
