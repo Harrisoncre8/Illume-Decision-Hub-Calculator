@@ -28,9 +28,9 @@ export default function AdminHelpAbout() {
                         <br/>
                     <h2>Edit Calculator Text</h2><br/>
                         <p>
-                            In the Admin Navigation Bar (Home Page), click 'Edit Calculators', and choose the calculator 
+                            In the Admin Navigation Bar (Home Page), click 'Edit Calculators' and choose the calculator 
                             that has the text you would like to edit. Scroll to see the descriptive headings of each. The 
-                            question text is what appears before each input, the tool tip is what appears when the question
+                            question text is what appears before each input. The tool tip is what appears when the question
                             mark is hovered over. Edit each as you would like and hit save. The text will update immediately.
                         </p>
                         <br/>
@@ -51,10 +51,10 @@ export default function AdminHelpAbout() {
                         <p>
                             In the Admin Navigation Bar (Home Page), click 'Edit Industries.' Each row in the industry table contains
                             the name, gross margin, and operating margin (all editable via 'Edit Info'). Clicking 'disable' on any 
-                            industry row will disable that industry. A disabled industry no longer appears in the options list for users
-                            If a user with a disabled industry logs in, they are prompted to choose a new industry before being 
-                            able to use the application. Alternatively, admins can edit individual user's industries in the 'Edit User 
-                            Information' tab. 
+                            industry row will disable that industry. A disabled industry no longer appears in the options list for users.
+                            If a user with a disabled industry logs in, they are prompted to choose a new industry. They are unable to 
+                            use the application until they do so. Alternatively, admins can edit individual user's industries in the 
+                            'Edit User Information' tab. 
                         </p>
             </div>
         </div>
