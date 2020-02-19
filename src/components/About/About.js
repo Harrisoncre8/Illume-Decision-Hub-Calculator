@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from '../Nav/Nav';
+import './About.css';
 
 export default function About(){
   return(
