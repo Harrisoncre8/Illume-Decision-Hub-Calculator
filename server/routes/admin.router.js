@@ -120,6 +120,22 @@ router.put('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) =
   });
 });
 
+// PUT route for admin to update user password
+router.put('/new-password', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
+  const id = [req.body.id, req.body.password];
+  const sqlQuery = `UPDATE users 
+                    SET hashedpassword = $2 
+                    WHERE id = $1;`;
+  pool.query(sqlQuery, id)
+  .then(result => {
+    res.sendStatus(200);
+  })
+  .catch( error => {
+    console.log('Error with PUT admin new user password', error);
+    res.sendStatus(500);
+  });
+});
+
 // PUT route for admin to update calculator questions
 router.put('/question', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   const id = [req.body[0], req.body[1], req.body[2]];

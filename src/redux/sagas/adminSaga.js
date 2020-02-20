@@ -55,6 +55,14 @@ function* putAdminIndustryInfo(action){
   }
 }
 
+function* putAdminNewPassword(action) {
+  try {
+    yield axios.put(`/api/admin/new-password`, action.payload);
+  } catch (error) {
+    alert('Error updating password');
+  }
+}
+
 function* putAdminQuestion(action){
   try{
     yield axios.put(`/api/admin/question`, action.payload);
@@ -90,6 +98,7 @@ function* adminSaga() {
   yield takeLatest(`GET_ADMIN_USER_INFO`, getAdminUserInfo);
   yield takeLatest(`POST_ADMIN_INDUSTRY_INFO`, postAdminIndustryInfo);
   yield takeLatest(`PUT_ADMIN_INDUSTRY_INFO`, putAdminIndustryInfo);
+  yield takeLatest(`PUT_ADMIN_NEW_PASSWORD`, putAdminNewPassword);
   yield takeLatest(`PUT_ADMIN_QUESTION`, putAdminQuestion);
   yield takeLatest(`PUT_ADMIN_SUB_QUESTION`, putAdminSubquestion);
   yield takeLatest(`PUT_ADMIN_USER_INFO`, putAdminUserInfo);
