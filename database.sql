@@ -25,14 +25,6 @@ CREATE TABLE "contact_info" (
     "phone_number" TEXT
   );
 
-CREATE TABLE "revenue_cost" (
-    "id" SERIAL PRIMARY KEY,
-    "user_id" INT,
-    "r_c" TEXT,
-    "value" INT,
-    "category" TEXT
-  );
-
 CREATE TABLE "calculators" (
     "id" SERIAL PRIMARY KEY,
     "calculator" TEXT,
@@ -386,7 +378,6 @@ VALUES (
 --#region Set up relations
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("industry_id") REFERENCES "industry" ("id");
-ALTER TABLE "revenue_cost" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
