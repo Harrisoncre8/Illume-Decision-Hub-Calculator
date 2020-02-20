@@ -1,3 +1,5 @@
+-- Create a database called illume_pricing for these table commands
+
 --#region Create Tables
 CREATE TABLE "users" (
     "id" SERIAL PRIMARY KEY,
@@ -25,28 +27,14 @@ CREATE TABLE "contact_info" (
     "phone_number" TEXT
   );
 
-CREATE TABLE "revenue_cost" (
-    "id" SERIAL PRIMARY KEY,
-    "user_id" INT,
-    "r_c" TEXT,
-    "value" INT,
-    "category" TEXT
-  );
-
 CREATE TABLE "calculators" (
     "id" SERIAL PRIMARY KEY,
     "calculator" TEXT,
     "start_id" INT
   );
 
-CREATE TABLE "inputs" (
-    "id" SERIAL PRIMARY KEY,
-    "user_id" INT,
-    "question_id" INT,
-    "sub_questions_id" INT,
-    "value" INT
-  );
-
+-- question 2 is for when you want two questions to display on the stepper at a time
+-- but the default is null
 CREATE TABLE "questions" (
     "id" SERIAL PRIMARY KEY,
     "header" TEXT,
@@ -69,17 +57,14 @@ CREATE TABLE "split" (
     "next_id" INT
   );
 
+-- This nightmare allows for this app to scale. next_id references the next row 
+-- in this table to display after this row.  If that value is NULL, the path is
+-- finished.
 CREATE TABLE "question_calculator" (
     "id" SERIAL PRIMARY KEY,
     "calculator_id" INT,
     "question_id" INT,
     "next_id" int
-  );
-
-CREATE TABLE "checkboxes" (
-    "id" SERIAL PRIMARY KEY,
-    "question_id" INT,
-    "checkbox_text" TEXT
   );
 
 CREATE TABLE "user_checks" (
@@ -395,16 +380,14 @@ VALUES (
 --#region Set up relations
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("industry_id") REFERENCES "industry" ("id");
-ALTER TABLE "revenue_cost" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-ALTER TABLE "inputs" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-ALTER TABLE "inputs" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
-ALTER TABLE "checkboxes" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "user_checks" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "user_checks" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "toggle_calculator" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "toggle_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 --#endregion
 
 INSERT INTO "calculators" ("calculator", "start_id") 
@@ -527,9 +510,13 @@ VALUES ('Professional Services - Businesses',0.4,0.12,true),
 ('All Other',0.35,0.08,null);
 
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
-VALUES ('phillip@gmail.com', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
+VALUES ('superadmin', '$2b$10$B0t4jBFniFsKGGydXBC4DuA5CltiBoeK3KihrkaL0R/AmewjIZDy6',true, true),
+('jenny@illume-pricing.com', '$2b$10$KaWjdVb/Tg0BJGH3hWn9rOWufvxGPzX.hc4jkf3G1PLdyIZVdSWTu',true, false),
+('susan@bamboo-partners.com', '$2b$10$tpthqya0L6mKVscihjxdgexQJFe7IG3nm3e64YzbSpzd720vRBQiG',true, false);
 
 INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "phone_number")
-VALUES (1,'Phillip Berg', 'Phillip Berg Development', 1, '763-867-5309');
+VALUES (1,'Super Admin', 'Illume', 1, ''),
+(2,'Jenny Niemela','Illume',1,'651-357-4174'),
+(3,'Susan Heinlein','Illume',1,'612-226-8007');
 
 INSERT INTO "user_checks" SELECT 1, * FROM generate_series(1, (SELECT COUNT(*) FROM questions));

@@ -19,6 +19,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
   try {
     client.query('BEGIN')
     await client.query(`DELETE FROM "user_checks" WHERE "user_id" = $1;`, [req.user.id])
+    // Transforms the data from the client into a JSON format to be inserted into the DB
     const payload = Object.entries(req.body).reduce((acum, arr) => {
       if (arr[1]) {
         acum.push({ user_id: req.user.id, question_id: arr[0] });
@@ -33,7 +34,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
           SELECT json_array_elements($1::json) AS data
         ) tmp
       );
-    `, [JSON.stringify(payload)])
+    `, [JSON.stringify(payload)]) // You always need your JSONS as string when using json_array_elements 
     await client.query('COMMIT');
     res.sendStatus(201)
   } catch (error) {

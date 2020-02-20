@@ -5,7 +5,6 @@ import './Stepper.css';
 import Nav from '../Nav/Nav';
 
 export default function Stepper() {
-
   // Using hooks to access redux and saga
   const dispatch = useCallback(useDispatch(), []);
   const inputData = useSelector(state => state.input);
@@ -32,6 +31,7 @@ export default function Stepper() {
     }
   }, [questionData.split, inputData, questionData.question_id, splitData]);
 
+  // Replaces the text of product with service if a service industry has been selected
   useEffect(()=>{
     if(questionData && questionData.skipToResults){
       const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
@@ -61,6 +61,9 @@ export default function Stepper() {
     dispatch({ type: 'ADD_PREVIOUS_QUESTION', payload: questionData.id });
     dispatch({ type: 'ADD_INPUT_VALUE', payload: { key: questionData.question_id, value: input } });
     setInput('');
+    // A null ends the calculator and sends you to the results page.
+    // Make sure the results page url is the calculator name in the DB with '-'
+    // instead of spaces
     if (questionData.next_id == null) {
       const url = questionData.calculator.replace(/ /g, '-').toLowerCase();
       history.push(`/${url}`);

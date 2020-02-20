@@ -3,6 +3,8 @@ import { put, takeLatest, takeLeading } from 'redux-saga/effects';
 
 // worker Saga: will be fired on 'GET_QUESTION' action
 function* getQuestion(action) {
+  // This lets you use the same question route and just give it a different
+  // query parameter to determine the function the get route does
   try {
     const queries = Object.entries(action.payload.query).reduce((acum, arr) => {
       acum += `${arr[0]}=${arr[1]}&`;

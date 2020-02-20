@@ -5,6 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 // GET route for questions
 router.get('/', rejectUnauthenticated, async (req, res) => {
+  // The two sub-queries cause the user_id to return null if the user doesn't exist in that row.
   const sqlQuery = `
       SELECT 
         "qc"."id", 
