@@ -40,7 +40,6 @@ export default function ProfitLever() {
       (+inputData[23] || 0) + (+inputData[24] || 0) + (+inputData[25] || 0);
 
     let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
-    console.log(directCosts,indirectCosts, inputData[3]);
     setPrice(
       (
         (
@@ -109,7 +108,6 @@ export default function ProfitLever() {
       }, {});
       setSplits(temp);
     }).catch(err => {
-      console.log(err);
     });
   }, []);
 

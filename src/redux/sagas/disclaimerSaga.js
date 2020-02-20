@@ -6,7 +6,7 @@ function* getDisclaimer(action){
     const response = yield axios.get('/api/disclaimer')
     yield put({type: `SET_DISCLAIMER`, payload: response.data});
   } catch(error){
-    console.log('Error in GET disclaimer', error);
+    alert('Error retrieving Terms of Service agreement');
   }
 }
 
