@@ -39,14 +39,8 @@ CREATE TABLE "calculators" (
     "start_id" INT
   );
 
-CREATE TABLE "inputs" (
-    "id" SERIAL PRIMARY KEY,
-    "user_id" INT,
-    "question_id" INT,
-    "sub_questions_id" INT,
-    "value" INT
-  );
-
+-- question 2 is for when you want two questions to display on the stepper at a time
+-- but the default is null
 CREATE TABLE "questions" (
     "id" SERIAL PRIMARY KEY,
     "header" TEXT,
@@ -69,17 +63,14 @@ CREATE TABLE "split" (
     "next_id" INT
   );
 
+-- This nightmare allows for this app to scale. next_id references the next row 
+-- in this table to display after this row.  If that value is NULL, the path is
+-- finished.
 CREATE TABLE "question_calculator" (
     "id" SERIAL PRIMARY KEY,
     "calculator_id" INT,
     "question_id" INT,
     "next_id" int
-  );
-
-CREATE TABLE "checkboxes" (
-    "id" SERIAL PRIMARY KEY,
-    "question_id" INT,
-    "checkbox_text" TEXT
   );
 
 CREATE TABLE "user_checks" (
@@ -396,13 +387,10 @@ VALUES (
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "contact_info" ADD FOREIGN KEY ("industry_id") REFERENCES "industry" ("id");
 ALTER TABLE "revenue_cost" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-ALTER TABLE "inputs" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-ALTER TABLE "inputs" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 ALTER TABLE "split" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
-ALTER TABLE "checkboxes" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "user_checks" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "user_checks" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 --#endregion

@@ -5,7 +5,6 @@ import './PriceSetting.css';
 import Nav from '../Nav/Nav';
 
 export default function PriceSetting() {
-
   // States
   const [margin, setMargin] = useState('');
   const [userMargin, setUserMargin] = useState(0);
@@ -69,6 +68,7 @@ export default function PriceSetting() {
   }, [margin, productMargin, userMargin, inputData, splitPath]);
 
   // Gets the questions and splits for the given results page
+  // This could be a saga, but I found it fine to just have it here
   useEffect(() => {
     Axios.get('/api/question/results/' + 3).then(response => {
       let temp = response.data.reduce((acum, arr) => {
@@ -117,6 +117,7 @@ export default function PriceSetting() {
   }, [splits, splitPath, inputData]);
 
   // Adds class if input has a value, removes the class if input has no value
+  // The class moves the label from inside to just above the text field
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
   // Handles the change of the radio button
@@ -141,6 +142,8 @@ export default function PriceSetting() {
   // Dynamically renders the questions associated with the calculator in the order
   // they would appear in the stepper component
   function stepper(start) {
+    // When a split in a path happens, this function handles the display of the options
+    // and calls then next question based on which radio button is selected
     function splitter(split) {
       return (
         <>
@@ -155,7 +158,7 @@ export default function PriceSetting() {
                           <label className="radio-container">
                             {
                               user[0] && user[0].service && radio.split_text ?
-                              radio.split_text.replace(/Product/g, 'Service')
+                              radio.split_text.replace(/Product/g, 'Service') 
                               :
                               radio.split_text
                             }
@@ -172,33 +175,36 @@ export default function PriceSetting() {
                       </span>
                     );
                   })}
-                </form> 
+                </form>
               </div>
               :
               null
           }
-          {splitPath[split.toString()] ?
-            stepper(splitPath[split.toString()]) 
-            :
-            null
+          {
+            splitPath[split.toString()] ?
+              stepper(splitPath[split.toString()]) 
+              :
+              null
           }
         </>
       );
     }
 
+    // Holds variables to avoid excessive &'s  
     let next = paths[start] && paths[start].next_id;
     let doesSplit = paths[start] && paths[start].split;
     let questionId = paths[start] && paths[start].question_id;
 
+    // Returns the question text and input field if the user has it associated with their profile
     return (
       <div className="max-width-container">
         <div className="align-left">
           {
-            userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
+            userCheckboxes.findIndex(el => el.question_id === (questionId)) !== -1 ?
               <p className="results-text">
                 {
                   user[0] && user[0].service &&  paths[start] && paths[start].question ?
-                  paths[start].question.replace(/product/g, 'service')
+                  paths[start].question.replace(/product/g, 'service') 
                   :
                   paths[start].question
                 }
@@ -210,16 +216,16 @@ export default function PriceSetting() {
         {doesSplit ?
           null 
           :
-          userCheckboxes.findIndex(el => el.question_id === (paths[start] && paths[start].question_id)) !== -1 ?
+          userCheckboxes.findIndex(el => el.question_id === (questionId)) !== -1 ?
             <>
-              <div className="text-field-container" key={paths[start] && paths[start].question_id}>
+              <div className="text-field-container" key={questionId}>
                 <input
                   className="text-field text-field-active"
                   type={paths[start] && paths[start].response_type}
                   name={paths[start] && paths[start].header}
                   value={
                     paths[start] && paths[start].question2 ?
-                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header] 
+                    inputData[questionId] && inputData[questionId][paths[start] && paths[start].header]
                     :
                     inputData[questionId]
                   } 
@@ -253,7 +259,9 @@ export default function PriceSetting() {
                 <div className="text-field-mask stepper-mask"></div>
               </div>
               {
-                paths[start] && paths[start].question2 ?
+                // for labor rates really but there for scalability.  It lets you pair
+                // two questions together
+                paths[start] && paths[start].question2 ? 
                   <>
                     <p className="results-text">
                       {
@@ -263,7 +271,7 @@ export default function PriceSetting() {
                         paths[start].question2
                       }
                     </p>
-                    <div className="text-field-container" key={paths[start] && paths[start].question_id}>
+                    <div className="text-field-container" key={questionId}>
                       <input
                         className="text-field text-field-active"
                         type={paths[start] && paths[start].response_type2}
@@ -296,13 +304,19 @@ export default function PriceSetting() {
             :
             null
         }
-        {next ?
-          doesSplit ?
-            splitter(questionId) 
+        {
+          // If there's a next question, it then checks if this questions splits.
+          // The path has a null value for next if it is the end of the path.
+          // If this question splits, it calls splitter to handle displaying
+          // radio buttons and their selections.  Null stops the recursion and
+          // doesn't display any new text.
+          next ?
+            doesSplit ?
+              splitter(questionId) 
+              :
+              stepper(next)
             :
-            stepper(next)
-          :
-          null // for next?
+            null // for next?
         }
       </div>
     );
