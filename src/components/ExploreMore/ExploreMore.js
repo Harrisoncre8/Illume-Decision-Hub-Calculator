@@ -29,15 +29,15 @@ const ExploreMore = () => {
   const [dollarToggle, setDollarToggle] = useState(false);
 
   // States to hold math results
-  const [revChange, setRevChange] = useState('')
-  const [salesChange, setSalesChange] = useState('')
-  const [directChange, setDirectChange] = useState('')
-  const [indirectChange, setIndirectChange] = useState('')
+  const [revChange, setRevChange] = useState('');
+  const [salesChange, setSalesChange] = useState('');
+  const [directChange, setDirectChange] = useState('');
+  const [indirectChange, setIndirectChange] = useState('');
 
   // Brings in input values
   const inputData = useSelector(state => state.input);
 
-  // Checks for text in a field and freezes lable if text exists
+  // Checks for text in a field and freezes label if text exists
   const checkForValue = e => e.target.value ? e.target.classList.add('text-field-active') : e.target.classList.remove('text-field-active');
 
   // Sets stepper input fields
@@ -59,12 +59,11 @@ const ExploreMore = () => {
         (+inputData[23] || 0) + (+inputData[24] || 0) + (+inputData[25] || 0)
     );
     setSales(+inputData[1] === 2 ? 1 : +inputData[5] || 1);
-  }, [inputData])
+  }, [inputData]);
 
   // Does the math
   useEffect(()=>{
-    let profit = revenue - directCost/sales - indirectCost/sales
-    console.log(revenue,sales,directCost,indirectCost,profit)
+    let profit = revenue - directCost/sales - indirectCost/sales;
     if(dollarToggle){
       setRevChange(
         (
@@ -147,21 +146,21 @@ const ExploreMore = () => {
     indirectCost,
     sales,
     dollarToggle
-  ])
+  ]);
 
   function toggleDollar(){
     if(dollarToggle){
-      setNewRevenue(newRevenue/100)
-      setNewSales(newSales/100)
-      setNewDirectCost(newDirectCost/100)
-      setNewIndirectCost(newIndirectCost/100)
+      setNewRevenue(newRevenue/100);
+      setNewSales(newSales/100);
+      setNewDirectCost(newDirectCost/100);
+      setNewIndirectCost(newIndirectCost/100);
     } else {
-      setNewRevenue(newRevenue*100)
-      setNewSales(newSales*100)
-      setNewDirectCost(newDirectCost*100)
-      setNewIndirectCost(newIndirectCost*100)
+      setNewRevenue(newRevenue*100);
+      setNewSales(newSales*100);
+      setNewDirectCost(newDirectCost*100);
+      setNewIndirectCost(newIndirectCost*100);
     }
-    setDollarToggle(!dollarToggle)
+    setDollarToggle(!dollarToggle);
   }
 
   return (
