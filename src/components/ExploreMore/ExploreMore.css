@@ -1,3 +1,7 @@
+.disabled-input {
+  color: black;
+} 
+ 
  /* The switch - the box around the slider */
  .switch {
   position: relative;
@@ -39,7 +43,7 @@
 }
 
 input:checked + .slider {
-  background-color: #f0aa42;
+  background-color: #f7d149;
 }
 
 input:focus + .slider {
