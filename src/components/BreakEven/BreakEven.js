@@ -292,14 +292,13 @@ export default function BreakEven() {
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>
             <p>
-              You're break even price is 
+              Your break even price is 
               {' ' + price.toLocaleString("en-US", { style: "currency", currency: 'USD' })}.
             </p>
             <br />
             <p>
               You must sell your product at a price higher than 
-              {' ' + price.toLocaleString("en-US", { style: "currency", currency: 'USD' })} 
-              to make a profit.
+              {' ' + price.toLocaleString("en-US", { style: "currency", currency: 'USD' })} to make a profit.
             </p>
           </div>
           {stepper(6)}
