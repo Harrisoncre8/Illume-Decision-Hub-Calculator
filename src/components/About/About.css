@@ -15,13 +15,13 @@
 }
 
 .heading {
-  color: #f7d149;
   font-size: 2em;
   margin-top: 1em;
+  text-decoration: underline;
 }
 
 .last-heading {
-  color: #f7d149;
+  color: #f0aa42;
   font-size: 1.6em;
   margin-top: 2em;
   margin-bottom: 1em;
@@ -30,7 +30,7 @@
 }
 
 .slide {
-  color: #f7d149;
+  color: #f0aa42;
   font-size: 1.6em;
   margin-top: 1em;
 }
@@ -39,14 +39,14 @@
   position: relative;
   bottom: 85px;
   font-size: 3.8em;
-  color: #f7d149;
+  color: #f0aa42;
   border-bottom: 5px solid #f0aa42;
 }
 
 .slide-img {
   height: 250px;
   border-radius: 50%;
-  box-shadow: 0 0 10px #f0aa42;
+  box-shadow: 0 0 10px #f7d149;
 }
 
 .slide-img-name-container {
@@ -68,7 +68,7 @@
 }
 
 .slide-name {
-  color: #f7d149;
+  color: #f0aa42;
   font-size: 1.6em;
 }
 

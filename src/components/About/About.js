@@ -68,7 +68,7 @@ export default function About(){
                 is able to translate financial jargon into easy to understand language.
               </li>
               <li className="list-li">
-                The Illume Decision Hub also identifies for clients many unknown financial factors 
+                The Illume Decision Hub also helps clients identify many unknown financial factors 
                 such as indirect costs and increasing prices as a way to improve profits. 
               </li>
               <li className="list-li">
