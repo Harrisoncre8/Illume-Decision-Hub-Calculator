@@ -289,7 +289,6 @@ export default function BreakEven() {
       <div className="main-container">
         <div className="top-card-container">
           <h1 className="main-heading">Break Even Pricing</h1>
-          {stepper(6)}
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>
             <p>
@@ -303,6 +302,7 @@ export default function BreakEven() {
               to make a profit.
             </p>
           </div>
+          {stepper(6)}
         </div>
       </div>
     </center>

@@ -135,7 +135,7 @@ export default function Nav() {
       {renderLever ? 
         null 
         : 
-        <button className={`nav-btn ${lever}`} onClick={()=>setStart(1)}>
+        <button className={`nav-btn ${lever}`} onClick={()=>{setStart(1)}}>
           Profit Lever Calculator
         </button>
       }

@@ -54,6 +54,9 @@ const QuestionCheckboxes = () => {
         }
         return acum;
       },{});
+      state[16] = true;
+      state[18] = true;
+      state[19] = true;
       setChecked(state);
     }
     // This is where the count is checked.  It's not in the above if/else chain
