@@ -312,7 +312,6 @@ export default function ProfitLever() {
       <div className="main-container">
         <div className="top-card-container">
           <h1 className="main-heading">Define Profit Levers</h1>
-          {stepper(1)}
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>
             <p>A 1% improvement in price will deliver {isNaN(price.toFixed(1))? 0 : price.toFixed(1)}% improvement in profit.</p>
@@ -341,6 +340,7 @@ export default function ProfitLever() {
                 null
             }
           </div>
+          {stepper(1)}
         </div>
       </div>
     </center>
