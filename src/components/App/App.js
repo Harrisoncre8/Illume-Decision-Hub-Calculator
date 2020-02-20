@@ -20,9 +20,6 @@ import ProfitLever from '../ProfitLever/ProfitLever';
 import Register from '../Register/Register';
 import Stepper from '../Stepper/Stepper';
 import User from '../User/User';
-import Slide1 from '../Slide1/Slide1';
-import Slide2 from '../Slide2/Slide2';
-import Slide3 from '../Slide3/Slide3';
 
 export default function App() {
   // gets user info on all pages DO NOT REMOVE
@@ -44,9 +41,6 @@ export default function App() {
       <CheckIndustry />
       <Router>
         <Switch>
-          <Route exact path="/slide1" component={Slide1} />
-          <Route exact path="/slide2" component={Slide2} />
-          <Route exact path="/slide3" component={Slide3} />
           <Route exact path='/' component={Login} />
           <ProtectedRoute exact path='/about' component={About} />
           <ProtectedRoute exact path='/admin' component={Admin} />
