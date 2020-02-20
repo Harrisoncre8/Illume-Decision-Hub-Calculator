@@ -1,3 +1,5 @@
+-- Create a database called illume_pricing for these table commands
+
 --#region Create Tables
 CREATE TABLE "users" (
     "id" SERIAL PRIMARY KEY,
@@ -384,6 +386,8 @@ ALTER TABLE "question_calculator" ADD FOREIGN KEY ("question_id") REFERENCES "qu
 ALTER TABLE "question_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 ALTER TABLE "user_checks" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
 ALTER TABLE "user_checks" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "toggle_calculator" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "toggle_calculator" ADD FOREIGN KEY ("calculator_id") REFERENCES "calculators" ("id");
 --#endregion
 
 INSERT INTO "calculators" ("calculator", "start_id") 
