@@ -45,7 +45,7 @@ export default function AdminEditUserInfo() {
     let selectedUser = {id, name, company, phone, email, industryId, password, usertype};
     if(password.length > 0 && password === checkPassword){
       let passwordInfo = [password, id];
-      dispatch({type: `NEW_PASSWORD`, payload: passwordInfo});
+      dispatch({type: `PUT_ADMIN_NEW_PASSWORD`, payload: passwordInfo});
       dispatch({ type: `PUT_ADMIN_USER_INFO`, payload: selectedUser });
       closeModal();
     }
