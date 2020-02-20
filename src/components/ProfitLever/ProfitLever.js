@@ -41,7 +41,6 @@ export default function ProfitLever() {
       (+inputData[19] || 0) + (+inputData[20] || 0) + (+inputData[21] || 0) + 
       (+inputData[23] || 0) + (+inputData[24] || 0) + (+inputData[25] || 0);
 
-    console.log(directCosts,indirectCosts, inputData[3]);
     setPrice(
       (
         (
@@ -109,7 +108,6 @@ export default function ProfitLever() {
       }, {});
       setSplits(temp);
     }).catch(err => {
-      console.log(err);
     });
   }, []);
 

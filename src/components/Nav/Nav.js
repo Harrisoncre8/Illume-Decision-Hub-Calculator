@@ -10,6 +10,7 @@ export default function Nav() {
   const history = useHistory();
   const dispatch = useCallback(useDispatch());
   const questionData = useSelector(state=>state.question.calculator_id);
+  const [about, setAbout] = useState('circle-btn');
   const [breakEven, setBreakEven] = useState('circle-btn');
   const [home, setHome] = useState('circle-btn');
   const [lever, setLever] = useState('circle-btn');
@@ -27,26 +28,35 @@ export default function Nav() {
       setRenderLever(false);
     }
     if(calcData[calcData.findIndex(element => element.calculator_id === 2)]){
-      console.log('BREAK HAPPENS?');
       setRenderBreak(true);
     } else {
       setRenderBreak(false);
     }
     if(calcData[calcData.findIndex(element => element.calculator_id === 3)]){
-      console.log('PRICE HAPPENS');
       setRenderPrice(true);
     } else {
       setRenderPrice(false);
     }
-    if(history.location.pathname === '/'){
+    if(history.location.pathname === '/' || history.location.pathname === '/admin'
+       || history.location.pathname === '/new-user'){
       setHome('circle-btn-active');
+      setAbout('circle-btn');
       setBreakEven('circle-btn');
       setLever('circle-btn');
       setPrice('circle-btn');
       setProfile('circle-btn');
     }
+    else if(history.location.pathname === '/about'){
+      setAbout('circle-btn-active');
+      setProfile('circle-btn');
+      setBreakEven('circle-btn');
+      setHome('circle-btn');
+      setLever('circle-btn');
+      setPrice('circle-btn');
+    }
     else if(history.location.pathname === '/user'){
       setProfile('circle-btn-active');
+      setAbout('circle-btn');
       setBreakEven('circle-btn');
       setHome('circle-btn');
       setLever('circle-btn');
@@ -54,6 +64,7 @@ export default function Nav() {
     }
     else if(questionData === 1){
       setLever('circle-btn-active');
+      setAbout('circle-btn');
       setBreakEven('circle-btn');
       setHome('circle-btn');
       setPrice('circle-btn');
@@ -61,6 +72,7 @@ export default function Nav() {
     }
     else if(questionData === 2){
       setBreakEven('circle-btn-active');
+      setAbout('circle-btn');
       setHome('circle-btn');
       setLever('circle-btn');
       setPrice('circle-btn');
@@ -68,6 +80,7 @@ export default function Nav() {
     }
     else if(questionData === 3){
       setPrice('circle-btn-active');
+      setAbout('circle-btn');
       setBreakEven('circle-btn');
       setHome('circle-btn');
       setLever('circle-btn');
@@ -81,6 +94,8 @@ export default function Nav() {
     dispatch({type: 'CLEAR_ALL'});
     history.push('/');
   }
+
+  const pushHistoryToAbout = () => history.push('/about');
 
   // Push history to user profile
   const pushHistoryToHome = () => {
@@ -106,6 +121,9 @@ export default function Nav() {
     <center>
       <button className={`nav-btn ${home}`} onClick={pushHistoryToHome}>
         Home <br /> Page
+      </button>
+      <button className={`nav-btn ${about}`} onClick={pushHistoryToAbout}>
+        About <br/> Page
       </button>
       {renderBreak ? 
         null 

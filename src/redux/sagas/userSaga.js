@@ -21,7 +21,6 @@ function* fetchUser() {
     yield put({ type: 'SET_USER', payload: response.data });
     yield put({ type: 'GET_USER_CHECKBOXES' })
   } catch (error) {
-    console.log('User get request failed', error);
   }
 }
 
@@ -32,7 +31,7 @@ function* getUserInfo(action) {
     const response = yield axios.get(`/api/user/${id}`);
     yield put({ type: 'SET_USER_INFO', payload: response.data });
   } catch (error) {
-    console.log('User get info request failed', error);
+    alert('Error retrieving user information');
   }
 }
 
@@ -43,7 +42,7 @@ function* getCalcInfo(action) {
     const response = yield axios.get(`/api/user/calc/${id}`);
     yield put({ type: 'SET_CALC_INFO', payload: response.data });
   } catch (error) {
-    console.log('User get info request failed', error);
+    alert('Error retrieving calculator information');
   }
 }
 
@@ -55,7 +54,7 @@ function* deleteCalcInfo(action) {
     yield axios.delete(`/api/user/delete-calc/${id}`);
     yield put({ type: 'GET_CALC_INFO', payload: userID });
   } catch (error) {
-    console.log('User get info request failed', error);
+    alert('Error disabling calculator');
   }
 }
 
@@ -66,7 +65,7 @@ function* postCalcInfo(action) {
     yield axios.post(`/api/user/calc-info`, action.payload);
     yield put({ type: 'GET_CALC_INFO', payload: userID });
   } catch (error) {
-    console.log('User toggle calculator request failed', error);
+    alert('Error toggling calculator');
   }
 }
 
@@ -76,7 +75,7 @@ function* putUserInfo(action) {
     yield axios.put(`/api/user/info`, action.payload);
     yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
   } catch (error) {
-    console.log('User put new info request failed', error);
+    alert('Error updating information');
   }
 }
 
@@ -84,9 +83,9 @@ function* putUserInfo(action) {
 function* putUserIndustry(action) {
   try {
     yield axios.put(`/api/user/industry`, action.payload);
-    yield put({ type: 'GET_USER_INFO', payload: action.payload });
+    yield put({ type: 'GET_USER_INFO', payload: action.payload.id });
   } catch (error) {
-    console.log('User put new industry request failed', error);
+    alert('Error updating industry');
   }
 }
 
@@ -96,7 +95,7 @@ function* putNewPassword(action) {
     const response = yield axios.put(`/api/user/new-password`, action.payload);
     yield put({type: 'MATCH_PASSWORD', payload: response.status});
   } catch (error) {
-    console.log('User put new password request failed', error);
+    alert('Error updating password');
     yield put({type: 'MATCH_PASSWORD', payload: error.response.status});
   }
 }
