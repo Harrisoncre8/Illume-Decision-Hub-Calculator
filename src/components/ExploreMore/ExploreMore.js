@@ -178,7 +178,7 @@ const ExploreMore = () => {
           <div style={{ padding: 10, display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }}>
             <div className="text-field-container" >
               <input
-                className="text-field text-field-active"
+                className="text-field text-field-active disabled-input"
                 value={revenue}
                 disabled
               />
@@ -187,7 +187,7 @@ const ExploreMore = () => {
             </div>
             <div className="text-field-container" >
               <input
-                className="text-field text-field-active"
+                className="text-field text-field-active disabled-input"
                 value={sales}
                 disabled
               />
@@ -196,7 +196,7 @@ const ExploreMore = () => {
             </div>
             <div className="text-field-container" >
               <input
-                className="text-field text-field-active"
+                className="text-field text-field-active disabled-input"
                 value={directCost}
                 disabled
               />
@@ -205,7 +205,7 @@ const ExploreMore = () => {
             </div>
             <div className="text-field-container" >
               <input
-                className="text-field text-field-active"
+                className="text-field text-field-active disabled-input"
                 value={indirectCost}
                 disabled
               />
