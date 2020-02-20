@@ -8,6 +8,7 @@ router.get('/user/', rejectUnauthenticated, (req, res) => {
   pool.query(`SELECT * FROM "user_checks" WHERE "user_id" = $1;`, [req.user.id]).then( results=>{
     res.send(results.rows);
   }).catch(err=>{
+    console.log(err);
     res.send(500);
   })
 })
@@ -36,6 +37,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     await client.query('COMMIT');
     res.sendStatus(201)
   } catch (error) {
+    console.log(error);
     await client.query('ROLLBACK');
     res.sendStatus(500)
   } finally {

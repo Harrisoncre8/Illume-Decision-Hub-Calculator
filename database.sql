@@ -527,9 +527,9 @@ VALUES ('Professional Services - Businesses',0.4,0.12,true),
 ('All Other',0.35,0.08,null);
 
 INSERT INTO "users" ("email", "hashedpassword", "admin", "super_admin")
-VALUES ('test@test.com', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
+VALUES ('phillip@gmail.com', '$2b$10$pEJTYdGwMrHr7gfJkG5GMuL2JJLYU1xV.6RGiFr/jEiO.gSwZHYB6',true, true);
 
 INSERT INTO "contact_info" ("user_id", "name", "business_name", "industry_id", "phone_number")
-VALUES (1,'test', 'test co', 1, '1234567890');
+VALUES (1,'Phillip Berg', 'Phillip Berg Development', 1, '763-867-5309');
 
 INSERT INTO "user_checks" SELECT 1, * FROM generate_series(1, (SELECT COUNT(*) FROM questions));

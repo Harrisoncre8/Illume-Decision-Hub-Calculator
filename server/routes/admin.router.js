@@ -16,6 +16,7 @@ router.delete('/industry-info/:id', rejectUnauthenticated, rejectNonAdmin, (req,
     res.sendStatus(200);
   })
   .catch( error => {
+    console.log('Error with DELETE admin industry info', error);
     res.sendStatus(500);
   });
 });
@@ -29,6 +30,7 @@ router.get('/industry', rejectUnauthenticated, (req, res) => {
     res.send(result.rows);
   })
   .catch( error => {
+    console.log('Error with GET industry', error);
     res.sendStatus(500);
   });
 });
@@ -47,6 +49,7 @@ router.get('/questions/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) =
     res.send(result.rows);
   })
   .catch( error => {
+    console.log('Error with GET admin questions', error);
     res.sendStatus(500);
   });
 });
@@ -63,6 +66,7 @@ router.get('/subquestions', rejectUnauthenticated, rejectNonAdmin, (req, res) =>
     res.send(result.rows);
   })
   .catch( error => {
+    console.log('Error with GET admin sub-questions', error);
     res.sendStatus(500);
   });
 });
@@ -80,6 +84,7 @@ router.get('/user-info',rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     res.send(result.rows);
   })
   .catch( error => {
+    console.log('Error with GET admin user info', error);
     res.sendStatus(500);
   });
 });
@@ -94,6 +99,7 @@ router.post('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) 
     res.sendStatus(201);
   })
   .catch( error => {
+    console.log('Error with POST admin industry info', error);
     res.sendStatus(500);
   });
 });
@@ -109,6 +115,7 @@ router.put('/industry-info', rejectUnauthenticated, rejectNonAdmin, (req, res) =
     res.sendStatus(200);
   })
   .catch( error => {
+    console.log('Error with PUT admin industry info', error);
     res.sendStatus(500);
   });
 });
@@ -124,6 +131,7 @@ router.put('/question', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     res.sendStatus(200);
   })
   .catch( error => {
+    console.log('Error with PUT admin calculator question', error);
     res.sendStatus(500);
   });
 });
@@ -155,6 +163,7 @@ router.put('/user-info', rejectUnauthenticated, rejectNonAdmin, async (req, res)
     await connection.query(`COMMIT`);
     res.sendStatus(200);
   } catch(error) {
+    console.log('Error with PUT admin edit user info', error);
     await connection.query(`ROLLBACK`);
     res.sendStatus(500);
   }

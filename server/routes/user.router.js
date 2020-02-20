@@ -24,6 +24,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
       res.send(result.rows);
     })
     .catch( error => {
+      console.log('Error with GET user info', error);
       res.sendStatus(500);
     });
 });
@@ -49,6 +50,7 @@ router.put('/info', rejectUnauthenticated, async (req, res) => {
     await connection.query(`COMMIT`);
     res.sendStatus(200);
   } catch (error){
+    console.log('Error in put route for user info', error);
     await connection.query(`ROLLBACK`);
     res.sendStatus(500);
   } finally {
@@ -80,6 +82,7 @@ router.post('/calc-info', rejectUnauthenticated, (req, res) => {
     res.sendStatus(201);
   }) 
   .catch( error => {
+    console.log('Error with POST calculator toggle', error);
     res.sendStatus(500);
   });
 });
@@ -93,6 +96,7 @@ router.get('/calc/:id', rejectUnauthenticated, (req, res) => {
       res.send(result.rows);
     })
     .catch( error => {
+      console.log('Error with GET calculator info', error);
       res.sendStatus(500);
     });
 });
@@ -108,6 +112,7 @@ router.delete('/delete-calc/:id', rejectUnauthenticated, (req, res) => {
       res.sendStatus(200);
     })
     .catch( error => {
+      console.log('Error with DELETE calculator info', error);
       res.sendStatus(500);
     });
 });
@@ -135,6 +140,7 @@ router.post('/register', async (req, res, next) => {
     await connection.query(`COMMIT`);
     res.sendStatus(201);
   }catch(error){
+    console.log('----------->error in registration:', error);
     await connection.query(`ROLLBACK`);
     res.sendStatus(500);
   }finally{
@@ -165,9 +171,10 @@ router.put('/industry', rejectUnauthenticated, (req, res) => {
                     WHERE user_id = $2;`;
   pool.query(sqlQuery, id)
   .then(result => {
-    res.sendStatus(200);
+    res.send(200);
   })
   .catch( error => {
+    console.log('Error with PUT user industry', error);
     res.sendStatus(500);
   });
 });

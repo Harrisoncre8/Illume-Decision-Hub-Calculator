@@ -1,0 +1,68 @@
+.img-1 {
+  grid-area: img1;
+}
+
+.img-2 {
+  grid-area: img2;
+}
+
+.img-3 {
+  grid-area: img3;
+}
+
+.img-4 {
+  grid-area: img4;
+}
+
+.n1 {
+  grid-area: name1;
+}
+
+.n2 {
+  grid-area: name2;
+}
+
+.n3 {
+  grid-area: name3;
+}
+
+.n4 {
+  grid-area: name4;
+}
+
+.slide-heading {
+  position: relative;
+  bottom: 85px;
+  font-size: 3.8em;
+  color: #f7d149;
+  border-bottom: 5px solid #f0aa42;
+}
+
+.slide-img {
+  height: 250px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #f0aa42;
+}
+
+.slide-img-name-container {
+  display: grid;
+  grid-template-areas:
+    'img1 img2 img3 img4'
+    'name1 name2 name3 name4';
+  grid-gap: 50px;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+  text-align: center;
+  justify-content: center;
+}
+
+.slide-logo {
+  height: 200px;
+  padding-right: 30px;
+}
+
+.slide-name {
+  color: #f7d149;
+  font-size: 1.6em;
+}

@@ -63,6 +63,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
       }
     }
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   } finally {
     client.release();
@@ -73,6 +74,7 @@ router.get('/all/', (req,res)=>{
   pool.query(`SELECT * FROM "questions" ORDER BY "id";`).then(results=>{
     res.send(results.rows);
   }).catch(err=>{
+    console.log(err);
     res.send(500);
   })
 })
@@ -110,6 +112,7 @@ router.get('/results/:id', (req,res)=>{
   })
   .catch(err=>{
     res.sendStatus(500);
+    console.log(err);
   });
 });
 
@@ -120,6 +123,7 @@ router.get('/splits/:id', (req,res)=>{
     res.send(results.rows);
   })
   .catch(err=>{
+    console.log(err);
     res.sendStatus(500);
   });
 });

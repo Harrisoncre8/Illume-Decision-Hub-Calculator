@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Axios from 'axios';
 import './ProfitLever.css';
 import Nav from '../Nav/Nav';
+import ExploreMore from '../ExploreMore/ExploreMore';
 
 export default function ProfitLever() {
 
@@ -14,6 +15,7 @@ export default function ProfitLever() {
   const [growth, setGrowth] = useState(0);
   const [directCostChange, setDirectCostChange] = useState(0);
   const [indirectCostChange, setIndirectCostChange] = useState(0);
+  const [showExplore, setShowExplore] = useState(false);
 
   // Connects to redux
   const inputData = useSelector(state => state.input);
@@ -39,14 +41,13 @@ export default function ProfitLever() {
       (+inputData[19] || 0) + (+inputData[20] || 0) + (+inputData[21] || 0) + 
       (+inputData[23] || 0) + (+inputData[24] || 0) + (+inputData[25] || 0);
 
-    let divisor = +splitPath[1] === 2 ? 1 : +inputData[5] || 1;
     setPrice(
       (
         (
           (+inputData[2] * 1.01 - directCosts - indirectCosts) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100 / divisor
+      ) * 100
     );
     setGrowth(
       (
@@ -54,7 +55,7 @@ export default function ProfitLever() {
           ((+inputData[2] * 1.01 - directCosts * 1.01) - indirectCosts) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100 / divisor
+      ) * 100
     );
     setDirectCostChange(
       (
@@ -62,7 +63,7 @@ export default function ProfitLever() {
           (+inputData[2] - (directCosts * .99) - indirectCosts) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100 / divisor
+      ) * 100
     );
     setIndirectCostChange(
       (
@@ -70,7 +71,7 @@ export default function ProfitLever() {
           (+inputData[2] - directCosts - (indirectCosts * .99)) /
           (+inputData[2] - directCosts - indirectCosts)
         ) - 1
-      ) * 100 / divisor
+      ) * 100
     );
   }, [inputData, splitPath]);
 
@@ -159,7 +160,18 @@ export default function ProfitLever() {
                               name="next"
                               value={radio.next_id}
                               checked={+splitPath[split] === +radio.next_id}
-                              onChange={(e) => { radioChange(e, split) }}
+                              onChange={
+                                (e) => { 
+                                  radioChange(e, split); 
+                                  dispatch({ 
+                                    type: 'ADD_INPUT_VALUE',
+                                    payload: {
+                                      key: radio.question_id,
+                                      value: radio.next_id 
+                                    } 
+                                  });
+                                }
+                              }
                             />
                             <span className="radio-btn"></span>
                           </label>
@@ -310,7 +322,6 @@ export default function ProfitLever() {
       <div className="main-container">
         <div className="top-card-container">
           <h1 className="main-heading">Define Profit Levers</h1>
-          {stepper(1)}
           <div className="data-result">
             <h3 className="data-result-heading">Result</h3>
             <p>A 1% improvement in price will deliver {isNaN(price.toFixed(1))? 0 : price.toFixed(1)}% improvement in profit.</p>
@@ -339,6 +350,12 @@ export default function ProfitLever() {
                 null
             }
           </div>
+          <br/>
+          <button onClick={()=>setShowExplore(!showExplore)} className='secondary-btn'>
+            {showExplore? 'hide': 'Explore More Options'}
+          </button>
+          {showExplore? <ExploreMore/>: null}
+          {stepper(1)}
         </div>
       </div>
     </center>
