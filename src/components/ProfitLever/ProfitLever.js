@@ -350,11 +350,14 @@ export default function ProfitLever() {
                 null
             }
           </div>
+<<<<<<< HEAD
           <br/>
           <button onClick={()=>setShowExplore(!showExplore)} className='secondary-btn'>
             {showExplore? 'hide': 'Explore More Options'}
           </button>
           {showExplore? <ExploreMore/>: null}
+=======
+>>>>>>> 9118225117e41271ed13e99903dc0f0f44702604
           {stepper(1)}
         </div>
       </div>
