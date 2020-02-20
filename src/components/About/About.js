@@ -14,10 +14,12 @@ export default function About(){
               <span className="slide-heading">illume Decision Hub</span>
             </div>
 
-            <div className="slide">
-              Jenny and Susan are business owners with a passion 
-              for helping other business owners fulfill their potential. 
-              Their biggest goal is helping their clients to work less and earn more.
+            <div className="info-container">
+              <div className="slide">
+                Jenny and Susan are business owners with a passion 
+                for helping other business owners fulfill their potential. 
+                Their biggest goal is helping their clients to work less and earn more.
+              </div>
             </div>
 
             <div className="slide-img-name-container">
@@ -81,10 +83,12 @@ export default function About(){
               </li>
             </ul>
 
-            <div className="last-heading">
-              The Illume Decision Hub started as an idea to help people work less and earn more and we 
-              hope it will become a tool that encourages you to understand the worth of your 
-              time, effort, and product.
+            <div className="info-container">
+              <div className="last-heading">
+                The Illume Decision Hub started as an idea to help people work less and earn more and we 
+                hope it will become a tool that encourages you to understand the worth of your 
+                time, effort, and product.
+              </div>
             </div>
 
           </div>

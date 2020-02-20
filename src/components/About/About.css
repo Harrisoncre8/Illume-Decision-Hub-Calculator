@@ -27,12 +27,14 @@
   margin-bottom: 1em;
   margin-left: 1em;
   margin-right: 1em;
+  text-align: left;
 }
 
 .slide {
   color: #f0aa42;
   font-size: 1.6em;
   margin-top: 1em;
+  text-align: left;
 }
 
 .slide-heading {
@@ -83,4 +85,8 @@
   width: 650px;
   font-size: 1.2em;
   text-align: left;
+}
+
+.info-container {
+  max-width: 600px;
 }
