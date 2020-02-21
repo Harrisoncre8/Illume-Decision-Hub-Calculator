@@ -39,7 +39,7 @@ export default function AdminEditUserInfo() {
   // Show or hide password
   const togglePasswordView = () => showPassword === 'password' ? setShowPassword('text') : setShowPassword('password');
 
-  // Dispatch to saga to handle admin edits, close modal ///////////////////////////////////////////TEST TEST TEST TEST
+  // Dispatch to saga to handle admin edits, close modal
   const handleSave = e => {
     e.preventDefault();
     let selectedUser = {id, name, company, phone, email, industryId, password, usertype};
